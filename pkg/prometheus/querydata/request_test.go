@@ -18,17 +18,16 @@ import (
 	p "github.com/prometheus/common/model"
 	"github.com/stretchr/testify/require"
 
-	"github.com/grafana/grafana/pkg/tsdb/prometheus/kinds/dataquery"
+	"github.com/grafana/prometheus-amd/pkg/prometheus/kinds/dataquery"
 
 	"github.com/grafana/kindsys"
 
-	"github.com/grafana/grafana/pkg/infra/httpclient"
-	"github.com/grafana/grafana/pkg/infra/log/logtest"
+	"github.com/grafana/grafana-plugin-sdk-go/backend/httpclient"
+	"github.com/grafana/grafana-plugin-sdk-go/backend/log"
 	"github.com/grafana/grafana/pkg/infra/tracing"
-	"github.com/grafana/grafana/pkg/setting"
-	"github.com/grafana/grafana/pkg/tsdb/prometheus/client"
-	"github.com/grafana/grafana/pkg/tsdb/prometheus/models"
-	"github.com/grafana/grafana/pkg/tsdb/prometheus/querydata"
+	"github.com/grafana/prometheus-amd/pkg/prometheus/client"
+	"github.com/grafana/prometheus-amd/pkg/prometheus/models"
+	"github.com/grafana/prometheus-amd/pkg/prometheus/querydata"
 )
 
 func TestPrometheus_parseTimeSeriesResponse(t *testing.T) {
@@ -445,7 +444,7 @@ func setup() (*testContext, error) {
 
 	features := &fakeFeatureToggles{flags: map[string]bool{"prometheusBufferedClient": false}}
 
-	opts, err := client.CreateTransportOptions(settings, &setting.Cfg{}, &logtest.Fake{})
+	opts, err := client.CreateTransportOptions(settings, &backend.GrafanaCfg{}, &log.Fake{})
 	if err != nil {
 		return nil, err
 	}
@@ -455,7 +454,7 @@ func setup() (*testContext, error) {
 		return nil, err
 	}
 
-	queryData, _ := querydata.New(httpClient, features, tracer, settings, &logtest.Fake{})
+	queryData, _ := querydata.New(httpClient, features, tracer, settings, &log.Fake{})
 
 	return &testContext{
 		httpProvider: httpProvider,

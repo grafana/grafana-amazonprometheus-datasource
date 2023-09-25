@@ -11,11 +11,10 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
+	"github.com/grafana/grafana-plugin-sdk-go/backend"
 	"github.com/grafana/grafana-plugin-sdk-go/backend/datasource"
+	"github.com/grafana/grafana-plugin-sdk-go/backend/httpclient"
 	sdkHttpClient "github.com/grafana/grafana-plugin-sdk-go/backend/httpclient"
-	"github.com/grafana/grafana/pkg/infra/httpclient"
-	"github.com/grafana/grafana/pkg/services/featuremgmt"
-	"github.com/grafana/grafana/pkg/setting"
 )
 
 type heuristicsProvider struct {
@@ -63,7 +62,7 @@ func Test_GetHeuristics(t *testing.T) {
 		}
 		httpProvider := getHeuristicsMockProvider(&rt)
 		s := &Service{
-			im: datasource.NewInstanceManager(newInstanceSettings(httpProvider, &setting.Cfg{}, &featuremgmt.FeatureManager{}, nil)),
+			im: datasource.NewInstanceManager(newInstanceSettings(httpProvider, &backend.GrafanaCfg{}, backend.FeatureToggles{}, nil)),
 		}
 
 		req := HeuristicsRequest{
@@ -83,7 +82,7 @@ func Test_GetHeuristics(t *testing.T) {
 		}
 		httpProvider := getHeuristicsMockProvider(&rt)
 		s := &Service{
-			im: datasource.NewInstanceManager(newInstanceSettings(httpProvider, &setting.Cfg{}, &featuremgmt.FeatureManager{}, nil)),
+			im: datasource.NewInstanceManager(newInstanceSettings(httpProvider, &backend.GrafanaCfg{}, backend.FeatureToggles{}, nil)),
 		}
 
 		req := HeuristicsRequest{

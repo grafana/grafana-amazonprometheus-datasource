@@ -10,9 +10,9 @@ import (
 	"github.com/grafana/kindsys"
 
 	"github.com/grafana/grafana-plugin-sdk-go/backend"
-	"github.com/grafana/grafana/pkg/infra/log"
-	"github.com/grafana/grafana/pkg/tsdb/prometheus/kinds/dataquery"
-	"github.com/grafana/grafana/pkg/tsdb/prometheus/models"
+	"github.com/grafana/grafana-plugin-sdk-go/backend/log"
+	"github.com/grafana/prometheus-amd/pkg/prometheus/kinds/dataquery"
+	"github.com/grafana/prometheus-amd/pkg/prometheus/models"
 )
 
 const (

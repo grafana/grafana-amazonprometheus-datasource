@@ -12,10 +12,10 @@ import (
 	"github.com/grafana/grafana-plugin-sdk-go/data"
 	jsoniter "github.com/json-iterator/go"
 
-	"github.com/grafana/grafana/pkg/tsdb/prometheus/models"
-	"github.com/grafana/grafana/pkg/tsdb/prometheus/querydata/exemplar"
-	"github.com/grafana/grafana/pkg/tsdb/prometheus/utils"
-	"github.com/grafana/grafana/pkg/util/converter"
+	"github.com/grafana/prometheus-amd/pkg/prometheus/models"
+	"github.com/grafana/prometheus-amd/pkg/prometheus/querydata/exemplar"
+	"github.com/grafana/prometheus-amd/pkg/prometheus/utils"
+	"github.com/grafana/prometheus-amd/pkg/gcopypaste/converter"
 )
 
 func (s *QueryData) parseResponse(ctx context.Context, q *models.Query, res *http.Response) backend.DataResponse {

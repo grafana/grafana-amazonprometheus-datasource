@@ -11,15 +11,14 @@ import (
 	"github.com/grafana/grafana-plugin-sdk-go/data"
 	"go.opentelemetry.io/otel/attribute"
 
-	"github.com/grafana/grafana/pkg/infra/log"
-	"github.com/grafana/grafana/pkg/infra/tracing"
-	"github.com/grafana/grafana/pkg/services/featuremgmt"
-	"github.com/grafana/grafana/pkg/tsdb/intervalv2"
-	"github.com/grafana/grafana/pkg/tsdb/prometheus/client"
-	"github.com/grafana/grafana/pkg/tsdb/prometheus/models"
-	"github.com/grafana/grafana/pkg/tsdb/prometheus/querydata/exemplar"
-	"github.com/grafana/grafana/pkg/tsdb/prometheus/utils"
-	"github.com/grafana/grafana/pkg/util/maputil"
+	"github.com/grafana/grafana-plugin-sdk-go/backend/log"
+	"github.com/grafana/grafana-plugin-sdk-go/backend/tracing"
+	"github.com/grafana/prometheus-amd/pkg/gcopypaste/intervalv2"
+	"github.com/grafana/prometheus-amd/pkg/gcopypaste/maputil"
+	"github.com/grafana/prometheus-amd/pkg/prometheus/client"
+	"github.com/grafana/prometheus-amd/pkg/prometheus/models"
+	"github.com/grafana/prometheus-amd/pkg/prometheus/querydata/exemplar"
+	"github.com/grafana/prometheus-amd/pkg/prometheus/utils"
 )
 
 const legendFormatAuto = "__auto"
@@ -48,7 +47,7 @@ type QueryData struct {
 
 func New(
 	httpClient *http.Client,
-	features featuremgmt.FeatureToggles,
+	features backend.FeatureToggles,
 	tracer tracing.Tracer,
 	settings backend.DataSourceInstanceSettings,
 	plog log.Logger,
@@ -69,7 +68,7 @@ func New(
 	// standard deviation sampler is the default for backwards compatibility
 	exemplarSampler := exemplar.NewStandardDeviationSampler
 
-	if features.IsEnabled(featuremgmt.FlagDisablePrometheusExemplarSampling) {
+	if features.IsEnabled("disablePrometheusExemplarSampling") {
 		exemplarSampler = exemplar.NewNoOpSampler
 	}
 
@@ -81,7 +80,7 @@ func New(
 		TimeInterval:       timeInterval,
 		ID:                 settings.ID,
 		URL:                settings.URL,
-		enableDataplane:    features.IsEnabled(featuremgmt.FlagPrometheusDataplane),
+		enableDataplane:    features.IsEnabled("prometheusDataplane"),
 		exemplarSampler:    exemplarSampler,
 	}, nil
 }

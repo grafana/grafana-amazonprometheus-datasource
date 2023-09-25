@@ -7,8 +7,7 @@ import (
 
 	"github.com/grafana/grafana-plugin-sdk-go/backend"
 	"go.opentelemetry.io/otel/attribute"
-
-	"github.com/grafana/grafana/pkg/infra/tracing"
+	"go.opentelemetry.io/otel/trace"
 )
 
 // GetJsonData just gets the json in easier to work with type. It's used on multiple places which isn't super effective
@@ -29,13 +28,13 @@ type Attribute struct {
 }
 
 // StartTrace setups a trace but does not panic if tracer is nil which helps with testing
-func StartTrace(ctx context.Context, tracer tracing.Tracer, name string, attributes []Attribute) (context.Context, func()) {
+func StartTrace(ctx context.Context, tracer trace.Tracer, name string, attributes []Attribute) (context.Context, func()) {
 	if tracer == nil {
 		return ctx, func() {}
 	}
 	ctx, span := tracer.Start(ctx, name)
 	for _, attr := range attributes {
-		span.SetAttributes(attr.Key, attr.Value, attr.Kv)
+		span.SetAttributes(attr.Kv)
 	}
 	return ctx, func() {
 		span.End()

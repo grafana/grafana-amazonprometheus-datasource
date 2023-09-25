@@ -7,10 +7,10 @@ import (
 	"net/http"
 
 	"github.com/grafana/grafana-plugin-sdk-go/backend"
-	"github.com/grafana/grafana/pkg/infra/log"
-	"github.com/grafana/grafana/pkg/tsdb/prometheus/client"
-	"github.com/grafana/grafana/pkg/tsdb/prometheus/utils"
-	"github.com/grafana/grafana/pkg/util/maputil"
+	"github.com/grafana/grafana-plugin-sdk-go/backend/log"
+	"github.com/grafana/prometheus-amd/pkg/prometheus/client"
+	"github.com/grafana/prometheus-amd/pkg/prometheus/utils"
+	"github.com/grafana/prometheus-amd/pkg/gcopypaste/maputil"
 )
 
 type Resource struct {

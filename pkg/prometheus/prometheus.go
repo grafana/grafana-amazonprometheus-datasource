@@ -10,25 +10,23 @@ import (
 	"github.com/grafana/grafana-plugin-sdk-go/backend"
 	"github.com/grafana/grafana-plugin-sdk-go/backend/datasource"
 	"github.com/grafana/grafana-plugin-sdk-go/backend/instancemgmt"
-	"github.com/patrickmn/go-cache"
+	cache "github.com/patrickmn/go-cache"
 	apiv1 "github.com/prometheus/client_golang/api/prometheus/v1"
 
-	"github.com/grafana/grafana/pkg/infra/httpclient"
-	"github.com/grafana/grafana/pkg/infra/log"
+	"github.com/grafana/grafana-plugin-sdk-go/backend/httpclient"
+	"github.com/grafana/grafana-plugin-sdk-go/backend/log"
 	"github.com/grafana/grafana/pkg/infra/tracing"
-	"github.com/grafana/grafana/pkg/services/featuremgmt"
-	"github.com/grafana/grafana/pkg/setting"
-	"github.com/grafana/grafana/pkg/tsdb/prometheus/client"
-	"github.com/grafana/grafana/pkg/tsdb/prometheus/instrumentation"
-	"github.com/grafana/grafana/pkg/tsdb/prometheus/querydata"
-	"github.com/grafana/grafana/pkg/tsdb/prometheus/resource"
+	"github.com/grafana/prometheus-amd/pkg/prometheus/client"
+	"github.com/grafana/prometheus-amd/pkg/prometheus/instrumentation"
+	"github.com/grafana/prometheus-amd/pkg/prometheus/querydata"
+	"github.com/grafana/prometheus-amd/pkg/prometheus/resource"
 )
 
-var plog = log.New("tsdb.prometheus")
+var plog = log.New()
 
 type Service struct {
 	im       instancemgmt.InstanceManager
-	features featuremgmt.FeatureToggles
+	features backend.FeatureToggles
 }
 
 type instance struct {
@@ -37,7 +35,7 @@ type instance struct {
 	versionCache *cache.Cache
 }
 
-func ProvideService(httpClientProvider httpclient.Provider, cfg *setting.Cfg, features featuremgmt.FeatureToggles, tracer tracing.Tracer) *Service {
+func ProvideService(httpClientProvider httpclient.Provider, cfg *backend.GrafanaCfg, features backend.FeatureToggles, tracer tracing.Tracer) *Service {
 	plog.Debug("initializing")
 	return &Service{
 		im:       datasource.NewInstanceManager(newInstanceSettings(httpClientProvider, cfg, features, tracer)),
@@ -45,7 +43,7 @@ func ProvideService(httpClientProvider httpclient.Provider, cfg *setting.Cfg, fe
 	}
 }
 
-func newInstanceSettings(httpClientProvider httpclient.Provider, cfg *setting.Cfg, features featuremgmt.FeatureToggles, tracer tracing.Tracer) datasource.InstanceFactoryFunc {
+func newInstanceSettings(httpClientProvider httpclient.Provider, cfg *backend.GrafanaCfg, features backend.FeatureToggles, tracer tracing.Tracer) datasource.InstanceFactoryFunc {
 	return func(settings backend.DataSourceInstanceSettings) (instancemgmt.Instance, error) {
 		// Creates a http roundTripper.
 		opts, err := client.CreateTransportOptions(settings, cfg, plog)

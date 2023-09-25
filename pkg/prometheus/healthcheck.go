@@ -19,7 +19,7 @@ const (
 	refID = "__healthcheck__"
 )
 
-var logger log.Logger = log.New("tsdb.prometheus")
+var logger log.Logger = log.New()
 
 func (s *Service) CheckHealth(ctx context.Context, req *backend.CheckHealthRequest) (*backend.CheckHealthResult,
 	error) {

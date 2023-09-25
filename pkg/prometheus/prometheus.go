@@ -10,12 +10,12 @@ import (
 	"github.com/grafana/grafana-plugin-sdk-go/backend"
 	"github.com/grafana/grafana-plugin-sdk-go/backend/datasource"
 	"github.com/grafana/grafana-plugin-sdk-go/backend/instancemgmt"
-	cache "github.com/patrickmn/go-cache"
+	"github.com/patrickmn/go-cache"
 	apiv1 "github.com/prometheus/client_golang/api/prometheus/v1"
 
 	"github.com/grafana/grafana-plugin-sdk-go/backend/httpclient"
 	"github.com/grafana/grafana-plugin-sdk-go/backend/log"
-	"github.com/grafana/grafana/pkg/infra/tracing"
+	"github.com/grafana/grafana-plugin-sdk-go/backend/tracing"
 	"github.com/grafana/prometheus-amd/pkg/prometheus/client"
 	"github.com/grafana/prometheus-amd/pkg/prometheus/instrumentation"
 	"github.com/grafana/prometheus-amd/pkg/prometheus/querydata"
@@ -44,7 +44,7 @@ func ProvideService(httpClientProvider httpclient.Provider, cfg *backend.Grafana
 }
 
 func newInstanceSettings(httpClientProvider httpclient.Provider, cfg *backend.GrafanaCfg, features backend.FeatureToggles, tracer tracing.Tracer) datasource.InstanceFactoryFunc {
-	return func(settings backend.DataSourceInstanceSettings) (instancemgmt.Instance, error) {
+	return func(ctx context.Context, settings backend.DataSourceInstanceSettings) (instancemgmt.Instance, error) {
 		// Creates a http roundTripper.
 		opts, err := client.CreateTransportOptions(settings, cfg, plog)
 		if err != nil {

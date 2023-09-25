@@ -44,7 +44,7 @@ func TestClient(t *testing.T) {
 			defer func() {
 				if res != nil && res.Body != nil {
 					if err := res.Body.Close(); err != nil {
-						logger.Warn("Error", "err", err)
+						logger.New().Warn("Error", "err", err)
 					}
 				}
 			}()
@@ -68,7 +68,7 @@ func TestClient(t *testing.T) {
 			defer func() {
 				if res != nil && res.Body != nil {
 					if err := res.Body.Close(); err != nil {
-						logger.Warn("Error", "err", err)
+						logger.New().Warn("Error", "err", err)
 					}
 				}
 			}()
@@ -98,7 +98,7 @@ func TestClient(t *testing.T) {
 			defer func() {
 				if res != nil && res.Body != nil {
 					if err := res.Body.Close(); err != nil {
-						logger.Warn("Error", "err", err)
+						logger.New().Warn("Error", "err", err)
 					}
 				}
 			}()
@@ -125,7 +125,7 @@ func TestClient(t *testing.T) {
 			defer func() {
 				if res != nil && res.Body != nil {
 					if err := res.Body.Close(); err != nil {
-						logger.Warn("Error", "err", err)
+						logger.New().Warn("Error", "err", err)
 					}
 				}
 			}()

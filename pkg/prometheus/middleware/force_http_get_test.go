@@ -15,7 +15,7 @@ func TestEnsureHttpMethodMiddleware(t *testing.T) {
 		finalRoundTripper := httpclient.RoundTripperFunc(func(req *http.Request) (*http.Response, error) {
 			return &http.Response{StatusCode: http.StatusOK}, nil
 		})
-		mw := ForceHttpGet(log.New("test"))
+		mw := ForceHttpGet(log.New())
 		rt := mw.CreateMiddleware(httpclient.Options{}, finalRoundTripper)
 		require.NotNil(t, rt)
 		middlewareName, ok := mw.(httpclient.MiddlewareName)
@@ -28,7 +28,7 @@ func TestEnsureHttpMethodMiddleware(t *testing.T) {
 			return &http.Response{StatusCode: http.StatusOK}, nil
 		})
 
-		mw := ForceHttpGet(log.New("test"))
+		mw := ForceHttpGet(log.New())
 		rt := mw.CreateMiddleware(httpclient.Options{}, finalRoundTripper)
 		require.NotNil(t, rt)
 

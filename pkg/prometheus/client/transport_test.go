@@ -19,7 +19,7 @@ func TestCreateTransportOptions(t *testing.T) {
 				"httpHeaderValue1": "bar",
 			},
 		}
-		opts, err := CreateTransportOptions(settings, &backend.GrafanaCfg{}, &log.Fake{})
+		opts, err := CreateTransportOptions(settings, &backend.GrafanaCfg{}, log.New())
 		require.NoError(t, err)
 		require.Equal(t, map[string]string{"foo": "bar"}, opts.Headers)
 		require.Equal(t, 2, len(opts.Middlewares))
@@ -36,7 +36,7 @@ func TestCreateTransportOptions(t *testing.T) {
 			}`),
 			DecryptedSecureJSONData: map[string]string{},
 		}
-		opts, err := CreateTransportOptions(settings, &backend.GrafanaCfg{}, &log.Fake{})
+		opts, err := CreateTransportOptions(settings, &backend.GrafanaCfg{}, log.New())
 		require.NoError(t, err)
 		require.Equal(t, 3, len(opts.Middlewares))
 	})

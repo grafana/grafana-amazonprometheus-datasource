@@ -13,6 +13,7 @@ import (
 
 	"github.com/grafana/grafana-plugin-sdk-go/backend"
 	sdkhttpclient "github.com/grafana/grafana-plugin-sdk-go/backend/httpclient"
+	"github.com/grafana/grafana-plugin-sdk-go/backend/tracing"
 	"github.com/grafana/grafana-plugin-sdk-go/data"
 	apiv1 "github.com/prometheus/client_golang/api/prometheus/v1"
 	p "github.com/prometheus/common/model"
@@ -24,7 +25,6 @@ import (
 
 	"github.com/grafana/grafana-plugin-sdk-go/backend/httpclient"
 	"github.com/grafana/grafana-plugin-sdk-go/backend/log"
-	"github.com/grafana/grafana-plugin-sdk-go/backend/tracing"
 	"github.com/grafana/prometheus-amd/pkg/prometheus/client"
 	"github.com/grafana/prometheus-amd/pkg/prometheus/models"
 	"github.com/grafana/prometheus-amd/pkg/prometheus/querydata"
@@ -427,7 +427,7 @@ type testContext struct {
 }
 
 func setup() (*testContext, error) {
-	tracer := tracing.InitializeTracerForTest()
+	tracer := tracing.DefaultTracer()
 	httpProvider := &fakeHttpClientProvider{
 		opts: sdkhttpclient.Options{
 			Timeouts: &sdkhttpclient.DefaultTimeoutOptions,
@@ -444,7 +444,7 @@ func setup() (*testContext, error) {
 
 	features := &fakeFeatureToggles{flags: map[string]bool{"prometheusBufferedClient": false}}
 
-	opts, err := client.CreateTransportOptions(settings, &backend.GrafanaCfg{}, &log.Fake{})
+	opts, err := client.CreateTransportOptions(settings, &backend.GrafanaCfg{}, log.New())
 	if err != nil {
 		return nil, err
 	}
@@ -454,7 +454,7 @@ func setup() (*testContext, error) {
 		return nil, err
 	}
 
-	queryData, _ := querydata.New(httpClient, features, tracer, settings, &log.Fake{})
+	queryData, _ := querydata.New(httpClient, features, tracer, settings, log.New())
 
 	return &testContext{
 		httpProvider: httpProvider,

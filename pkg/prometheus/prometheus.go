@@ -12,10 +12,10 @@ import (
 	"github.com/grafana/grafana-plugin-sdk-go/backend/instancemgmt"
 	"github.com/patrickmn/go-cache"
 	apiv1 "github.com/prometheus/client_golang/api/prometheus/v1"
+	"go.opencensus.io/trace"
 
 	"github.com/grafana/grafana-plugin-sdk-go/backend/httpclient"
 	"github.com/grafana/grafana-plugin-sdk-go/backend/log"
-	"github.com/grafana/grafana-plugin-sdk-go/backend/tracing"
 	"github.com/grafana/prometheus-amd/pkg/prometheus/client"
 	"github.com/grafana/prometheus-amd/pkg/prometheus/instrumentation"
 	"github.com/grafana/prometheus-amd/pkg/prometheus/querydata"
@@ -35,7 +35,7 @@ type instance struct {
 	versionCache *cache.Cache
 }
 
-func ProvideService(httpClientProvider httpclient.Provider, cfg *backend.GrafanaCfg, features backend.FeatureToggles, tracer tracing.Tracer) *Service {
+func ProvideService(httpClientProvider httpclient.Provider, cfg *backend.GrafanaCfg, features backend.FeatureToggles, tracer trace.Tracer) *Service {
 	plog.Debug("initializing")
 	return &Service{
 		im:       datasource.NewInstanceManager(newInstanceSettings(httpClientProvider, cfg, features, tracer)),
@@ -43,7 +43,7 @@ func ProvideService(httpClientProvider httpclient.Provider, cfg *backend.Grafana
 	}
 }
 
-func newInstanceSettings(httpClientProvider httpclient.Provider, cfg *backend.GrafanaCfg, features backend.FeatureToggles, tracer tracing.Tracer) datasource.InstanceFactoryFunc {
+func newInstanceSettings(httpClientProvider httpclient.Provider, cfg *backend.GrafanaCfg, features backend.FeatureToggles, tracer trace.Tracer) datasource.InstanceFactoryFunc {
 	return func(ctx context.Context, settings backend.DataSourceInstanceSettings) (instancemgmt.Instance, error) {
 		// Creates a http roundTripper.
 		opts, err := client.CreateTransportOptions(settings, cfg, plog)

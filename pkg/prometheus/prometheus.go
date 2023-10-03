@@ -10,9 +10,10 @@ import (
 	"github.com/grafana/grafana-plugin-sdk-go/backend"
 	"github.com/grafana/grafana-plugin-sdk-go/backend/datasource"
 	"github.com/grafana/grafana-plugin-sdk-go/backend/instancemgmt"
+	"github.com/grafana/grafana-plugin-sdk-go/backend/tracing"
 	"github.com/patrickmn/go-cache"
 	apiv1 "github.com/prometheus/client_golang/api/prometheus/v1"
-	"go.opencensus.io/trace"
+	"go.opentelemetry.io/otel/trace"
 
 	"github.com/grafana/grafana-plugin-sdk-go/backend/httpclient"
 	"github.com/grafana/grafana-plugin-sdk-go/backend/log"
@@ -52,7 +53,7 @@ func NewDatasource(ctx context.Context, settings backend.DataSourceInstanceSetti
 	provider := httpclient.NewProvider(httpclient.ProviderOptions{Middlewares: []httpclient.Middleware{httpclient.CustomHeadersMiddleware()}})
 	cfg := backend.GrafanaConfigFromContext(ctx)
 	return &Datasource{
-		Service: ProvideService(*provider, &cfg, cfg.FeatureToggles(), ),
+		Service: ProvideService(*provider, cfg, cfg.FeatureToggles(), tracing.DefaultTracer()),
 	}, nil
 }
 

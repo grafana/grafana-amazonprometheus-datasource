@@ -442,8 +442,6 @@ func setup() (*testContext, error) {
 		JSONData: json.RawMessage(`{"timeInterval": "15s"}`),
 	}
 
-	features := &fakeFeatureToggles{flags: map[string]bool{"prometheusBufferedClient": false}}
-
 	opts, err := client.CreateTransportOptions(settings, &backend.GrafanaCfg{}, log.New())
 	if err != nil {
 		return nil, err
@@ -454,7 +452,7 @@ func setup() (*testContext, error) {
 		return nil, err
 	}
 
-	queryData, _ := querydata.New(httpClient, features, tracer, settings, log.New())
+	queryData, _ := querydata.New(httpClient, backend.FeatureToggles{}, tracer, settings, log.New())
 
 	return &testContext{
 		httpProvider: httpProvider,

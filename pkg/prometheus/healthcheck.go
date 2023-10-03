@@ -23,7 +23,7 @@ var logger log.Logger = log.New()
 
 func (s *Service) CheckHealth(ctx context.Context, req *backend.CheckHealthRequest) (*backend.CheckHealthResult,
 	error) {
-	logger := logger.FromContext(ctx)
+	//logger := logger.FromContext(ctx)
 	ds, err := s.getInstance(ctx, req.PluginContext)
 
 	// check that the datasource exists

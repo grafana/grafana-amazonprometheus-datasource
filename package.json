@@ -63,7 +63,7 @@
     "@grafana/runtime": "9.5.3",
     "@grafana/ui": "9.5.3",
     "@lezer/common": "^1.1.0",
-    "@prometheus-io/lezer-promql": "^0.45.1",
+    "@prometheus-io/lezer-promql": "0.37.0",
     "@reduxjs/toolkit": "^1.9.6",
     "@testing-library/user-event": "^14.5.1",
     "d3": "^7.8.5",

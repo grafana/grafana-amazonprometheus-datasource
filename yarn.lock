@@ -2049,10 +2049,10 @@
   resolved "https://registry.npmjs.org/@popperjs/core/-/core-2.11.8.tgz"
   integrity sha512-P1st0aksCrn9sGZhp8GMYwBnQsbvAWsZAX44oXNNvLHGqAOcoVxmjZiohstwQ7SqKnbR47akdNi+uleWD8+g6A==
 
-"@prometheus-io/lezer-promql@^0.45.1":
-  version "0.45.1"
-  resolved "https://registry.yarnpkg.com/@prometheus-io/lezer-promql/-/lezer-promql-0.45.1.tgz#548d3d087d618024ec54c246f3f46f6c688306a0"
-  integrity sha512-/ns1pZeUR8iwjZgsxZzTIlDD3Mlizpwb/YRSJJm5Fy9rwDs/5ABVGorkZK9qLb/yFZm/rTC4tcS4t96d46eIFw==
+"@prometheus-io/lezer-promql@0.37.0":
+  version "0.37.0"
+  resolved "https://registry.yarnpkg.com/@prometheus-io/lezer-promql/-/lezer-promql-0.37.0.tgz#c42a10d0114d81e079cea2572d472b6a1fbfde97"
+  integrity sha512-la6tluaMlYa0hu+c4o3BQARigTqPWG4A/Tj4UuHiLUiRT0xRaDXP8my7/WcqFJPLq6DVigux4bagIgLvVj8PgQ==
 
 "@rc-component/portal@^1.0.0-6":
   version "1.1.2"

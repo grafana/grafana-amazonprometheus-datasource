@@ -43,6 +43,23 @@ func ProvideService(httpClientProvider httpclient.Provider, cfg *backend.Grafana
 	}
 }
 
+func NewDatasource(ctx context.Context, settings backend.DataSourceInstanceSettings) (instancemgmt.Instance, error) {
+	// TODO:
+	// - Make HTTP Provider
+	// - Get Grafana Config from the context
+	// - (Does Provide service actually need both the config and features?)
+	// - (Create?) Tracer
+	provider := httpclient.NewProvider(httpclient.ProviderOptions{Middlewares: []httpclient.Middleware{httpclient.CustomHeadersMiddleware()}})
+	cfg := backend.GrafanaConfigFromContext(ctx)
+	return &Datasource{
+		Service: ProvideService(*provider, &cfg, cfg.FeatureToggles(), ),
+	}, nil
+}
+
+type Datasource struct {
+	Service *Service
+}
+
 func newInstanceSettings(httpClientProvider httpclient.Provider, cfg *backend.GrafanaCfg, features backend.FeatureToggles, tracer trace.Tracer) datasource.InstanceFactoryFunc {
 	return func(ctx context.Context, settings backend.DataSourceInstanceSettings) (instancemgmt.Instance, error) {
 		// Creates a http roundTripper.

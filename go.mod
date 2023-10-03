@@ -4,7 +4,7 @@ go 1.19
 
 require (
 	github.com/grafana/grafana-azure-sdk-go v1.9.0
-	github.com/grafana/grafana-plugin-sdk-go v0.177.0
+	github.com/grafana/grafana-plugin-sdk-go v0.178.0
 	github.com/grafana/kindsys v0.0.0-20230926104744-988ea4c8a739
 	github.com/json-iterator/go v1.1.12
 	github.com/patrickmn/go-cache v2.1.0+incompatible
@@ -17,6 +17,7 @@ require (
 )
 
 require (
+	cloud.google.com/go/compute/metadata v0.2.3 // indirect
 	cuelang.org/go v0.5.0 // indirect
 	github.com/Azure/azure-sdk-for-go/sdk/azcore v1.6.1 // indirect
 	github.com/Azure/azure-sdk-for-go/sdk/azidentity v1.3.0 // indirect

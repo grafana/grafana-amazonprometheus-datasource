@@ -1,8 +1,7 @@
 import { css, cx } from '@emotion/css';
-import React from 'react';
-
 import { ConfigSubSection } from '@grafana/experimental';
 import { InlineField, Input, TagsInput } from '@grafana/ui';
+import React from 'react';
 
 import { PROM_CONFIG_LABEL_WIDTH } from '../ConfigEditor';
 

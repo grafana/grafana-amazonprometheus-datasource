@@ -1,22 +1,17 @@
 import { cx } from '@emotion/css';
-import { LanguageMap, languages as prismLanguages } from 'prismjs';
-import React, { ReactNode } from 'react';
-import { Plugin } from 'slate';
-import { Editor } from 'slate-react';
-
 import { isDataFrame, QueryEditorProps, QueryHint, TimeRange, toLegacyResponseData } from '@grafana/data';
-import { reportInteraction } from '@grafana/runtime/src';
+import { reportInteraction } from '@grafana/runtime';
 import {
   BracesPlugin,
+  clearButtonStyles,
   DOMUtil,
   Icon,
   SlatePrism,
   SuggestionsState,
+  Themeable2,
   TypeaheadInput,
   TypeaheadOutput,
-  Themeable2,
   withTheme2,
-  clearButtonStyles,
 } from '@grafana/ui';
 import { LocalStorageValueProvider } from 'app/core/components/LocalStorageValueProvider';
 import {
@@ -24,6 +19,10 @@ import {
   isCancelablePromiseRejection,
   makePromiseCancelable,
 } from 'app/core/utils/CancelablePromise';
+import { LanguageMap, languages as prismLanguages } from 'prismjs';
+import React, { ReactNode } from 'react';
+import { Plugin } from 'slate';
+import { Editor } from 'slate-react';
 
 import { PrometheusDatasource } from '../datasource';
 import { roundMsToMin } from '../language_utils';

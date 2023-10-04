@@ -1,9 +1,9 @@
 import { css, cx } from '@emotion/css';
+import { GrafanaTheme2 } from '@grafana/data';
+import { IconButton, InlineLabel, Tooltip, useStyles2 } from '@grafana/ui';
 import React, { useEffect, useState } from 'react';
 import { usePrevious } from 'react-use';
 
-import { GrafanaTheme2 } from '@grafana/data';
-import { IconButton, InlineLabel, Tooltip, useStyles2 } from '@grafana/ui';
 
 import { PrometheusDatasource } from '../datasource';
 import { PromQuery } from '../types';

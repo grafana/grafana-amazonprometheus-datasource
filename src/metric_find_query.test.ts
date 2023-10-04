@@ -1,10 +1,10 @@
 import 'whatwg-fetch'; // fetch polyfill needed backendSrv
-import { of } from 'rxjs';
 
 import { DataSourceInstanceSettings, toUtc } from '@grafana/data';
 import { FetchResponse } from '@grafana/runtime';
 import { backendSrv } from 'app/core/services/backend_srv'; // will use the version in __mocks__
 import { TemplateSrv } from 'app/features/templating/template_srv';
+import { of } from 'rxjs';
 
 import { PromApplication } from '../../../types/unified-alerting-dto';
 

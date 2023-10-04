@@ -1,9 +1,8 @@
 import { css, cx } from '@emotion/css';
-import React, { ReactNode } from 'react';
-
 import { DataSourceJsonData, DataSourceSettings } from '@grafana/data';
 import { ConfigSection } from '@grafana/experimental';
 import { InlineField, Input, PopoverContent } from '@grafana/ui';
+import React, { ReactNode } from 'react';
 
 import { PromOptions } from '../../types';
 // THIS FILE IS COPIED FROM GRAFANA/EXPERIMENTAL

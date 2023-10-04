@@ -1,7 +1,6 @@
+import { SelectableValue } from '@grafana/data';
 import { capitalize } from 'lodash';
 import pluralize from 'pluralize';
-
-import { SelectableValue } from '@grafana/data/src';
 
 import { LabelParamEditor } from '../components/LabelParamEditor';
 import { PromVisualQueryOperationCategory } from '../types';

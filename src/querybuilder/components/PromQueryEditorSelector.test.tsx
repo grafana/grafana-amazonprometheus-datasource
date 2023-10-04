@@ -1,9 +1,8 @@
+import { CoreApp, PluginMeta, PluginType } from '@grafana/data';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { cloneDeep, defaultsDeep } from 'lodash';
 import React from 'react';
-
-import { CoreApp, PluginMeta, PluginType } from '@grafana/data';
 
 import { PromQueryEditorProps } from '../../components/types';
 import { PrometheusDatasource } from '../../datasource';
@@ -245,6 +244,7 @@ async function expectRunQueriesButton() {
 function expectNoRunQueriesButton() {
   expect(screen.queryByRole('button', { name: /run queries/i })).not.toBeInTheDocument();
 }
+
 async function switchToMode(mode: QueryEditorMode) {
   const label = {
     [QueryEditorMode.Code]: /Code/,

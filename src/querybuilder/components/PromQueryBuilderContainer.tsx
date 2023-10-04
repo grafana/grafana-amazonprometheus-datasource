@@ -1,8 +1,8 @@
+import { PanelData } from '@grafana/data';
+import { config } from '@grafana/runtime';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import React, { useEffect, useReducer } from 'react';
 
-import { PanelData } from '@grafana/data';
-import { config } from '@grafana/runtime';
 
 import { PrometheusDatasource } from '../../datasource';
 import { PromQuery } from '../../types';
@@ -29,6 +29,7 @@ export interface State {
 }
 
 const prometheusMetricEncyclopedia = config.featureToggles.prometheusMetricEncyclopedia;
+
 /**
  * This component is here just to contain the translation logic between string query and the visual query builder model.
  */

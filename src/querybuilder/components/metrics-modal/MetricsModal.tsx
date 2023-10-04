@@ -1,20 +1,20 @@
 import { cx } from '@emotion/css';
-import debounce from 'debounce-promise';
-import React, { useCallback, useEffect, useMemo, useReducer } from 'react';
-
 import { SelectableValue } from '@grafana/data';
 import {
+  Button,
+  ButtonGroup,
+  Icon,
   Input,
   Modal,
   MultiSelect,
-  Spinner,
-  useTheme2,
   Pagination,
-  Button,
+  Spinner,
   Toggletip,
-  ButtonGroup,
-  Icon,
+  useTheme2,
 } from '@grafana/ui';
+import debounce from 'debounce-promise';
+import React, { useCallback, useEffect, useMemo, useReducer } from 'react';
+
 
 import { PrometheusDatasource } from '../../../datasource';
 import { PromVisualQuery } from '../../types';
@@ -27,9 +27,9 @@ import {
   calculateResultsPerPage,
   displayedMetrics,
   getBackendSearchMetrics,
-  setMetrics,
   placeholders,
   promTypes,
+  setMetrics,
   tracking,
 } from './state/helpers';
 import {

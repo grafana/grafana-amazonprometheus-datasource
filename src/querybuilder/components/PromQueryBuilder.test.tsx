@@ -1,7 +1,3 @@
-import { getByText, render, screen, waitFor } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
-import React from 'react';
-
 import {
   DataSourceInstanceSettings,
   DataSourcePluginMeta,
@@ -11,6 +7,10 @@ import {
   QueryHint,
   TimeRange,
 } from '@grafana/data';
+import { getByText, render, screen, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import React from 'react';
+
 
 import { PromApplication } from '../../../../../types/unified-alerting-dto';
 import { PrometheusDatasource } from '../../datasource';

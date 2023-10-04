@@ -1,6 +1,3 @@
-import { invert } from 'lodash';
-import { Token } from 'prismjs';
-
 import {
   AbstractLabelMatcher,
   AbstractLabelOperator,
@@ -11,6 +8,8 @@ import {
   incrRoundDn,
   TimeRange,
 } from '@grafana/data';
+import { invert } from 'lodash';
+import { Token } from 'prismjs';
 
 import { addLabelToQuery } from './add_label_to_query';
 import { SUGGESTIONS_LIMIT } from './language_provider';

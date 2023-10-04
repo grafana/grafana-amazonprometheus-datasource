@@ -1,7 +1,7 @@
-import React, { FormEvent, useCallback, useEffect, useState } from 'react';
 
 import { QueryEditorProps, SelectableValue } from '@grafana/data';
 import { InlineField, InlineFieldRow, Input, Select, TextArea } from '@grafana/ui';
+import React, { FormEvent, useCallback, useEffect, useState } from 'react';
 
 import { PrometheusDatasource } from '../datasource';
 import {

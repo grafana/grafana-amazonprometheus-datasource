@@ -1,10 +1,3 @@
-import { cloneDeep, defaults } from 'lodash';
-import { LRUCache } from 'lru-cache';
-import React from 'react';
-import { forkJoin, lastValueFrom, merge, Observable, of, OperatorFunction, pipe, throwError } from 'rxjs';
-import { catchError, filter, map, tap } from 'rxjs/operators';
-import semver from 'semver/preload';
-
 import {
   AbstractQuery,
   AnnotationEvent,
@@ -21,9 +14,9 @@ import {
   LoadingState,
   QueryFixAction,
   rangeUtil,
+  renderLegendFormat,
   ScopedVars,
   TimeRange,
-  renderLegendFormat,
 } from '@grafana/data';
 import {
   BackendDataSourceResponse,
@@ -41,6 +34,12 @@ import { discoverDataSourceFeatures } from 'app/features/alerting/unified/api/bu
 import { getTimeSrv, TimeSrv } from 'app/features/dashboard/services/TimeSrv';
 import { getTemplateSrv, TemplateSrv } from 'app/features/templating/template_srv';
 import { PromApiFeatures, PromApplication } from 'app/types/unified-alerting-dto';
+import { cloneDeep, defaults } from 'lodash';
+import { LRUCache } from 'lru-cache';
+import React from 'react';
+import { forkJoin, lastValueFrom, merge, Observable, of, OperatorFunction, pipe, throwError } from 'rxjs';
+import { catchError, filter, map, tap } from 'rxjs/operators';
+import semver from 'semver/preload';
 
 import config from '../../../core/config';
 

@@ -1,12 +1,11 @@
+import {DataFrame, DataQueryRequest, DateTime, dateTime, TimeRange} from '@grafana/data';
 import moment from 'moment';
 
-import { DataFrame, DataQueryRequest, DateTime, dateTime, TimeRange } from '@grafana/data/src';
+import {QueryEditorMode} from '../querybuilder/shared/types';
+import {PromQuery} from '../types';
 
-import { QueryEditorMode } from '../querybuilder/shared/types';
-import { PromQuery } from '../types';
-
-import { DatasourceProfileData, QueryCache } from './QueryCache';
-import { IncrementalStorageDataFrameScenarios } from './QueryCacheTestData';
+import {DatasourceProfileData, QueryCache} from './QueryCache';
+import {IncrementalStorageDataFrameScenarios} from './QueryCacheTestData';
 
 // Will not interpolate vars!
 const interpolateStringTest = (query: PromQuery) => {

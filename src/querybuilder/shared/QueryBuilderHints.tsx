@@ -1,10 +1,9 @@
 import { css } from '@emotion/css';
-import React, { useState, useEffect } from 'react';
-
 import { GrafanaTheme2, PanelData, QueryHint } from '@grafana/data';
 import { reportInteraction } from '@grafana/runtime';
 import { Button, Tooltip, useStyles2 } from '@grafana/ui';
 import { LokiDatasource } from 'app/plugins/datasource/loki/datasource';
+import React, { useEffect, useState } from 'react';
 
 import { PrometheusDatasource } from '../../datasource';
 

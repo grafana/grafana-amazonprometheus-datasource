@@ -1,13 +1,12 @@
 import { css } from '@emotion/css';
-import React, { useState } from 'react';
-import { DraggableProvided } from 'react-beautiful-dnd';
-
 import { GrafanaTheme2, SelectableValue } from '@grafana/data';
 import { FlexItem } from '@grafana/experimental';
 import { Button, Select, useStyles2 } from '@grafana/ui';
+import React, { useState } from 'react';
+import { DraggableProvided } from 'react-beautiful-dnd';
 
 import { OperationInfoButton } from './OperationInfoButton';
-import { VisualQueryModeller, QueryBuilderOperation, QueryBuilderOperationDef } from './types';
+import { QueryBuilderOperation, QueryBuilderOperationDef, VisualQueryModeller } from './types';
 
 export interface Props {
   operation: QueryBuilderOperation;

@@ -1,9 +1,9 @@
 import { css } from '@emotion/css';
+import { GrafanaTheme2 } from '@grafana/data';
+import { Button, Icon, Tooltip, useTheme2 } from '@grafana/ui';
 import React, { ReactElement } from 'react';
 import Highlighter from 'react-highlight-words';
 
-import { GrafanaTheme2 } from '@grafana/data';
-import { Button, Icon, Tooltip, useTheme2 } from '@grafana/ui';
 
 import { docsTip } from '../../../configuration/ConfigEditor';
 import { PromVisualQuery } from '../../types';
@@ -146,7 +146,7 @@ export function ResultsTable(props: ResultsTableProps) {
               <th className={`${styles.descriptionWidth} ${styles.tableHeaderPadding}`}>Description</th>
             </>
           )}
-          <th className={styles.selectButtonWidth}> </th>
+          <th className={styles.selectButtonWidth}></th>
         </tr>
       </thead>
       <tbody>

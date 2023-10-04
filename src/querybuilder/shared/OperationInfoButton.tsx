@@ -1,10 +1,9 @@
 import { css } from '@emotion/css';
-import React, { useState } from 'react';
-import { usePopperTooltip } from 'react-popper-tooltip';
-
 import { GrafanaTheme2, renderMarkdown } from '@grafana/data';
 import { FlexItem } from '@grafana/experimental';
 import { Button, Portal, useStyles2 } from '@grafana/ui';
+import React, { useState } from 'react';
+import { usePopperTooltip } from 'react-popper-tooltip';
 
 import { QueryBuilderOperation, QueryBuilderOperationDef } from './types';
 
@@ -96,6 +95,7 @@ const getStyles = (theme: GrafanaTheme2) => {
     }),
   };
 };
+
 function getOperationDocs(def: QueryBuilderOperationDef, op: QueryBuilderOperation): string {
   return renderMarkdown(def.explainHandler ? def.explainHandler(op, def) : def.documentation ?? 'no docs');
 }

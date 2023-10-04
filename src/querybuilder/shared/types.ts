@@ -2,9 +2,9 @@
  * Shared types that can be reused by Loki and other data sources
  */
 
+import { DataSourceApi, RegistryItem, SelectableValue } from '@grafana/data';
 import { ComponentType } from 'react';
 
-import { DataSourceApi, RegistryItem, SelectableValue } from '@grafana/data';
 
 export interface QueryBuilderLabelFilter {
   label: string;
@@ -103,7 +103,10 @@ export enum QueryEditorMode {
 
 export interface VisualQueryModeller {
   getOperationsForCategory(category: string): QueryBuilderOperationDef[];
+
   getAlternativeOperations(key: string): QueryBuilderOperationDef[];
+
   getCategories(): string[];
+
   getOperationDef(id: string): QueryBuilderOperationDef | undefined;
 }

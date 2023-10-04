@@ -1,17 +1,20 @@
+import { DataSourcePluginOptionsEditorProps, DataSourceSettings } from '@grafana/data';
 import React from 'react';
 
-import { DataSourcePluginOptionsEditorProps, DataSourceSettings } from '@grafana/data';
+import {
+  AwsAuthDataSourceJsonData,
+  AwsAuthDataSourceSecureJsonData,
+  ConnectionConfig,
+  ConnectionConfigProps,
+} from './ConnectionConfig';
 
-import { AwsAuthDataSourceJsonData, AwsAuthDataSourceSecureJsonData, ConnectionConfig, ConnectionConfigProps } from './ConnectionConfig';
 // import { AwsAuthDataSourceSecureJsonData, AwsAuthDataSourceJsonData } from './types';
 
 export interface Props extends DataSourcePluginOptionsEditorProps<any, any> {
   inExperimentalAuthComponent?: boolean;
-};
+}
 
-export const SIGV4ConnectionConfig: React.FC<Props> = (
-  props: Props
-) => {
+export const SIGV4ConnectionConfig: React.FC<Props> = (props: Props) => {
   const { onOptionsChange, options } = props;
 
   // Map HttpSettings props to ConnectionConfigProps

@@ -1,11 +1,7 @@
-import { css } from '@emotion/css';
-import debounce from 'debounce-promise';
-import React, { RefCallback, useCallback, useState } from 'react';
-import Highlighter from 'react-highlight-words';
-
-import { GrafanaTheme2, SelectableValue, toOption } from '@grafana/data';
-import { EditorField, EditorFieldGroup } from '@grafana/experimental';
-import { config } from '@grafana/runtime';
+import {css} from '@emotion/css';
+import {GrafanaTheme2, SelectableValue, toOption} from '@grafana/data';
+import {EditorField, EditorFieldGroup} from '@grafana/experimental';
+import {config} from '@grafana/runtime';
 import {
   AsyncSelect,
   Button,
@@ -18,16 +14,19 @@ import {
   useStyles2,
   useTheme2,
 } from '@grafana/ui';
-import { SelectMenuOptions } from '@grafana/ui/src/components/Select/SelectMenu';
+import {SelectMenuOptions} from '@grafana/ui/src/components/Select/SelectMenu';
+import debounce from 'debounce-promise';
+import React, {RefCallback, useCallback, useState} from 'react';
+import Highlighter from 'react-highlight-words';
 
-import { PrometheusDatasource } from '../../datasource';
-import { truncateResult } from '../../language_utils';
-import { regexifyLabelValuesQueryString } from '../shared/parsingUtils';
-import { QueryBuilderLabelFilter } from '../shared/types';
-import { PromVisualQuery } from '../types';
+import {PrometheusDatasource} from '../../datasource';
+import {truncateResult} from '../../language_utils';
+import {regexifyLabelValuesQueryString} from '../shared/parsingUtils';
+import {QueryBuilderLabelFilter} from '../shared/types';
+import {PromVisualQuery} from '../types';
 
-import { MetricsModal } from './metrics-modal/MetricsModal';
-import { tracking } from './metrics-modal/state/helpers';
+import {MetricsModal} from './metrics-modal/MetricsModal';
+import {tracking} from './metrics-modal/state/helpers';
 
 // We are matching words split with space
 const splitSeparator = ' ';

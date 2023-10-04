@@ -1,11 +1,11 @@
-import { isEqual, map } from 'lodash';
-import React, { SyntheticEvent, useCallback, useEffect, useState } from 'react';
 
 import { CoreApp, LoadingState, SelectableValue } from '@grafana/data';
 import { selectors } from '@grafana/e2e-selectors';
 import { EditorHeader, EditorRows, FlexItem, Space } from '@grafana/experimental';
 import { reportInteraction } from '@grafana/runtime';
 import { Button, ConfirmModal } from '@grafana/ui';
+import { isEqual, map } from 'lodash';
+import React, { SyntheticEvent, useCallback, useEffect, useState } from 'react';
 
 import { PromQueryEditorProps } from '../../components/types';
 import { PromQueryFormat } from '../../dataquery.gen';

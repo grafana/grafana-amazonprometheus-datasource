@@ -1,9 +1,8 @@
+import { MetricFindValue, TimeRange } from '@grafana/data';
+import { getTimeSrv } from 'app/features/dashboard/services/TimeSrv';
 import { chain, map as _map, uniq } from 'lodash';
 import { lastValueFrom } from 'rxjs';
 import { map } from 'rxjs/operators';
-
-import { MetricFindValue, TimeRange } from '@grafana/data';
-import { getTimeSrv } from 'app/features/dashboard/services/TimeSrv';
 
 import { PrometheusDatasource } from './datasource';
 import { getPrometheusTime } from './language_utils';

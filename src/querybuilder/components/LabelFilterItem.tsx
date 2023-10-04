@@ -1,10 +1,10 @@
-import debounce from 'debounce-promise';
-import React, { useState } from 'react';
 
 import { SelectableValue, toOption } from '@grafana/data';
 import { selectors } from '@grafana/e2e-selectors';
 import { AccessoryButton, InputGroup } from '@grafana/experimental';
 import { AsyncSelect, Select } from '@grafana/ui';
+import debounce from 'debounce-promise';
+import React, { useState } from 'react';
 
 import { truncateResult } from '../../language_utils';
 import { QueryBuilderLabelFilter } from '../shared/types';

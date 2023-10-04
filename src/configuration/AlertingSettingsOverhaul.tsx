@@ -1,10 +1,9 @@
 import { cx } from '@emotion/css';
-import React from 'react';
-
 import { DataSourceJsonData, DataSourcePluginOptionsEditorProps } from '@grafana/data';
 import { ConfigSubSection } from '@grafana/experimental';
 import { config } from '@grafana/runtime';
 import { InlineField, Switch, useTheme2 } from '@grafana/ui';
+import React from 'react';
 
 import { docsTip, overhaulStyles } from './ConfigEditor';
 

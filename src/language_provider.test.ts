@@ -1,9 +1,8 @@
-import { Editor as SlateEditor } from 'slate';
-import Plain from 'slate-plain-serializer';
-
 import { AbstractLabelOperator, dateTime, HistoryItem, TimeRange } from '@grafana/data';
 import { config } from '@grafana/runtime';
 import { SearchFunctionType } from '@grafana/ui';
+import { Editor as SlateEditor } from 'slate';
+import Plain from 'slate-plain-serializer';
 
 import { Label } from './components/monaco-query-field/monaco-completion-provider/situation';
 import { PrometheusDatasource } from './datasource';

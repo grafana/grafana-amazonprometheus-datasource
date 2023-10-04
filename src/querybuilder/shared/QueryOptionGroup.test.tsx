@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import React from 'react';
 
-import { QueryOptionGroup, Props } from './QueryOptionGroup';
+import { Props, QueryOptionGroup } from './QueryOptionGroup';
 
 describe('Query size approximation', () => {
   const _1KiB = 1024; // size of 1 KiB in bytes

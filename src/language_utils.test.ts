@@ -1,6 +1,5 @@
-import { Moment } from 'moment';
-
 import { AbstractLabelOperator, AbstractQuery, DateTime, dateTime, TimeRange } from '@grafana/data';
+import { Moment } from 'moment';
 
 import {
   escapeLabelValueInExactSelector,

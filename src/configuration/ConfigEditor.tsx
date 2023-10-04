@@ -1,17 +1,16 @@
 import { css } from '@emotion/css';
-import React, { useRef } from 'react';
-
 import { SIGV4ConnectionConfig } from '@grafana/aws-sdk';
 import { DataSourcePluginOptionsEditorProps, DataSourceSettings, GrafanaTheme2 } from '@grafana/data';
 import { ConfigSection, DataSourceDescription } from '@grafana/experimental';
 import { Alert, DataSourceHttpSettings, FieldValidationMessage, useTheme2 } from '@grafana/ui';
 import { config } from 'app/core/config';
+import React, { useRef } from 'react';
 
 import { PromOptions } from '../types';
 
 import { AlertingSettingsOverhaul } from './AlertingSettingsOverhaul';
 import { AzureAuthSettings } from './AzureAuthSettings';
-import { hasCredentials, setDefaultCredentials, resetCredentials } from './AzureCredentialsConfig';
+import { hasCredentials, resetCredentials, setDefaultCredentials } from './AzureCredentialsConfig';
 import { DataSourcehttpSettingsOverhaul } from './DataSourceHttpSettingsOverhaul';
 import { PromSettings } from './PromSettings';
 import { AdvancedHttpSettings } from './overhaul/AdvancedHttpSettings';
@@ -110,6 +109,7 @@ export const ConfigEditor = (props: Props) => {
     </>
   );
 };
+
 /**
  * Use this to return a url in a tooltip in a field. Don't forget to make the field interactive to be able to click on the tooltip
  * @param url

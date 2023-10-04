@@ -84,7 +84,9 @@
   "info": {
     "version": "%VERSION%",
     "updated": "%TODAY%",
-    "keywords": ["datasource"],
+    "keywords": [
+      "datasource"
+    ],
     "description": "Open source time series database & alerting",
     "author": {
       "name": "Grafana Labs",

@@ -1,5 +1,5 @@
-import { VisualQueryBinary } from './shared/LokiAndPromQueryModellerBase';
-import { QueryBuilderLabelFilter, QueryBuilderOperation } from './shared/types';
+import {VisualQueryBinary} from './shared/LokiAndPromQueryModellerBase';
+import {QueryBuilderLabelFilter, QueryBuilderOperation} from './shared/types';
 
 /**
  * Visual query model

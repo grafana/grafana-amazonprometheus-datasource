@@ -1,14 +1,14 @@
-import { render, screen } from '@testing-library/react';
-import { noop } from 'lodash';
+import {CoreApp} from '@grafana/data';
+import {render, screen} from '@testing-library/react';
+import {noop} from 'lodash';
 import React from 'react';
 
-import { CoreApp } from '@grafana/data';
 
-import { PrometheusDatasource } from '../datasource';
+import {PrometheusDatasource} from '../datasource';
 
-import { PromQueryEditorByApp } from './PromQueryEditorByApp';
-import { testIds as alertingTestIds } from './PromQueryEditorForAlerting';
-import { Props } from './monaco-query-field/MonacoQueryFieldProps';
+import {PromQueryEditorByApp} from './PromQueryEditorByApp';
+import {testIds as alertingTestIds} from './PromQueryEditorForAlerting';
+import {Props} from './monaco-query-field/MonacoQueryFieldProps';
 
 // the monaco-based editor uses lazy-loading and that does not work
 // well with this test, and we do not need the monaco-related

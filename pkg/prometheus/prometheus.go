@@ -61,6 +61,10 @@ type Datasource struct {
 	Service *Service
 }
 
+func (d *Datasource) QueryData(ctx context.Context, req *backend.QueryDataRequest) (*backend.QueryDataResponse, error) {
+	return d.Service.QueryData(ctx, req)
+}
+
 func newInstanceSettings(httpClientProvider httpclient.Provider, cfg *backend.GrafanaCfg, features backend.FeatureToggles, tracer trace.Tracer) datasource.InstanceFactoryFunc {
 	return func(ctx context.Context, settings backend.DataSourceInstanceSettings) (instancemgmt.Instance, error) {
 		// Creates a http roundTripper.

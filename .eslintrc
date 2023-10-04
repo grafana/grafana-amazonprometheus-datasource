@@ -1,9 +1,7 @@
 {
-  "extends": "./.config/.eslintrc",
-  "root": true,
-  "plugins": ["@emotion", "lodash", "jest", "import", "jsx-a11y", "@grafana"],
+  "extends": ["@grafana/eslint-config"],
+  "plugins": ["@emotion", "lodash", "jest", "import", "jsx-a11y"],
   "settings": {
-    "import/internal-regex": "^(app/)|(@grafana)",
     "import/external-module-folders": ["node_modules", ".yarn"]
   },
   "rules": {
@@ -50,28 +48,6 @@
   },
   "overrides": [
     {
-      "files": ["packages/grafana-ui/src/components/uPlot/**/*.{ts,tsx}"],
-      "rules": {
-        "react-hooks/rules-of-hooks": "off",
-        "react-hooks/exhaustive-deps": "off"
-      }
-    },
-    {
-      "files": ["packages/grafana-ui/src/components/ThemeDemos/**/*.{ts,tsx}"],
-      "rules": {
-        "@emotion/jsx-import": "off",
-        "react/jsx-uses-react": "off",
-        "react/react-in-jsx-scope": "off"
-      }
-    },
-    {
-      "files": ["public/dashboards/scripted*.js"],
-      "rules": {
-        "no-redeclare": "error",
-        "@typescript-eslint/no-redeclare": "off"
-      }
-    },
-    {
       "extends": ["plugin:jsx-a11y/recommended"],
       "files": ["**/*.tsx"],
       "excludedFiles": ["**/*.{spec,test}.tsx"],
@@ -90,34 +66,6 @@
           {
             "controlComponents": ["NumberInput"],
             "depth": 2
-          }
-        ]
-      }
-    },
-    {
-      "files": [
-        "public/app/plugins/datasource/grafana-testdata-datasource/*.{ts,tsx}",
-        "public/app/plugins/datasource/grafana-testdata-datasource/**/*.{ts,tsx}"
-      ],
-      "settings": {
-        "import/resolver": {
-          "node": {
-            "extensions": [".ts", ".tsx"]
-          }
-        }
-      },
-      "rules": {
-        "import/no-restricted-paths": [
-          "error",
-          {
-            "zones": [
-              {
-                "target": "./public/app/plugins",
-                "from": "./public/app",
-                "except": ["./plugins"],
-                "message": "Core plugins are not allowed to depend on Grafana core packages"
-              }
-            ]
           }
         ]
       }

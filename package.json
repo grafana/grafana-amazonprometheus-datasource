@@ -19,6 +19,7 @@
   "license": "Apache-2.0",
   "devDependencies": {
     "@babel/core": "7.23.0",
+    "@emotion/eslint-plugin": "11.11.0",
     "@grafana/e2e": "10.1.4",
     "@grafana/e2e-selectors": "10.1.4",
     "@grafana/eslint-config": "6.0.1",
@@ -33,6 +34,8 @@
     "@types/jest": "29.5.5",
     "@types/lodash": "4.14.199",
     "@types/node": "20.8.2",
+    "@typescript-eslint/eslint-plugin": "5.42.0",
+    "@typescript-eslint/parser": "5.42.0",
     "copy-webpack-plugin": "11.0.0",
     "css-loader": "6.7.3",
     "eslint": "8.50.0",

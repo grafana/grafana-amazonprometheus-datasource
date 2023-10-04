@@ -1,8 +1,7 @@
+import { DataSourceInstanceSettings, MetricFindValue } from '@grafana/data';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
-
-import { DataSourceInstanceSettings, MetricFindValue } from '@grafana/data/src';
 
 import { PrometheusDatasource } from '../../datasource';
 import { PromOptions } from '../../types';

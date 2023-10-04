@@ -1,6 +1,3 @@
-import React, { SyntheticEvent, useState } from 'react';
-import semver from 'semver/preload';
-
 import {
   DataSourcePluginOptionsEditorProps,
   DataSourceSettings as DataSourceSettingsType,
@@ -9,8 +6,10 @@ import {
   updateDatasourcePluginJsonDataOption,
 } from '@grafana/data';
 import { ConfigSubSection } from '@grafana/experimental';
-import { getBackendSrv } from '@grafana/runtime/src';
+import { getBackendSrv } from '@grafana/runtime';
 import { InlineField, Input, Select, Switch, useTheme2 } from '@grafana/ui';
+import React, { SyntheticEvent, useState } from 'react';
+import semver from 'semver/preload';
 
 import config from '../../../../core/config';
 import { useUpdateDatasource } from '../../../../features/datasources/state';

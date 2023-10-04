@@ -1,6 +1,5 @@
-import React from 'react';
-
 import { FieldValidationMessage } from '@grafana/ui';
+import React from 'react';
 
 import { validateInput } from './ConfigEditor';
 import { DURATION_REGEX, MULTIPLE_DURATION_REGEX } from './PromSettings';

@@ -1,4 +1,4 @@
-import { screen, getAllByRole } from '@testing-library/react';
+import { getAllByRole, screen } from '@testing-library/react';
 
 export function getLabelSelects(index = 0) {
   const labels = screen.getByText(/Label filters/);

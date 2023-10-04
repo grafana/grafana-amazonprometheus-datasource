@@ -4,16 +4,16 @@ import React, { useCallback, useEffect, useMemo, useReducer } from 'react';
 
 import { SelectableValue } from '@grafana/data';
 import {
+  Button,
+  ButtonGroup,
+  Icon,
   Input,
   Modal,
   MultiSelect,
-  Spinner,
-  useTheme2,
   Pagination,
-  Button,
+  Spinner,
   Toggletip,
-  ButtonGroup,
-  Icon,
+  useTheme2,
 } from '@grafana/ui';
 
 import { PrometheusDatasource } from '../../../datasource';
@@ -27,9 +27,9 @@ import {
   calculateResultsPerPage,
   displayedMetrics,
   getBackendSearchMetrics,
-  setMetrics,
   placeholders,
   promTypes,
+  setMetrics,
   tracking,
 } from './state/helpers';
 import {

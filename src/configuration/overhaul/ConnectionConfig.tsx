@@ -1,17 +1,16 @@
-import React, { FC, useEffect, useMemo, useState } from 'react';
-
 import {
+  DataSourceJsonData,
   DataSourcePluginOptionsEditorProps,
+  DataSourceSettings,
+  onUpdateDatasourceJsonDataOption,
   onUpdateDatasourceJsonDataOptionSelect,
   onUpdateDatasourceResetOption,
-  onUpdateDatasourceJsonDataOption,
   onUpdateDatasourceSecureJsonDataOption,
-  DataSourceJsonData,
-  DataSourceSettings,
-  SelectableValue
+  SelectableValue,
 } from '@grafana/data';
 import { config } from '@grafana/runtime';
-import { Input, Select, InlineField, ButtonGroup, ToolbarButton, FieldSet } from '@grafana/ui';
+import { ButtonGroup, FieldSet, InlineField, Input, Select, ToolbarButton } from '@grafana/ui';
+import React, { FC, useEffect, useMemo, useState } from 'react';
 
 export enum AwsAuthType {
   Keys = 'keys',
@@ -22,7 +21,7 @@ export enum AwsAuthType {
    * @deprecated use default
    */
   ARN = 'arn',
-  GrafanaAssumeRole = 'grafana_assume_role'
+  GrafanaAssumeRole = 'grafana_assume_role',
 }
 
 export interface AwsAuthDataSourceJsonData extends DataSourceJsonData {
@@ -99,9 +98,10 @@ const toOption = (value: string) => ({ value, label: value });
 const isAwsAuthType = (value: any): value is AwsAuthType => {
   return typeof value === 'string' && awsAuthProviderOptions.some((opt) => opt.value === value);
 };
+
 export interface ConnectionConfigProps<
   J extends AwsAuthDataSourceJsonData = AwsAuthDataSourceJsonData,
-  S = AwsAuthDataSourceSecureJsonData
+  S = AwsAuthDataSourceSecureJsonData,
 > extends DataSourcePluginOptionsEditorProps<J, S> {
   standardRegions?: string[];
   loadRegions?: () => Promise<string[]>;
@@ -156,7 +156,7 @@ export const ConnectionConfig: FC<ConnectionConfigProps> = (props: ConnectionCon
 
   // const inExperimentalAuthComponent = options.jsonData.inExperimentalAuthComponent;
 
-  const inputWidth = inExperimentalAuthComponent ? "width-20" : "width-30";
+  const inputWidth = inExperimentalAuthComponent ? 'width-20' : 'width-30';
 
   return (
     <FieldSet label={skipHeader ? '' : 'Connection Details'} data-testid="connection-config">

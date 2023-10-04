@@ -1,11 +1,8 @@
 import { cx } from '@emotion/css';
-import React, { ChangeEvent, useEffect, useReducer, useState } from 'react';
-
 import { SelectableValue } from '@grafana/data';
 import { config } from '@grafana/runtime';
-import { InlineFormLabel, Button } from '@grafana/ui/src/components';
-import { Input } from '@grafana/ui/src/components/Forms/Legacy/Input/Input';
-import { Select } from '@grafana/ui/src/components/Forms/Legacy/Select/Select';
+import { Button, InlineFormLabel, Input, Select } from '@grafana/ui';
+import React, { ChangeEvent, useEffect, useReducer, useState } from 'react';
 
 import { AzureAuthType, AzureCredentials, isCredentialsComplete } from './AzureCredentials';
 

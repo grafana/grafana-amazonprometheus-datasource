@@ -1,8 +1,7 @@
+import { DataSourceInstanceSettings, DataSourcePluginMeta } from '@grafana/data';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
-
-import { DataSourceInstanceSettings, DataSourcePluginMeta } from '@grafana/data';
 
 import { PrometheusDatasource } from '../../datasource';
 import PromQlLanguageProvider from '../../language_provider';

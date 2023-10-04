@@ -1,8 +1,3 @@
-import { chain, difference, once } from 'lodash';
-import { LRUCache } from 'lru-cache';
-import Prism from 'prismjs';
-import { Value } from 'slate';
-
 import {
   AbstractLabelMatcher,
   AbstractLabelOperator,
@@ -13,6 +8,10 @@ import {
 } from '@grafana/data';
 import { BackendSrvRequest, config } from '@grafana/runtime';
 import { CompletionItem, CompletionItemGroup, SearchFunctionType, TypeaheadInput, TypeaheadOutput } from '@grafana/ui';
+import { chain, difference, once } from 'lodash';
+import { LRUCache } from 'lru-cache';
+import Prism from 'prismjs';
+import { Value } from 'slate';
 
 import { Label } from './components/monaco-query-field/monaco-completion-provider/situation';
 import { PrometheusDatasource } from './datasource';
@@ -123,6 +122,7 @@ export default class PromQlLanguageProvider extends LanguageProvider {
    */
   private labelsCache = new LRUCache<string, Record<string, string[]>>({ max: 10 });
   private labelValuesCache = new LRUCache<string, string[]>({ max: 10 });
+
   constructor(datasource: PrometheusDatasource, initialValues?: Partial<PromQlLanguageProvider>) {
     super();
 

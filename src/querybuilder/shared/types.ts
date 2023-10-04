@@ -103,7 +103,10 @@ export enum QueryEditorMode {
 
 export interface VisualQueryModeller {
   getOperationsForCategory(category: string): QueryBuilderOperationDef[];
+
   getAlternativeOperations(key: string): QueryBuilderOperationDef[];
+
   getCategories(): string[];
+
   getOperationDef(id: string): QueryBuilderOperationDef | undefined;
 }

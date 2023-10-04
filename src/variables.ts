@@ -1,8 +1,7 @@
-import { from, Observable, of } from 'rxjs';
-import { map } from 'rxjs/operators';
-
 import { CustomVariableSupport, DataQueryRequest, DataQueryResponse, rangeUtil } from '@grafana/data';
 import { getTemplateSrv, TemplateSrv } from '@grafana/runtime';
+import { from, Observable, of } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 import { getTimeSrv, TimeSrv } from '../../../features/dashboard/services/TimeSrv';
 

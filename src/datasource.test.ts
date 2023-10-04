@@ -1,6 +1,3 @@
-import { cloneDeep } from 'lodash';
-import { lastValueFrom, of, throwError } from 'rxjs';
-
 import {
   AnnotationEvent,
   AnnotationQueryRequest,
@@ -19,6 +16,8 @@ import { config } from '@grafana/runtime';
 import { TimeSrv } from 'app/features/dashboard/services/TimeSrv';
 import { TemplateSrv } from 'app/features/templating/template_srv';
 import { QueryOptions } from 'app/types';
+import { cloneDeep } from 'lodash';
+import { lastValueFrom, of, throwError } from 'rxjs';
 
 import { VariableHide } from '../../../features/variables/types';
 

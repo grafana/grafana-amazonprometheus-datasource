@@ -146,7 +146,7 @@ export function ResultsTable(props: ResultsTableProps) {
               <th className={`${styles.descriptionWidth} ${styles.tableHeaderPadding}`}>Description</th>
             </>
           )}
-          <th className={styles.selectButtonWidth}> </th>
+          <th className={styles.selectButtonWidth}></th>
         </tr>
       </thead>
       <tbody>

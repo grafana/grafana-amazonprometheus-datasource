@@ -96,6 +96,7 @@ const getStyles = (theme: GrafanaTheme2) => {
     }),
   };
 };
+
 function getOperationDocs(def: QueryBuilderOperationDef, op: QueryBuilderOperation): string {
   return renderMarkdown(def.explainHandler ? def.explainHandler(op, def) : def.documentation ?? 'no docs');
 }

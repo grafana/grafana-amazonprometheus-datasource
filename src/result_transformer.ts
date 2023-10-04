@@ -1,6 +1,3 @@
-import { descending, deviation } from 'd3';
-import { flatten, forOwn, groupBy, partition } from 'lodash';
-
 import {
   ArrayDataFrame,
   CoreApp,
@@ -16,13 +13,15 @@ import {
   getDisplayProcessor,
   Labels,
   PreferredVisualisationType,
+  renderLegendFormat,
   ScopedVars,
   TIME_SERIES_TIME_FIELD_NAME,
   TIME_SERIES_VALUE_FIELD_NAME,
-  renderLegendFormat,
 } from '@grafana/data';
 import { calculateFieldDisplayName } from '@grafana/data/src/field/fieldState';
 import { config, FetchResponse, getDataSourceSrv, getTemplateSrv } from '@grafana/runtime';
+import { descending, deviation } from 'd3';
+import { flatten, forOwn, groupBy, partition } from 'lodash';
 
 import {
   ExemplarTraceIdDestination,
@@ -648,11 +647,11 @@ function mergeHeatmapFrames(frames: DataFrame[]): DataFrame[] {
 
 function transformToHistogramOverTime(seriesList: DataFrame[]) {
   /*      t1 = timestamp1, t2 = timestamp2 etc.
-            t1  t2  t3          t1  t2  t3
-    le10    10  10  0     =>    10  10  0
-    le20    20  10  30    =>    10  0   30
-    le30    30  10  35    =>    10  0   5
-    */
+              t1  t2  t3          t1  t2  t3
+      le10    10  10  0     =>    10  10  0
+      le20    20  10  30    =>    10  0   30
+      le30    30  10  35    =>    10  0   5
+      */
 
   for (let i = seriesList.length - 1; i > 0; i--) {
     const topSeries = seriesList[i].fields.find((s) => s.type === FieldType.number);

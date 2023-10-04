@@ -29,6 +29,7 @@ export interface State {
 }
 
 const prometheusMetricEncyclopedia = config.featureToggles.prometheusMetricEncyclopedia;
+
 /**
  * This component is here just to contain the translation logic between string query and the visual query builder model.
  */

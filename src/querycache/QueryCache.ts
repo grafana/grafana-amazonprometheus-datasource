@@ -1,19 +1,10 @@
-import {
-  DataFrame,
-  DataQueryRequest,
-  dateTime,
-  durationToMilliseconds,
-  Field,
-  incrRoundDn,
-  isValidDuration,
-  parseDuration,
-} from '@grafana/data/src';
-import { faro } from '@grafana/faro-web-sdk';
-import { config, reportInteraction } from '@grafana/runtime/src';
-import { amendTable, Table, trimTable } from 'app/features/live/data/amendTimeSeries';
+import {DataFrame, DataQueryRequest, dateTime, durationToMilliseconds, Field, incrRoundDn, isValidDuration, parseDuration,} from '@grafana/data';
+import {faro} from '@grafana/faro-web-sdk';
+import {config, reportInteraction} from '@grafana/runtime';
+import {amendTable, Table, trimTable} from 'app/features/live/data/amendTimeSeries';
 
-import { getTimeSrv } from '../../../../features/dashboard/services/TimeSrv';
-import { PromQuery } from '../types';
+import {getTimeSrv} from '../../../../features/dashboard/services/TimeSrv';
+import {PromQuery} from '../types';
 
 // dashboardUID + panelId + refId
 // (must be stable across query changes, time range changes / interval changes / panel resizes / template variable changes)

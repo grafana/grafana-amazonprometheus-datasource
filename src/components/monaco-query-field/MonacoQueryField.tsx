@@ -1,13 +1,13 @@
 import { css } from '@emotion/css';
 import { debounce } from 'lodash';
 import { promLanguageDefinition } from 'monaco-promql';
-import React, { useRef, useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useLatest } from 'react-use';
 import { v4 as uuidv4 } from 'uuid';
 
 import { GrafanaTheme2 } from '@grafana/data';
 import { selectors } from '@grafana/e2e-selectors';
-import { useTheme2, ReactMonacoEditor, Monaco, monacoTypes } from '@grafana/ui';
+import { Monaco, monacoTypes, ReactMonacoEditor, useTheme2 } from '@grafana/ui';
 
 import { Props } from './MonacoQueryFieldProps';
 import { getOverrideServices } from './getOverrideServices';
@@ -248,8 +248,8 @@ const MonacoQueryField = (props: Props) => {
           );
 
           /* Something in this configuration of monaco doesn't bubble up [mod]+K, which the
-          command palette uses. Pass the event out of monaco manually
-          */
+                    command palette uses. Pass the event out of monaco manually
+                    */
           editor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyK, function () {
             global.dispatchEvent(new KeyboardEvent('keydown', { key: 'k', metaKey: true }));
           });

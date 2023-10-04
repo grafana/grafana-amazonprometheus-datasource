@@ -12,9 +12,7 @@ import (
 	sdkHttpClient "github.com/grafana/grafana-plugin-sdk-go/backend/httpclient"
 	"github.com/stretchr/testify/require"
 
-	"github.com/grafana/grafana/pkg/infra/httpclient"
-	"github.com/grafana/grafana/pkg/services/featuremgmt"
-	"github.com/grafana/grafana/pkg/setting"
+	"github.com/grafana/grafana-plugin-sdk-go/backend/httpclient"
 )
 
 type fakeSender struct{}
@@ -60,7 +58,7 @@ func TestService(t *testing.T) {
 			t.Run("creates correct request", func(t *testing.T) {
 				httpProvider := &fakeHTTPClientProvider{}
 				service := &Service{
-					im: datasource.NewInstanceManager(newInstanceSettings(httpProvider, &setting.Cfg{}, &featuremgmt.FeatureManager{}, nil)),
+					im: datasource.NewInstanceManager(newInstanceSettings(httpProvider, &backend.GrafanaCfg{}, backend.FeatureToggles{}, nil)),
 				}
 
 				req := &backend.CallResourceRequest{

@@ -8,10 +8,10 @@ import (
 	"time"
 
 	"github.com/grafana/grafana-plugin-sdk-go/backend"
+	logger "github.com/grafana/grafana-plugin-sdk-go/backend/log"
 	"github.com/stretchr/testify/require"
 
-	"github.com/grafana/grafana/pkg/cmd/grafana-cli/logger"
-	"github.com/grafana/grafana/pkg/tsdb/prometheus/models"
+	"github.com/grafana/prometheus-amd/pkg/prometheus/models"
 )
 
 type MockDoer struct {
@@ -44,7 +44,7 @@ func TestClient(t *testing.T) {
 			defer func() {
 				if res != nil && res.Body != nil {
 					if err := res.Body.Close(); err != nil {
-						logger.Warn("Error", "err", err)
+						logger.New().Warn("Error", "err", err)
 					}
 				}
 			}()
@@ -68,7 +68,7 @@ func TestClient(t *testing.T) {
 			defer func() {
 				if res != nil && res.Body != nil {
 					if err := res.Body.Close(); err != nil {
-						logger.Warn("Error", "err", err)
+						logger.New().Warn("Error", "err", err)
 					}
 				}
 			}()
@@ -98,7 +98,7 @@ func TestClient(t *testing.T) {
 			defer func() {
 				if res != nil && res.Body != nil {
 					if err := res.Body.Close(); err != nil {
-						logger.Warn("Error", "err", err)
+						logger.New().Warn("Error", "err", err)
 					}
 				}
 			}()
@@ -125,7 +125,7 @@ func TestClient(t *testing.T) {
 			defer func() {
 				if res != nil && res.Body != nil {
 					if err := res.Body.Close(); err != nil {
-						logger.Warn("Error", "err", err)
+						logger.New().Warn("Error", "err", err)
 					}
 				}
 			}()

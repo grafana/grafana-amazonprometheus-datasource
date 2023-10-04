@@ -10,16 +10,15 @@ import (
 	"github.com/grafana/grafana-plugin-sdk-go/backend"
 	"github.com/grafana/grafana-plugin-sdk-go/data"
 	"go.opentelemetry.io/otel/attribute"
+	"go.opentelemetry.io/otel/trace"
 
-	"github.com/grafana/grafana/pkg/infra/log"
-	"github.com/grafana/grafana/pkg/infra/tracing"
-	"github.com/grafana/grafana/pkg/services/featuremgmt"
-	"github.com/grafana/grafana/pkg/tsdb/intervalv2"
-	"github.com/grafana/grafana/pkg/tsdb/prometheus/client"
-	"github.com/grafana/grafana/pkg/tsdb/prometheus/models"
-	"github.com/grafana/grafana/pkg/tsdb/prometheus/querydata/exemplar"
-	"github.com/grafana/grafana/pkg/tsdb/prometheus/utils"
-	"github.com/grafana/grafana/pkg/util/maputil"
+	"github.com/grafana/grafana-plugin-sdk-go/backend/log"
+	"github.com/grafana/prometheus-amd/pkg/gcopypaste/intervalv2"
+	"github.com/grafana/prometheus-amd/pkg/gcopypaste/maputil"
+	"github.com/grafana/prometheus-amd/pkg/prometheus/client"
+	"github.com/grafana/prometheus-amd/pkg/prometheus/models"
+	"github.com/grafana/prometheus-amd/pkg/prometheus/querydata/exemplar"
+	"github.com/grafana/prometheus-amd/pkg/prometheus/utils"
 )
 
 const legendFormatAuto = "__auto"
@@ -36,7 +35,7 @@ type ExemplarEvent struct {
 // client.
 type QueryData struct {
 	intervalCalculator intervalv2.Calculator
-	tracer             tracing.Tracer
+	tracer             trace.Tracer
 	client             *client.Client
 	log                log.Logger
 	ID                 int64
@@ -48,8 +47,8 @@ type QueryData struct {
 
 func New(
 	httpClient *http.Client,
-	features featuremgmt.FeatureToggles,
-	tracer tracing.Tracer,
+	features backend.FeatureToggles,
+	tracer trace.Tracer,
 	settings backend.DataSourceInstanceSettings,
 	plog log.Logger,
 ) (*QueryData, error) {
@@ -69,7 +68,7 @@ func New(
 	// standard deviation sampler is the default for backwards compatibility
 	exemplarSampler := exemplar.NewStandardDeviationSampler
 
-	if features.IsEnabled(featuremgmt.FlagDisablePrometheusExemplarSampling) {
+	if features.IsEnabled("disablePrometheusExemplarSampling") {
 		exemplarSampler = exemplar.NewNoOpSampler
 	}
 
@@ -81,7 +80,7 @@ func New(
 		TimeInterval:       timeInterval,
 		ID:                 settings.ID,
 		URL:                settings.URL,
-		enableDataplane:    features.IsEnabled(featuremgmt.FlagPrometheusDataplane),
+		enableDataplane:    features.IsEnabled("prometheusDataplane"),
 		exemplarSampler:    exemplarSampler,
 	}, nil
 }
@@ -99,7 +98,7 @@ func (s *QueryData) Execute(ctx context.Context, req *backend.QueryDataRequest) 
 		}
 		r := s.fetch(ctx, s.client, query, req.Headers)
 		if r == nil {
-			s.log.FromContext(ctx).Debug("Received nil response from runQuery", "query", query.Expr)
+			//s.log.FromContext(ctx).Debug("Received nil response from runQuery", "query", query.Expr)
 			continue
 		}
 		result.Responses[q.RefID] = *r
@@ -112,8 +111,8 @@ func (s *QueryData) fetch(ctx context.Context, client *client.Client, q *models.
 	traceCtx, end := s.trace(ctx, q)
 	defer end()
 
-	logger := s.log.FromContext(traceCtx)
-	logger.Debug("Sending query", "start", q.Start, "end", q.End, "step", q.Step, "query", q.Expr)
+	//logger := s.log.FromContext(traceCtx)
+	//logger.Debug("Sending query", "start", q.Start, "end", q.End, "step", q.Step, "query", q.Expr)
 
 	dr := &backend.DataResponse{
 		Frames: data.Frames{},
@@ -143,7 +142,7 @@ func (s *QueryData) fetch(ctx context.Context, client *client.Client, q *models.
 		if res.Error != nil {
 			// If exemplar query returns error, we want to only log it and
 			// continue with other results processing
-			logger.Error("Exemplar query failed", "query", q.Expr, "err", res.Error)
+			//logger.Error("Exemplar query failed", "query", q.Expr, "err", res.Error)
 		}
 		dr.Frames = append(dr.Frames, res.Frames...)
 	}

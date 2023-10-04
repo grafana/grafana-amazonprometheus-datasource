@@ -7,10 +7,10 @@ import (
 	"net/http"
 
 	"github.com/grafana/grafana-plugin-sdk-go/backend"
-	"github.com/grafana/grafana/pkg/infra/log"
-	"github.com/grafana/grafana/pkg/tsdb/prometheus/client"
-	"github.com/grafana/grafana/pkg/tsdb/prometheus/utils"
-	"github.com/grafana/grafana/pkg/util/maputil"
+	"github.com/grafana/grafana-plugin-sdk-go/backend/log"
+	"github.com/grafana/prometheus-amd/pkg/gcopypaste/maputil"
+	"github.com/grafana/prometheus-amd/pkg/prometheus/client"
+	"github.com/grafana/prometheus-amd/pkg/prometheus/utils"
 )
 
 type Resource struct {
@@ -40,7 +40,7 @@ func New(
 }
 
 func (r *Resource) Execute(ctx context.Context, req *backend.CallResourceRequest) (*backend.CallResourceResponse, error) {
-	r.log.FromContext(ctx).Debug("Sending resource query", "URL", req.URL)
+	//r.log.FromContext(ctx).Debug("Sending resource query", "URL", req.URL)
 	resp, err := r.promClient.QueryResource(ctx, req)
 	if err != nil {
 		return nil, fmt.Errorf("error querying resource: %v", err)

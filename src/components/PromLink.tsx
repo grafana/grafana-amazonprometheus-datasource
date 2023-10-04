@@ -1,7 +1,7 @@
+import { DataQueryRequest, PanelData, rangeUtil, ScopedVars, textUtil } from '@grafana/data';
 import { map } from 'lodash';
 import React, { memo, useEffect, useState } from 'react';
 
-import { DataQueryRequest, PanelData, rangeUtil, ScopedVars, textUtil } from '@grafana/data';
 
 import { PrometheusDatasource } from '../datasource';
 import { getPrometheusTime } from '../language_utils';

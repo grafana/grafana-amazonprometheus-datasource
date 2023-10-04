@@ -1,8 +1,8 @@
-import React, { SyntheticEvent } from 'react';
 
 import { CoreApp, SelectableValue } from '@grafana/data';
 import { EditorField, EditorRow, EditorSwitch } from '@grafana/experimental';
 import { AutoSizeInput, RadioButtonGroup, Select } from '@grafana/ui';
+import React, { SyntheticEvent } from 'react';
 
 import { getQueryTypeChangeHandler, getQueryTypeOptions } from '../../components/PromExploreExtraField';
 import { PromQueryFormat } from '../../dataquery.gen';

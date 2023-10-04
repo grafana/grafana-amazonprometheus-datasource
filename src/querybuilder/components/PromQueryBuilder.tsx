@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
 
 import { DataSourceApi, PanelData } from '@grafana/data';
 import { EditorRow } from '@grafana/experimental';
+import React, { useState } from 'react';
 
 import { PrometheusDatasource } from '../../datasource';
 import promqlGrammar from '../../promql';

@@ -1,8 +1,8 @@
+import { SelectableValue } from '@grafana/data';
+import { EditorField, EditorFieldGroup, EditorList } from '@grafana/experimental';
 import { isEqual } from 'lodash';
 import React, { useEffect, useState } from 'react';
 
-import { SelectableValue } from '@grafana/data';
-import { EditorField, EditorFieldGroup, EditorList } from '@grafana/experimental';
 
 import { QueryBuilderLabelFilter } from '../shared/types';
 

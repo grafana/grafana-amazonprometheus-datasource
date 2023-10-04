@@ -1,6 +1,6 @@
+import { SelectableValue } from '@grafana/data';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { SelectableValue } from '@grafana/data';
 
 import { PromVisualQuery } from '../../../types';
 import { HaystackDictionary, MetricsData } from '../types';

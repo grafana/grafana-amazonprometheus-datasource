@@ -1,6 +1,5 @@
-import React, { memo } from 'react';
-
 import { CoreApp } from '@grafana/data';
+import React, { memo } from 'react';
 
 import { PromQueryEditorSelector } from '../querybuilder/components/PromQueryEditorSelector';
 

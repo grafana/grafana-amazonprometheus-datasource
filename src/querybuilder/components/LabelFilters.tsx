@@ -1,10 +1,9 @@
 import { css, cx } from '@emotion/css';
-import { isEqual } from 'lodash';
-import React, { useEffect, useState } from 'react';
-
 import { SelectableValue } from '@grafana/data';
 import { EditorField, EditorFieldGroup, EditorList } from '@grafana/experimental';
 import { InlineFieldRow, InlineLabel } from '@grafana/ui';
+import { isEqual } from 'lodash';
+import React, { useEffect, useState } from 'react';
 
 import { QueryBuilderLabelFilter } from '../shared/types';
 

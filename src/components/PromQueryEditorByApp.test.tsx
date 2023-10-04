@@ -1,8 +1,8 @@
+import {CoreApp} from '@grafana/data';
 import {render, screen} from '@testing-library/react';
 import {noop} from 'lodash';
 import React from 'react';
 
-import {CoreApp} from '@grafana/data';
 
 import {PrometheusDatasource} from '../datasource';
 

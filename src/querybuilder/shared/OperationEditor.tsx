@@ -1,12 +1,11 @@
 import { css, cx } from '@emotion/css';
-import React, { useEffect, useState } from 'react';
-import { Draggable } from 'react-beautiful-dnd';
-
 import { DataSourceApi, GrafanaTheme2 } from '@grafana/data';
 import { Stack } from '@grafana/experimental';
 import { Button, Icon, InlineField, Tooltip, useTheme2 } from '@grafana/ui';
 import { isConflictingFilter } from 'app/plugins/datasource/loki/querybuilder/operationUtils';
 import { LokiOperationId } from 'app/plugins/datasource/loki/querybuilder/types';
+import React, { useEffect, useState } from 'react';
+import { Draggable } from 'react-beautiful-dnd';
 
 import { OperationHeader } from './OperationHeader';
 import { getOperationParamEditor } from './OperationParamEditor';

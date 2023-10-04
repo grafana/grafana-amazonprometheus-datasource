@@ -1,9 +1,9 @@
+import {CoreApp, DataFrame, LoadingState, PanelData} from '@grafana/data';
 import {getByTestId, render, screen, waitFor} from '@testing-library/react';
 // @ts-ignore
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 
-import {CoreApp, DataFrame, LoadingState, PanelData} from '@grafana/data';
 
 import {PrometheusDatasource} from '../datasource';
 import PromQlLanguageProvider from '../language_provider';

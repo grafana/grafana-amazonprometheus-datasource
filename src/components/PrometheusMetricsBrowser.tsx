@@ -1,9 +1,9 @@
 import {css, cx} from '@emotion/css';
+import {GrafanaTheme2} from '@grafana/data';
+import {BrowserLabel as PromLabel, Button, HorizontalGroup, Input, Label, LoadingPlaceholder, stylesFactory, withTheme2,} from '@grafana/ui';
 import React, {ChangeEvent} from 'react';
 import {FixedSizeList} from 'react-window';
 
-import {GrafanaTheme2} from '@grafana/data';
-import {BrowserLabel as PromLabel, Button, HorizontalGroup, Input, Label, LoadingPlaceholder, stylesFactory, withTheme2,} from '@grafana/ui';
 
 import PromQlLanguageProvider from '../language_provider';
 import {escapeLabelValueInExactSelector, escapeLabelValueInRegexSelector} from '../language_utils';

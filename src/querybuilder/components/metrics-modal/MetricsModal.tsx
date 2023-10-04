@@ -1,7 +1,4 @@
 import { cx } from '@emotion/css';
-import debounce from 'debounce-promise';
-import React, { useCallback, useEffect, useMemo, useReducer } from 'react';
-
 import { SelectableValue } from '@grafana/data';
 import {
   Button,
@@ -15,6 +12,9 @@ import {
   Toggletip,
   useTheme2,
 } from '@grafana/ui';
+import debounce from 'debounce-promise';
+import React, { useCallback, useEffect, useMemo, useReducer } from 'react';
+
 
 import { PrometheusDatasource } from '../../../datasource';
 import { PromVisualQuery } from '../../types';

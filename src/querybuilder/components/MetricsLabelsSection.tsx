@@ -1,6 +1,6 @@
+import { SelectableValue } from '@grafana/data';
 import React, { useCallback } from 'react';
 
-import { SelectableValue } from '@grafana/data';
 
 import { PrometheusDatasource } from '../../datasource';
 import { getMetadataString } from '../../language_provider';

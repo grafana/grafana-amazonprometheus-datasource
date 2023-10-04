@@ -1,8 +1,8 @@
-import React, { useRef } from 'react';
 
 import { SelectableValue } from '@grafana/data';
 import { EditorField } from '@grafana/experimental';
 import { AutoSizeInput, Select } from '@grafana/ui';
+import React, { useRef } from 'react';
 
 import { LegendFormatMode } from '../../types';
 

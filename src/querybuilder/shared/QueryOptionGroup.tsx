@@ -1,12 +1,11 @@
 import { css } from '@emotion/css';
-import React from 'react';
-import { useToggle } from 'react-use';
-
 import { getValueFormat, GrafanaTheme2 } from '@grafana/data';
 import { Stack } from '@grafana/experimental';
 import { config } from '@grafana/runtime';
 import { Collapse, Icon, Tooltip, useStyles2 } from '@grafana/ui';
 import { QueryStats } from 'app/plugins/datasource/loki/types';
+import React from 'react';
+import { useToggle } from 'react-use';
 
 export interface Props {
   title: string;

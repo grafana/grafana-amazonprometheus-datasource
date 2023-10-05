@@ -3,10 +3,11 @@ import { render, screen } from '@testing-library/react';
 import React, { SyntheticEvent } from 'react';
 import { Provider } from 'react-redux';
 
-import { configureStore } from '../../../../store/configureStore';
+// import { configureStore } from '../../../../store/configureStore';
 
 import { getValueFromEventItem, PromSettings } from './PromSettings';
 import { createDefaultConfigOptions } from './mocks';
+import { configureStore } from 'gcopypaste/app/store/configureStore';
 
 describe('PromSettings', () => {
   describe('getValueFromEventItem', () => {

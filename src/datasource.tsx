@@ -473,10 +473,6 @@ export class PrometheusDatasource
     return processedTargets;
   }
 
-  intepolateStringHelper = (query: PromQuery): string => {
-    return this.interpolateString(query.expr);
-  };
-
   query(request: DataQueryRequest<PromQuery>): Observable<DataQueryResponse> {
     if (this.access === 'proxy') {
       let fullOrPartialRequest: DataQueryRequest<PromQuery>;

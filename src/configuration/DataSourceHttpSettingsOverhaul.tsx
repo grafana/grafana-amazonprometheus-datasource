@@ -1,7 +1,7 @@
 import { DataSourceSettings } from '@grafana/data';
 import { Auth, ConnectionSettings, convertLegacyAuthProps } from '@grafana/experimental';
 import { SecureSocksProxySettings, useTheme2 } from '@grafana/ui';
-import { AzureAuthSettings } from '@grafana/ui/src/components/DataSourceSettings/types';
+// import { AzureAuthSettings } from '@grafana/ui/src/components/DataSourceSettings/types';
 import React, { useState } from 'react';
 
 import { PromOptions } from '../types';
@@ -12,7 +12,7 @@ import { CustomMethod } from './overhaul/types';
 type Props = {
   options: DataSourceSettings<PromOptions, {}>;
   onOptionsChange: (options: DataSourceSettings<PromOptions, {}>) => void;
-  azureAuthSettings: AzureAuthSettings;
+  // azureAuthSettings: AzureAuthSettings;
   sigV4AuthToggleEnabled: boolean | undefined;
   renderSigV4Editor: React.ReactNode;
   secureSocksDSProxyEnabled: boolean;
@@ -22,7 +22,7 @@ export const DataSourcehttpSettingsOverhaul = (props: Props) => {
   const {
     options,
     onOptionsChange,
-    azureAuthSettings,
+    // azureAuthSettings,
     sigV4AuthToggleEnabled,
     renderSigV4Editor,
     secureSocksDSProxyEnabled,
@@ -34,6 +34,7 @@ export const DataSourcehttpSettingsOverhaul = (props: Props) => {
   });
 
   const theme = useTheme2();
+  // @ts-ignore incompatibility between grafana/data and grafana/ui GrafanaTheme2
   const styles = overhaulStyles(theme);
 
   // for custom auth methods sigV4 and azure auth
@@ -54,39 +55,39 @@ export const DataSourcehttpSettingsOverhaul = (props: Props) => {
     customMethods.push(sigV4Option);
   }
 
-  const azureAuthEnabled: boolean =
-    (azureAuthSettings?.azureAuthSupported && azureAuthSettings.getAzureAuthEnabled(options)) || false;
+  // const azureAuthEnabled: boolean =
+  //   (azureAuthSettings?.azureAuthSupported && azureAuthSettings.getAzureAuthEnabled(options)) || false;
 
-  const [azureAuthSelected, setAzureAuthSelected] = useState<boolean>(azureAuthEnabled);
+  // const [azureAuthSelected, setAzureAuthSelected] = useState<boolean>(azureAuthEnabled);
 
-  const azureAuthId = 'custom-azureAuthId';
+  // const azureAuthId = 'custom-azureAuthId';
 
-  const azureAuthOption: CustomMethod = {
-    id: azureAuthId,
-    label: 'Azure auth',
-    description: 'This is Azure auth description',
-    component: (
-      <>
-        {azureAuthSettings.azureSettingsUI && (
-          <azureAuthSettings.azureSettingsUI dataSourceConfig={options} onChange={onOptionsChange} />
-        )}
-      </>
-    ),
-  };
+  // const azureAuthOption: CustomMethod = {
+  //   id: azureAuthId,
+  //   label: 'Azure auth',
+  //   description: 'This is Azure auth description',
+  //   component: (
+  //     <>
+  //       {azureAuthSettings.azureSettingsUI && (
+  //         <azureAuthSettings.azureSettingsUI dataSourceConfig={options} onChange={onOptionsChange} />
+  //       )}
+  //     </>
+  //   ),
+  // };
 
   // allow the option to show in the dropdown
-  if (azureAuthSettings?.azureAuthSupported) {
-    customMethods.push(azureAuthOption);
-  }
+  // if (azureAuthSettings?.azureAuthSupported) {
+  //   customMethods.push(azureAuthOption);
+  // }
 
   function returnSelectedMethod() {
     if (sigV4Selected) {
       return sigV4Id;
     }
 
-    if (azureAuthSelected) {
-      return azureAuthId;
-    }
+    // if (azureAuthSelected) {
+    //   return azureAuthId;
+    // }
 
     return newAuthProps.selectedMethod;
   }
@@ -144,10 +145,10 @@ export const DataSourcehttpSettingsOverhaul = (props: Props) => {
           }
 
           // Azure
-          if (azureAuthSettings?.azureAuthSupported) {
-            setAzureAuthSelected(method === azureAuthId);
-            azureAuthSettings.setAzureAuthEnabled(options, method === azureAuthId);
-          }
+          // if (azureAuthSettings?.azureAuthSupported) {
+          //   setAzureAuthSelected(method === azureAuthId);
+          //   azureAuthSettings.setAzureAuthEnabled(options, method === azureAuthId);
+          // }
 
           newAuthProps.onAuthMethodSelect(method);
         }}

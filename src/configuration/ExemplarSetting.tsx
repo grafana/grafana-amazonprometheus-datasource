@@ -1,12 +1,13 @@
 import { DataSourceInstanceSettings } from '@grafana/data';
 import { selectors } from '@grafana/e2e-selectors';
 import { Button, InlineField, Input, Switch, useTheme2 } from '@grafana/ui';
-import { DataSourcePicker } from 'app/features/datasources/components/picker/DataSourcePicker';
+
 import React, { useState } from 'react';
 
 import { ExemplarTraceIdDestination } from '../types';
 
 import { docsTip, overhaulStyles, PROM_CONFIG_LABEL_WIDTH } from './ConfigEditor';
+import { DataSourcePicker } from '@grafana/runtime';
 
 type Props = {
   value: ExemplarTraceIdDestination;
@@ -19,6 +20,7 @@ export default function ExemplarSetting({ value, onChange, onDelete, disabled }:
   const [isInternalLink, setIsInternalLink] = useState(Boolean(value.datasourceUid));
 
   const theme = useTheme2();
+  // @ts-ignore incompatibility between grafana/data and grafana/ui GrafanaTheme2
   const styles = overhaulStyles(theme);
 
   return (

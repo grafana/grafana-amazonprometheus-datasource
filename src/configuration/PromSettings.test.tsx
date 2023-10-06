@@ -3,6 +3,7 @@ import { render, screen } from '@testing-library/react';
 import React, { SyntheticEvent } from 'react';
 import { Provider } from 'react-redux';
 
+// removed and hacked in gcopypaste
 // import { configureStore } from '../../../../store/configureStore';
 
 import { getValueFromEventItem, PromSettings } from './PromSettings';

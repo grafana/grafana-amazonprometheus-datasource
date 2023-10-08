@@ -3,8 +3,6 @@ import { getTemplateSrv, TemplateSrv } from '@grafana/runtime';
 import { from, Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { getTimeSrv, TimeSrv } from '../../../features/dashboard/services/TimeSrv';
-
 import { PromVariableQueryEditor } from './components/VariableQueryEditor';
 import { PrometheusDatasource } from './datasource';
 import PrometheusMetricFindQuery from './metric_find_query';
@@ -13,8 +11,7 @@ import { PromVariableQuery } from './types';
 export class PrometheusVariableSupport extends CustomVariableSupport<PrometheusDatasource> {
   constructor(
     private readonly datasource: PrometheusDatasource,
-    private readonly templateSrv: TemplateSrv = getTemplateSrv(),
-    private readonly timeSrv: TimeSrv = getTimeSrv()
+    private readonly templateSrv: TemplateSrv = getTemplateSrv()
   ) {
     super();
     this.query = this.query.bind(this);
@@ -49,12 +46,12 @@ export class PrometheusVariableSupport extends CustomVariableSupport<PrometheusD
         text: rangeUtil.intervalToMs(this.datasource.interval),
         value: rangeUtil.intervalToMs(this.datasource.interval),
       },
-      ...this.datasource.getRangeScopedVars(this.timeSrv.timeRange()),
+      ...this.datasource.getRangeScopedVars(request.range),
     };
 
     const interpolated = this.templateSrv.replace(query, scopedVars, this.datasource.interpolateQueryExpr);
     const metricFindQuery = new PrometheusMetricFindQuery(this.datasource, interpolated);
-    const metricFindStream = from(metricFindQuery.process());
+    const metricFindStream = from(metricFindQuery.process(request.range));
 
     return metricFindStream.pipe(map((results) => ({ data: results })));
   }

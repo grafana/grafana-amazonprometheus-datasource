@@ -1,4 +1,3 @@
-
 import { QueryEditorProps, SelectableValue } from '@grafana/data';
 import { InlineField, InlineFieldRow, Input, Select, TextArea } from '@grafana/ui';
 import React, { FormEvent, useCallback, useEffect, useState } from 'react';
@@ -80,7 +79,7 @@ export const PromVariableQueryEditor = ({ onChange, query, datasource }: Props) 
     const variables = datasource.getVariables().map((variable: string) => ({ label: variable, value: variable }));
     if (!metric) {
       // get all the labels
-      datasource.getTagKeys().then((labelNames: Array<{ text: string }>) => {
+      datasource.getTagKeys({ filters: [] }).then((labelNames: Array<{ text: string }>) => {
         const names = labelNames.map(({ text }) => ({ label: text, value: text }));
         setLabelOptions([...variables, ...names]);
       });

@@ -3,7 +3,6 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 
-
 import { PrometheusDatasource } from '../../datasource';
 import PromQlLanguageProvider from '../../language_provider';
 import { EmptyLanguageProviderMock } from '../../language_provider.mock';
@@ -72,7 +71,6 @@ function setup(query: PromVisualQuery = defaultQuery) {
         jsonData: {},
         meta: {},
       } as DataSourceInstanceSettings<PromOptions>,
-      undefined,
       undefined,
       languageProvider
     ) as DataSourceApi,

@@ -18,7 +18,7 @@ import {
   TIME_SERIES_TIME_FIELD_NAME,
   TIME_SERIES_VALUE_FIELD_NAME,
 } from '@grafana/data';
-import { calculateFieldDisplayName } from '@grafana/data/src/field/fieldState';
+import { calculateFieldDisplayName } from '@grafana/data';
 import { config, FetchResponse, getDataSourceSrv, getTemplateSrv } from '@grafana/runtime';
 import { descending, deviation } from 'd3';
 import { flatten, forOwn, groupBy, partition } from 'lodash';

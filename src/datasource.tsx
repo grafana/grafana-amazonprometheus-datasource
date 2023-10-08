@@ -1186,9 +1186,6 @@ export class PrometheusDatasource
    * Returns the adjusted "snapped" interval parameters
    */
   getAdjustedInterval(): { start: string; end: string } {
-    if (!config.featureToggles.prometheusResourceBrowserCache) {
-      return this.getTimeRangeParams();
-    }
     const range = this.timeSrv.timeRange();
     return getRangeSnapInterval(this.cacheLevel, range);
   }

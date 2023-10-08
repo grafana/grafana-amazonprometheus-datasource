@@ -12,10 +12,9 @@ import React, { SyntheticEvent, useState } from 'react';
 import semver from 'semver/preload';
 
 import { useUpdateDatasource } from '../../../../features/datasources/state';
-import { PromApplication, PromBuildInfoResponse } from '../../../../types/unified-alerting-dto';
 import { QueryEditorMode } from '../querybuilder/shared/types';
 import { defaultPrometheusQueryOverlapWindow } from '../querycache/QueryCache';
-import { PrometheusCacheLevel, PromOptions } from '../types';
+import { PromApplication, PromBuildInfoResponse, PrometheusCacheLevel, PromOptions } from '../types';
 
 import { docsTip, overhaulStyles, PROM_CONFIG_LABEL_WIDTH, validateInput } from './ConfigEditor';
 import { ExemplarsSettings } from './ExemplarsSettings';

@@ -1293,13 +1293,13 @@
     "@grafana/async-query-data" "0.1.4"
     "@grafana/experimental" "1.1.0"
 
-"@grafana/data@10.2.0-nightly.150d4d68":
-  version "10.2.0-nightly.150d4d68"
-  resolved "https://registry.yarnpkg.com/@grafana/data/-/data-10.2.0-nightly.150d4d68.tgz#55baca3827ba123e678291ae69e899aa4a64b26f"
-  integrity sha512-lQo4S+WOeaMAek6uU1HoBoEwZuV2VXZxHiMX9vm5plY8Gog6KA4kVXKkjDhcXi/8fgVT3mAJ+gInHknms/Bzhw==
+"@grafana/data@10.2.0-nightly.6184bf21":
+  version "10.2.0-nightly.6184bf21"
+  resolved "https://registry.yarnpkg.com/@grafana/data/-/data-10.2.0-nightly.6184bf21.tgz#29b027d7ce99830604bfe8bb7d4f66da1ee5b21a"
+  integrity sha512-XvNSmsLT4tT8xnk2oCnWrLVXYE3rFLHq5CEDfRU1Q5R7BLIPXTPc4CR1pnwcN5Y7jEyfpxjHWUXo6rAlDFjlVA==
   dependencies:
     "@braintree/sanitize-url" "6.0.2"
-    "@grafana/schema" "10.2.0-nightly.150d4d68"
+    "@grafana/schema" "10.2.0-nightly.6184bf21"
     "@types/d3-interpolate" "^3.0.0"
     "@types/string-hash" "1.1.1"
     d3-interpolate "3.0.1"
@@ -1333,10 +1333,10 @@
     tslib "2.6.0"
     typescript "4.8.4"
 
-"@grafana/e2e-selectors@10.2.0-nightly.150d4d68":
-  version "10.2.0-nightly.150d4d68"
-  resolved "https://registry.yarnpkg.com/@grafana/e2e-selectors/-/e2e-selectors-10.2.0-nightly.150d4d68.tgz#3d2f110e3ae4bb8a523a82c3b2645849e25a1ffe"
-  integrity sha512-oRQk5yhWPY/rtSHPluKhuyMuPgwq2gPafjID2X5FF46nACHXco7e1a6JMhvIid5MtHbU/sFcGZ/N6bizwfMELw==
+"@grafana/e2e-selectors@10.2.0-nightly.6184bf21":
+  version "10.2.0-nightly.6184bf21"
+  resolved "https://registry.yarnpkg.com/@grafana/e2e-selectors/-/e2e-selectors-10.2.0-nightly.6184bf21.tgz#2ac7eb47d49ea802d03cf8ab0884de778854a658"
+  integrity sha512-TX51tXAAm1M9/0/xRY/mZw95Z40ITEW6Z2ojQ9Kl/mCy92TBU5Wyo0ZxxyBcEYgFu8PWBkxlnC/vePaaNFIkYg==
   dependencies:
     "@grafana/tsconfig" "^1.2.0-rc1"
     tslib "2.6.0"
@@ -1422,15 +1422,15 @@
     ua-parser-js "^1.0.32"
     web-vitals "^3.1.1"
 
-"@grafana/runtime@10.2.0-nightly.150d4d68":
-  version "10.2.0-nightly.150d4d68"
-  resolved "https://registry.yarnpkg.com/@grafana/runtime/-/runtime-10.2.0-nightly.150d4d68.tgz#7342a4995c12a78fe80adeba3ca5d60783faa50c"
-  integrity sha512-bIfbpn4ahTkkk/gXCN9mxbmaZ6mW0lE9nVNQWxTgp/JhJ6W+nTuVJAMfYgqXjtPUH23D7qeDEBLi3eMqtAtWrQ==
+"@grafana/runtime@10.2.0-nightly.6184bf21":
+  version "10.2.0-nightly.6184bf21"
+  resolved "https://registry.yarnpkg.com/@grafana/runtime/-/runtime-10.2.0-nightly.6184bf21.tgz#a2098d86d1138e4d1e74c890ed918bba4c5170da"
+  integrity sha512-ifpBSHWi+5PsG0KihwV/4BYwqONQsclxhpB5NS5Z1VNMAN/XT43TVcD2qtUsMqdCqD5JVc8UfLp/zPZtwCvGtA==
   dependencies:
-    "@grafana/data" "10.2.0-nightly.150d4d68"
-    "@grafana/e2e-selectors" "10.2.0-nightly.150d4d68"
+    "@grafana/data" "10.2.0-nightly.6184bf21"
+    "@grafana/e2e-selectors" "10.2.0-nightly.6184bf21"
     "@grafana/faro-web-sdk" "1.2.1"
-    "@grafana/ui" "10.2.0-nightly.150d4d68"
+    "@grafana/ui" "10.2.0-nightly.6184bf21"
     history "4.10.1"
     lodash "4.17.21"
     rxjs "7.8.1"
@@ -1438,10 +1438,10 @@
     systemjs-cjs-extra "0.2.0"
     tslib "2.6.0"
 
-"@grafana/schema@10.2.0-nightly.150d4d68":
-  version "10.2.0-nightly.150d4d68"
-  resolved "https://registry.yarnpkg.com/@grafana/schema/-/schema-10.2.0-nightly.150d4d68.tgz#3a795f863d105eb7e77916956bb75319323d4033"
-  integrity sha512-4UlC+Kg3d9HZA2uHMJLKC+if5vsyzugxHm/t0fRa/XosVGn3mCMExAloFbYnLfe0U+mrveDr5YytROiNxhZsxA==
+"@grafana/schema@10.2.0-nightly.6184bf21":
+  version "10.2.0-nightly.6184bf21"
+  resolved "https://registry.yarnpkg.com/@grafana/schema/-/schema-10.2.0-nightly.6184bf21.tgz#aaf295b3cf15aacc4b4682c10df8a0ccb59d915d"
+  integrity sha512-GaPvX3FwoGJ9h2c5oGb0ikAlAMTGoy4X3BVIkPyLg0rOOQvoyY8bqo/z6tU4L+DWwNgURa6DXhlbPiciQkbIIA==
   dependencies:
     tslib "2.6.0"
 
@@ -1455,19 +1455,19 @@
   resolved "https://registry.yarnpkg.com/@grafana/tsconfig/-/tsconfig-1.2.0-rc1.tgz#10973c978ec95b0ea637511254b5f478bce04de7"
   integrity sha512-+SgQeBQ1pT6D/E3/dEdADqTrlgdIGuexUZ8EU+8KxQFKUeFeU7/3z/ayI2q/wpJ/Kr6WxBBNlrST6aOKia19Ag==
 
-"@grafana/ui@10.2.0-nightly.150d4d68":
-  version "10.2.0-nightly.150d4d68"
-  resolved "https://registry.yarnpkg.com/@grafana/ui/-/ui-10.2.0-nightly.150d4d68.tgz#93259862a62b5bd923e244efbd5f60b7974b15dc"
-  integrity sha512-N3ene+e1uwKcgy816DjgAXjEq2aKAnSjJgjt+CiCz9y+mDeizqxYGN1ESCIcR+FONdClkAnEygjdmv1vtbp8Zw==
+"@grafana/ui@10.2.0-nightly.6184bf21":
+  version "10.2.0-nightly.6184bf21"
+  resolved "https://registry.yarnpkg.com/@grafana/ui/-/ui-10.2.0-nightly.6184bf21.tgz#017075a78cbf7cfa7cc0bb2abb834ccdffc3a280"
+  integrity sha512-XfFa8IXaoJpWOiF85gAjKCK2sBLRPed+NrCfuApUI8rLJCc7v9cUtKrncOoJInG8en59v3nEw1ajPdFFL+NJlQ==
   dependencies:
     "@emotion/css" "11.11.2"
     "@emotion/react" "11.11.1"
-    "@grafana/data" "10.2.0-nightly.150d4d68"
-    "@grafana/e2e-selectors" "10.2.0-nightly.150d4d68"
+    "@grafana/data" "10.2.0-nightly.6184bf21"
+    "@grafana/e2e-selectors" "10.2.0-nightly.6184bf21"
     "@grafana/faro-web-sdk" "1.2.1"
-    "@grafana/schema" "10.2.0-nightly.150d4d68"
+    "@grafana/schema" "10.2.0-nightly.6184bf21"
     "@leeoniya/ufuzzy" "1.0.8"
-    "@monaco-editor/react" "4.5.1"
+    "@monaco-editor/react" "4.6.0"
     "@popperjs/core" "2.11.8"
     "@react-aria/button" "3.8.0"
     "@react-aria/dialog" "3.5.3"
@@ -1924,19 +1924,19 @@
   resolved "https://registry.yarnpkg.com/@mochajs/json-file-reporter/-/json-file-reporter-1.3.0.tgz#63a53bcda93d75f5c5c74af60e45da063931370b"
   integrity sha512-evIxpeP8EOixo/T2xh5xYEIzwbEHk8YNJfRUm1KeTs8F3bMjgNn2580Ogze9yisXNlTxu88JiJJYzXjjg5NdLA==
 
-"@monaco-editor/loader@^1.3.3":
+"@monaco-editor/loader@^1.4.0":
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/@monaco-editor/loader/-/loader-1.4.0.tgz#f08227057331ec890fa1e903912a5b711a2ad558"
   integrity sha512-00ioBig0x642hytVspPl7DbQyaSWRaolYie/UFNjoTdvoKPzo6xrXLhTk9ixgIKcLH5b5vDOjVNiGyY+uDCUlg==
   dependencies:
     state-local "^1.0.6"
 
-"@monaco-editor/react@4.5.1":
-  version "4.5.1"
-  resolved "https://registry.yarnpkg.com/@monaco-editor/react/-/react-4.5.1.tgz#fbc76c692aee9a33b9ab24ae0c5f219b8f002fdb"
-  integrity sha512-NNDFdP+2HojtNhCkRfE6/D6ro6pBNihaOzMbGK84lNWzRu+CfBjwzGt4jmnqimLuqp5yE5viHS2vi+QOAnD5FQ==
+"@monaco-editor/react@4.6.0":
+  version "4.6.0"
+  resolved "https://registry.yarnpkg.com/@monaco-editor/react/-/react-4.6.0.tgz#bcc68671e358a21c3814566b865a54b191e24119"
+  integrity sha512-RFkU9/i7cN2bsq/iTkurMWOEErmYcY6JiQI3Jn+WeR/FGISH8JbHERjpS9oRuSOPvDMJI0Z8nJeKkbOs9sBYQw==
   dependencies:
-    "@monaco-editor/loader" "^1.3.3"
+    "@monaco-editor/loader" "^1.4.0"
 
 "@nodelib/fs.scandir@2.1.5":
   version "2.1.5"

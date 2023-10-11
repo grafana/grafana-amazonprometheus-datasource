@@ -10,8 +10,8 @@ import {
 } from '@grafana/data';
 import { faro } from '@grafana/faro-web-sdk';
 import { config, reportInteraction } from '@grafana/runtime';
-import { amendTable, Table, trimTable } from 'app/features/live/data/amendTimeSeries';
 
+import { amendTable, Table, trimTable } from '../gcopypaste/app/features/live/data/amendTimeSeries';
 import { PromQuery } from '../types';
 
 // dashboardUID + panelId + refId

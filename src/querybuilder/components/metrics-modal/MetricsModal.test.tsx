@@ -1,16 +1,15 @@
-import {DataSourceInstanceSettings, DataSourcePluginMeta} from '@grafana/data';
-import {render, screen, waitFor} from '@testing-library/react';
+import { DataSourceInstanceSettings, DataSourcePluginMeta } from '@grafana/data';
+import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 
-
-import {PrometheusDatasource} from '../../../datasource';
+import { PrometheusDatasource } from '../../../datasource';
 import PromQlLanguageProvider from '../../../language_provider';
-import {EmptyLanguageProviderMock} from '../../../language_provider.mock';
-import {PromOptions} from '../../../types';
-import {PromVisualQuery} from '../../types';
+import { EmptyLanguageProviderMock } from '../../../language_provider.mock';
+import { PromOptions } from '../../../types';
+import { PromVisualQuery } from '../../types';
 
-import {MetricsModal, testIds} from './MetricsModal';
+import { MetricsModal, testIds } from './MetricsModal';
 
 // don't care about interaction tracking in our unit tests
 jest.mock('@grafana/runtime', () => ({
@@ -232,7 +231,6 @@ function createDatasource(withLabels?: boolean) {
       jsonData: {},
       meta: {} as DataSourcePluginMeta,
     } as DataSourceInstanceSettings<PromOptions>,
-    undefined,
     undefined,
     languageProvider
   );

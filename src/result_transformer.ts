@@ -1,6 +1,5 @@
 import {
   ArrayDataFrame,
-  calculateFieldDisplayName,
   CoreApp,
   DataFrame,
   DataFrameType,
@@ -12,6 +11,7 @@ import {
   FieldType,
   formatLabels,
   getDisplayProcessor,
+  getFieldDisplayName,
   Labels,
   PreferredVisualisationType,
   renderLegendFormat,
@@ -79,7 +79,7 @@ export function transformV2(
         f.fields.forEach((field) => {
           if (field.labels?.__name__ && field.labels?.__name__ === field.name) {
             const fieldCopy = { ...field, name: TIME_SERIES_VALUE_FIELD_NAME };
-            field.config.displayNameFromDS = calculateFieldDisplayName(fieldCopy, f, response.data);
+            field.config.displayNameFromDS = getFieldDisplayName(fieldCopy, f, response.data);
           }
         });
       }

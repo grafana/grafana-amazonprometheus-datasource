@@ -10085,10 +10085,10 @@ test-exclude@^6.0.0:
     glob "^7.1.4"
     minimatch "^3.0.4"
 
-testing-library-selector@0.2.1:
-  version "0.2.1"
-  resolved "https://registry.yarnpkg.com/testing-library-selector/-/testing-library-selector-0.2.1.tgz#9f2a4ffaab6ae73197c221c63d99dd88b31be9d4"
-  integrity sha512-cTC9X3w3KAz04Q23vKN9FQdnBeB06C1Cr1tEmy10KNyx1BiVyoYz5i3iojmSGbPPndSPhiUauQWn3tDvrrBMeQ==
+testing-library-selector@0.3.1:
+  version "0.3.1"
+  resolved "https://registry.yarnpkg.com/testing-library-selector/-/testing-library-selector-0.3.1.tgz#ef4c2dfef356d7e0e1de458250d8311dae08af77"
+  integrity sha512-DjXyUhY/omIQNXnjOBFpkRaLADlf9yWDAW0KYpuNuurlS4aJNd1cE7yGG1XAH/LaMOSJ8woCkKdcO2UzyDAYQw==
 
 text-table@^0.2.0:
   version "0.2.0"

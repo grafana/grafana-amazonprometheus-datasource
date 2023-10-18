@@ -1,19 +1,21 @@
 import { css } from '@emotion/css';
 import { SIGV4ConnectionConfig } from '@grafana/aws-sdk';
-import { DataSourcePluginOptionsEditorProps, DataSourceSettings, GrafanaTheme2 } from '@grafana/data';
+import { DataSourcePluginOptionsEditorProps, /*DataSourceSettings,*/ GrafanaTheme2 } from '@grafana/data';
 import { ConfigSection, DataSourceDescription } from '@grafana/experimental';
+import { config } from '@grafana/runtime';
 import { Alert, DataSourceHttpSettings, FieldValidationMessage, useTheme2 } from '@grafana/ui';
-import { config } from 'app/core/config';
+// import { config } from 'app/core/config';
 import React, { useRef } from 'react';
 
 import { PromOptions } from '../types';
 
 import { AlertingSettingsOverhaul } from './AlertingSettingsOverhaul';
-import { AzureAuthSettings } from './AzureAuthSettings';
-import { hasCredentials, resetCredentials, setDefaultCredentials } from './AzureCredentialsConfig';
+// import { AzureAuthSettings } from './AzureAuthSettings';
+// import { hasCredentials, resetCredentials, setDefaultCredentials } from './AzureCredentialsConfig';
 import { DataSourcehttpSettingsOverhaul } from './DataSourceHttpSettingsOverhaul';
 import { PromSettings } from './PromSettings';
 import { AdvancedHttpSettings } from './overhaul/AdvancedHttpSettings';
+
 
 export const PROM_CONFIG_LABEL_WIDTH = 30;
 
@@ -22,18 +24,18 @@ export type Props = DataSourcePluginOptionsEditorProps<PromOptions>;
 export const ConfigEditor = (props: Props) => {
   const { options, onOptionsChange } = props;
 
-  const prometheusConfigOverhaulAuth = config.featureToggles.prometheusConfigOverhaulAuth;
+  const prometheusConfigOverhaulAuth = true//config.featureToggles.prometheusConfigOverhaulAuth;
 
   // use ref so this is evaluated only first time it renders and the select does not disappear suddenly.
   const showAccessOptions = useRef(props.options.access === 'direct');
 
-  const azureAuthSettings = {
-    azureAuthSupported: config.azureAuthEnabled,
-    getAzureAuthEnabled: (config: DataSourceSettings<any, any>): boolean => hasCredentials(config),
-    setAzureAuthEnabled: (config: DataSourceSettings<any, any>, enabled: boolean) =>
-      enabled ? setDefaultCredentials(config) : resetCredentials(config),
-    azureSettingsUI: AzureAuthSettings,
-  };
+  // const azureAuthSettings = {
+  //   azureAuthSupported: config.azureAuthEnabled,
+  //   getAzureAuthEnabled: (config: DataSourceSettings<any, any>): boolean => hasCredentials(config),
+  //   setAzureAuthEnabled: (config: DataSourceSettings<any, any>, enabled: boolean) =>
+  //     enabled ? setDefaultCredentials(config) : resetCredentials(config),
+  //   azureSettingsUI: AzureAuthSettings,
+  // };
 
   const theme = useTheme2();
   const styles = overhaulStyles(theme);
@@ -56,10 +58,10 @@ export const ConfigEditor = (props: Props) => {
           <DataSourcehttpSettingsOverhaul
             options={options}
             onOptionsChange={onOptionsChange}
-            azureAuthSettings={azureAuthSettings}
+            // azureAuthSettings={azureAuthSettings}
             sigV4AuthToggleEnabled={config.sigV4AuthEnabled}
             renderSigV4Editor={<SIGV4ConnectionConfig {...props}></SIGV4ConnectionConfig>}
-            secureSocksDSProxyEnabled={config.secureSocksDSProxyEnabled}
+            secureSocksDSProxyEnabled={true}//config.secureSocksDSProxyEnabled}
           />
         </>
       ) : (
@@ -69,7 +71,7 @@ export const ConfigEditor = (props: Props) => {
           showAccessOptions={showAccessOptions.current}
           onChange={onOptionsChange}
           sigV4AuthToggleEnabled={config.sigV4AuthEnabled}
-          azureAuthSettings={azureAuthSettings}
+          // azureAuthSettings={azureAuthSettings}
           renderSigV4Editor={<SIGV4ConnectionConfig {...props}></SIGV4ConnectionConfig>}
           secureSocksDSProxyEnabled={config.secureSocksDSProxyEnabled}
           urlLabel="Prometheus server URL"

@@ -13,18 +13,18 @@ import {
   TypeaheadOutput,
   withTheme2,
 } from '@grafana/ui';
-import { LocalStorageValueProvider } from 'app/core/components/LocalStorageValueProvider';
-import {
-  CancelablePromise,
-  isCancelablePromiseRejection,
-  makePromiseCancelable,
-} from 'app/core/utils/CancelablePromise';
 import { LanguageMap, languages as prismLanguages } from 'prismjs';
 import React, { ReactNode } from 'react';
 import { Plugin } from 'slate';
 import { Editor } from 'slate-react';
 
 import { PrometheusDatasource } from '../datasource';
+import { LocalStorageValueProvider } from '../gcopypaste/app/core/components/LocalStorageValueProvider';
+import {
+  CancelablePromise,
+  isCancelablePromiseRejection,
+  makePromiseCancelable,
+} from '../gcopypaste/app/core/utils/CancelablePromise';
 import { roundMsToMin } from '../language_utils';
 import { PromOptions, PromQuery } from '../types';
 

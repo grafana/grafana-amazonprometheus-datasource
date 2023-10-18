@@ -1,7 +1,6 @@
 import { cx } from '@emotion/css';
 import { DataSourceJsonData, DataSourcePluginOptionsEditorProps } from '@grafana/data';
 import { ConfigSubSection } from '@grafana/experimental';
-// import { config } from '@grafana/runtime';
 import { InlineField, Switch, useTheme2 } from '@grafana/ui';
 import React from 'react';
 
@@ -22,9 +21,6 @@ export function AlertingSettingsOverhaul<T extends AlertingConfig>({
   // imported GrafanaTheme2 from @grafana/data does not match type of same from @grafana/ui 
   // @ts-ignore
   const styles = overhaulStyles(theme);
-
-  // turned on by default
-  // const prometheusConfigOverhaulAuth = config.featureToggles.prometheusConfigOverhaulAuth;
 
   return (
     <ConfigSubSection

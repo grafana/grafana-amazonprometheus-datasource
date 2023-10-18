@@ -1,12 +1,13 @@
 import { DataSourceInstanceSettings } from '@grafana/data';
 import { selectors } from '@grafana/e2e-selectors';
+import { DataSourcePicker } from '@grafana/runtime';
 import { Button, InlineField, Input, Switch, useTheme2 } from '@grafana/ui';
-import { DataSourcePicker } from 'app/features/datasources/components/picker/DataSourcePicker';
 import React, { useState } from 'react';
 
 import { ExemplarTraceIdDestination } from '../types';
 
 import { docsTip, overhaulStyles, PROM_CONFIG_LABEL_WIDTH } from './ConfigEditor';
+
 
 type Props = {
   value: ExemplarTraceIdDestination;

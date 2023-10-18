@@ -2,7 +2,7 @@
   "category": "tsdb",
   "$schema": "https://raw.githubusercontent.com/grafana/grafana/master/docs/sources/developers/plugins/plugin.schema.json",
   "type": "datasource",
-  "name": "Prometheus AMD",
+  "name": "Prometheus Amazon",
   "id": "prometheus-amazon-datasource",
   "executable": "gpx_prometheus_amazon",
   "routes": [

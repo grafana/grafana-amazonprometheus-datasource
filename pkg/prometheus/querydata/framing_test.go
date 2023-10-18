@@ -14,10 +14,10 @@ import (
 
 	"github.com/grafana/grafana-plugin-sdk-go/backend"
 	"github.com/grafana/grafana-plugin-sdk-go/experimental"
-	"github.com/grafana/prometheus-amd/pkg/prometheus/kinds/dataquery"
+	"github.com/grafana/prometheus-amazon/pkg/prometheus/kinds/dataquery"
 	"github.com/stretchr/testify/require"
 
-	"github.com/grafana/prometheus-amd/pkg/prometheus/models"
+	"github.com/grafana/prometheus-amazon/pkg/prometheus/models"
 )
 
 var update = true

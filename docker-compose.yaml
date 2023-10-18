@@ -2,7 +2,7 @@ version: '3.0'
 
 services:
   grafana:
-    container_name: 'prometheus-amd-datasource'
+    container_name: 'prometheus-amazon-datasource'
     build:
       context: ./.config
       args:
@@ -11,5 +11,5 @@ services:
     ports:
       - 3000:3000/tcp
     volumes:
-      - ./dist:/var/lib/grafana/plugins/prometheus-amd-datasource
+      - ./dist:/var/lib/grafana/plugins/prometheus-amazon-datasource
       - ./provisioning:/etc/grafana/provisioning

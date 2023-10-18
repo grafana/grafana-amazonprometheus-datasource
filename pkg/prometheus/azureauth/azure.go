@@ -12,7 +12,7 @@ import (
 	"github.com/grafana/grafana-plugin-sdk-go/backend"
 	sdkhttpclient "github.com/grafana/grafana-plugin-sdk-go/backend/httpclient"
 
-	"github.com/grafana/prometheus-amd/pkg/prometheus/utils"
+	"github.com/grafana/prometheus-amazon/pkg/prometheus/utils"
 )
 
 var (

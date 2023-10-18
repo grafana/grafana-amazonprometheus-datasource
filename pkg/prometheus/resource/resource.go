@@ -8,9 +8,9 @@ import (
 
 	"github.com/grafana/grafana-plugin-sdk-go/backend"
 	"github.com/grafana/grafana-plugin-sdk-go/backend/log"
-	"github.com/grafana/prometheus-amd/pkg/gcopypaste/maputil"
-	"github.com/grafana/prometheus-amd/pkg/prometheus/client"
-	"github.com/grafana/prometheus-amd/pkg/prometheus/utils"
+	"github.com/grafana/prometheus-amazon/pkg/gcopypaste/maputil"
+	"github.com/grafana/prometheus-amazon/pkg/prometheus/client"
+	"github.com/grafana/prometheus-amazon/pkg/prometheus/utils"
 )
 
 type Resource struct {

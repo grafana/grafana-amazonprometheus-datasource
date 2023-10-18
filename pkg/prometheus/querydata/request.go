@@ -13,12 +13,12 @@ import (
 	"go.opentelemetry.io/otel/trace"
 
 	"github.com/grafana/grafana-plugin-sdk-go/backend/log"
-	"github.com/grafana/prometheus-amd/pkg/gcopypaste/intervalv2"
-	"github.com/grafana/prometheus-amd/pkg/gcopypaste/maputil"
-	"github.com/grafana/prometheus-amd/pkg/prometheus/client"
-	"github.com/grafana/prometheus-amd/pkg/prometheus/models"
-	"github.com/grafana/prometheus-amd/pkg/prometheus/querydata/exemplar"
-	"github.com/grafana/prometheus-amd/pkg/prometheus/utils"
+	"github.com/grafana/prometheus-amazon/pkg/gcopypaste/intervalv2"
+	"github.com/grafana/prometheus-amazon/pkg/gcopypaste/maputil"
+	"github.com/grafana/prometheus-amazon/pkg/prometheus/client"
+	"github.com/grafana/prometheus-amazon/pkg/prometheus/models"
+	"github.com/grafana/prometheus-amazon/pkg/prometheus/querydata/exemplar"
+	"github.com/grafana/prometheus-amazon/pkg/prometheus/utils"
 )
 
 const legendFormatAuto = "__auto"

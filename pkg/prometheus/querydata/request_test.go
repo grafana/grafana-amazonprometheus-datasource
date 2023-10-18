@@ -19,15 +19,15 @@ import (
 	p "github.com/prometheus/common/model"
 	"github.com/stretchr/testify/require"
 
-	"github.com/grafana/prometheus-amd/pkg/prometheus/kinds/dataquery"
+	"github.com/grafana/prometheus-amazon/pkg/prometheus/kinds/dataquery"
 
 	"github.com/grafana/kindsys"
 
 	"github.com/grafana/grafana-plugin-sdk-go/backend/httpclient"
 	"github.com/grafana/grafana-plugin-sdk-go/backend/log"
-	"github.com/grafana/prometheus-amd/pkg/prometheus/client"
-	"github.com/grafana/prometheus-amd/pkg/prometheus/models"
-	"github.com/grafana/prometheus-amd/pkg/prometheus/querydata"
+	"github.com/grafana/prometheus-amazon/pkg/prometheus/client"
+	"github.com/grafana/prometheus-amazon/pkg/prometheus/models"
+	"github.com/grafana/prometheus-amazon/pkg/prometheus/querydata"
 )
 
 func TestPrometheus_parseTimeSeriesResponse(t *testing.T) {

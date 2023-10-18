@@ -5,7 +5,7 @@ import (
 
 	"github.com/grafana/grafana-plugin-sdk-go/backend/datasource"
 	"github.com/grafana/grafana-plugin-sdk-go/backend/log"
-	"github.com/grafana/prometheus-amd/pkg/prometheus"
+	"github.com/grafana/prometheus-amazon/pkg/prometheus"
 )
 
 func main() {

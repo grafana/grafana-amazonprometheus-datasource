@@ -8,9 +8,9 @@ import (
 	sdkhttpclient "github.com/grafana/grafana-plugin-sdk-go/backend/httpclient"
 	"github.com/grafana/grafana-plugin-sdk-go/backend/log"
 
-	"github.com/grafana/prometheus-amd/pkg/gcopypaste/maputil"
-	"github.com/grafana/prometheus-amd/pkg/prometheus/middleware"
-	"github.com/grafana/prometheus-amd/pkg/prometheus/utils"
+	"github.com/grafana/prometheus-amazon/pkg/gcopypaste/maputil"
+	"github.com/grafana/prometheus-amazon/pkg/prometheus/middleware"
+	"github.com/grafana/prometheus-amazon/pkg/prometheus/utils"
 )
 
 // CreateTransportOptions creates options for the http client. Probably should be shared and should not live in the

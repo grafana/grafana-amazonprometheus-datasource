@@ -1,5 +1,6 @@
 import { SelectableValue } from '@grafana/data';
 import { render, screen } from '@testing-library/react';
+import { configureStore } from 'gcopypaste/app/store/configureStore';
 import React, { SyntheticEvent } from 'react';
 import { Provider } from 'react-redux';
 
@@ -8,7 +9,7 @@ import { Provider } from 'react-redux';
 
 import { getValueFromEventItem, PromSettings } from './PromSettings';
 import { createDefaultConfigOptions } from './mocks';
-import { configureStore } from 'gcopypaste/app/store/configureStore';
+
 
 describe('PromSettings', () => {
   describe('getValueFromEventItem', () => {

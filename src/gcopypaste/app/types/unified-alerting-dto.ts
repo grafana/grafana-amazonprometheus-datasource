@@ -1,10 +1,3 @@
-export enum PromApplication {
-  Cortex = 'Cortex',
-  Mimir = 'Mimir',
-  Prometheus = 'Prometheus',
-  Thanos = 'Thanos',
-}
-
 export interface PromBuildInfoResponse {
   data: {
     application?: string;

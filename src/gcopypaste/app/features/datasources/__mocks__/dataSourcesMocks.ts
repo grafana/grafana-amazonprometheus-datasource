@@ -1,7 +1,6 @@
 import { DataSourceJsonData, DataSourceSettings } from "@grafana/data";
 import { merge } from "lodash";
 
-
 export const getMockDataSource = <T extends DataSourceJsonData>(
   overrides?: Partial<DataSourceSettings<T>>
 ): DataSourceSettings<T> =>

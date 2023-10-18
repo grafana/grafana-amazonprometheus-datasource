@@ -3,7 +3,6 @@ import { getMockDataSource } from 'gcopypaste/app/features/datasources/__mocks__
 
 import { PromOptions } from '../types';
 
-
 export function createDefaultConfigOptions(): DataSourceSettings<PromOptions> {
   return getMockDataSource<PromOptions>({
     jsonData: {

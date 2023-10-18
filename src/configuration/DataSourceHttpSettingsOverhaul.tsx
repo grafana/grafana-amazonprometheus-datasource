@@ -1,7 +1,6 @@
 import { DataSourceSettings } from '@grafana/data';
-import { Auth, ConnectionSettings, convertLegacyAuthProps } from '@grafana/experimental';
+import { Auth, AuthMethod, ConnectionSettings, convertLegacyAuthProps } from '@grafana/experimental';
 import { SecureSocksProxySettings, useTheme2 } from '@grafana/ui';
-// import { AzureAuthSettings } from '@grafana/ui/src/components/DataSourceSettings/types';
 import React, { useState } from 'react';
 
 import { PromOptions } from '../types';
@@ -12,7 +11,6 @@ import { CustomMethod } from './overhaul/types';
 type Props = {
   options: DataSourceSettings<PromOptions, {}>;
   onOptionsChange: (options: DataSourceSettings<PromOptions, {}>) => void;
-  // azureAuthSettings: AzureAuthSettings;
   sigV4AuthToggleEnabled: boolean | undefined;
   renderSigV4Editor: React.ReactNode;
   secureSocksDSProxyEnabled: boolean;
@@ -22,7 +20,6 @@ export const DataSourcehttpSettingsOverhaul = (props: Props) => {
   const {
     options,
     onOptionsChange,
-    // azureAuthSettings,
     sigV4AuthToggleEnabled,
     renderSigV4Editor,
     secureSocksDSProxyEnabled,
@@ -34,10 +31,9 @@ export const DataSourcehttpSettingsOverhaul = (props: Props) => {
   });
 
   const theme = useTheme2();
-  // @ts-ignore incompatibility between grafana/data and grafana/ui GrafanaTheme2
   const styles = overhaulStyles(theme);
 
-  // for custom auth methods sigV4 and azure auth
+  // for custom auth methods sigV4
   let customMethods: CustomMethod[] = [];
 
   const [sigV4Selected, setSigV4Selected] = useState<boolean>(options.jsonData.sigV4Auth || false);
@@ -55,39 +51,10 @@ export const DataSourcehttpSettingsOverhaul = (props: Props) => {
     customMethods.push(sigV4Option);
   }
 
-  // const azureAuthEnabled: boolean =
-  //   (azureAuthSettings?.azureAuthSupported && azureAuthSettings.getAzureAuthEnabled(options)) || false;
-
-  // const [azureAuthSelected, setAzureAuthSelected] = useState<boolean>(azureAuthEnabled);
-
-  // const azureAuthId = 'custom-azureAuthId';
-
-  // const azureAuthOption: CustomMethod = {
-  //   id: azureAuthId,
-  //   label: 'Azure auth',
-  //   description: 'This is Azure auth description',
-  //   component: (
-  //     <>
-  //       {azureAuthSettings.azureSettingsUI && (
-  //         <azureAuthSettings.azureSettingsUI dataSourceConfig={options} onChange={onOptionsChange} />
-  //       )}
-  //     </>
-  //   ),
-  // };
-
-  // allow the option to show in the dropdown
-  // if (azureAuthSettings?.azureAuthSupported) {
-  //   customMethods.push(azureAuthOption);
-  // }
-
   function returnSelectedMethod() {
     if (sigV4Selected) {
       return sigV4Id;
     }
-
-    // if (azureAuthSelected) {
-    //   return azureAuthId;
-    // }
 
     return newAuthProps.selectedMethod;
   }
@@ -140,17 +107,18 @@ export const DataSourcehttpSettingsOverhaul = (props: Props) => {
           // sigV4Id
           if (sigV4AuthToggleEnabled) {
             setSigV4Selected(method === sigV4Id);
-            // mutate jsonData here to store the selected option because of auth component issue with onOptionsChange being overridden
-            options.jsonData.sigV4Auth = method === sigV4Id;
           }
 
-          // Azure
-          // if (azureAuthSettings?.azureAuthSupported) {
-          //   setAzureAuthSelected(method === azureAuthId);
-          //   azureAuthSettings.setAzureAuthEnabled(options, method === azureAuthId);
-          // }
-
-          newAuthProps.onAuthMethodSelect(method);
+          onOptionsChange({
+            ...options,
+            basicAuth: method === AuthMethod.BasicAuth,
+            withCredentials: method === AuthMethod.CrossSiteCredentials,
+            jsonData: {
+              ...options.jsonData,
+              sigV4Auth: method === sigV4Id,
+              oauthPassThru: method === AuthMethod.OAuthForward,
+            },
+          });
         }}
         // If your method is selected pass its id to `selectedMethod`,
         // otherwise pass the id from converted legacy data

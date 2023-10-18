@@ -82,7 +82,7 @@
     "minInterval": true
   },
   "info": {
-    "version": "%VERSION%",
+    "version": "0.0.0",
     "updated": "%TODAY%",
     "keywords": [
       "datasource"
@@ -93,8 +93,8 @@
       "url": "https://grafana.com"
     },
     "logos": {
-      "small": "img/prometheus_amazon.png",
-      "large": "img/prometheus_amazon.png"
+      "small": "img/prometheus_amazon.svg",
+      "large": "img/prometheus_amazon.svg"
     },
     "links": [
       {

@@ -1,7 +1,7 @@
-# Prometheus Data Source - Native Plugin
+# Prometheus Amazon Data Source
 
-Grafana ships with **built in** support for Prometheus, the open-source service monitoring system and time series database.
+Amazon Managed Service for Prometheus is a Prometheus-compatible service that monitors and provides alerts on containerized applications and infrastructure at scale.
 
 Read more about it here:
 
-[http://docs.grafana.org/datasources/prometheus/](http://docs.grafana.org/datasources/prometheus/)
+[https://aws.amazon.com/prometheus/](https://aws.amazon.com/prometheus/)

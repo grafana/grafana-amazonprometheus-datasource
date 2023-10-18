@@ -1,11 +1,6 @@
 import { SelectableValue } from '@grafana/data';
 import { render, screen } from '@testing-library/react';
-import { configureStore } from 'gcopypaste/app/store/configureStore';
 import React, { SyntheticEvent } from 'react';
-import { Provider } from 'react-redux';
-
-// removed and hacked in gcopypaste
-// import { configureStore } from '../../../../store/configureStore';
 
 import { getValueFromEventItem, PromSettings } from './PromSettings';
 import { createDefaultConfigOptions } from './mocks';
@@ -46,42 +41,24 @@ describe('PromSettings', () => {
       const options = defaultProps;
       options.url = '';
       options.jsonData.httpMethod = '';
-      const store = configureStore();
 
-      render(
-        <Provider store={store}>
-          {/* @ts-ignore until we get the tests working */}
-          <PromSettings onOptionsChange={() => {}} options={options} />
-        </Provider>
-      );
+      render(<PromSettings onOptionsChange={() => {}} options={options} />);
       expect(screen.getByText('POST')).toBeInTheDocument();
     });
     it('should show POST httpMethod if POST httpMethod is configured', () => {
       const options = defaultProps;
       options.url = 'test_url';
       options.jsonData.httpMethod = 'POST';
-      const store = configureStore();
 
-      render(
-        <Provider store={store}>
-          {/* @ts-ignore until we get the tests working */}
-          <PromSettings onOptionsChange={() => {}} options={options} />
-        </Provider>
-      );
+      render(<PromSettings onOptionsChange={() => {}} options={options} />);
       expect(screen.getByText('POST')).toBeInTheDocument();
     });
     it('should show GET httpMethod if GET httpMethod is configured', () => {
       const options = defaultProps;
       options.url = 'test_url';
       options.jsonData.httpMethod = 'GET';
-      const store = configureStore();
 
-      render(
-        <Provider store={store}>
-          {/* @ts-ignore until we get the tests working */}
-          <PromSettings onOptionsChange={() => {}} options={options} />
-        </Provider>
-      );
+      render(<PromSettings onOptionsChange={() => {}} options={options} />);
       expect(screen.getByText('GET')).toBeInTheDocument();
     });
   });

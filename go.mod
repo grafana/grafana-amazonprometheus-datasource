@@ -1,4 +1,4 @@
-module github.com/grafana/prometheus-amd
+module github.com/grafana/prometheus-amazon
 
 go 1.19
 

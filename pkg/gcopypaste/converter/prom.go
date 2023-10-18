@@ -10,7 +10,7 @@ import (
 	"github.com/grafana/grafana-plugin-sdk-go/data"
 	jsoniter "github.com/json-iterator/go"
 
-	"github.com/grafana/prometheus-amd/pkg/gcopypaste/converter/jsonitere"
+	"github.com/grafana/prometheus-amazon/pkg/gcopypaste/converter/jsonitere"
 )
 
 // helpful while debugging all the options that may appear

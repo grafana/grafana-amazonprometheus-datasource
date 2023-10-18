@@ -11,7 +11,7 @@ import (
 	logger "github.com/grafana/grafana-plugin-sdk-go/backend/log"
 	"github.com/stretchr/testify/require"
 
-	"github.com/grafana/prometheus-amd/pkg/prometheus/models"
+	"github.com/grafana/prometheus-amazon/pkg/prometheus/models"
 )
 
 type MockDoer struct {

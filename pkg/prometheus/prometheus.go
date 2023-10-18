@@ -17,10 +17,10 @@ import (
 
 	"github.com/grafana/grafana-plugin-sdk-go/backend/httpclient"
 	"github.com/grafana/grafana-plugin-sdk-go/backend/log"
-	"github.com/grafana/prometheus-amd/pkg/prometheus/client"
-	"github.com/grafana/prometheus-amd/pkg/prometheus/instrumentation"
-	"github.com/grafana/prometheus-amd/pkg/prometheus/querydata"
-	"github.com/grafana/prometheus-amd/pkg/prometheus/resource"
+	"github.com/grafana/prometheus-amazon/pkg/prometheus/client"
+	"github.com/grafana/prometheus-amazon/pkg/prometheus/instrumentation"
+	"github.com/grafana/prometheus-amazon/pkg/prometheus/querydata"
+	"github.com/grafana/prometheus-amazon/pkg/prometheus/resource"
 )
 
 var plog = log.New()

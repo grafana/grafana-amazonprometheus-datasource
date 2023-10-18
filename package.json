@@ -1,5 +1,5 @@
 {
-  "name": "prometheus-amd",
+  "name": "prometheus-amazon",
   "version": "1.0.0",
   "description": "A prometheus plugin for Amazon",
   "scripts": {

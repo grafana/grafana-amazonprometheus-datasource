@@ -20,7 +20,6 @@ export default function ExemplarSetting({ value, onChange, onDelete, disabled }:
   const [isInternalLink, setIsInternalLink] = useState(Boolean(value.datasourceUid));
 
   const theme = useTheme2();
-  // @ts-ignore incompatibility between grafana/data and grafana/ui GrafanaTheme2
   const styles = overhaulStyles(theme);
 
   return (

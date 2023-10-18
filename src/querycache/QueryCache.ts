@@ -1,10 +1,18 @@
-import {DataFrame, DataQueryRequest, dateTime, durationToMilliseconds, Field, incrRoundDn, isValidDuration, parseDuration,} from '@grafana/data';
-import {faro} from '@grafana/faro-web-sdk';
-import {config, reportInteraction} from '@grafana/runtime';
-import {amendTable, Table, trimTable} from 'app/features/live/data/amendTimeSeries';
+import {
+  DataFrame,
+  DataQueryRequest,
+  dateTime,
+  durationToMilliseconds,
+  Field,
+  incrRoundDn,
+  isValidDuration,
+  parseDuration,
+} from '@grafana/data';
+import { faro } from '@grafana/faro-web-sdk';
+import { config, reportInteraction } from '@grafana/runtime';
 
-import {getTimeSrv} from '../../../../features/dashboard/services/TimeSrv';
-import {PromQuery} from '../types';
+import { amendTable, Table, trimTable } from '../gcopypaste/app/features/live/data/amendTimeSeries';
+import { PromQuery } from '../types';
 
 // dashboardUID + panelId + refId
 // (must be stable across query changes, time range changes / interval changes / panel resizes / template variable changes)
@@ -251,7 +259,7 @@ export class QueryCache<T extends SupportedQueryTypes> {
     let doPartialQuery = shouldCache;
     let prevTo: TimestampMs | undefined = undefined;
 
-    const refreshIntervalMs = getTimeSrv().refreshMS;
+    const refreshIntervalMs = request.intervalMs;
 
     // pre-compute reqTargSigs
     const reqTargSigs = new Map<TargetIdent, TargetSig>();

@@ -10,16 +10,14 @@ import {
   Field,
   getFieldDisplayName,
   LoadingState,
+  rangeUtil,
+  TimeRange,
   toDataFrame,
+  VariableHide,
 } from '@grafana/data';
-import { config } from '@grafana/runtime';
-import { TimeSrv } from 'app/features/dashboard/services/TimeSrv';
 import { TemplateSrv } from 'app/features/templating/template_srv';
-import { QueryOptions } from 'app/types';
 import { cloneDeep } from 'lodash';
 import { lastValueFrom, of, throwError } from 'rxjs';
-
-import { VariableHide } from '../../../features/variables/types';
 
 import {
   alignRange,
@@ -28,6 +26,7 @@ import {
   prometheusRegularEscape,
   prometheusSpecialRegexEscape,
 } from './datasource';
+import { QueryOptions } from './gcopypaste/app/types';
 import PromQlLanguageProvider from './language_provider';
 import { PrometheusCacheLevel, PromOptions, PromQuery, PromQueryRequest } from './types';
 
@@ -41,34 +40,32 @@ jest.mock('@grafana/runtime', () => ({
   }),
 }));
 
-const getAdhocFiltersMock = jest.fn().mockImplementation(() => []);
 const replaceMock = jest.fn().mockImplementation((a: string, ...rest: unknown[]) => a);
 
 const templateSrvStub = {
-  getAdhocFilters: getAdhocFiltersMock,
   replace: replaceMock,
 } as unknown as TemplateSrv;
 
 const fromSeconds = 1674500289215;
 const toSeconds = 1674500349215;
 
-const timeSrvStubOld = {
-  timeRange() {
-    return {
-      from: dateTime(1531468681),
-      to: dateTime(1531489712),
-    };
+const mockTimeRangeOld: TimeRange = {
+  from: dateTime(1531468681),
+  to: dateTime(1531489712),
+  raw: {
+    from: '1531468681',
+    to: '1531489712',
   },
-} as TimeSrv;
+};
 
-const timeSrvStub: TimeSrv = {
-  timeRange() {
-    return {
-      from: dateTime(fromSeconds),
-      to: dateTime(toSeconds),
-    };
+const mockTimeRange: TimeRange = {
+  from: dateTime(fromSeconds),
+  to: dateTime(toSeconds),
+  raw: {
+    from: fromSeconds.toString(),
+    to: toSeconds.toString(),
   },
-} as TimeSrv;
+};
 
 beforeEach(() => {
   jest.clearAllMocks();
@@ -90,7 +87,7 @@ describe('PrometheusDatasource', () => {
   } as unknown as DataSourceInstanceSettings<PromOptions>;
 
   beforeEach(() => {
-    ds = new PrometheusDatasource(instanceSettings, templateSrvStub, timeSrvStub);
+    ds = new PrometheusDatasource(instanceSettings, templateSrvStub);
   });
 
   // Some functions are required by the parent datasource class to provide functionality such as ad-hoc filters, which requires the definition of the getTagKeys, and getTagValues functions
@@ -145,7 +142,7 @@ describe('PrometheusDatasource', () => {
         },
       } as unknown as DataSourceInstanceSettings<PromOptions>;
       const range = { from: time({ seconds: 63 }), to: time({ seconds: 183 }) };
-      const directDs = new PrometheusDatasource(instanceSettings, templateSrvStub, timeSrvStub);
+      const directDs = new PrometheusDatasource(instanceSettings, templateSrvStub);
 
       await expect(
         lastValueFrom(directDs.query(createDataRequest([{}, {}], { app: CoreApp.Dashboard })))
@@ -171,10 +168,14 @@ describe('PrometheusDatasource', () => {
       ).rejects.toMatchObject({
         message: expect.stringMatching('Browser access'),
       });
-      await expect(directDs.getTagKeys()).rejects.toMatchObject({
-        message: expect.stringMatching('Browser access'),
-      });
-      await expect(directDs.getTagValues()).rejects.toMatchObject({
+
+      const errorMock = jest.spyOn(console, 'error').mockImplementation(() => {});
+
+      await directDs.getTagKeys({ filters: [] });
+      // Language provider currently catches and just logs the error
+      expect(errorMock).toHaveBeenCalledTimes(1);
+
+      await expect(directDs.getTagValues({ filters: [], key: 'A' })).rejects.toMatchObject({
         message: expect.stringMatching('Browser access'),
       });
     });
@@ -190,7 +191,7 @@ describe('PrometheusDatasource', () => {
     it('should still perform a GET request with the DS HTTP method set to POST and not POST-friendly endpoint', () => {
       const postSettings = cloneDeep(instanceSettings);
       postSettings.jsonData.httpMethod = 'POST';
-      const promDs = new PrometheusDatasource(postSettings, templateSrvStub, timeSrvStub);
+      const promDs = new PrometheusDatasource(postSettings, templateSrvStub);
       promDs.metadataRequest('/foo');
       expect(fetchMock.mock.calls.length).toBe(1);
       expect(fetchMock.mock.calls[0][0].method).toBe('GET');
@@ -198,7 +199,7 @@ describe('PrometheusDatasource', () => {
     it('should try to perform a POST request with the DS HTTP method set to POST and POST-friendly endpoint', () => {
       const postSettings = cloneDeep(instanceSettings);
       postSettings.jsonData.httpMethod = 'POST';
-      const promDs = new PrometheusDatasource(postSettings, templateSrvStub, timeSrvStub);
+      const promDs = new PrometheusDatasource(postSettings, templateSrvStub);
       promDs.metadataRequest('api/v1/series', { bar: 'baz baz', foo: 'foo' });
       expect(fetchMock.mock.calls.length).toBe(1);
       expect(fetchMock.mock.calls[0][0].method).toBe('POST');
@@ -221,8 +222,7 @@ describe('PrometheusDatasource', () => {
     describe('with GET http method', () => {
       const promDs = new PrometheusDatasource(
         { ...instanceSettings, jsonData: { customQueryParameters: 'customQuery=123', httpMethod: 'GET' } },
-        templateSrvStub,
-        timeSrvStub
+        templateSrvStub
       );
 
       it('added to metadata request', () => {
@@ -256,8 +256,7 @@ describe('PrometheusDatasource', () => {
     describe('with POST http method', () => {
       const promDs = new PrometheusDatasource(
         { ...instanceSettings, jsonData: { customQueryParameters: 'customQuery=123', httpMethod: 'POST' } },
-        templateSrvStub,
-        timeSrvStub
+        templateSrvStub
       );
 
       it('added to metadata request with non-POST endpoint', () => {
@@ -305,17 +304,18 @@ describe('PrometheusDatasource', () => {
     const DEFAULT_QUERY_EXPRESSION = 'metric{job="foo"} - metric';
     const target: PromQuery = { expr: DEFAULT_QUERY_EXPRESSION, refId: 'A' };
 
-    afterAll(() => {
-      getAdhocFiltersMock.mockImplementation(() => []);
-    });
-
     it('should not modify expression with no filters', () => {
-      const result = ds.createQuery(target, { interval: '15s' } as DataQueryRequest<PromQuery>, 0, 0);
+      const result = ds.createQuery(
+        target,
+        { interval: '15s', range: getMockTimeRange() } as DataQueryRequest<PromQuery>,
+        0,
+        0
+      );
       expect(result).toMatchObject({ expr: DEFAULT_QUERY_EXPRESSION });
     });
 
     it('should add filters to expression', () => {
-      getAdhocFiltersMock.mockReturnValue([
+      const filters = [
         {
           key: 'k1',
           operator: '=',
@@ -326,13 +326,18 @@ describe('PrometheusDatasource', () => {
           operator: '!=',
           value: 'v2',
         },
-      ]);
-      const result = ds.createQuery(target, { interval: '15s' } as DataQueryRequest<PromQuery>, 0, 0);
+      ];
+      const result = ds.createQuery(
+        target,
+        { interval: '15s', range: getMockTimeRange(), filters } as DataQueryRequest<PromQuery>,
+        0,
+        0
+      );
       expect(result).toMatchObject({ expr: 'metric{job="foo", k1="v1", k2!="v2"} - metric{k1="v1", k2!="v2"}' });
     });
 
     it('should add escaping if needed to regex filter expressions', () => {
-      getAdhocFiltersMock.mockReturnValue([
+      const filters = [
         {
           key: 'k1',
           operator: '=~',
@@ -343,8 +348,14 @@ describe('PrometheusDatasource', () => {
           operator: '=~',
           value: `v'.*`,
         },
-      ]);
-      const result = ds.createQuery(target, { interval: '15s' } as DataQueryRequest<PromQuery>, 0, 0);
+      ];
+
+      const result = ds.createQuery(
+        target,
+        { interval: '15s', range: getMockTimeRange(), filters } as DataQueryRequest<PromQuery>,
+        0,
+        0
+      );
       expect(result).toMatchObject({
         expr: `metric{job="foo", k1=~"v.*", k2=~"v\\\\'.*"} - metric{k1=~"v.*", k2=~"v\\\\'.*"}`,
       });
@@ -353,6 +364,7 @@ describe('PrometheusDatasource', () => {
 
   describe('When converting prometheus histogram to heatmap format', () => {
     let query: DataQueryRequest<PromQuery>;
+
     beforeEach(() => {
       query = {
         range: { from: dateTime(1443454528000), to: dateTime(1443454528000) },
@@ -439,60 +451,16 @@ describe('PrometheusDatasource', () => {
     });
   });
 
-  // Remove when prometheusResourceBrowserCache is removed
-  describe('When prometheusResourceBrowserCache feature flag is off, there should be no change to the query intervals ', () => {
-    beforeEach(() => {
-      config.featureToggles.prometheusResourceBrowserCache = false;
-    });
-
-    it('test default 1 minute quantization', () => {
-      const dataSource = new PrometheusDatasource(
-        {
-          ...instanceSettings,
-          jsonData: { ...instanceSettings.jsonData, cacheLevel: PrometheusCacheLevel.Low },
-        },
-        templateSrvStub as unknown as TemplateSrv,
-        timeSrvStub as unknown as TimeSrv
-      );
-      const quantizedRange = dataSource.getAdjustedInterval();
-      const oldRange = dataSource.getTimeRangeParams();
-      // For "1 minute" the window is unchanged
-      expect(parseInt(quantizedRange.end, 10) - parseInt(quantizedRange.start, 10)).toBe(60);
-      expect(parseInt(oldRange.end, 10) - parseInt(oldRange.start, 10)).toBe(60);
-    });
-
-    it('test 10 minute quantization', () => {
-      const dataSource = new PrometheusDatasource(
-        {
-          ...instanceSettings,
-          jsonData: { ...instanceSettings.jsonData, cacheLevel: PrometheusCacheLevel.Medium },
-        },
-        templateSrvStub as unknown as TemplateSrv,
-        timeSrvStub as unknown as TimeSrv
-      );
-      const quantizedRange = dataSource.getAdjustedInterval();
-      const oldRange = dataSource.getTimeRangeParams();
-
-      expect(parseInt(quantizedRange.end, 10) - parseInt(quantizedRange.start, 10)).toBe(60);
-      expect(parseInt(oldRange.end, 10) - parseInt(oldRange.start, 10)).toBe(60);
-    });
-  });
-
   describe('Test query range snapping', () => {
-    beforeEach(() => {
-      config.featureToggles.prometheusResourceBrowserCache = true;
-    });
-
     it('test default 1 minute quantization', () => {
       const dataSource = new PrometheusDatasource(
         {
           ...instanceSettings,
           jsonData: { ...instanceSettings.jsonData, cacheLevel: PrometheusCacheLevel.Low },
         },
-        templateSrvStub as unknown as TemplateSrv,
-        timeSrvStub as unknown as TimeSrv
+        templateSrvStub as unknown as TemplateSrv
       );
-      const quantizedRange = dataSource.getAdjustedInterval();
+      const quantizedRange = dataSource.getAdjustedInterval(mockTimeRange);
       // For "1 minute" the window contains all the minutes, so a query from 1:11:09 - 1:12:09 becomes 1:11 - 1:13
       expect(parseInt(quantizedRange.end, 10) - parseInt(quantizedRange.start, 10)).toBe(120);
     });
@@ -503,10 +471,9 @@ describe('PrometheusDatasource', () => {
           ...instanceSettings,
           jsonData: { ...instanceSettings.jsonData, cacheLevel: PrometheusCacheLevel.Medium },
         },
-        templateSrvStub as unknown as TemplateSrv,
-        timeSrvStub as unknown as TimeSrv
+        templateSrvStub as unknown as TemplateSrv
       );
-      const quantizedRange = dataSource.getAdjustedInterval();
+      const quantizedRange = dataSource.getAdjustedInterval(mockTimeRange);
       expect(parseInt(quantizedRange.end, 10) - parseInt(quantizedRange.start, 10)).toBe(600);
     });
 
@@ -516,10 +483,9 @@ describe('PrometheusDatasource', () => {
           ...instanceSettings,
           jsonData: { ...instanceSettings.jsonData, cacheLevel: PrometheusCacheLevel.High },
         },
-        templateSrvStub as unknown as TemplateSrv,
-        timeSrvStub as unknown as TimeSrv
+        templateSrvStub as unknown as TemplateSrv
       );
-      const quantizedRange = dataSource.getAdjustedInterval();
+      const quantizedRange = dataSource.getAdjustedInterval(mockTimeRange);
       expect(parseInt(quantizedRange.end, 10) - parseInt(quantizedRange.start, 10)).toBe(3600);
     });
 
@@ -529,10 +495,9 @@ describe('PrometheusDatasource', () => {
           ...instanceSettings,
           jsonData: { ...instanceSettings.jsonData, cacheLevel: PrometheusCacheLevel.None },
         },
-        templateSrvStub as unknown as TemplateSrv,
-        timeSrvStub as unknown as TimeSrv
+        templateSrvStub as unknown as TemplateSrv
       );
-      const quantizedRange = dataSource.getAdjustedInterval();
+      const quantizedRange = dataSource.getAdjustedInterval(mockTimeRange);
       expect(parseInt(quantizedRange.end, 10) - parseInt(quantizedRange.start, 10)).toBe(
         (toSeconds - fromSeconds) / 1000
       );
@@ -765,7 +730,6 @@ describe('PrometheusDatasource', () => {
 
   describe('applyTemplateVariables', () => {
     afterAll(() => {
-      getAdhocFiltersMock.mockImplementation(() => []);
       replaceMock.mockImplementation((a: string, ...rest: unknown[]) => a);
     });
 
@@ -809,7 +773,7 @@ describe('PrometheusDatasource', () => {
 
     it('should add ad-hoc filters to expr', () => {
       replaceMock.mockImplementation((a: string) => a);
-      getAdhocFiltersMock.mockReturnValue([
+      const filters = [
         {
           key: 'k1',
           operator: '=',
@@ -820,15 +784,64 @@ describe('PrometheusDatasource', () => {
           operator: '!=',
           value: 'v2',
         },
-      ]);
+      ];
 
       const query = {
         expr: 'test{job="bar"}',
         refId: 'A',
       };
 
-      const result = ds.applyTemplateVariables(query, {});
+      const result = ds.applyTemplateVariables(query, {}, filters);
       expect(result).toMatchObject({ expr: 'test{job="bar", k1="v1", k2!="v2"}' });
+    });
+
+    it('should add ad-hoc filters only to expr', () => {
+      replaceMock.mockImplementation((a: string) => a?.replace('$A', '99') ?? a);
+      const filters = [
+        {
+          key: 'k1',
+          operator: '=',
+          value: 'v1',
+        },
+        {
+          key: 'k2',
+          operator: '!=',
+          value: 'v2',
+        },
+      ];
+
+      const query = {
+        expr: 'test{job="bar"} > $A',
+        refId: 'A',
+      };
+
+      const result = ds.applyTemplateVariables(query, {}, filters);
+      expect(result).toMatchObject({ expr: 'test{job="bar", k1="v1", k2!="v2"} > 99' });
+    });
+
+    it('should add ad-hoc filters only to expr and expression has template variable as label value??', () => {
+      const searchPattern = /\$A/g;
+      replaceMock.mockImplementation((a: string) => a?.replace(searchPattern, '99') ?? a);
+      const filters = [
+        {
+          key: 'k1',
+          operator: '=',
+          value: 'v1',
+        },
+        {
+          key: 'k2',
+          operator: '!=',
+          value: 'v2',
+        },
+      ];
+
+      const query = {
+        expr: 'test{job="$A"} > $A',
+        refId: 'A',
+      };
+
+      const result = ds.applyTemplateVariables(query, {}, filters);
+      expect(result).toMatchObject({ expr: 'test{job="99", k1="v1", k2!="v2"} > 99' });
     });
   });
 
@@ -836,11 +849,10 @@ describe('PrometheusDatasource', () => {
     beforeEach(() => {
       const prometheusDatasource = new PrometheusDatasource(
         { ...instanceSettings, jsonData: { ...instanceSettings.jsonData, cacheLevel: PrometheusCacheLevel.None } },
-        templateSrvStub,
-        timeSrvStubOld
+        templateSrvStub
       );
       const query = 'query_result(topk(5,rate(http_request_duration_microseconds_count[$__interval])))';
-      prometheusDatasource.metricFindQuery(query);
+      prometheusDatasource.metricFindQuery(query, { range: mockTimeRangeOld });
     });
 
     it('should call templateSrv.replace with scopedVars', () => {
@@ -884,7 +896,7 @@ describe('PrometheusDatasource2', () => {
 
   let ds: PrometheusDatasource;
   beforeEach(() => {
-    ds = new PrometheusDatasource(instanceSettings, templateSrvStub, timeSrvStub);
+    ds = new PrometheusDatasource(instanceSettings, templateSrvStub);
   });
 
   describe('When querying prometheus with one target using query editor target spec', () => {
@@ -1506,7 +1518,7 @@ describe('PrometheusDatasource2', () => {
     it('should be determined by the 11000 data points limit when too small', async () => {
       const query = {
         // 1 week range
-        range: { from: time({}), to: time({ hours: 7 * 24 }) },
+        range: { from: time({ minutes: 1 }), to: time({ hours: 7 * 24, minutes: 1 }) },
         targets: [
           {
             expr: 'test',
@@ -1517,9 +1529,9 @@ describe('PrometheusDatasource2', () => {
       } as DataQueryRequest<PromQuery>;
       let end = 7 * 24 * 60 * 60;
       end -= end % 55;
-      const start = 0;
+      const start = 60;
       const step = 55;
-      const adjusted = alignRange(start, end, step, timeSrvStub.timeRange().to.utcOffset() * 60);
+      const adjusted = alignRange(start, end, step, query.range.to.utcOffset() * 60);
       const urlExpected =
         'proxied/api/v1/query_range?query=test' +
         '&start=' +
@@ -1756,7 +1768,7 @@ describe('PrometheusDatasource2', () => {
     it('should be determined by the 11000 data points limit, accounting for intervalFactor', async () => {
       const query = {
         // 1 week range
-        range: { from: time({}), to: time({ hours: 7 * 24 }) },
+        range: { from: time({ minutes: 1 }), to: time({ hours: 7 * 24, minutes: 1 }) },
         targets: [
           {
             expr: 'rate(test[$__interval])',
@@ -1771,9 +1783,9 @@ describe('PrometheusDatasource2', () => {
       };
       let end = 7 * 24 * 60 * 60;
       end -= end % 55;
-      const start = 0;
+      const start = 60;
       const step = 55;
-      const adjusted = alignRange(start, end, step, timeSrvStub.timeRange().to.utcOffset() * 60);
+      const adjusted = alignRange(start, end, step, query.range.to.utcOffset() * 60);
       const urlExpected =
         'proxied/api/v1/query_range?query=' +
         encodeURIComponent('rate(test[$__interval])') +
@@ -1868,40 +1880,70 @@ describe('PrometheusDatasource2', () => {
     });
 
     it('should be 4 times the scrape interval if interval + scrape interval is lower', () => {
-      ds.createQuery(target, { interval: '15s' } as DataQueryRequest<PromQuery>, 0, 300);
+      ds.createQuery(target, { interval: '15s', range: getMockTimeRange() } as DataQueryRequest<PromQuery>, 0, 300);
       expect(replaceMock.mock.calls[1][1]['__rate_interval'].value).toBe('60s');
     });
     it('should be interval + scrape interval if 4 times the scrape interval is lower', () => {
-      ds.createQuery(target, { interval: '5m' } as DataQueryRequest<PromQuery>, 0, 10080);
+      ds.createQuery(target, { interval: '5m', range: getMockTimeRange() } as DataQueryRequest<PromQuery>, 0, 10080);
       expect(replaceMock.mock.calls[1][1]['__rate_interval'].value).toBe('315s');
     });
     it('should fall back to a scrape interval of 15s if min step is set to 0, resulting in 4*15s = 60s', () => {
-      ds.createQuery({ ...target, interval: '' }, { interval: '15s' } as DataQueryRequest<PromQuery>, 0, 300);
+      ds.createQuery(
+        { ...target, interval: '' },
+        { interval: '15s', range: getMockTimeRange() } as DataQueryRequest<PromQuery>,
+        0,
+        300
+      );
       expect(replaceMock.mock.calls[1][1]['__rate_interval'].value).toBe('60s');
     });
     it('should be 4 times the scrape interval if min step set to 1m and interval is 15s', () => {
       // For a 5m graph, $__interval is 15s
-      ds.createQuery({ ...target, interval: '1m' }, { interval: '15s' } as DataQueryRequest<PromQuery>, 0, 300);
+      ds.createQuery(
+        { ...target, interval: '1m' },
+        { interval: '15s', range: getMockTimeRange() } as DataQueryRequest<PromQuery>,
+        0,
+        300
+      );
       expect(replaceMock.mock.calls[2][1]['__rate_interval'].value).toBe('240s');
     });
     it('should be interval + scrape interval if min step set to 1m and interval is 5m', () => {
       // For a 7d graph, $__interval is 5m
-      ds.createQuery({ ...target, interval: '1m' }, { interval: '5m' } as DataQueryRequest<PromQuery>, 0, 10080);
+      ds.createQuery(
+        { ...target, interval: '1m' },
+        { interval: '5m', range: getMockTimeRange() } as DataQueryRequest<PromQuery>,
+        0,
+        10080
+      );
       expect(replaceMock.mock.calls[2][1]['__rate_interval'].value).toBe('360s');
     });
     it('should be interval + scrape interval if resolution is set to 1/2 and interval is 10m', () => {
       // For a 7d graph, $__interval is 10m
-      ds.createQuery({ ...target, intervalFactor: 2 }, { interval: '10m' } as DataQueryRequest<PromQuery>, 0, 10080);
+      ds.createQuery(
+        { ...target, intervalFactor: 2 },
+        { interval: '10m', range: getMockTimeRange() } as DataQueryRequest<PromQuery>,
+        0,
+        10080
+      );
       expect(replaceMock.mock.calls[1][1]['__rate_interval'].value).toBe('1215s');
     });
     it('should be 4 times the scrape interval if resolution is set to 1/2 and interval is 15s', () => {
       // For a 5m graph, $__interval is 15s
-      ds.createQuery({ ...target, intervalFactor: 2 }, { interval: '15s' } as DataQueryRequest<PromQuery>, 0, 300);
+      ds.createQuery(
+        { ...target, intervalFactor: 2 },
+        { interval: '15s', range: getMockTimeRange() } as DataQueryRequest<PromQuery>,
+        0,
+        300
+      );
       expect(replaceMock.mock.calls[1][1]['__rate_interval'].value).toBe('60s');
     });
     it('should interpolate min step if set', () => {
       replaceMock.mockImplementation((_: string) => '15s');
-      ds.createQuery({ ...target, interval: '$int' }, { interval: '15s' } as DataQueryRequest<PromQuery>, 0, 300);
+      ds.createQuery(
+        { ...target, interval: '$int' },
+        { interval: '15s', range: getMockTimeRange() } as DataQueryRequest<PromQuery>,
+        0,
+        300
+      );
       expect(replaceMock.mock.calls).toHaveLength(3);
       replaceMock.mockImplementation((str) => str);
     });
@@ -1948,7 +1990,7 @@ describe('PrometheusDatasource for POST', () => {
 
   let ds: PrometheusDatasource;
   beforeEach(() => {
-    ds = new PrometheusDatasource(instanceSettings, templateSrvStub, timeSrvStub);
+    ds = new PrometheusDatasource(instanceSettings, templateSrvStub);
   });
 
   describe('When querying prometheus with one target using query editor target spec', () => {
@@ -2017,11 +2059,7 @@ describe('PrometheusDatasource for POST', () => {
 
     let ds: PrometheusDatasource;
     beforeEach(() => {
-      ds = new PrometheusDatasource(
-        instanceSettings,
-        templateSrvStub as unknown as TemplateSrv,
-        timeSrvStub as unknown as TimeSrv
-      );
+      ds = new PrometheusDatasource(instanceSettings, templateSrvStub as unknown as TemplateSrv);
     });
 
     it('with proxy access tracing headers should be added', () => {
@@ -2039,11 +2077,7 @@ describe('PrometheusDatasource for POST', () => {
         jsonData: { httpMethod: 'POST' },
       } as unknown as DataSourceInstanceSettings<PromOptions>;
 
-      const mockDs = new PrometheusDatasource(
-        { ...instanceSettings, url: 'http://127.0.0.1:8000' },
-        templateSrvStub,
-        timeSrvStub
-      );
+      const mockDs = new PrometheusDatasource({ ...instanceSettings, url: 'http://127.0.0.1:8000' }, templateSrvStub);
       mockDs._addTracingHeaders(httpOptions, options);
       expect(httpOptions.headers['X-Dashboard-Id']).toBe(undefined);
       expect(httpOptions.headers['X-Panel-Id']).toBe(undefined);
@@ -2079,10 +2113,11 @@ function getPrepareTargetsContext({
     interval: '1s',
     panelId,
     app,
+    range: getMockTimeRange(),
     ...queryOptions,
   } as unknown as DataQueryRequest<PromQuery>;
 
-  const ds = new PrometheusDatasource(instanceSettings, templateSrvStub, timeSrvStub);
+  const ds = new PrometheusDatasource(instanceSettings, templateSrvStub);
   if (languageProvider) {
     ds.languageProvider = languageProvider;
   }
@@ -2388,7 +2423,7 @@ describe('modifyQuery', () => {
         const query: PromQuery = { refId: 'A', expr: 'go_goroutines' };
         const action = { options: { key: 'cluster', value: 'us-cluster' }, type: 'ADD_FILTER' };
         const instanceSettings = { jsonData: {} } as unknown as DataSourceInstanceSettings<PromOptions>;
-        const ds = new PrometheusDatasource(instanceSettings, templateSrvStub, timeSrvStub);
+        const ds = new PrometheusDatasource(instanceSettings, templateSrvStub);
 
         const result = ds.modifyQuery(query, action);
 
@@ -2402,7 +2437,7 @@ describe('modifyQuery', () => {
         const query: PromQuery = { refId: 'A', expr: 'go_goroutines{cluster="us-cluster"}' };
         const action = { options: { key: 'pod', value: 'pod-123' }, type: 'ADD_FILTER' };
         const instanceSettings = { jsonData: {} } as unknown as DataSourceInstanceSettings<PromOptions>;
-        const ds = new PrometheusDatasource(instanceSettings, templateSrvStub, timeSrvStub);
+        const ds = new PrometheusDatasource(instanceSettings, templateSrvStub);
 
         const result = ds.modifyQuery(query, action);
 
@@ -2418,7 +2453,7 @@ describe('modifyQuery', () => {
         const query: PromQuery = { refId: 'A', expr: 'go_goroutines' };
         const action = { options: { key: 'cluster', value: 'us-cluster' }, type: 'ADD_FILTER_OUT' };
         const instanceSettings = { jsonData: {} } as unknown as DataSourceInstanceSettings<PromOptions>;
-        const ds = new PrometheusDatasource(instanceSettings, templateSrvStub, timeSrvStub);
+        const ds = new PrometheusDatasource(instanceSettings, templateSrvStub);
 
         const result = ds.modifyQuery(query, action);
 
@@ -2432,7 +2467,7 @@ describe('modifyQuery', () => {
         const query: PromQuery = { refId: 'A', expr: 'go_goroutines{cluster="us-cluster"}' };
         const action = { options: { key: 'pod', value: 'pod-123' }, type: 'ADD_FILTER_OUT' };
         const instanceSettings = { jsonData: {} } as unknown as DataSourceInstanceSettings<PromOptions>;
-        const ds = new PrometheusDatasource(instanceSettings, templateSrvStub, timeSrvStub);
+        const ds = new PrometheusDatasource(instanceSettings, templateSrvStub);
 
         const result = ds.modifyQuery(query, action);
 
@@ -2554,4 +2589,11 @@ function createEmptyAnnotationResponse() {
   };
 
   return { ...response };
+}
+
+function getMockTimeRange(range = '6h'): TimeRange {
+  return rangeUtil.convertRawToRange({
+    from: `now-${range}`,
+    to: 'now',
+  });
 }

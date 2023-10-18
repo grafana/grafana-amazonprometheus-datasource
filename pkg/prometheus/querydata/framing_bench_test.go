@@ -18,13 +18,13 @@ import (
 	"github.com/grafana/kindsys"
 	"github.com/stretchr/testify/require"
 
-	"github.com/grafana/prometheus-amd/pkg/prometheus/kinds/dataquery"
+	"github.com/grafana/prometheus-amazon/pkg/prometheus/kinds/dataquery"
 
-	"github.com/grafana/prometheus-amd/pkg/prometheus/models"
+	"github.com/grafana/prometheus-amazon/pkg/prometheus/models"
 )
 
 // when memory-profiling this benchmark, these commands are recommended:
-// - go test -benchmem -run=^$ -bench ^BenchmarkExemplarJson$ github.com/grafana/prometheus-amd/pkg/prometheus/querydata -memprofile memprofile.out -count 6 | tee old.txt
+// - go test -benchmem -run=^$ -bench ^BenchmarkExemplarJson$ github.com/grafana/prometheus-amazon/pkg/prometheus/querydata -memprofile memprofile.out -count 6 | tee old.txt
 // - go tool pprof -http=localhost:6061 memprofile.out
 func BenchmarkExemplarJson(b *testing.B) {
 	queryFileName := filepath.Join("../testdata", "exemplar.query.json")
@@ -58,7 +58,7 @@ func BenchmarkExemplarJson(b *testing.B) {
 var resp *backend.QueryDataResponse
 
 // when memory-profiling this benchmark, these commands are recommended:
-// - go test -benchmem -run=^$ -bench ^BenchmarkRangeJson$ github.com/grafana/prometheus-amd/pkg/prometheus/querydata -memprofile memprofile.out -count 6 | tee old.txt
+// - go test -benchmem -run=^$ -bench ^BenchmarkRangeJson$ github.com/grafana/prometheus-amazon/pkg/prometheus/querydata -memprofile memprofile.out -count 6 | tee old.txt
 // - go tool pprof -http=localhost:6061 memprofile.out
 // - benchstat old.txt new.txt
 func BenchmarkRangeJson(b *testing.B) {

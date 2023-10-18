@@ -1,8 +1,8 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React, { ComponentProps } from 'react';
-import { selectOptionInTest } from 'test/helpers/selectOptionInTest';
 
+import { selectOptionInTest } from '../../gcopypaste/test/helpers/selectOptionInTest';
 import { getLabelSelects } from '../testUtils';
 
 import { LabelFilters, MISSING_LABEL_FILTER_ERROR_MESSAGE, Props } from './LabelFilters';

@@ -2,7 +2,6 @@ import { DataSourceInstanceSettings, DataSourcePluginMeta } from '@grafana/data'
 import { render, screen } from '@testing-library/react';
 import React from 'react';
 
-
 import { PrometheusDatasource } from '../../datasource';
 import PromQlLanguageProvider from '../../language_provider';
 import { EmptyLanguageProviderMock } from '../../language_provider.mock';
@@ -23,7 +22,6 @@ function createDatasource() {
       jsonData: {},
       meta: {} as DataSourcePluginMeta,
     } as DataSourceInstanceSettings,
-    undefined,
     undefined,
     languageProvider
   );

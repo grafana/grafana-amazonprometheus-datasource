@@ -8,8 +8,8 @@ import (
 	"time"
 
 	"github.com/grafana/grafana-plugin-sdk-go/backend"
-	"github.com/grafana/prometheus-amd/pkg/gcopypaste/intervalv2"
-	"github.com/grafana/prometheus-amd/pkg/prometheus/kinds/dataquery"
+	"github.com/grafana/prometheus-amazon/pkg/gcopypaste/intervalv2"
+	"github.com/grafana/prometheus-amazon/pkg/prometheus/kinds/dataquery"
 )
 
 // Internal interval and range variables

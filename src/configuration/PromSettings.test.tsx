@@ -50,6 +50,7 @@ describe('PromSettings', () => {
 
       render(
         <Provider store={store}>
+          {/* @ts-ignore until we get the tests working */}
           <PromSettings onOptionsChange={() => {}} options={options} />
         </Provider>
       );
@@ -63,6 +64,7 @@ describe('PromSettings', () => {
 
       render(
         <Provider store={store}>
+          {/* @ts-ignore until we get the tests working */}
           <PromSettings onOptionsChange={() => {}} options={options} />
         </Provider>
       );
@@ -76,6 +78,7 @@ describe('PromSettings', () => {
 
       render(
         <Provider store={store}>
+          {/* @ts-ignore until we get the tests working */}
           <PromSettings onOptionsChange={() => {}} options={options} />
         </Provider>
       );

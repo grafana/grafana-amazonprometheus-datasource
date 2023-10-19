@@ -3,8 +3,8 @@ import { SIGV4ConnectionConfig } from '@grafana/aws-sdk';
 import { DataSourcePluginOptionsEditorProps, GrafanaTheme2 } from '@grafana/data';
 import { ConfigSection, DataSourceDescription } from '@grafana/experimental';
 import { config } from '@grafana/runtime';
-import { Alert, DataSourceHttpSettings, FieldValidationMessage, useTheme2 } from '@grafana/ui';
-import React, { useRef } from 'react';
+import { Alert, FieldValidationMessage, useTheme2 } from '@grafana/ui';
+import React from 'react';
 
 import { PromOptions } from '../types';
 
@@ -12,7 +12,6 @@ import { AlertingSettingsOverhaul } from './AlertingSettingsOverhaul';
 import { DataSourcehttpSettingsOverhaul } from './DataSourceHttpSettingsOverhaul';
 import { PromSettings } from './PromSettings';
 import { AdvancedHttpSettings } from './overhaul/AdvancedHttpSettings';
-
 
 export const PROM_CONFIG_LABEL_WIDTH = 30;
 
@@ -29,7 +28,7 @@ export const ConfigEditor = (props: Props) => {
         <Alert title="Error" severity="error">
           Browser access mode in the Prometheus data source is no longer available. Switch to server access mode.
         </Alert>
-      )}  
+      )}
       <DataSourceDescription
         dataSourceName="Prometheus"
         docsLink="https://grafana.com/docs/grafana/latest/datasources/prometheus/configure-prometheus-data-source/"
@@ -41,7 +40,7 @@ export const ConfigEditor = (props: Props) => {
         sigV4AuthToggleEnabled={config.sigV4AuthEnabled}
         renderSigV4Editor={<SIGV4ConnectionConfig {...props}></SIGV4ConnectionConfig>}
         secureSocksDSProxyEnabled={config.secureSocksDSProxyEnabled}
-      />  
+      />
       <hr />
       <ConfigSection
         className={styles.advancedSettings}

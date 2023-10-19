@@ -15,7 +15,7 @@ import {
   toDataFrame,
   VariableHide,
 } from '@grafana/data';
-import { TemplateSrv } from 'app/features/templating/template_srv';
+import { TemplateSrv } from '@grafana/runtime';
 import { cloneDeep } from 'lodash';
 import { lastValueFrom, of, throwError } from 'rxjs';
 

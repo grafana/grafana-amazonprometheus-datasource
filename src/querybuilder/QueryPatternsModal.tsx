@@ -2,10 +2,10 @@ import { css } from '@emotion/css';
 import { CoreApp, DataQuery, GrafanaTheme2 } from '@grafana/data';
 import { reportInteraction } from '@grafana/runtime';
 import { Button, Collapse, Modal, useStyles2 } from '@grafana/ui';
-import { getNextRefIdChar } from 'app/core/utils/query';
 import { capitalize } from 'lodash';
 import React, { useMemo, useState } from 'react';
 
+import { getNextRefIdChar } from '../gcopypaste/app/core/utils/query';
 import { PromQuery } from '../types';
 
 import { promQueryModeller } from './PromQueryModeller';

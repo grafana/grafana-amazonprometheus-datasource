@@ -31,10 +31,11 @@ import {
   FetchError,
   FetchResponse,
   getBackendSrv,
+  getTemplateSrv,
   isFetchError,
+  TemplateSrv,
   toDataQueryResponse,
 } from '@grafana/runtime';
-import { getTemplateSrv, TemplateSrv } from 'app/features/templating/template_srv';
 import { cloneDeep, defaults } from 'lodash';
 import { forkJoin, lastValueFrom, merge, Observable, of, OperatorFunction, pipe, throwError } from 'rxjs';
 import { catchError, filter, map, tap } from 'rxjs/operators';

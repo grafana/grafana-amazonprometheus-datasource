@@ -37,12 +37,10 @@ const config = async (env): Promise<Configuration> => {
       'lodash',
       'jquery',
       'moment',
-      'slate',
       'emotion',
       '@emotion/react',
       '@emotion/css',
       'prismjs',
-      'slate-plain-serializer',
       '@grafana/slate-react',
       'react',
       'react-dom',
@@ -97,7 +95,7 @@ const config = async (env): Promise<Configuration> => {
         },
         {
           test: /\.css$/,
-          use: ["style-loader", "css-loader"]
+          use: ['style-loader', 'css-loader'],
         },
         {
           test: /\.s[ac]ss$/,
@@ -197,17 +195,16 @@ const config = async (env): Promise<Configuration> => {
       modules: [path.resolve(process.cwd(), 'src'), 'node_modules'],
       unsafeCache: true,
     },
-  }
+  };
 
-  if(isWSL()) {
+  if (isWSL()) {
     baseConfig.watchOptions = {
       poll: 3000,
       ignored: /node_modules/,
-    }}
-
+    };
+  }
 
   return baseConfig;
-
 };
 
 export default config;

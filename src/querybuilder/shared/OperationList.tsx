@@ -6,7 +6,6 @@ import React, { useState } from 'react';
 import { DragDropContext, Droppable, DropResult } from 'react-beautiful-dnd';
 import { useMountedState, usePrevious } from 'react-use';
 
-
 import { OperationEditor } from './OperationEditor';
 import { QueryBuilderOperation, QueryWithOperations, VisualQueryModeller } from './types';
 

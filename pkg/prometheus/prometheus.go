@@ -65,6 +65,14 @@ func (d *Datasource) QueryData(ctx context.Context, req *backend.QueryDataReques
 	return d.Service.QueryData(ctx, req)
 }
 
+func (d *Datasource) CheckHealth(ctx context.Context, req *backend.CheckHealthRequest) (*backend.CheckHealthResult, error) {
+	return d.Service.CheckHealth(ctx, req)
+}
+
+func (d *Datasource) CallResource(ctx context.Context, req *backend.CallResourceRequest, sender backend.CallResourceResponseSender) error {
+	return d.Service.CallResource(ctx, req, sender)
+}
+
 func newInstanceSettings(httpClientProvider httpclient.Provider, cfg *backend.GrafanaCfg, features backend.FeatureToggles, tracer trace.Tracer) datasource.InstanceFactoryFunc {
 	return func(ctx context.Context, settings backend.DataSourceInstanceSettings) (instancemgmt.Instance, error) {
 		// Creates a http roundTripper.

@@ -1,9 +1,9 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
-import { selectOptionInTest } from 'test/helpers/selectOptionInTest';
 
 import { PrometheusDatasource } from '../datasource';
+import { selectOptionInTest } from '../gcopypaste/test/helpers/selectOptionInTest';
 import PrometheusLanguageProvider from '../language_provider';
 import { migrateVariableEditorBackToVariableSupport } from '../migrations/variableMigration';
 import { PromVariableQuery, PromVariableQueryType, StandardPromVariableQuery } from '../types';

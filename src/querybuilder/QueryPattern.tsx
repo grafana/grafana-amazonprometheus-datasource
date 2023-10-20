@@ -1,12 +1,12 @@
 import { css } from '@emotion/css';
 import { GrafanaTheme2 } from '@grafana/data';
 import { Button, Card, useStyles2 } from '@grafana/ui';
-import { RawQuery } from 'app/plugins/datasource/prometheus/querybuilder/shared/RawQuery';
 import React from 'react';
 
 import promqlGrammar from '../promql';
 
 import { promQueryModeller } from './PromQueryModeller';
+import { RawQuery } from './shared/RawQuery';
 import { PromQueryPattern } from './types';
 
 type Props = {

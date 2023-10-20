@@ -43,6 +43,5 @@ function createProps(bytes?: number): Props {
     title: 'Options',
     collapsedInfo: ['Type: Range', 'Line limit: 1000'],
     children: <div></div>,
-    queryStats: { streams: 0, chunks: 0, bytes: bytes ?? 0, entries: 0 },
   };
 }

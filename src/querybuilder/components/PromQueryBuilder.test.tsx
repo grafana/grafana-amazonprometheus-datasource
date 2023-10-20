@@ -11,7 +11,6 @@ import { getByText, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 
-
 import { PrometheusDatasource } from '../../datasource';
 import PromQlLanguageProvider from '../../language_provider';
 import { EmptyLanguageProviderMock } from '../../language_provider.mock';
@@ -317,7 +316,6 @@ function createDatasource(options?: Partial<DataSourceInstanceSettings<PromOptio
       meta: {} as DataSourcePluginMeta,
       ...options,
     } as DataSourceInstanceSettings<PromOptions>,
-    undefined,
     undefined,
     languageProvider
   );

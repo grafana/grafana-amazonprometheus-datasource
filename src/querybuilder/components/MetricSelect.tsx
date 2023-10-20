@@ -14,8 +14,9 @@ import {
   useStyles2,
   useTheme2,
 } from '@grafana/ui';
-import {SelectMenuOptions} from '@grafana/ui/src/components/Select/SelectMenu';
+// import {SelectMenuOptions} from '@grafana/ui/src/components/Select/SelectMenu';
 import debounce from 'debounce-promise';
+import { SelectMenuOptions } from 'gcopypaste/packages/grafana-ui/src/components/Select/SelectBase';
 import React, {RefCallback, useCallback, useState} from 'react';
 import Highlighter from 'react-highlight-words';
 
@@ -27,6 +28,7 @@ import {PromVisualQuery} from '../types';
 
 import {MetricsModal} from './metrics-modal/MetricsModal';
 import {tracking} from './metrics-modal/state/helpers';
+
 
 // We are matching words split with space
 const splitSeparator = ' ';

@@ -64,7 +64,8 @@ function ensurePromQL(monaco: Monaco) {
     PROMQL_SETUP_STARTED = true;
     const { aliases, extensions, mimetypes, loader } = promLanguageDefinition;
     monaco.languages.register({ id: PROMQL_LANG_ID, aliases, extensions, mimetypes });
-
+    // This does not work in the external datasource
+    // see library for removing loader in favor of importing language and languageConfiguration
     loader().then((mod) => {
       monaco.languages.setMonarchTokensProvider(PROMQL_LANG_ID, mod.language);
       monaco.languages.setLanguageConfiguration(PROMQL_LANG_ID, mod.languageConfiguration);

@@ -1,17 +1,12 @@
 import { DataSourceSettings } from '@grafana/data';
 import { Auth, AuthMethod, ConnectionSettings, convertLegacyAuthProps } from '@grafana/experimental';
+import { PromOptions, docsTip, overhaulStyles } from '@grafana/prometheus';
 import { SecureSocksProxySettings, useTheme2 } from '@grafana/ui';
-import React, { useState } from 'react';
-
-import { PromOptions } from '../types';
-
-import { docsTip, overhaulStyles } from './ConfigEditor';
-import { CustomMethod } from './overhaul/types';
+import React, { ReactElement, useState } from 'react';
 
 type Props = {
   options: DataSourceSettings<PromOptions, {}>;
   onOptionsChange: (options: DataSourceSettings<PromOptions, {}>) => void;
-  sigV4AuthToggleEnabled: boolean | undefined;
   renderSigV4Editor: React.ReactNode;
   secureSocksDSProxyEnabled: boolean;
 };
@@ -20,7 +15,6 @@ export const DataSourcehttpSettingsOverhaul = (props: Props) => {
   const {
     options,
     onOptionsChange,
-    sigV4AuthToggleEnabled,
     renderSigV4Editor,
     secureSocksDSProxyEnabled,
   } = props;
@@ -47,9 +41,7 @@ export const DataSourcehttpSettingsOverhaul = (props: Props) => {
     component: <>{renderSigV4Editor}</>,
   };
 
-  if (sigV4AuthToggleEnabled) {
-    customMethods.push(sigV4Option);
-  }
+  customMethods.push(sigV4Option);
 
   function returnSelectedMethod() {
     if (sigV4Selected) {
@@ -94,20 +86,10 @@ export const DataSourcehttpSettingsOverhaul = (props: Props) => {
       />
       <hr className={`${styles.hrTopSpace} ${styles.hrBottomSpace}`} />
       <Auth
-        // Reshaped legacy props
         {...newAuthProps}
-        // Your custom auth methods
         customMethods={customMethods}
-        // Still need to call `onAuthMethodSelect` function from
-        // `newAuthProps` to store the legacy data correctly.
-        // Also make sure to store the data about your component
-        // being selected/unselected.
         onAuthMethodSelect={(method) => {
-          // handle selecting of custom methods
-          // sigV4Id
-          if (sigV4AuthToggleEnabled) {
-            setSigV4Selected(method === sigV4Id);
-          }
+          setSigV4Selected(method === sigV4Id);
 
           onOptionsChange({
             ...options,
@@ -133,4 +115,13 @@ export const DataSourcehttpSettingsOverhaul = (props: Props) => {
       )}
     </>
   );
+};
+
+export type CustomMethodId = `custom-${string}`;
+
+export type CustomMethod = {
+  id: CustomMethodId;
+  label: string;
+  description: string;
+  component: ReactElement;
 };

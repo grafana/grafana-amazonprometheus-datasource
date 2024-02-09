@@ -1,10 +1,8 @@
 import { DataSourcePlugin } from '@grafana/data';
-import { ConfigEditor, PromQueryEditorByApp, PrometheusDatasource, PromCheatSheet } from '@grafana/prometheus';
+import { PromQueryEditorByApp, PrometheusDatasource, PromCheatSheet } from '@grafana/prometheus';
 
-// import PromCheatSheet from './components/PromCheatSheet';
-// import PromQueryEditorByApp from './components/PromQueryEditorByApp';
-// import { ConfigEditor } from './configuration/ConfigEditor';
-// import { PrometheusDatasource } from './datasource';
+// custom config made with sigV4 auth
+import { ConfigEditor } from './configuration/ConfigEditor';
 
 // @ts-ignore
 export const plugin = new DataSourcePlugin(PrometheusDatasource)

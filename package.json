@@ -97,7 +97,7 @@
     "@grafana/runtime": "10.3.0",
     "@grafana/schema": "10.2.0",
     "@grafana/ui": "10.3.0",
-    "@grafana/prometheus": "0.0.1",
+    "@grafana/prometheus": "10.4.0-161545",
     "@leeoniya/ufuzzy": "1.0.8",
     "@lezer/common": "1.1.0",
     "@lezer/highlight": "1.1.3",

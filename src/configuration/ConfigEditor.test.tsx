@@ -2,7 +2,12 @@ import { FieldValidationMessage } from '@grafana/ui';
 import React from 'react';
 
 import { validateInput } from './ConfigEditor';
-import { DURATION_REGEX, MULTIPLE_DURATION_REGEX } from './PromSettings';
+
+// single duration input
+const DURATION_REGEX = /^$|^\d+(ms|[Mwdhmsy])$/;
+
+// multiple duration input
+const MULTIPLE_DURATION_REGEX = /(\d+)(.+)/;
 
 const VALID_URL_REGEX = /^(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?$/;
 

@@ -102,5 +102,10 @@
         "url": "https://prometheus.io/"
       }
     ]
+  },
+  "dependencies": {
+    "grafanaVersion": "10.4.x",
+    "grafanaDependency": ">=10.4.0",
+    "plugins": []
   }
 }

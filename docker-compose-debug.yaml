@@ -23,7 +23,7 @@ services:
       - GF_AUTH_ANONYMOUS_ENABLED=true
       - GF_AUTH_BASIC_ENABLED=false
     volumes:
-      - ./provisioning:/etc/grafana/provisioning/datasources
+      - ./provisioning/datasources:/etc/grafana/provisioning/datasources
       - ./dist:/var/lib/grafana/plugins/prometheus-amazon
 volumes:
   prom_data:

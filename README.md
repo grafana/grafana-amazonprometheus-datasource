@@ -1,10 +1,12 @@
-# Grafana data source plugin template
+# Prometheus Amazon Data Source
 
-This template is a starting point for building a Data Source Plugin for Grafana.
+This data source plugin is is for Amazon Prometheus. It has all the features of the Grafana core Prometheus plugin with Amazon specific authentication in the configuration page.
 
-## What are Grafana data source plugins?
+Amazon Managed Service for Prometheus is a Prometheus-compatible service that monitors and provides alerts on containerized applications and infrastructure at scale.
 
-Grafana supports a wide range of data sources, including Prometheus, MySQL, and even Datadog. There’s a good chance you can already visualize metrics from the systems you have set up. In some cases, though, you already have an in-house metrics solution that you’d like to add to your Grafana dashboards. Grafana Data Source Plugins enables integrating such solutions with Grafana.
+Read more about it here:
+
+[https://aws.amazon.com/prometheus/](https://aws.amazon.com/prometheus/)
 
 ## Getting started
 
@@ -33,55 +35,55 @@ Grafana supports a wide range of data sources, including Prometheus, MySQL, and 
 1. Install dependencies
 
    ```bash
-   npm install
+   yarn install
    ```
 
 2. Build plugin in development mode and run in watch mode
 
    ```bash
-   npm run dev
+   yarn run dev
    ```
 
 3. Build plugin in production mode
 
    ```bash
-   npm run build
+   yarn run build
    ```
 
 4. Run the tests (using Jest)
 
    ```bash
    # Runs the tests and watches for changes, requires git init first
-   npm run test
+   yarn run test
 
    # Exits after running all the tests
-   npm run test:ci
+   yarn run test:ci
    ```
 
 5. Spin up a Grafana instance and run the plugin inside it (using Docker)
 
    ```bash
-   npm run server
+   yarn run server
    ```
 
-6. Run the E2E tests (using Cypress)
+6. Run the E2E tests (using Playwright and @grafana/plugin-e2e)
 
    ```bash
-   # Spins up a Grafana instance first that we tests against
-   npm run server
+   # Spins up a Grafana docker instance (port 3099) with an actual Prometheus instance (port 9090)
+   yarn run server
 
    # Starts the tests
-   npm run e2e
+   yarn run test:e2e
    ```
 
 7. Run the linter
 
    ```bash
-   npm run lint
+   yarn run lint
 
    # or
 
-   npm run lint:fix
+   yarn run lint:fix
    ```
 
 

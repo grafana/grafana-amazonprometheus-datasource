@@ -29,62 +29,58 @@ test.describe('Configuration tests', () => {
     const configPage = await createDataSourceConfigPage({type: ds.type, deleteDataSourceAfterTest: true});
     
     // connection settings
-    await configPage
-      .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.configPage.connectionSettings)
-      .isVisible();
+    await expect(configPage
+      .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.configPage.connectionSettings)).toBeVisible();
+
+    // expect(connectionSettings).toBe(true);
 
     // managed alerts
-    await configPage
-      .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.configPage.manageAlerts)
-      .isVisible();
+    await expect(
+      page.locator(`#${selectors.components.DataSource.Prometheus.configPage.manageAlerts}`)
+    ).toBeVisible();
+      
 
+    // expect(manageAlerts).toBe(true);
+    
     // scrape interval
-    await configPage
-      .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.configPage.scrapeInterval)
-      .isVisible();
+    await expect(configPage
+      .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.configPage.scrapeInterval)).toBeVisible();
+      
 
     // query timeout
-    await configPage
-      .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.configPage.queryTimeout)
-      .isVisible();
+    await expect(configPage
+      .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.configPage.queryTimeout)).toBeVisible();
 
     // default editor
-    await configPage
-      .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.configPage.defaultEditor)
-      .isVisible();
+    await expect(configPage
+      .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.configPage.defaultEditor)).toBeVisible();
 
     // disable metric lookup
-    await configPage
-      .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.configPage.disableMetricLookup)
-      .isVisible();
+    await expect(
+      page.locator(`#${selectors.components.DataSource.Prometheus.configPage.disableMetricLookup}`)
+    ).toBeVisible();
 
     // prometheus type
-    await configPage
-      .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.configPage.prometheusType)
-      .isVisible();
+    await expect(configPage
+      .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.configPage.prometheusType)).toBeVisible();
 
     // cache level
-    await configPage
-      .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.configPage.cacheLevel)
-      .isVisible();
+    await expect(configPage
+      .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.configPage.cacheLevel)).toBeVisible();
 
     // incremental querying
-    await page.locator(`#${selectors.components.DataSource.Prometheus.configPage.incrementalQuerying}`)
-      .isVisible();
+    await expect(page.locator(`#${selectors.components.DataSource.Prometheus.configPage.incrementalQuerying}`)).toBeVisible();
 
     // disable recording rules
-    await page.locator(`#${selectors.components.DataSource.Prometheus.configPage.disableRecordingRules}`)
-      .isVisible();
+    await expect(page.locator(`#${selectors.components.DataSource.Prometheus.configPage.disableRecordingRules}`)).toBeVisible();
 
     // custom query parameters
-    await configPage
-      .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.configPage.customQueryParameters)
-      .isVisible();
+    await expect(configPage
+      .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.configPage.customQueryParameters)).toBeVisible();
 
     // http method
-    await configPage
-      .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.configPage.httpMethod)
-      .isVisible();
+    await expect(configPage
+      .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.configPage.httpMethod)).toBeVisible();
   });
 
   test('"Save & test" should be successful when configuration is valid', async ({
@@ -116,28 +112,6 @@ test.describe('Configuration tests', () => {
   async ({
     createDataSourceConfigPage,
     readProvisionedDataSource,
-  }) => {
-    const ds = await readProvisionedDataSource<DataSourcePluginOptionsEditorProps<PromOptions>>({ fileName: 'datasources.yml' });
-    
-    const configPage = await createDataSourceConfigPage({
-      type: "prometheus-amazon-datasource", 
-      name: DATA_SOURCE_NAME,
-      deleteDataSourceAfterTest: true,
-    });
-    
-    await configPage
-      .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.configPage.prometheusType)
-      .isVisible();
-
-    await configPage
-      .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.configPage.prometheusVersion)
-      .isVisible();
-  });
-
-  test('it should allow a user to select a query overlap window when incremental querying is selected', 
-  async ({
-    createDataSourceConfigPage,
-    readProvisionedDataSource,
     page,
   }) => {
     const ds = await readProvisionedDataSource<DataSourcePluginOptionsEditorProps<PromOptions>>({ fileName: 'datasources.yml' });
@@ -147,13 +121,53 @@ test.describe('Configuration tests', () => {
       name: DATA_SOURCE_NAME,
       deleteDataSourceAfterTest: true,
     });
+    
+    await expect(configPage
+      .getByTestIdOrAriaLabel(
+        selectors.components.DataSource.Prometheus.configPage.prometheusType
+      )).toBeVisible();
       
-    await page.locator(`#${selectors.components.DataSource.Prometheus.configPage.incrementalQuerying}`)
-      .isVisible();
 
-    await configPage
-      .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.configPage.queryOverlapWindow)
-      .isVisible();
+    // open the select dropdown
+    await page.getByLabel('Prometheus type').click();
+
+    // select a prometheus type
+    await page.getByText('Cortex').click();
+    
+    // expect the version component to be displayed
+    await expect(configPage
+      .getByTestIdOrAriaLabel(
+        selectors.components.DataSource.Prometheus.configPage.prometheusVersion
+      )).toBeVisible();
+  });
+
+  test('it should allow a user to select a query overlap window when incremental querying is selected', 
+  async ({
+    createDataSourceConfigPage,
+    readProvisionedDataSource,
+    page,
+  }) => {
+    // const ds = await readProvisionedDataSource<DataSourcePluginOptionsEditorProps<PromOptions>>({ fileName: 'datasources.yml' });
+    
+    const configPage = await createDataSourceConfigPage({
+      type: "prometheus-amazon-datasource", 
+      name: DATA_SOURCE_NAME + "check",
+      deleteDataSourceAfterTest: true,
+    });
+    
+    const incrementalQuerying = await page
+      .locator(`#${selectors.components.DataSource.Prometheus.configPage.incrementalQuerying}`)
+      
+    expect(await incrementalQuerying).toBeVisible();
+
+    await page.getByLabel('Toggle switch').nth(3).setChecked(true);
+
+    expect(
+      await configPage
+        .getByTestIdOrAriaLabel(
+          selectors.components.DataSource.Prometheus.configPage.queryOverlapWindow
+        )
+    ).toBeVisible();
   });
 
 // exemplars tested in exemplar.spec

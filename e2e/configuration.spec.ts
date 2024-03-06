@@ -32,21 +32,15 @@ test.describe('Configuration tests', () => {
     await expect(configPage
       .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.configPage.connectionSettings)).toBeVisible();
 
-    // expect(connectionSettings).toBe(true);
-
     // managed alerts
     await expect(
       page.locator(`#${selectors.components.DataSource.Prometheus.configPage.manageAlerts}`)
     ).toBeVisible();
-      
-
-    // expect(manageAlerts).toBe(true);
     
     // scrape interval
     await expect(configPage
       .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.configPage.scrapeInterval)).toBeVisible();
       
-
     // query timeout
     await expect(configPage
       .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.configPage.queryTimeout)).toBeVisible();

@@ -1,5 +1,5 @@
 import { DataSourcePluginOptionsEditorProps } from '@grafana/data';
-import { E2ESelectors, Selectors, selectors } from '@grafana/e2e-selectors';
+import { selectors } from '@grafana/e2e-selectors';
 import { test, expect } from '@grafana/plugin-e2e';
 import { PromOptions } from '@grafana/prometheus';
 

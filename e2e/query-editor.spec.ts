@@ -3,8 +3,6 @@ import { selectors } from '@grafana/e2e-selectors';
 import { test, expect } from '@grafana/plugin-e2e';
 import { PromOptions } from '@grafana/prometheus';
 
-import { labelsResponse, metadataResponse, metricResponse } from './data';
-
 const codeEditorProvFile = 'code-editor.yml';
 
 const metric = 'process_cpu_seconds_total';

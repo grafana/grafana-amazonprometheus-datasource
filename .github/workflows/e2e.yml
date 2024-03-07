@@ -14,9 +14,38 @@ jobs:
     timeout-minutes: 60
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Setup Go environment
+        uses: actions/setup-go@v4
+        with:
+          go-version: '1.21.6'
+      
+      # - name: Test backend
+      #   uses: magefile/mage-action@v2
+      #   with:
+      #     version: latest
+      #     args: coverage
+      # - name: Build backend
+      #   uses: magefile/mage-action@v2
+      #   with:
+      #     version: latest
+      #     args: buildAll
+      # - name: Setup Node
+      #   uses: actions/setup-node@v3
+      #   with:
+      #     node-version: 20
+      # - name: Install dependencies
+      #   run: npm install -g yarn && yarn install --frozen-lockfile;
+      # - name: Spellcheck
+      #   run: |
+      #     yarn spellcheck;
+      # - name: Build Frontend
+      #   run: |
+      #     yarn build;
       - name: Start the docker container for E2E
         run: |
-          docker-compose -f docker-compose-debug.yaml pull
+          docker compose -f docker-compose-debug.yaml pull
           docker compose -f docker-compose-debug.yaml up
       - name: Wait for grafana to start
         uses: nev7n/wait_for_response@v1
@@ -38,4 +67,4 @@ jobs:
           retention-days: 30
       - name: Stop the docker container
         if: always()
-        run: docker-compose down
+        run: docker-compose -f docker-compose-debug.yaml down

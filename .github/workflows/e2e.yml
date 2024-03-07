@@ -16,7 +16,7 @@ jobs:
     steps:
       - name: Start the docker container for E2E
         run: |
-          docker-compose pull
+          docker-compose -f docker-compose-debug.yaml pull
           docker compose -f docker-compose-debug.yaml up
       - name: Wait for grafana to start
         uses: nev7n/wait_for_response@v1

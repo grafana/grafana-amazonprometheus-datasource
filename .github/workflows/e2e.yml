@@ -14,35 +14,6 @@ jobs:
     timeout-minutes: 60
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-      - name: Setup Go environment
-        uses: actions/setup-go@v4
-        with:
-          go-version: '1.21.6'
-      # tests failing so don't test backend until we get the library working
-      # - name: Test backend
-      #   uses: magefile/mage-action@v2
-      #   with:
-      #     version: latest
-      #     args: coverage
-      - name: Build backend
-        uses: magefile/mage-action@v2
-        with:
-          version: latest
-          args: buildAll
-      - name: Setup Node
-        uses: actions/setup-node@v3
-        with:
-          node-version: 20
-      - name: Install dependencies
-        run: npm install -g yarn && yarn install --frozen-lockfile;
-      - name: Spellcheck
-        run: |
-          yarn spellcheck;
-      - name: Build Frontend
-        run: |
-          yarn build;
       - name: Start the docker container for E2E
         run: |
           docker-compose pull

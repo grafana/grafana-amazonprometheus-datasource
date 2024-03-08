@@ -26,5 +26,8 @@ services:
     volumes:
       - ./provisioning/datasources:/etc/grafana/provisioning/datasources
       - ./dist:/var/lib/grafana/plugins/prometheus-amazon
+    depends_on:
+      prometheus:
+        condition: service_started
 volumes:
   prom_data:

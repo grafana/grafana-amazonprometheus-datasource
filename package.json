@@ -129,7 +129,6 @@
     "uuid": "^9.0.1",
     "whatwg-fetch": "3.6.20"
   },
-  "packageManager": "yarn@3.6.1",
   "dependenciesMeta": {
     "prettier@3.0.0": {
       "unplugged": true

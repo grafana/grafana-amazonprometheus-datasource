@@ -40,9 +40,9 @@ jobs:
       # - name: Spellcheck
       #   run: |
       #     yarn spellcheck;
-      # - name: Build Frontend
-      #   run: |
-      #     yarn build;
+      - name: Build Frontend
+        run: |
+          yarn build;
       - name: Start the docker container for E2E
         run: |
           docker compose -f docker-compose-debug.yaml pull

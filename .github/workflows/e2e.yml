@@ -35,8 +35,8 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 20
-      # - name: Install dependencies
-      #   run: npm install -g yarn && yarn install --frozen-lockfile;
+      - name: Install dependencies
+        run: npm install -g yarn && yarn install --frozen-lockfile;
       # - name: Spellcheck
       #   run: |
       #     yarn spellcheck;

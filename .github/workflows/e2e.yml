@@ -64,7 +64,7 @@ jobs:
       - name: Wait for prometheus to be configured in grafana
         uses: nev7n/wait_for_response@v1
         with:
-          url: 'http://localhost:3099/api/datasources/uid/prometheus-amazon/health'
+          url: 'http://localhost:3099/api/datasources/uid/prometheus-amazon'
           responseCode: 200
           timeout: 20000
           interval: 500

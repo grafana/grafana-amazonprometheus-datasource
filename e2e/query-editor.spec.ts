@@ -270,6 +270,12 @@ test.describe('Prometheus query editor', () => {
 
       explorePage.datasource.set(dsDefaultEditorBuilder.name);
 
+      await explorePage
+        .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect).focus();
+
+      await expect(explorePage
+        .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect)).toBeVisible();
+
       await explorePage.getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect).click()
 
       await page.getByText('Metrics explorer', { exact: true }).click();

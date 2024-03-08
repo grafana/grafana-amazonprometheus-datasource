@@ -31,10 +31,10 @@ jobs:
       #   with:
       #     version: latest
       #     args: buildAll
-      # - name: Setup Node
-      #   uses: actions/setup-node@v3
-      #   with:
-      #     node-version: 20
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
       # - name: Install dependencies
       #   run: npm install -g yarn && yarn install --frozen-lockfile;
       # - name: Spellcheck

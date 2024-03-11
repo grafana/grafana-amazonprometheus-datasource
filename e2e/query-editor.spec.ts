@@ -2,6 +2,7 @@ import { DataSourcePluginOptionsEditorProps } from '@grafana/data';
 import { selectors } from '@grafana/e2e-selectors';
 import { test, expect } from '@grafana/plugin-e2e';
 import { PromOptions } from '@grafana/prometheus';
+import { chromium } from '@playwright/test';
 
 const codeEditorProvFile = 'code-editor.yml';
 
@@ -27,7 +28,7 @@ test.describe('Prometheus query editor', () => {
   }) => {
     const ds = await readProvisionedDataSource<DataSourcePluginOptionsEditorProps<PromOptions>>({ fileName: 'datasources.yml' });
     
-    explorePage.datasource.set(ds.name);
+    await explorePage.datasource.set(ds.name);
     // query patterns
     await expect(explorePage
       .getByTestIdOrAriaLabel(selectors.components.QueryBuilder.queryPatterns)).toBeVisible();
@@ -75,7 +76,7 @@ test.describe('Prometheus query editor', () => {
     }) => {
       const dsCodeEditor = await readProvisionedDataSource<DataSourcePluginOptionsEditorProps<PromOptions>>({ fileName: codeEditorProvFile });
 
-      explorePage.datasource.set(dsCodeEditor.name);
+      await explorePage.datasource.set(dsCodeEditor.name);
 
       await expect(explorePage
         .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.queryEditor.code.queryField)).toBeVisible();
@@ -84,10 +85,10 @@ test.describe('Prometheus query editor', () => {
     test('it navigates to the code editor and opens the metrics browser with metric search, labels, label values, and all components', async ({
       readProvisionedDataSource,
       explorePage
-    }) => {
+    }) => {      
       const dsCodeEditor = await readProvisionedDataSource<DataSourcePluginOptionsEditorProps<PromOptions>>({ fileName: codeEditorProvFile });
 
-      explorePage.datasource.set(dsCodeEditor.name);
+      await explorePage.datasource.set(dsCodeEditor.name);
 
       await expect(explorePage
         .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.queryEditor.code.queryField)).toBeVisible();
@@ -113,24 +114,26 @@ test.describe('Prometheus query editor', () => {
       
       await expect(explorePage
         .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.queryEditor.code.metricsBrowser.selectMetric)).toBeVisible(TIMEOUT);  
-        
-      await explorePage
-        .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.queryEditor.code.metricsBrowser.labelNamesFilter).isVisible(TIMEOUT)
 
       await explorePage
-        .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.queryEditor.code.metricsBrowser.labelValuesFilter).isVisible(TIMEOUT)
+        .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.queryEditor.code.metricsBrowser.labelNamesFilter).isVisible(TIMEOUT);
 
       await explorePage
-        .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.queryEditor.code.metricsBrowser.useQuery).isVisible(TIMEOUT)
+        .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.queryEditor.code.metricsBrowser.labelValuesFilter).isVisible(TIMEOUT);
 
       await explorePage
-        .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.queryEditor.code.metricsBrowser.useAsRateQuery).isVisible(TIMEOUT)
+        .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.queryEditor.code.metricsBrowser.useQuery).isVisible(TIMEOUT);
 
       await explorePage
-        .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.queryEditor.code.metricsBrowser.validateSelector).isVisible(TIMEOUT)
+        .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.queryEditor.code.metricsBrowser.useAsRateQuery).isVisible(TIMEOUT);
 
       await explorePage
-        .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.queryEditor.code.metricsBrowser.clear).isVisible(TIMEOUT)
+        .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.queryEditor.code.metricsBrowser.validateSelector).isVisible(TIMEOUT);
+
+      await explorePage
+        .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.queryEditor.code.metricsBrowser.clear).isVisible(TIMEOUT);
+      
+
     });
 
     test('selects a metric in the metrics browser and uses the query', async ({
@@ -140,7 +143,7 @@ test.describe('Prometheus query editor', () => {
     }) => {
       const dsCodeEditor = await readProvisionedDataSource<DataSourcePluginOptionsEditorProps<PromOptions>>({ fileName: codeEditorProvFile });
 
-      explorePage.datasource.set(dsCodeEditor.name);
+      await explorePage.datasource.set(dsCodeEditor.name);
 
       await expect(explorePage
         .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.queryEditor.code.queryField)).toBeVisible();
@@ -183,7 +186,7 @@ test.describe('Prometheus query editor', () => {
     }) => {
       const dsDefaultEditorBuilder = await readProvisionedDataSource<DataSourcePluginOptionsEditorProps<PromOptions>>({ fileName: 'datasources.yml' });
 
-      explorePage.datasource.set(dsDefaultEditorBuilder.name);
+      await explorePage.datasource.set(dsDefaultEditorBuilder.name);
 
       await explorePage
         .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect).isVisible(TIMEOUT);
@@ -204,7 +207,7 @@ test.describe('Prometheus query editor', () => {
     }) => {
       const dsDefaultEditorBuilder = await readProvisionedDataSource<DataSourcePluginOptionsEditorProps<PromOptions>>({ fileName: 'datasources.yml' });
 
-      explorePage.datasource.set(dsDefaultEditorBuilder.name);
+      await explorePage.datasource.set(dsDefaultEditorBuilder.name);
 
       await explorePage
         .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect).isEnabled(TIMEOUT);
@@ -241,7 +244,7 @@ test.describe('Prometheus query editor', () => {
     }) => {
       const dsDefaultEditorBuilder = await readProvisionedDataSource<DataSourcePluginOptionsEditorProps<PromOptions>>({ fileName: 'datasources.yml' });
 
-      explorePage.datasource.set(dsDefaultEditorBuilder.name);
+      await explorePage.datasource.set(dsDefaultEditorBuilder.name);
       
       await explorePage
         .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect).isVisible(TIMEOUT);
@@ -268,7 +271,7 @@ test.describe('Prometheus query editor', () => {
     }) => {
       const dsDefaultEditorBuilder = await readProvisionedDataSource<DataSourcePluginOptionsEditorProps<PromOptions>>({ fileName: 'datasources.yml' });
 
-      explorePage.datasource.set(dsDefaultEditorBuilder.name);
+      await explorePage.datasource.set(dsDefaultEditorBuilder.name);
       
       await explorePage
         .getByTestIdOrAriaLabel(selectors.components.QueryBuilder.labelSelect).isVisible(TIMEOUT);
@@ -297,7 +300,7 @@ test.describe('Prometheus query editor', () => {
     }) => {
       const dsDefaultEditorBuilder = await readProvisionedDataSource<DataSourcePluginOptionsEditorProps<PromOptions>>({ fileName: 'datasources.yml' });
 
-      explorePage.datasource.set(dsDefaultEditorBuilder.name);
+      await explorePage.datasource.set(dsDefaultEditorBuilder.name);
 
       await explorePage
         .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect).isVisible(TIMEOUT);

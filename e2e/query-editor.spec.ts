@@ -108,26 +108,29 @@ test.describe('Prometheus query editor', () => {
         .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.queryEditor.code.metricsBrowser.openButton)
         .click(TIMEOUT)
         
+      await explorePage
+        .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.queryEditor.code.metricsBrowser.selectMetric).isVisible(TIMEOUT);
+      
       await expect(explorePage
-        .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.queryEditor.code.metricsBrowser.selectMetric)).toBeVisible();      
+        .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.queryEditor.code.metricsBrowser.selectMetric)).toBeVisible(TIMEOUT);  
+        
+      await explorePage
+        .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.queryEditor.code.metricsBrowser.labelNamesFilter).isVisible(TIMEOUT)
 
-      await expect(explorePage
-        .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.queryEditor.code.metricsBrowser.labelNamesFilter)).toBeVisible();
+      await explorePage
+        .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.queryEditor.code.metricsBrowser.labelValuesFilter).isVisible(TIMEOUT)
 
-      await expect(explorePage
-        .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.queryEditor.code.metricsBrowser.labelValuesFilter)).toBeVisible();
+      await explorePage
+        .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.queryEditor.code.metricsBrowser.useQuery).isVisible(TIMEOUT)
 
-      await expect(explorePage
-        .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.queryEditor.code.metricsBrowser.useQuery)).toBeVisible();
+      await explorePage
+        .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.queryEditor.code.metricsBrowser.useAsRateQuery).isVisible(TIMEOUT)
 
-      await expect(explorePage
-        .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.queryEditor.code.metricsBrowser.useAsRateQuery)).toBeVisible();
+      await explorePage
+        .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.queryEditor.code.metricsBrowser.validateSelector).isVisible(TIMEOUT)
 
-      await expect(explorePage
-        .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.queryEditor.code.metricsBrowser.validateSelector)).toBeVisible();
-
-      await expect(explorePage
-        .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.queryEditor.code.metricsBrowser.clear)).toBeVisible();
+      await explorePage
+        .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.queryEditor.code.metricsBrowser.clear).isVisible(TIMEOUT)
     });
 
     test('selects a metric in the metrics browser and uses the query', async ({

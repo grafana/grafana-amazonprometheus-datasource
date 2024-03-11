@@ -188,13 +188,20 @@ test.describe('Prometheus query editor', () => {
   test.describe('Query builder', () => {
     test('it navigates to the query builder with default editor type as builder', async ({
       readProvisionedDataSource,
-      explorePage
+      explorePage,
+      page,
     }) => {
       const dsDefaultEditorBuilder = await readProvisionedDataSource<DataSourcePluginOptionsEditorProps<PromOptions>>({ fileName: 'datasources.yml' });
 
       await explorePage.goto();
 
-      await explorePage.datasource.set(dsDefaultEditorBuilder.name);
+      // await explorePage.datasource.set(dsDefaultEditorBuilder.name);
+
+      await page.getByTestId('data-testid Select a data source').click();
+
+      await page.getByTestId('data-testid Select a data source').fill('Prometheus-amazon');
+
+      await page.getByRole('button', { name: 'Prometheus-amazon Prometheus' }).click();
 
       await explorePage
         .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect).isVisible(TIMEOUT);
@@ -211,13 +218,20 @@ test.describe('Prometheus query editor', () => {
 
     test('the query builder contains metric select, label filters and operations', async ({
       readProvisionedDataSource,
-      explorePage
+      explorePage,
+      page,
     }) => {
       const dsDefaultEditorBuilder = await readProvisionedDataSource<DataSourcePluginOptionsEditorProps<PromOptions>>({ fileName: 'datasources.yml' });
 
       await explorePage.goto();
 
-      await explorePage.datasource.set(dsDefaultEditorBuilder.name);
+      // await explorePage.datasource.set(dsDefaultEditorBuilder.name);
+
+      await page.getByTestId('data-testid Select a data source').click();
+
+      await page.getByTestId('data-testid Select a data source').fill('Prometheus-amazon');
+
+      await page.getByRole('button', { name: 'Prometheus-amazon Prometheus' }).click();
 
       await explorePage
         .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect).isEnabled(TIMEOUT);
@@ -250,14 +264,20 @@ test.describe('Prometheus query editor', () => {
     test('it can select a metric and provide a hint', async ({
       readProvisionedDataSource,
       explorePage,
-      page
+      page,
     }) => {
       const dsDefaultEditorBuilder = await readProvisionedDataSource<DataSourcePluginOptionsEditorProps<PromOptions>>({ fileName: 'datasources.yml' });
 
       await explorePage.goto();
 
-      await explorePage.datasource.set(dsDefaultEditorBuilder.name);
-      
+      // await explorePage.datasource.set(dsDefaultEditorBuilder.name);
+
+      await page.getByTestId('data-testid Select a data source').click();
+
+      await page.getByTestId('data-testid Select a data source').fill('Prometheus-amazon');
+
+      await page.getByRole('button', { name: 'Prometheus-amazon Prometheus' }).click();
+
       await explorePage
         .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect).isVisible(TIMEOUT);
 
@@ -279,13 +299,19 @@ test.describe('Prometheus query editor', () => {
     test('it can select a label filter and run a query', async ({
       readProvisionedDataSource,
       explorePage,
-      page
+      page,
     }) => {
       const dsDefaultEditorBuilder = await readProvisionedDataSource<DataSourcePluginOptionsEditorProps<PromOptions>>({ fileName: 'datasources.yml' });
 
       await explorePage.goto();
 
-      await explorePage.datasource.set(dsDefaultEditorBuilder.name);
+      // await explorePage.datasource.set(dsDefaultEditorBuilder.name);
+
+      await page.getByTestId('data-testid Select a data source').click();
+
+      await page.getByTestId('data-testid Select a data source').fill('Prometheus-amazon');
+
+      await page.getByRole('button', { name: 'Prometheus-amazon Prometheus' }).click();
       
       await explorePage
         .getByTestIdOrAriaLabel(selectors.components.QueryBuilder.labelSelect).isVisible(TIMEOUT);
@@ -310,13 +336,19 @@ test.describe('Prometheus query editor', () => {
     test('it should have the metrics explorer opened via the metric select', async ({
       readProvisionedDataSource,
       explorePage,
-      page
+      page,
     }) => {
       const dsDefaultEditorBuilder = await readProvisionedDataSource<DataSourcePluginOptionsEditorProps<PromOptions>>({ fileName: 'datasources.yml' });
 
       await explorePage.goto();
 
-      await explorePage.datasource.set(dsDefaultEditorBuilder.name);
+      // await explorePage.datasource.set(dsDefaultEditorBuilder.name);
+
+      await page.getByTestId('data-testid Select a data source').click();
+
+      await page.getByTestId('data-testid Select a data source').fill('Prometheus-amazon');
+
+      await page.getByRole('button', { name: 'Prometheus-amazon Prometheus' }).click();
 
       await explorePage
         .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect).isVisible(TIMEOUT);

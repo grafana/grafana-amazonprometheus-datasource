@@ -28,6 +28,8 @@ test.describe('Prometheus query editor', () => {
   }) => {
     const ds = await readProvisionedDataSource<DataSourcePluginOptionsEditorProps<PromOptions>>({ fileName: 'datasources.yml' });
     
+    await explorePage.goto();
+
     await explorePage.datasource.set(ds.name);
     // query patterns
     await expect(explorePage
@@ -76,6 +78,8 @@ test.describe('Prometheus query editor', () => {
     }) => {
       const dsCodeEditor = await readProvisionedDataSource<DataSourcePluginOptionsEditorProps<PromOptions>>({ fileName: codeEditorProvFile });
 
+      await explorePage.goto();
+
       await explorePage.datasource.set(dsCodeEditor.name);
 
       await expect(explorePage
@@ -87,6 +91,8 @@ test.describe('Prometheus query editor', () => {
       explorePage
     }) => {      
       const dsCodeEditor = await readProvisionedDataSource<DataSourcePluginOptionsEditorProps<PromOptions>>({ fileName: codeEditorProvFile });
+
+      await explorePage.goto();
 
       await explorePage.datasource.set(dsCodeEditor.name);
 
@@ -132,8 +138,6 @@ test.describe('Prometheus query editor', () => {
 
       await explorePage
         .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.queryEditor.code.metricsBrowser.clear).isVisible(TIMEOUT);
-      
-
     });
 
     test('selects a metric in the metrics browser and uses the query', async ({
@@ -143,6 +147,8 @@ test.describe('Prometheus query editor', () => {
     }) => {
       const dsCodeEditor = await readProvisionedDataSource<DataSourcePluginOptionsEditorProps<PromOptions>>({ fileName: codeEditorProvFile });
 
+      await explorePage.goto();
+      
       await explorePage.datasource.set(dsCodeEditor.name);
 
       await expect(explorePage
@@ -186,6 +192,8 @@ test.describe('Prometheus query editor', () => {
     }) => {
       const dsDefaultEditorBuilder = await readProvisionedDataSource<DataSourcePluginOptionsEditorProps<PromOptions>>({ fileName: 'datasources.yml' });
 
+      await explorePage.goto();
+
       await explorePage.datasource.set(dsDefaultEditorBuilder.name);
 
       await explorePage
@@ -206,6 +214,8 @@ test.describe('Prometheus query editor', () => {
       explorePage
     }) => {
       const dsDefaultEditorBuilder = await readProvisionedDataSource<DataSourcePluginOptionsEditorProps<PromOptions>>({ fileName: 'datasources.yml' });
+
+      await explorePage.goto();
 
       await explorePage.datasource.set(dsDefaultEditorBuilder.name);
 
@@ -244,6 +254,8 @@ test.describe('Prometheus query editor', () => {
     }) => {
       const dsDefaultEditorBuilder = await readProvisionedDataSource<DataSourcePluginOptionsEditorProps<PromOptions>>({ fileName: 'datasources.yml' });
 
+      await explorePage.goto();
+
       await explorePage.datasource.set(dsDefaultEditorBuilder.name);
       
       await explorePage
@@ -270,6 +282,8 @@ test.describe('Prometheus query editor', () => {
       page
     }) => {
       const dsDefaultEditorBuilder = await readProvisionedDataSource<DataSourcePluginOptionsEditorProps<PromOptions>>({ fileName: 'datasources.yml' });
+
+      await explorePage.goto();
 
       await explorePage.datasource.set(dsDefaultEditorBuilder.name);
       
@@ -299,6 +313,8 @@ test.describe('Prometheus query editor', () => {
       page
     }) => {
       const dsDefaultEditorBuilder = await readProvisionedDataSource<DataSourcePluginOptionsEditorProps<PromOptions>>({ fileName: 'datasources.yml' });
+
+      await explorePage.goto();
 
       await explorePage.datasource.set(dsDefaultEditorBuilder.name);
 

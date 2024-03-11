@@ -30,7 +30,7 @@ export default defineConfig({
     trace: 'on-first-retry',
     
     video: {
-        mode: 'on',
+        mode: 'retain-on-failure',
     },
   },
 

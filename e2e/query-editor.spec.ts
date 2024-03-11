@@ -7,6 +7,8 @@ const codeEditorProvFile = 'code-editor.yml';
 
 const metric = 'process_cpu_seconds_total';
 
+const TIMEOUT = {timeout: 5000}
+
 test.describe('Prometheus query editor', () => {
   test(`should have the following components:
     kickstart component
@@ -98,10 +100,13 @@ test.describe('Prometheus query editor', () => {
 
       await explorePage
         .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.queryEditor.code.metricsBrowser.openButton).focus();
+      
+      await explorePage
+        .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.queryEditor.code.metricsBrowser.openButton).isEnabled(TIMEOUT);
 
       await explorePage
         .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.queryEditor.code.metricsBrowser.openButton)
-        .click()
+        .click(TIMEOUT)
         
       await expect(explorePage
         .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.queryEditor.code.metricsBrowser.selectMetric)).toBeVisible();      
@@ -145,10 +150,13 @@ test.describe('Prometheus query editor', () => {
 
       await explorePage
         .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.queryEditor.code.metricsBrowser.openButton).focus();
+
+      await explorePage
+        .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.queryEditor.code.metricsBrowser.openButton).isEnabled(TIMEOUT);
         
       await explorePage
         .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.queryEditor.code.metricsBrowser.openButton)
-        .click()
+        .click(TIMEOUT)
         
       await expect(explorePage
         .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.queryEditor.code.metricsBrowser.selectMetric)).toBeVisible();
@@ -175,10 +183,16 @@ test.describe('Prometheus query editor', () => {
       explorePage.datasource.set(dsDefaultEditorBuilder.name);
 
       await explorePage
-        .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect).focus();
+        .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect).isVisible(TIMEOUT);
+
+      await explorePage
+        .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect).focus(TIMEOUT);
+      
+      await explorePage
+        .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect).isEnabled(TIMEOUT);
 
       await expect(explorePage
-        .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect)).toBeVisible();
+        .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect)).toBeVisible(TIMEOUT);
     });
 
     test('the query builder contains metric select, label filters and operations', async ({
@@ -190,17 +204,20 @@ test.describe('Prometheus query editor', () => {
       explorePage.datasource.set(dsDefaultEditorBuilder.name);
 
       await explorePage
-        .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect).focus();
+        .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect).isEnabled(TIMEOUT);
 
       await expect(explorePage
-        .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect)).toBeVisible();
+        .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect)).toBeVisible(TIMEOUT);
+      
+      await explorePage
+        .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect).focus(TIMEOUT);
+
+      await expect(explorePage
+          .getByTestIdOrAriaLabel(selectors.components.QueryBuilder.labelSelect)).toBeVisible(TIMEOUT);
 
       await explorePage
-        .getByTestIdOrAriaLabel(selectors.components.QueryBuilder.labelSelect).focus();  
+        .getByTestIdOrAriaLabel(selectors.components.QueryBuilder.labelSelect).focus(TIMEOUT);  
 
-      await expect(explorePage
-        .getByTestIdOrAriaLabel(selectors.components.QueryBuilder.labelSelect)).toBeVisible();
-      
       await explorePage
         .getByTestIdOrAriaLabel(selectors.components.QueryBuilder.matchOperatorSelect).focus();  
 
@@ -222,13 +239,19 @@ test.describe('Prometheus query editor', () => {
       const dsDefaultEditorBuilder = await readProvisionedDataSource<DataSourcePluginOptionsEditorProps<PromOptions>>({ fileName: 'datasources.yml' });
 
       explorePage.datasource.set(dsDefaultEditorBuilder.name);
+      
+      await explorePage
+        .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect).isVisible(TIMEOUT);
 
       await explorePage
-        .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect).focus();
+        .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect).isEnabled(TIMEOUT);
 
-      await explorePage.getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect).click()
+      await explorePage
+        .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect).focus(TIMEOUT);
 
-      await page.getByText(metric, { exact: true }).click();
+      await explorePage.getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect).click(TIMEOUT)
+
+      await page.getByText(metric, { exact: true }).click(TIMEOUT);
 
       const hintText = await explorePage.getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.queryEditor.builder.hints).textContent();
 
@@ -245,14 +268,17 @@ test.describe('Prometheus query editor', () => {
       explorePage.datasource.set(dsDefaultEditorBuilder.name);
       
       await explorePage
-        .getByTestIdOrAriaLabel(selectors.components.QueryBuilder.labelSelect).focus();  
+        .getByTestIdOrAriaLabel(selectors.components.QueryBuilder.labelSelect).isVisible(TIMEOUT);
       
-      await expect(explorePage
-        .getByTestIdOrAriaLabel(selectors.components.QueryBuilder.labelSelect)).toBeVisible();
-        
-      await explorePage.getByTestIdOrAriaLabel(selectors.components.QueryBuilder.labelSelect).click()
+      await explorePage
+        .getByTestIdOrAriaLabel(selectors.components.QueryBuilder.labelSelect).isEnabled(TIMEOUT);  
 
-      await page.getByText('__name__', { exact: true }).click();
+      await explorePage
+        .getByTestIdOrAriaLabel(selectors.components.QueryBuilder.labelSelect).focus(TIMEOUT);  
+        
+      await explorePage.getByTestIdOrAriaLabel(selectors.components.QueryBuilder.labelSelect).click(TIMEOUT)
+
+      await page.getByText('__name__', { exact: true }).click(TIMEOUT);
 
       await explorePage.getByTestIdOrAriaLabel(selectors.components.QueryBuilder.valueSelect).click();
 
@@ -271,14 +297,17 @@ test.describe('Prometheus query editor', () => {
       explorePage.datasource.set(dsDefaultEditorBuilder.name);
 
       await explorePage
-        .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect).focus();
+        .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect).isVisible(TIMEOUT);
 
-      await expect(explorePage
-        .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect)).toBeVisible();
+        await explorePage
+        .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect).isEnabled(TIMEOUT);
+      
+      await explorePage
+        .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect).focus(TIMEOUT);
 
-      await explorePage.getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect).click()
+      await explorePage.getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect).click(TIMEOUT);
 
-      await page.getByText('Metrics explorer', { exact: true }).click();
+      await page.getByText('Metrics explorer', { exact: true }).click(TIMEOUT);
 
       await expect(explorePage.getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.queryEditor.builder.metricsExplorer)).toBeVisible();
     });

@@ -26,7 +26,7 @@ test.describe('Configuration tests', () => {
     page,
   }) => {
     const ds = await readProvisionedDataSource<DataSourcePluginOptionsEditorProps<PromOptions>>({ fileName: 'datasources.yml' });
-    const configPage = await createDataSourceConfigPage({type: ds.type, deleteDataSourceAfterTest: true});
+    const configPage = await createDataSourceConfigPage({ type: ds.type });
     
     // connection settings
     await expect(configPage
@@ -82,7 +82,7 @@ test.describe('Configuration tests', () => {
     readProvisionedDataSource,
   }) => {
     const ds = await readProvisionedDataSource<DataSourcePluginOptionsEditorProps<PromOptions>>({ fileName: 'datasources.yml' });
-    const configPage = await createDataSourceConfigPage({ type: ds.type, deleteDataSourceAfterTest: true, });
+    const configPage = await createDataSourceConfigPage({ type: ds.type });
     
     await configPage
       .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.configPage.connectionSettings)
@@ -96,10 +96,9 @@ test.describe('Configuration tests', () => {
     readProvisionedDataSource,
   }) => {
     const ds = await readProvisionedDataSource<DataSourcePluginOptionsEditorProps<PromOptions>>({ fileName: 'datasources.yml' });
-    const configPage = await createDataSourceConfigPage({ type: ds.type, deleteDataSourceAfterTest: true, });
+    const configPage = await createDataSourceConfigPage({ type: ds.type });
     await expect(configPage.saveAndTest()).not.toBeOK();
-    const alertMessage = await configPage.getByTestIdOrAriaLabel('data-testid Alert error').textContent();
-    await expect(alertMessage).toContain('empty url')
+    await expect(configPage).toHaveAlert('error', { hasText: 'empty url' });
   });
 
   test('it should allow a user to add the version when the Prom type is selected', 
@@ -113,7 +112,6 @@ test.describe('Configuration tests', () => {
     const configPage = await createDataSourceConfigPage({
       type: "prometheus-amazon-datasource", 
       name: DATA_SOURCE_NAME,
-      deleteDataSourceAfterTest: true,
     });
     
     await expect(configPage
@@ -146,7 +144,6 @@ test.describe('Configuration tests', () => {
     const configPage = await createDataSourceConfigPage({
       type: "prometheus-amazon-datasource", 
       name: DATA_SOURCE_NAME + "check",
-      deleteDataSourceAfterTest: true,
     });
     
     const incrementalQuerying = await page

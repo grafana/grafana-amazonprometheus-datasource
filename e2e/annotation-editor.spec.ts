@@ -6,13 +6,16 @@ import { PromOptions } from '@grafana/prometheus';
 test.describe('Prometheus annotation query editor', () => {
   test('Check that the editor uses the code editor', async ({
     readProvisionedDataSource,
-    annotationEditPage
+    annotationEditPage,
+    page,
   }) => {
     const ds = await readProvisionedDataSource<DataSourcePluginOptionsEditorProps<PromOptions>>({ fileName: 'datasources.yml' });
+    
+    await page.getByTestId('data-testid Select a data source').click();
 
-    await annotationEditPage.datasource.set(ds.name);
-    await annotationEditPage
-      .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.queryEditor.code.queryField).focus();
+    await page.getByTestId('data-testid Select a data source').fill(ds.name);
+
+    await page.getByRole('button', { name: `${ds.name} Prometheus` }).click();
 
     await expect(annotationEditPage
       .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.queryEditor.code.queryField)).toBeVisible();

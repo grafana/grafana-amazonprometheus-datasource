@@ -3,8 +3,6 @@ import { selectors } from '@grafana/e2e-selectors';
 import { test, expect } from '@grafana/plugin-e2e';
 import { PromOptions } from '@grafana/prometheus';
 
-const TIMEOUT = { timeout: 5000 };
-
 test.describe('Prometheus variable query editor', () => {
   test.beforeEach('set query type', async ({
     readProvisionedDataSource,
@@ -38,11 +36,11 @@ test.describe('Prometheus variable query editor', () => {
 
     await page.getByText('Label names', { exact: true }).click();
 
-    await page.getByText('__name__').isVisible(TIMEOUT);
+    await page.getByText('__name__').isVisible();
 
-    await page.getByText('__name__').focus(TIMEOUT);
+    await page.getByText('__name__').focus();
 
-    await expect(page.getByText('__name__')).toBeVisible(TIMEOUT);
+    await expect(page.getByText('__name__')).toBeVisible();
   });
 
   test('label values query variable', async ({
@@ -56,11 +54,11 @@ test.describe('Prometheus variable query editor', () => {
     
     await page.getByTestId(selector).click();
 
-    await page.getByText('__name__').isVisible(TIMEOUT);
+    await page.getByText('__name__').isVisible();
 
-    await page.getByText('__name__').focus(TIMEOUT);
+    await page.getByText('__name__').focus();
 
-    await page.getByText('__name__').click(TIMEOUT);
+    await page.getByText('__name__').click();
 
     await expect(variableEditPage
       .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect)).toBeVisible();
@@ -150,10 +148,10 @@ test.describe('Prometheus variable query editor', () => {
 
     await variableEditPage.getByTestIdOrAriaLabel(selector).blur();
     
-    await page.getByText('__name__').isVisible(TIMEOUT);
+    await page.getByText('__name__').isVisible();
 
-    await page.getByText('__name__').focus(TIMEOUT);
+    await page.getByText('__name__').focus();
 
-    await expect(page.getByText('__name__')).toBeVisible(TIMEOUT);
+    await expect(page.getByText('__name__')).toBeVisible();
   });
 });

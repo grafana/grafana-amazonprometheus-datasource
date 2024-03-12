@@ -28,8 +28,6 @@ test.describe('Prometheus variable query editor', () => {
   });
 
   test('label names query variable', async ({
-    readProvisionedDataSource,
-    variableEditPage,
     page,
   }) => {
     await expect(page.getByText('Label names', { exact: true })).toBeVisible();
@@ -44,7 +42,6 @@ test.describe('Prometheus variable query editor', () => {
   });
 
   test('label values query variable', async ({
-    readProvisionedDataSource,
     variableEditPage,
     page,
   }) => {
@@ -76,7 +73,6 @@ test.describe('Prometheus variable query editor', () => {
   });
 
   test('Metrics query variable', async ({
-    readProvisionedDataSource,
     variableEditPage,
     page,
   }) => {
@@ -94,7 +90,6 @@ test.describe('Prometheus variable query editor', () => {
   });
 
   test('Query result query variable', async ({
-    readProvisionedDataSource,
     variableEditPage,
     page,
   }) => {
@@ -114,7 +109,6 @@ test.describe('Prometheus variable query editor', () => {
   });
 
   test('Series query variable', async ({
-    readProvisionedDataSource,
     variableEditPage,
     page,
   }) => {
@@ -134,7 +128,6 @@ test.describe('Prometheus variable query editor', () => {
   });
 
   test('Classic query variable', async ({
-    readProvisionedDataSource,
     variableEditPage,
     page,
   }) => {

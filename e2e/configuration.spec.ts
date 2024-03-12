@@ -136,7 +136,6 @@ test.describe('Configuration tests', () => {
   test('it should allow a user to select a query overlap window when incremental querying is selected', 
   async ({
     createDataSourceConfigPage,
-    readProvisionedDataSource,
     page,
   }) => {
     // const ds = await readProvisionedDataSource<DataSourcePluginOptionsEditorProps<PromOptions>>({ fileName: 'datasources.yml' });

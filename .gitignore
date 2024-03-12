@@ -34,6 +34,7 @@ e2e-results/
 
 .eslintcache
 /test-results/
-# /playwright-report/
+/playwright-report/
 /blob-report/
 /playwright/.cache/
+/playwright/.auth/

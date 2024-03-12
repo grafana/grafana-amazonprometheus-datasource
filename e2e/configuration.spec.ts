@@ -149,12 +149,12 @@ test.describe('Configuration tests', () => {
     const incrementalQuerying = await page
       .locator(`#${selectors.components.DataSource.Prometheus.configPage.incrementalQuerying}`)
       
-    expect(await incrementalQuerying).toBeVisible();
+    expect(incrementalQuerying).toBeVisible();
 
     await page.getByLabel('Toggle switch').nth(3).setChecked(true);
 
     expect(
-      await configPage
+      configPage
         .getByTestIdOrAriaLabel(
           selectors.components.DataSource.Prometheus.configPage.queryOverlapWindow
         )

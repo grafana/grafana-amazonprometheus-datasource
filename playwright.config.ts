@@ -1,4 +1,7 @@
 import { defineConfig, devices } from '@playwright/test';
+import { dirname } from 'path';
+
+const pluginE2eAuth = `${dirname(require.resolve('@grafana/plugin-e2e'))}/auth`;
 
 /**
  * Read environment variables from file.
@@ -37,9 +40,18 @@ export default defineConfig({
   /* Configure projects for major browsers */
   projects: [
     {
-      name: 'data source',
-      use: { ...devices['Desktop Chrome']},
+      name: 'auth',
+      testDir: pluginE2eAuth,
+      testMatch: [/.*\.js/],
     },
+    {
+      name: 'run-tests',
+      use: {
+        ...devices['Desktop Chrome'],
+        storageState: 'playwright/.auth/admin.json',
+      },
+      dependencies: ['auth'],
+    }
   ],
   // projects: [
   //   {

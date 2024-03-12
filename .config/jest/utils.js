@@ -23,6 +23,7 @@ const grafanaESModules = [
   'react-colorful',
   'rxjs',
   'uuid',
+  'monaco-promql',
 ];
 
 module.exports = {

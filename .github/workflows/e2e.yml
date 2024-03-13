@@ -39,7 +39,6 @@ jobs:
           node-version: 20
           check-latest: true
           cache: 'yarn'
-          cache-dependency-path: '**/package-lock.json'
       - name: Install dependencies
         run: npm install -g yarn && yarn install --frozen-lockfile;
       - name: Build Frontend

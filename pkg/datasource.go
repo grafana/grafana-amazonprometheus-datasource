@@ -43,7 +43,7 @@ func (d *Datasource) CheckHealth(ctx context.Context, req *backend.CheckHealthRe
 	return d.Service.CheckHealth(ctx, req)
 }
 
-func extendClientOpts(ctx context.Context, settings backend.DataSourceInstanceSettings, clientOpts *sdkhttpclient.Options) error {
+func extendClientOpts(_ context.Context, _ backend.DataSourceInstanceSettings, clientOpts *sdkhttpclient.Options) error {
 	// Set SigV4 service namespace
 	if clientOpts.SigV4 != nil {
 		clientOpts.SigV4.Service = "aps"

@@ -33,7 +33,7 @@ export const ConfigEditor = (props: Props) => {
       <DataSourcehttpSettingsOverhaul
         options={options}
         onOptionsChange={onOptionsChange}
-        renderSigV4Editor={<SIGV4ConnectionConfig {...props}></SIGV4ConnectionConfig>}
+        renderSigV4Editor={<SIGV4ConnectionConfig inExperimentalAuthComponent={true} {...props}></SIGV4ConnectionConfig>}
         secureSocksDSProxyEnabled={config.secureSocksDSProxyEnabled}
       />
       <hr />

@@ -117,5 +117,3 @@ require (
 	gopkg.in/fsnotify/fsnotify.v1 v1.4.7 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
-
-replace github.com/grafana/grafana/pkg/promlib => /Users/ismailsimsek/Documents/workspace/grafana/pkg/promlib

@@ -5,7 +5,7 @@ go 1.21.0
 require (
 	github.com/grafana/grafana-aws-sdk v0.25.0
 	github.com/grafana/grafana-plugin-sdk-go v0.216.0
-	github.com/grafana/grafana/pkg/promlib v0.0.3
+	github.com/grafana/grafana/pkg/promlib v0.0.4
 )
 
 require (
@@ -35,7 +35,7 @@ require (
 	github.com/google/flatbuffers v23.5.26+incompatible // indirect
 	github.com/google/go-cmp v0.6.0 // indirect
 	github.com/google/uuid v1.6.0 // indirect
-	github.com/gorilla/mux v1.8.0 // indirect
+	github.com/gorilla/mux v1.8.1 // indirect
 	github.com/grafana/dataplane/sdata v0.0.7 // indirect
 	github.com/grafana/regexp v0.0.0-20221123153739-15dc172cd2db // indirect
 	github.com/grafana/sqlds/v3 v3.2.0 // indirect
@@ -56,7 +56,7 @@ require (
 	github.com/mattetti/filebuffer v1.0.1 // indirect
 	github.com/mattn/go-colorable v0.1.13 // indirect
 	github.com/mattn/go-isatty v0.0.19 // indirect
-	github.com/mattn/go-runewidth v0.0.13 // indirect
+	github.com/mattn/go-runewidth v0.0.15 // indirect
 	github.com/mitchellh/go-homedir v1.1.0 // indirect
 	github.com/mitchellh/go-testing-interface v1.14.1 // indirect
 	github.com/mithrandie/csvq v1.17.10 // indirect
@@ -81,7 +81,7 @@ require (
 	github.com/prometheus/prometheus v1.8.2-0.20221021121301-51a44e6657c3 // indirect
 	github.com/rivo/uniseg v0.3.4 // indirect
 	github.com/russross/blackfriday/v2 v2.1.0 // indirect
-	github.com/stretchr/testify v1.8.4 // indirect
+	github.com/stretchr/testify v1.9.0 // indirect
 	github.com/unknwon/bra v0.0.0-20200517080246-1e3013ecaff8 // indirect
 	github.com/unknwon/com v1.0.1 // indirect
 	github.com/unknwon/log v0.0.0-20150304194804-e617c87089d3 // indirect

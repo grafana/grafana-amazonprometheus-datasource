@@ -13,10 +13,6 @@ on:
 jobs:
   run:
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: true
-      matrix:
-        version: [10, 12, 14]
 
     steps:
       - uses: actions/checkout@v4

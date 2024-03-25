@@ -74,7 +74,7 @@ jobs:
 
       - name: Run Playwright tests
         id: run-tests
-        run: yarn test:e2e
+        run: yarn e2e
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v4

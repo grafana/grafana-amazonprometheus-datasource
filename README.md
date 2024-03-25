@@ -72,8 +72,8 @@ Read more about it here:
    # Spins up a Grafana docker instance (port 3000) with an actual Prometheus instance (port 9090)
    docker compose -f docker-compose-debug.yaml
 
-   # Starts the tests
-   yarn run test:e2e
+   # Starts the e2e tests
+   yarn run e2e
    ```
 
 7. Run the linter

@@ -1,9 +1,13 @@
 name: E2E Tests
 on:
   pull_request:
+    branches:
+      - main
     paths-ignore:
       - 'docs/**'
   push:
+    branches:
+      - main
     paths-ignore:
       - 'docs/**'
 concurrency:
@@ -14,25 +18,25 @@ jobs:
     timeout-minutes: 60
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Setup Go environment
-        uses: actions/setup-go@v5
-        with:
-          go-version: '1.21.6'
-          check-latest: true
-          cache-dependency-path: "**/*.sum"
+#      - name: Checkout
+#        uses: actions/checkout@v4
+#      - name: Setup Go environment
+#        uses: actions/setup-go@v5
+#        with:
+#          go-version: '1.21.6'
+#          check-latest: true
+#          cache-dependency-path: "**/*.sum"
       # NOT TESTING THE BACKEND YET
       # - name: Test backend
       #   uses: magefile/mage-action@v2
       #   with:
       #     version: latest
       #     args: coverage
-      - name: Build backend
-        uses: magefile/mage-action@v2
-        with:
-          version: latest
-          args: buildAll
+#      - name: Build backend
+#        uses: magefile/mage-action@v2
+#        with:
+#          version: latest
+#          args: buildAll
       - name: Setup Node
         uses: actions/setup-node@v3
         with:

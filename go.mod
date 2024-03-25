@@ -4,7 +4,7 @@ go 1.21.0
 
 require (
 	github.com/grafana/grafana-aws-sdk v0.25.0
-	github.com/grafana/grafana-plugin-sdk-go v0.216.0
+	github.com/grafana/grafana-plugin-sdk-go v0.217.0
 	github.com/grafana/grafana/pkg/promlib v0.0.4
 )
 

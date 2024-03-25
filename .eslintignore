@@ -23,3 +23,5 @@ vendor
 
 # Auto-generated icon file
 /packages/grafana-ui/src/components/Icon/iconBundle.ts
+
+./.config

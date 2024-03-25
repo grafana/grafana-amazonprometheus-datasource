@@ -1,7 +1,7 @@
 import { matcherHint, printExpected, printReceived } from 'jest-matcher-utils';
 import { asapScheduler, Subscription, timer, isObservable } from 'rxjs';
 
-import { OBSERVABLE_TEST_TIMEOUT_IN_MS } from './types';
+export const OBSERVABLE_TEST_TIMEOUT_IN_MS = 1000;
 
 export function forceObservableCompletion(subscription: Subscription, resolve: (args: any) => void) {
   const timeoutObservable = timer(OBSERVABLE_TEST_TIMEOUT_IN_MS, asapScheduler);

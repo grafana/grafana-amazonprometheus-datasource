@@ -1,4 +1,7 @@
 {
+  "include": [
+    "./typings/jest/index.d.ts"
+  ],
+  "exclude": ["dist/**/*"],
   "extends": "./.config/tsconfig.json",
-  "exclude": ["src/matchers"]
 }

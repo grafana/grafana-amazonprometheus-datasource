@@ -162,5 +162,5 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: ${{ steps.metadata.outputs.plugin-id }}-${{ steps.metadata.outputs.plugin-version }}
-          path: ${{ steps.metadata.outputs.plugin-id }}
+          path: ${{github.run_id}}-${{ steps.metadata.outputs.plugin-id }}
           retention-days: 5

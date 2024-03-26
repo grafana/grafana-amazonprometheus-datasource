@@ -161,6 +161,6 @@ jobs:
       - name: Archive Build
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ steps.metadata.outputs.plugin-id }}-${{ steps.metadata.outputs.plugin-version }}
-          path: ${{github.run_id}}-${{ steps.metadata.outputs.plugin-id }}
+          name: ${{ steps.metadata.outputs.plugin-id }}-${{ steps.metadata.outputs.plugin-version }}-${{github.run_id}}
+          path: ${{ steps.metadata.outputs.plugin-id }}
           retention-days: 5

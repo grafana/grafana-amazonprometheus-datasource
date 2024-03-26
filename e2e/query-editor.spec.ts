@@ -31,7 +31,7 @@ test.describe('Prometheus query editor', () => {
     await explorePage.datasource.set(ds.name);
     // query patterns
     await expect(explorePage
-      .getByTestIdOrAriaLabel(selectors.components.QueryBuilder.queryPatterns+"break on purpose")).toBeVisible();
+      .getByTestIdOrAriaLabel(selectors.components.QueryBuilder.queryPatterns)).toBeVisible();
     
     // explain
     await expect(explorePage

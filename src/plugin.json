@@ -82,7 +82,7 @@
     "minInterval": true
   },
   "info": {
-    "version": "0.0.0",
+    "version": "%VERSION%",
     "updated": "%TODAY%",
     "keywords": [
       "datasource"

@@ -70,7 +70,7 @@ Read more about it here:
 
    ```bash
    # Spins up a Grafana docker instance (port 3000) with an actual Prometheus instance (port 9090)
-   docker compose -f docker-compose-debug.yaml
+   yarn run server
 
    # Starts the e2e tests
    yarn run e2e

@@ -10,10 +10,6 @@ on:
 
 permissions: read-all
 
-concurrency:
-  group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
-  cancel-in-progress: true
-
 jobs:
   run:
     runs-on: ubuntu-latest
@@ -57,7 +53,7 @@ jobs:
           version: latest
           args: coverage
 
-      - name: Build backend [linux]
+      - name: Build backend
         uses: magefile/mage-action@v3
         with:
           version: latest

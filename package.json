@@ -5,7 +5,6 @@
   "scripts": {
     "build": "webpack -c ./.config/webpack/webpack.config.ts --env production",
     "dev": "webpack -w -c ./.config/webpack/webpack.config.ts --env development",
-    "test:all": "jest",
     "test": "jest --watch --onlyChanged",
     "e2e": "yarn playwright test",
     "test:ci": "jest --passWithNoTests --maxWorkers 4",

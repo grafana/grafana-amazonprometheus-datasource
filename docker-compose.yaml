@@ -1,8 +1,24 @@
 version: '3.7'
 
 services:
+  prometheus:
+    image: prom/prometheus:v2.50.1
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+    command: >
+      --config.file=/etc/prometheus/prometheus.yml
+      --storage.tsdb.path=/prometheus
+
   grafana:
+    user: root
     container_name: 'prometheus-amazon-datasource'
+
+    depends_on:
+      prometheus:
+        condition: service_started
+
     build:
       context: ./.config
       args:
@@ -11,6 +27,8 @@ services:
     ports:
       - 3000:3000/tcp
       - 2345:2345/tcp # delve
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     security_opt:
       - 'apparmor:unconfined'
       - 'seccomp:unconfined'

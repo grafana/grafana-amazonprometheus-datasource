@@ -82,13 +82,18 @@ jobs:
           args: build:linux
 #          args: buildAll # do we want to build all?
 
-      - name: Install Playwright Browsers
-        run: yarn playwright install --with-deps
-
       - name: Start Grafana
         run: |
           docker-compose pull
           GRAFANA_VERSION=${{ matrix.GRAFANA_IMAGE.VERSION }} GRAFANA_IMAGE=${{ matrix.GRAFANA_IMAGE.NAME }} docker-compose up -d
+
+      - name: Wait for prometheus to start
+        uses: nev7n/wait_for_response@v1
+        with:
+          url: 'http://localhost:9090/-/ready'
+          responseCode: 200
+          timeout: 20000
+          interval: 500
 
       - name: Wait for Grafana to start
         uses: nev7n/wait_for_response@v1
@@ -97,6 +102,9 @@ jobs:
           responseCode: 200
           timeout: 60000
           interval: 500
+
+      - name: Install Playwright Browsers
+        run: yarn playwright install --with-deps
 
       - name: Run Playwright tests
         id: run-tests

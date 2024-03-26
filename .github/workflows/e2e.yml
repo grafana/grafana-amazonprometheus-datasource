@@ -28,86 +28,86 @@ jobs:
         id: resolve-versions
         uses: grafana/plugin-actions/e2e-version@main
 
-#  run-e2e:
-#    needs: resolve-versions
-#    timeout-minutes: 15
-#    strategy:
-#      fail-fast: false
-#      matrix:
-#        GRAFANA_IMAGE: ${{fromJson(needs.resolve-versions.outputs.matrix)}}
-#    name: e2e ${{ matrix.GRAFANA_IMAGE.name }}@${{ matrix.GRAFANA_IMAGE.VERSION }}
-#    runs-on: ubuntu-latest
-#    steps:
-#      - uses: actions/checkout@v4
-#
-#      - name: Setup Node.js environment
-#        uses: actions/setup-node@v4
-#        with:
-#          node-version-file: .nvmrc
-#          cache: 'yarn'
-#
-#      - name: Install dependencies
-#        run: yarn install
-#
-#      - name: Build frontend
-#        run: yarn build
-#
-#      - name: Setup Go environment
-#        uses: actions/setup-go@v5
-#        with:
-#          go-version-file: './go.mod'
-#          cache-dependency-path: "**/*.sum"
-#
-#      - name: Build backend [linux]
-#        uses: magefile/mage-action@v3
-#        with:
-#          version: latest
-#          args: build:linux
-##          args: buildAll # do we want to build all?
-#
-#      - name: Start Grafana
-#        run: |
-#          docker-compose pull
-#          GRAFANA_VERSION=${{ matrix.GRAFANA_IMAGE.VERSION }} GRAFANA_IMAGE=${{ matrix.GRAFANA_IMAGE.NAME }} docker-compose up -d
-#
-#      - name: Wait for prometheus to start
-#        uses: nev7n/wait_for_response@v1
-#        with:
-#          url: 'http://localhost:9090/-/ready'
-#          responseCode: 200
-#          timeout: 20000
-#          interval: 500
-#
-#      - name: Wait for Grafana to start
-#        uses: nev7n/wait_for_response@v1
-#        with:
-#          url: 'http://localhost:3000/'
-#          responseCode: 200
-#          timeout: 60000
-#          interval: 500
-#
-#      - name: Install Playwright Browsers
-#        run: yarn playwright install --with-deps
-#
-#      - name: Run Playwright tests
-#        id: run-tests
-#        run: yarn e2e
-#
-#      - name: Upload playwright artifacts
-#        uses: actions/upload-artifact@v4
-#        if: ${{ github.repository_owner != 'grafana' && (always() && steps.run-tests.outcome == 'success') || (failure() && steps.run-tests.outcome == 'failure') }}
-#        with:
-#          name: playwright-report-${{ matrix.GRAFANA_IMAGE.NAME }}-v${{ matrix.GRAFANA_IMAGE.VERSION }}-${{github.run_id}}
-#          path: playwright-report/
-#          retention-days: 30
-#
-#      - name: Upload playwright videos
-#        uses: actions/upload-artifact@v4
-#        if: ${{ github.repository_owner != 'grafana' && (always() && steps.run-tests.outcome == 'success') || (failure() && steps.run-tests.outcome == 'failure') }}
-#        with:
-#          name: test-results-${{ matrix.GRAFANA_IMAGE.NAME }}-v${{ matrix.GRAFANA_IMAGE.VERSION }}-${{github.run_id}}
-#          path: test-results/
-#          retention-days: 30
-#
-#      - name: Stop grafana docker
-#        run: docker-compose down
+  run-e2e:
+    needs: resolve-versions
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        GRAFANA_IMAGE: ${{fromJson(needs.resolve-versions.outputs.matrix)}}
+    name: e2e ${{ matrix.GRAFANA_IMAGE.name }}@${{ matrix.GRAFANA_IMAGE.VERSION }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: 'yarn'
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Build frontend
+        run: yarn build
+
+      - name: Setup Go environment
+        uses: actions/setup-go@v5
+        with:
+          go-version-file: './go.mod'
+          cache-dependency-path: "**/*.sum"
+
+      - name: Build backend [linux]
+        uses: magefile/mage-action@v3
+        with:
+          version: latest
+          args: build:linux
+#          args: buildAll # do we want to build all?
+
+      - name: Start Grafana
+        run: |
+          docker-compose pull
+          GRAFANA_VERSION=${{ matrix.GRAFANA_IMAGE.VERSION }} GRAFANA_IMAGE=${{ matrix.GRAFANA_IMAGE.NAME }} docker-compose up -d
+
+      - name: Wait for prometheus to start
+        uses: nev7n/wait_for_response@v1
+        with:
+          url: 'http://localhost:9090/-/ready'
+          responseCode: 200
+          timeout: 20000
+          interval: 500
+
+      - name: Wait for Grafana to start
+        uses: nev7n/wait_for_response@v1
+        with:
+          url: 'http://localhost:3000/'
+          responseCode: 200
+          timeout: 60000
+          interval: 500
+
+      - name: Install Playwright Browsers
+        run: yarn playwright install --with-deps
+
+      - name: Run Playwright tests
+        id: run-tests
+        run: yarn e2e
+
+      - name: Upload playwright artifacts
+        uses: actions/upload-artifact@v4
+        if: ${{ github.repository_owner != 'grafana' && (always() && steps.run-tests.outcome == 'success') || (failure() && steps.run-tests.outcome == 'failure') }}
+        with:
+          name: playwright-report-${{ matrix.GRAFANA_IMAGE.NAME }}-v${{ matrix.GRAFANA_IMAGE.VERSION }}-${{github.run_id}}
+          path: playwright-report/
+          retention-days: 30
+
+      - name: Upload playwright videos
+        uses: actions/upload-artifact@v4
+        if: ${{ github.repository_owner != 'grafana' && (always() && steps.run-tests.outcome == 'success') || (failure() && steps.run-tests.outcome == 'failure') }}
+        with:
+          name: test-results-${{ matrix.GRAFANA_IMAGE.NAME }}-v${{ matrix.GRAFANA_IMAGE.VERSION }}-${{github.run_id}}
+          path: test-results/
+          retention-days: 30
+
+      - name: Stop grafana docker
+        run: docker-compose down

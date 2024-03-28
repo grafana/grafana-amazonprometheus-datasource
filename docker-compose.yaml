@@ -37,3 +37,4 @@ services:
     volumes:
       - ./dist:/var/lib/grafana/plugins/grafana-prometheusamazon-datasource
       - ./provisioning:/etc/grafana/provisioning
+      - .:/root/grafana-prometheusamazon-datasource

@@ -65,6 +65,9 @@ jobs:
           args: build:linux
 #          args: buildAll # do we want to build all?
 
+      - name: Install Playwright Browsers
+        run: yarn playwright install --with-deps
+
       - name: Start Grafana
         run: |
           docker-compose pull
@@ -86,9 +89,6 @@ jobs:
           timeout: 60000
           interval: 500
 
-      - name: Install Playwright Browsers
-        run: yarn playwright install --with-deps
-
       - name: Run Playwright tests
         id: run-tests
         run: yarn e2e
@@ -99,14 +99,6 @@ jobs:
         with:
           name: playwright-report-${{ matrix.GRAFANA_IMAGE.NAME }}-v${{ matrix.GRAFANA_IMAGE.VERSION }}-${{github.run_id}}
           path: playwright-report/
-          retention-days: 30
-
-      - name: Upload playwright videos
-        uses: actions/upload-artifact@v4
-        if: ${{ github.repository_owner != 'grafana' && (always() && steps.run-tests.outcome == 'success') || (failure() && steps.run-tests.outcome == 'failure') }}
-        with:
-          name: test-results-${{ matrix.GRAFANA_IMAGE.NAME }}-v${{ matrix.GRAFANA_IMAGE.VERSION }}-${{github.run_id}}
-          path: test-results/
           retention-days: 30
 
       - name: Stop grafana docker

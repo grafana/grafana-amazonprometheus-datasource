@@ -63,14 +63,14 @@ Read more about it here:
 5. Spin up a Grafana instance and run the plugin inside it (using Docker)
 
    ```bash
-   yarn run server
+   yarn run server:configured
    ```
 
 6. Run the E2E tests (using Playwright and @grafana/plugin-e2e)
 
    ```bash
-   # Spins up a Grafana docker instance (port 3000) with an actual Prometheus instance (port 9090)
-   yarn run server
+   # Spins up a Grafana docker instance (v10.4.1) (port 3000) with an actual Prometheus instance (port 9090)
+   yarn run server:configured
 
    # Starts the e2e tests
    yarn run e2e

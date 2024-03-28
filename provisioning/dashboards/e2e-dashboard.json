@@ -15,8 +15,8 @@
       },
       {
         "datasource": {
-          "type": "prometheus-amazon-datasource",
-          "uid": "prometheus-amazon"
+          "type": "grafana-prometheusamazon-datasource",
+          "uid": "grafana-prometheusamazon"
         },
         "enable": true,
         "expr": "go_goroutines",
@@ -38,8 +38,8 @@
   "panels": [
     {
       "datasource": {
-        "type": "prometheus-amazon-datasource",
-        "uid": "prometheus-amazon"
+        "type": "grafana-prometheusamazon-datasource",
+        "uid": "grafana-prometheusamazon"
       },
       "fieldConfig": {
         "defaults": {
@@ -149,8 +149,8 @@
           "value": "__name__"
         },
         "datasource": {
-          "type": "prometheus-amazon-datasource",
-          "uid": "prometheus-amazon"
+          "type": "grafana-prometheusamazon-datasource",
+          "uid": "grafana-prometheusamazon"
         },
         "definition": "label_names()",
         "hide": 0,

@@ -110,7 +110,7 @@ test.describe('Configuration tests', () => {
     const ds = await readProvisionedDataSource<DataSourcePluginOptionsEditorProps<PromOptions>>({ fileName: 'datasources.yml' });
     
     const configPage = await createDataSourceConfigPage({
-      type: "prometheus-amazon-datasource", 
+      type: "grafana-prometheusamazon-datasource",
       name: DATA_SOURCE_NAME,
     });
     
@@ -141,7 +141,7 @@ test.describe('Configuration tests', () => {
     // const ds = await readProvisionedDataSource<DataSourcePluginOptionsEditorProps<PromOptions>>({ fileName: 'datasources.yml' });
     
     const configPage = await createDataSourceConfigPage({
-      type: "prometheus-amazon-datasource", 
+      type: "grafana-prometheusamazon-datasource",
       name: DATA_SOURCE_NAME + "check",
     });
     

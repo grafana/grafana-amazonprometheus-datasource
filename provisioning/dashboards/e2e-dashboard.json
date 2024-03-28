@@ -119,7 +119,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "prometheus-amazon"
+            "uid": "grafana-prometheusamazon"
           },
           "disableTextWrap": false,
           "editorMode": "builder",
@@ -178,7 +178,7 @@
   "timeRangeUpdatedDuringEditOrView": false,
   "timepicker": {},
   "timezone": "browser",
-  "title": "prometheus-amazon",
+  "title": "grafana-prometheusamazon",
   "uid": "fdewz0hu7qccge",
   "version": 2,
   "weekStart": ""

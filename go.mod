@@ -4,8 +4,9 @@ go 1.21.0
 
 require (
 	github.com/grafana/grafana-aws-sdk v0.25.0
-	github.com/grafana/grafana-plugin-sdk-go v0.217.0
+	github.com/grafana/grafana-plugin-sdk-go v0.218.0
 	github.com/grafana/grafana/pkg/promlib v0.0.4
+	github.com/stretchr/testify v1.9.0
 )
 
 require (
@@ -81,7 +82,6 @@ require (
 	github.com/prometheus/prometheus v1.8.2-0.20221021121301-51a44e6657c3 // indirect
 	github.com/rivo/uniseg v0.3.4 // indirect
 	github.com/russross/blackfriday/v2 v2.1.0 // indirect
-	github.com/stretchr/testify v1.9.0 // indirect
 	github.com/unknwon/bra v0.0.0-20200517080246-1e3013ecaff8 // indirect
 	github.com/unknwon/com v1.0.1 // indirect
 	github.com/unknwon/log v0.0.0-20150304194804-e617c87089d3 // indirect

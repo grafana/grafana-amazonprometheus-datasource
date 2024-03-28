@@ -7,7 +7,7 @@ import { config } from '@grafana/runtime';
 import { Alert, FieldValidationMessage, useTheme2 } from '@grafana/ui';
 import React from 'react';
 
-import { DataSourcehttpSettingsOverhaul } from './DataSourceHttpSettingsOverhaul';
+import { DataSourceHttpSettingsOverhaul } from './DataSourceHttpSettingsOverhaul';
 
 export const PROM_CONFIG_LABEL_WIDTH = 30;
 
@@ -30,7 +30,7 @@ export const ConfigEditor = (props: Props) => {
         docsLink="https://grafana.com/docs/grafana/latest/datasources/prometheus/configure-prometheus-data-source/"
       />
       <hr className={`${styles.hrTopSpace} ${styles.hrBottomSpace}`} />
-      <DataSourcehttpSettingsOverhaul
+      <DataSourceHttpSettingsOverhaul
         options={options}
         onOptionsChange={onOptionsChange}
         renderSigV4Editor={<SIGV4ConnectionConfig inExperimentalAuthComponent={true} {...props}></SIGV4ConnectionConfig>}
@@ -131,7 +131,7 @@ export function overhaulStyles(theme: GrafanaTheme2) {
       font-weight: 400;
     `,
     container: css`
-      maxwidth: 578;
+      maxWidth: 578;
     `,
   };
 }

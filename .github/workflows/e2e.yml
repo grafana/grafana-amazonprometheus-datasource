@@ -63,7 +63,6 @@ jobs:
         with:
           version: latest
           args: build:linux
-#          args: buildAll # do we want to build all?
 
       - name: Install Playwright Browsers
         run: yarn playwright install --with-deps

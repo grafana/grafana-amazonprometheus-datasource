@@ -54,5 +54,5 @@ export default defineConfig({
       },
       dependencies: ['auth'],
     }
-  ],
+  ]
 });

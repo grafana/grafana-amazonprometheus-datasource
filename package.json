@@ -14,7 +14,7 @@
     "server": "docker-compose up --build",
     "sign": "npx --yes @grafana/sign-plugin@latest --rootUrls https://github.com/grafana/prometheus-amazon"
   },
-  "author": "Grafana",
+  "author": "Grafana Labs",
   "license": "Apache-2.0",
   "devDependencies": {
     "@emotion/eslint-plugin": "11.11.0",

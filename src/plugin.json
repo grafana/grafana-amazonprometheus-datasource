@@ -3,7 +3,7 @@
   "$schema": "https://raw.githubusercontent.com/grafana/grafana/master/docs/sources/developers/plugins/plugin.schema.json",
   "type": "datasource",
   "name": "Prometheus Amazon",
-  "id": "prometheus-amazon-datasource",
+  "id": "grafana-prometheusamazon-datasource",
   "executable": "gpx_prometheus_amazon",
   "routes": [
     {
@@ -104,7 +104,6 @@
     ]
   },
   "dependencies": {
-    "grafanaVersion": "10.4.x",
     "grafanaDependency": ">=10.4.0",
     "plugins": []
   }

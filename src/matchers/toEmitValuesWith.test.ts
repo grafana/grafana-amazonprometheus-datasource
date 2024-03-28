@@ -10,7 +10,7 @@ describe('toEmitValuesWith matcher', () => {
         const observable = null as unknown as Observable<number>;
 
         const rejects = expect(() =>
-          expect(observable).toEmitValuesWith((received) => {
+          expect(observable).toEmitValuesWith((received: any) => {
             expect(received).toEqual([1, 2, 3]);
           })
         ).rejects;
@@ -24,7 +24,7 @@ describe('toEmitValuesWith matcher', () => {
         const observable = undefined as unknown as Observable<number>;
 
         const rejects = expect(() =>
-          expect(observable).toEmitValuesWith((received) => {
+          expect(observable).toEmitValuesWith((received: any) => {
             expect(received).toEqual([1, 2, 3]);
           })
         ).rejects;
@@ -38,7 +38,7 @@ describe('toEmitValuesWith matcher', () => {
         const observable = 1 as unknown as Observable<number>;
 
         const rejects = expect(() =>
-          expect(observable).toEmitValuesWith((received) => {
+          expect(observable).toEmitValuesWith((received: any) => {
             expect(received).toEqual([1, 2, 3]);
           })
         ).rejects;
@@ -52,7 +52,7 @@ describe('toEmitValuesWith matcher', () => {
         const observable = interval(10).pipe(take(3));
 
         const rejects = expect(() =>
-          expect(observable).toEmitValuesWith((received) => {
+          expect(observable).toEmitValuesWith((received: any) => {
             expect(received).toEqual([0, 1]);
           })
         ).rejects;
@@ -66,7 +66,7 @@ describe('toEmitValuesWith matcher', () => {
         const observable = interval(10).pipe(take(3));
 
         const rejects = expect(() =>
-          expect(observable).toEmitValuesWith((received) => {
+          expect(observable).toEmitValuesWith((received: any) => {
             expect(received).toEqual([1, 2, 3]);
           })
         ).rejects;
@@ -80,7 +80,7 @@ describe('toEmitValuesWith matcher', () => {
         const observable = interval(10).pipe(take(3)) as unknown as Observable<string>;
 
         const rejects = expect(() =>
-          expect(observable).toEmitValuesWith((received) => {
+          expect(observable).toEmitValuesWith((received: any) => {
             expect(received).toEqual(['0', '1', '2']);
           })
         ).rejects;
@@ -94,7 +94,7 @@ describe('toEmitValuesWith matcher', () => {
         const observable = interval(600);
 
         const rejects = expect(() =>
-          expect(observable).toEmitValuesWith((received) => {
+          expect(observable).toEmitValuesWith((received: any) => {
             expect(received).toEqual([0]);
           })
         ).rejects;
@@ -108,7 +108,7 @@ describe('toEmitValuesWith matcher', () => {
     describe('correct emitted values', () => {
       it('should pass with correct message', async () => {
         const observable = interval(10).pipe(take(3));
-        await expect(observable).toEmitValuesWith((received) => {
+        await expect(observable).toEmitValuesWith((received: any) => {
           expect(received).toEqual([0, 1, 2]);
         });
       });
@@ -126,7 +126,7 @@ describe('toEmitValuesWith matcher', () => {
           })
         );
 
-        await expect(observable).toEmitValuesWith((received) => {
+        await expect(observable).toEmitValuesWith((received: any) => {
           expect(received).toEqual([0, 1, 'an error']);
         });
       });
@@ -144,7 +144,7 @@ describe('toEmitValuesWith matcher', () => {
           })
         );
 
-        await expect(observable).toEmitValuesWith((received) => {
+        await expect(observable).toEmitValuesWith((received: any) => {
           expect(received).toEqual([0, 'an error']);
         });
       });

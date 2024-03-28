@@ -1,85 +1,88 @@
-name: E2E Tests
+name: E2E tests
 on:
   pull_request:
-    paths-ignore:
-      - 'docs/**'
-  push:
-    paths-ignore:
-      - 'docs/**'
+
+permissions:
+  contents: read
+  id-token: write
+
 concurrency:
   group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
-  cancel-in-progress: true
+  cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
+
 jobs:
-  test:
-    timeout-minutes: 60
+  resolve-versions:
+    name: Resolve Grafana images
     runs-on: ubuntu-latest
+    timeout-minutes: 3
+    outputs:
+      matrix: ${{ steps.resolve-versions.outputs.matrix }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Setup Go environment
-        uses: actions/setup-go@v5
+      - name: Resolve Grafana E2E versions
+        id: resolve-versions
+        uses: grafana/plugin-actions/e2e-version@main
+
+  playwright-tests:
+    needs: resolve-versions
+    timeout-minutes: 60
+    strategy:
+      fail-fast: false
+      matrix:
+        GRAFANA_IMAGE: ${{fromJson(needs.resolve-versions.outputs.matrix)}}
+    name: e2e ${{ matrix.GRAFANA_IMAGE.name }}@${{ matrix.GRAFANA_IMAGE.VERSION }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v4
         with:
-          go-version: '1.21.6'
-          check-latest: true
-          cache-dependency-path: "**/*.sum"
-      # NOT TESTING THE BACKEND YET
-      # - name: Test backend
-      #   uses: magefile/mage-action@v2
-      #   with:
-      #     version: latest
-      #     args: coverage
-      - name: Build backend
-        uses: magefile/mage-action@v2
-        with:
-          version: latest
-          args: buildAll
-      - name: Setup Node
-        uses: actions/setup-node@v3
-        with:
-          node-version: 20
-          check-latest: true
+          node-version-file: .nvmrc
           cache: 'yarn'
-      - name: Install dependencies
-        run: npm install -g yarn && yarn install --frozen-lockfile;
-      - name: Build Frontend
-        run: |
-          yarn build;
-      - name: Start the docker container for E2E
-        run: |
-          docker compose -f docker-compose-debug.yaml pull
-          docker compose -f docker-compose-debug.yaml up -d
-      - name: Wait for prometheus to start
-        uses: nev7n/wait_for_response@v1
+
+      - name: Install yarn dependencies
+        run: yarn install
+
+      - name: Install Mage
+        uses: magefile/mage-action@v3
         with:
-          url: 'http://localhost:9090/-/ready'
-          responseCode: 200
-          timeout: 20000
-          interval: 500
-      - name: Wait for grafana to start
-        uses: nev7n/wait_for_response@v1
-        with:
-          url: 'http://localhost:3099/'
-          responseCode: 200
-          timeout: 20000
-          interval: 500
+          install-only: true
+
+      - name: Build binaries
+        run: mage -v build:linux
+
+      - name: Build frontend
+        run: yarn build
+
       - name: Install Playwright Browsers
         run: yarn playwright install --with-deps
-      - name: Run E2E tests
-        run: yarn test:e2e
-      - name: Run E2E report
-        uses: actions/upload-artifact@v3
-        if: always()
+
+      - name: Start Grafana
+        run: |
+          docker-compose pull
+          GRAFANA_VERSION=${{ matrix.GRAFANA_IMAGE.VERSION }} GRAFANA_IMAGE=${{ matrix.GRAFANA_IMAGE.NAME }} docker-compose up -d
+
+      - name: Wait for Grafana to start
+        uses: nev7n/wait_for_response@v1
         with:
-          name: playwright-report
+          url: 'http://localhost:3000/'
+          responseCode: 200
+          timeout: 60000
+          interval: 500
+
+      - name: Run Playwright tests
+        id: run-tests
+        run: yarn playwright test
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        if: ${{ (always() && steps.run-tests.outcome == 'success') || (failure() && steps.run-tests.outcome == 'failure') }}
+        with:
+          name: playwright-report-${{ matrix.GRAFANA_IMAGE.NAME }}-v${{ matrix.GRAFANA_IMAGE.VERSION }}-${{github.run_id}}
           path: playwright-report/
           retention-days: 30
-      - name: Run E2E videos
-        uses: actions/upload-artifact@v3
-        if: always()
-        with:
-          name: test-results
-          path: test-results/
-          retention-days: 30
-      - name: Stop the docker container
-        if: always()
-        run: docker-compose -f docker-compose-debug.yaml down
+
+      - name: Stop grafana docker
+        run: docker-compose down

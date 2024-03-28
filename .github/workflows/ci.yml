@@ -1,0 +1,94 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+permissions: read-all
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
+  cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    name: CI
+    env:
+      GRAFANA_ACCESS_POLICY_TOKEN: ${{ secrets.GRAFANA_ACCESS_POLICY_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: 'yarn'
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Check types
+        run: yarn typecheck
+
+      - name: Lint
+        run: yarn lint
+
+      - name: Frontend unit tests
+        run: yarn test:ci
+
+      - name: Build frontend
+        run: yarn build
+
+      - name: Setup Go environment
+        uses: actions/setup-go@v5
+        with:
+          go-version-file: './go.mod'
+          cache-dependency-path: "**/*.sum"
+
+      - name: Test backend
+        uses: magefile/mage-action@v3
+        with:
+          version: latest
+          args: coverage
+
+      - name: Build backend
+        uses: magefile/mage-action@v3
+        with:
+          version: latest
+          args: build:linux
+
+      - name: Sign plugin
+        run: yarn sign
+        if: ${{ env.GRAFANA_ACCESS_POLICY_TOKEN != '' }}
+
+      - name: Get plugin metadata
+        id: metadata
+        run: |
+          sudo apt-get install jq
+
+          export GRAFANA_PLUGIN_ID=$(cat dist/plugin.json | jq -r .id)
+          export GRAFANA_PLUGIN_VERSION=$(cat dist/plugin.json | jq -r .info.version)
+          export GRAFANA_PLUGIN_ARTIFACT=${GRAFANA_PLUGIN_ID}-${GRAFANA_PLUGIN_VERSION}.zip
+
+          echo "plugin-id=${GRAFANA_PLUGIN_ID}" >> $GITHUB_OUTPUT
+          echo "plugin-version=${GRAFANA_PLUGIN_VERSION}" >> $GITHUB_OUTPUT
+          echo "archive=${GRAFANA_PLUGIN_ARTIFACT}" >> $GITHUB_OUTPUT
+
+      - name: Package plugin
+        id: package-plugin
+        run: |
+          mv dist ${{ steps.metadata.outputs.plugin-id }}
+          zip ${{ steps.metadata.outputs.archive }} ${{ steps.metadata.outputs.plugin-id }} -r
+
+      - name: Archive Build
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ steps.metadata.outputs.plugin-id }}-${{ steps.metadata.outputs.plugin-version }}-${{ matrix.GRAFANA_IMAGE.NAME }}-v${{ matrix.GRAFANA_IMAGE.VERSION }}-${{github.run_id}}
+          path: ${{ steps.metadata.outputs.plugin-id }}
+          retention-days: 5

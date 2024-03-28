@@ -1,15 +1,40 @@
 version: '3.7'
 
 services:
+  prometheus:
+    image: prom/prometheus:v2.50.1
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+    command: >
+      --config.file=/etc/prometheus/prometheus.yml
+      --storage.tsdb.path=/prometheus
+
   grafana:
+    user: root
     container_name: 'prometheus-amazon-datasource'
+
+    depends_on:
+      prometheus:
+        condition: service_started
+
     build:
       context: ./.config
       args:
         grafana_image: ${GRAFANA_IMAGE:-grafana-enterprise}
-        grafana_version: ${GRAFANA_VERSION:-9.5.3}
+        grafana_version: ${GRAFANA_VERSION:-10.4.1}
     ports:
       - 3000:3000/tcp
+      - 2345:2345/tcp # delve
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    security_opt:
+      - 'apparmor:unconfined'
+      - 'seccomp:unconfined'
+    cap_add:
+      - SYS_PTRACE
     volumes:
       - ./dist:/var/lib/grafana/plugins/prometheus-amazon-datasource
-      - ./provisioning/datasources:/etc/grafana/provisioning
+      - ./provisioning:/etc/grafana/provisioning
+      - .:/root/prometheus-amazon-datasource

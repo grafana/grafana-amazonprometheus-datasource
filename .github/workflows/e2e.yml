@@ -1,18 +1,10 @@
-name: e2e
-
+name: E2E tests
 on:
-  push:
-    branches:
-      - main
   pull_request:
-    branches:
-      - main
 
-permissions: read-all
-
-concurrency:
-  group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
-  cancel-in-progress: true
+permissions:
+  contents: read
+  id-token: write
 
 jobs:
   resolve-versions:
@@ -28,9 +20,9 @@ jobs:
         id: resolve-versions
         uses: grafana/plugin-actions/e2e-version@main
 
-  run-e2e:
+  playwright-tests:
     needs: resolve-versions
-    timeout-minutes: 15
+    timeout-minutes: 60
     strategy:
       fail-fast: false
       matrix:
@@ -44,25 +36,20 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version-file: .nvmrc
-          cache: 'yarn'
 
-      - name: Install dependencies
+      - name: Install yarn dependencies
         run: yarn install
+
+      - name: Install Mage
+        uses: magefile/mage-action@v3
+        with:
+          install-only: true
+
+      - name: Build binaries
+        run: mage -v build:linux
 
       - name: Build frontend
         run: yarn build
-
-      - name: Setup Go environment
-        uses: actions/setup-go@v5
-        with:
-          go-version-file: './go.mod'
-          cache-dependency-path: "**/*.sum"
-
-      - name: Build backend [linux]
-        uses: magefile/mage-action@v3
-        with:
-          version: latest
-          args: build:linux
 
       - name: Install Playwright Browsers
         run: yarn playwright install --with-deps
@@ -71,14 +58,6 @@ jobs:
         run: |
           docker-compose pull
           GRAFANA_VERSION=${{ matrix.GRAFANA_IMAGE.VERSION }} GRAFANA_IMAGE=${{ matrix.GRAFANA_IMAGE.NAME }} docker-compose up -d
-
-      - name: Wait for prometheus to start
-        uses: nev7n/wait_for_response@v1
-        with:
-          url: 'http://localhost:9090/-/ready'
-          responseCode: 200
-          timeout: 20000
-          interval: 500
 
       - name: Wait for Grafana to start
         uses: nev7n/wait_for_response@v1
@@ -90,11 +69,11 @@ jobs:
 
       - name: Run Playwright tests
         id: run-tests
-        run: yarn e2e
+        run: yarn playwright test
 
-      - name: Upload playwright artifacts
+      - name: Upload artifacts
         uses: actions/upload-artifact@v4
-        if: ${{ github.repository_owner != 'grafana' && (always() && steps.run-tests.outcome == 'success') || (failure() && steps.run-tests.outcome == 'failure') }}
+        if: ${{ (always() && steps.run-tests.outcome == 'success') || (failure() && steps.run-tests.outcome == 'failure') }}
         with:
           name: playwright-report-${{ matrix.GRAFANA_IMAGE.NAME }}-v${{ matrix.GRAFANA_IMAGE.VERSION }}-${{github.run_id}}
           path: playwright-report/

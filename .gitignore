@@ -40,3 +40,4 @@ e2e-results/
 /playwright/.auth/
 
 *.toml
+.DS_Store

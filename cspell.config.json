@@ -1,0 +1,47 @@
+{
+  "ignorePaths": [
+    ".config/**",
+    ".github/**",
+    ".vscode/**",
+    "coverage/**",
+    "cspell.config.json",
+    "e2e/**",
+    "playwright/**",
+    "dist/**",
+    "docker-compose*.yaml",
+    "docker-compose*.yml",
+    "go.sum",
+    "mage_output_file.go",
+    "node_modules/**",
+    "package.json",
+    "pkg/**/*_test.go",
+    "pkg/**/*.html",
+    "pkg/**/*.json",
+    "pkg/**/*.jsonc",
+    "pkg/testdata/**",
+    "prometheus/**",
+    "provisioning/**",
+    "src/dashboards/**",
+    "yarn.lock"
+  ],
+  "ignoreRegExpList": [
+    "import\\s*\\((.|[\r\n])*?\\)",
+    "import\\s*.*\".*?\""
+  ],
+  "words": [
+    "grafana",
+    "datasource",
+    "datasources",
+    "prometheusamazon",
+    "tsdb",
+    "promlib",
+    "instancemgmt",
+    "plog",
+    "sdkhttpclient",
+    "sigv",
+    "SIGV",
+    "awsds",
+    "httpss",
+    "Mwdhmsy"
+  ]
+}

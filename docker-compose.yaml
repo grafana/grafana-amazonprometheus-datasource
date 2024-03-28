@@ -13,7 +13,7 @@ services:
 
   grafana:
     user: root
-    container_name: 'prometheus-amazon-datasource'
+    container_name: 'grafana-prometheusamazon-datasource'
 
     depends_on:
       prometheus:
@@ -35,6 +35,6 @@ services:
     cap_add:
       - SYS_PTRACE
     volumes:
-      - ./dist:/var/lib/grafana/plugins/prometheus-amazon-datasource
+      - ./dist:/var/lib/grafana/plugins/grafana-prometheusamazon-datasource
       - ./provisioning:/etc/grafana/provisioning
-      - .:/root/prometheus-amazon-datasource
+      - .:/root/grafana-prometheusamazon-datasource

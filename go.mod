@@ -4,14 +4,14 @@ go 1.21.0
 
 require (
 	github.com/grafana/grafana-aws-sdk v0.25.0
-	github.com/grafana/grafana-plugin-sdk-go v0.218.0
+	github.com/grafana/grafana-plugin-sdk-go v0.219.0
 	github.com/grafana/grafana/pkg/promlib v0.0.4
 	github.com/stretchr/testify v1.9.0
 )
 
 require (
 	github.com/BurntSushi/toml v1.3.2 // indirect
-	github.com/apache/arrow/go/v15 v15.0.0 // indirect
+	github.com/apache/arrow/go/v15 v15.0.2 // indirect
 	github.com/aws/aws-sdk-go v1.50.8 // indirect
 	github.com/beorn7/perks v1.0.1 // indirect
 	github.com/cenkalti/backoff/v4 v4.2.1 // indirect

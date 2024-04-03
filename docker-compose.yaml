@@ -14,6 +14,7 @@ services:
   grafana:
     user: root
     container_name: 'grafana-prometheusamazon-datasource'
+    platform: linux/amd64
 
     depends_on:
       prometheus:

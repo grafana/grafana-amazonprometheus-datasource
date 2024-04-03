@@ -69,7 +69,7 @@ Read more about it here:
 6. Run the E2E tests (using Playwright and @grafana/plugin-e2e)
 
    ```bash
-   # Spins up a Grafana docker instance (v10.4.1) (port 3000) with an actual Prometheus instance (port 9090)
+   # Spins up a Grafana docker instance (v11.0.0) (port 3000) with an actual Prometheus instance (port 9090)
    yarn run server:configured
 
    # Starts the e2e tests

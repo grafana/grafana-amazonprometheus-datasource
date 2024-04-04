@@ -51,7 +51,7 @@ jobs:
           install-only: true
 
       - name: Build binaries
-        run: mage -v
+        run: mage -v build:linux
 
       - name: Build frontend
         run: yarn build

@@ -34,7 +34,7 @@ jobs:
     name: e2e ${{ matrix.GRAFANA_IMAGE.name }}
     runs-on: ubuntu-latest
     steps:
-      - name: Print Grafana Image
+      - name: Print Grafana Image Name
         run: echo "Running for ${{ matrix.GRAFANA_IMAGE.name }}@${{ matrix.GRAFANA_IMAGE.VERSION }}"
 
       - uses: actions/checkout@v4

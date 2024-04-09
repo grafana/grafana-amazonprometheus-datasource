@@ -11,7 +11,7 @@ type Props = {
   secureSocksDSProxyEnabled: boolean;
 };
 
-export const DataSourcehttpSettingsOverhaul = (props: Props) => {
+export const DataSourceHttpSettingsOverhaul = (props: Props) => {
   const {
     options,
     onOptionsChange,

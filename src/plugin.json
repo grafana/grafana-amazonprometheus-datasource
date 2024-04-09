@@ -3,7 +3,7 @@
   "$schema": "https://raw.githubusercontent.com/grafana/grafana/master/docs/sources/developers/plugins/plugin.schema.json",
   "type": "datasource",
   "name": "Prometheus Amazon",
-  "id": "prometheus-amazon-datasource",
+  "id": "grafana-prometheusamazon-datasource",
   "executable": "gpx_prometheus_amazon",
   "routes": [
     {
@@ -93,8 +93,8 @@
       "url": "https://grafana.com"
     },
     "logos": {
-      "small": "img/prometheus_amazon.svg",
-      "large": "img/prometheus_amazon.svg"
+      "small": "img/prometheus_logo.svg",
+      "large": "img/prometheus_logo.svg"
     },
     "links": [
       {
@@ -104,8 +104,7 @@
     ]
   },
   "dependencies": {
-    "grafanaVersion": "10.4.x",
-    "grafanaDependency": ">=10.4.0",
+    "grafanaDependency": ">=11.0.0",
     "plugins": []
   }
 }

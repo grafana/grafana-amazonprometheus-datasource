@@ -14,15 +14,15 @@ test.describe('Prometheus variable query editor', () => {
 
     await variableEditPage.datasource.set(ds.name);
 
-    await variableEditPage.getByTestIdOrAriaLabel(
+    await variableEditPage.getByGrafanaSelector(
       selectors.components.DataSource.Prometheus.variableQueryEditor.queryType
     ).focus();
     
-    expect(await variableEditPage.getByTestIdOrAriaLabel(
+    expect(await variableEditPage.getByGrafanaSelector(
       selectors.components.DataSource.Prometheus.variableQueryEditor.queryType)
     ).toBeVisible();
 
-    await variableEditPage.getByTestIdOrAriaLabel(
+    await variableEditPage.getByGrafanaSelector(
       selectors.components.DataSource.Prometheus.variableQueryEditor.queryType
     ).click();
   });
@@ -58,16 +58,16 @@ test.describe('Prometheus variable query editor', () => {
     await page.getByText('__name__').click();
 
     await expect(variableEditPage
-      .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect)).toBeVisible();
+      .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect)).toBeVisible();
     
     await expect(variableEditPage
-      .getByTestIdOrAriaLabel(selectors.components.QueryBuilder.labelSelect)).toBeVisible();
+      .getByGrafanaSelector(selectors.components.QueryBuilder.labelSelect)).toBeVisible();
 
     await expect(variableEditPage
-      .getByTestIdOrAriaLabel(selectors.components.QueryBuilder.matchOperatorSelect)).toBeVisible();
+      .getByGrafanaSelector(selectors.components.QueryBuilder.matchOperatorSelect)).toBeVisible();
 
     await expect(variableEditPage
-      .getByTestIdOrAriaLabel(selectors.components.QueryBuilder.valueSelect)).toBeVisible();
+      .getByGrafanaSelector(selectors.components.QueryBuilder.valueSelect)).toBeVisible();
 
     await expect(page.getByText('go_goroutines')).toBeVisible();
   });
@@ -80,9 +80,9 @@ test.describe('Prometheus variable query editor', () => {
 
     const selector = 'data-testid metric names metric regex';
     
-    await expect(variableEditPage.getByTestIdOrAriaLabel(selector)).toBeVisible();
+    await expect(variableEditPage.getByGrafanaSelector(selector)).toBeVisible();
 
-    await variableEditPage.getByTestIdOrAriaLabel(selector).fill('go_go');
+    await variableEditPage.getByGrafanaSelector(selector).fill('go_go');
 
     await variableEditPage.runQuery();
 
@@ -97,11 +97,11 @@ test.describe('Prometheus variable query editor', () => {
 
     const selector = 'data-testid variable query result';
     
-    await expect(variableEditPage.getByTestIdOrAriaLabel(selector)).toBeVisible();
+    await expect(variableEditPage.getByGrafanaSelector(selector)).toBeVisible();
 
-    await variableEditPage.getByTestIdOrAriaLabel(selector).fill('go_goroutines');
+    await variableEditPage.getByGrafanaSelector(selector).fill('go_goroutines');
 
-    await variableEditPage.getByTestIdOrAriaLabel(selector).blur();
+    await variableEditPage.getByGrafanaSelector(selector).blur();
     
     await page.getByText('go_goroutines{').focus();
 
@@ -116,11 +116,11 @@ test.describe('Prometheus variable query editor', () => {
 
     const selector = 'data-testid prometheus series query';
 
-    await expect(variableEditPage.getByTestIdOrAriaLabel(selector)).toBeVisible();
+    await expect(variableEditPage.getByGrafanaSelector(selector)).toBeVisible();
 
-    await variableEditPage.getByTestIdOrAriaLabel(selector).fill('go_goroutines');
+    await variableEditPage.getByGrafanaSelector(selector).fill('go_goroutines');
 
-    await variableEditPage.getByTestIdOrAriaLabel(selector).blur();
+    await variableEditPage.getByGrafanaSelector(selector).blur();
     
     await page.getByText('go_goroutines{').focus();
 
@@ -135,11 +135,11 @@ test.describe('Prometheus variable query editor', () => {
 
     const selector = 'data-testid prometheus classic query';
 
-    await expect(variableEditPage.getByTestIdOrAriaLabel(selector)).toBeVisible();
+    await expect(variableEditPage.getByGrafanaSelector(selector)).toBeVisible();
 
-    await variableEditPage.getByTestIdOrAriaLabel(selector).fill('label_names()');
+    await variableEditPage.getByGrafanaSelector(selector).fill('label_names()');
 
-    await variableEditPage.getByTestIdOrAriaLabel(selector).blur();
+    await variableEditPage.getByGrafanaSelector(selector).blur();
     
     await page.getByText('__name__').isVisible();
 

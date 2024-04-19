@@ -2,7 +2,6 @@ import { DataSourcePluginOptionsEditorProps } from '@grafana/data';
 import { selectors } from '@grafana/e2e-selectors';
 import { test, expect } from '@grafana/plugin-e2e';
 import { PromOptions } from '@grafana/prometheus';
-import { chromium } from '@playwright/test';
 
 const codeEditorProvFile = 'code-editor.yml';
 
@@ -31,39 +30,39 @@ test.describe('Prometheus query editor', () => {
     await explorePage.datasource.set(ds.name);
     // query patterns
     await expect(explorePage
-      .getByTestIdOrAriaLabel(selectors.components.QueryBuilder.queryPatterns)).toBeVisible();
+      .getByGrafanaSelector(selectors.components.QueryBuilder.queryPatterns)).toBeVisible();
     
     // explain
     await expect(explorePage
-      .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.queryEditor.explain)).toBeVisible();
+      .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.explain)).toBeVisible();
       
     // editor toggle
     await expect(explorePage
-      .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.queryEditor.editorToggle)).toBeVisible();
+      .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.editorToggle)).toBeVisible();
 
     // options
     await expect(explorePage
-      .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.queryEditor.options)).toBeVisible();
+      .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.options)).toBeVisible();
     
     // open the options
     await explorePage
-      .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.queryEditor.options)
+      .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.options)
       .click();
 
     // legend
     await expect(explorePage
-      .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.queryEditor.legend)).toBeVisible();
+      .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.legend)).toBeVisible();
     
     // format
     await expect(explorePage
-      .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.queryEditor.format)).toBeVisible();
+      .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.format)).toBeVisible();
     
     // step
     await expect(page.locator(`#${selectors.components.DataSource.Prometheus.queryEditor.step}`)).toBeVisible();
 
     // type
     await expect(explorePage
-      .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.queryEditor.type)).toBeVisible();
+      .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.type)).toBeVisible();
 
     // exemplars
     await expect(page.locator(`#${selectors.components.DataSource.Prometheus.queryEditor.exemplars}`)).toBeVisible();
@@ -81,7 +80,7 @@ test.describe('Prometheus query editor', () => {
       await explorePage.datasource.set(dsCodeEditor.name);
 
       await expect(explorePage
-        .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.queryEditor.code.queryField)).toBeVisible();
+        .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.code.queryField)).toBeVisible();
     });
     
     test('it navigates to the code editor and opens the metrics browser with metric search, labels, label values, and all components', async ({
@@ -95,47 +94,47 @@ test.describe('Prometheus query editor', () => {
       await explorePage.datasource.set(dsCodeEditor.name);
 
       await expect(explorePage
-        .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.queryEditor.code.queryField)).toBeVisible();
+        .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.code.queryField)).toBeVisible();
 
       await explorePage
-        .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.queryEditor.code.queryField).focus();
+        .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.code.queryField).focus();
       
       await expect(explorePage
-        .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.queryEditor.code.metricsBrowser.openButton)).toBeVisible();
+        .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.code.metricsBrowser.openButton)).toBeVisible();
 
       await explorePage
-        .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.queryEditor.code.metricsBrowser.openButton).focus();
+        .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.code.metricsBrowser.openButton).focus();
       
       await explorePage
-        .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.queryEditor.code.metricsBrowser.openButton).isEnabled();
+        .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.code.metricsBrowser.openButton).isEnabled();
 
       await explorePage
-        .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.queryEditor.code.metricsBrowser.openButton)
+        .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.code.metricsBrowser.openButton)
         .click()
         
       await explorePage
-        .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.queryEditor.code.metricsBrowser.selectMetric).isVisible();
+        .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.code.metricsBrowser.selectMetric).isVisible();
       
       await expect(explorePage
-        .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.queryEditor.code.metricsBrowser.selectMetric)).toBeVisible();  
+        .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.code.metricsBrowser.selectMetric)).toBeVisible();
 
       await explorePage
-        .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.queryEditor.code.metricsBrowser.labelNamesFilter).isVisible();
+        .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.code.metricsBrowser.labelNamesFilter).isVisible();
 
       await explorePage
-        .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.queryEditor.code.metricsBrowser.labelValuesFilter).isVisible();
+        .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.code.metricsBrowser.labelValuesFilter).isVisible();
 
       await explorePage
-        .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.queryEditor.code.metricsBrowser.useQuery).isVisible();
+        .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.code.metricsBrowser.useQuery).isVisible();
 
       await explorePage
-        .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.queryEditor.code.metricsBrowser.useAsRateQuery).isVisible();
+        .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.code.metricsBrowser.useAsRateQuery).isVisible();
 
       await explorePage
-        .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.queryEditor.code.metricsBrowser.validateSelector).isVisible();
+        .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.code.metricsBrowser.validateSelector).isVisible();
 
       await explorePage
-        .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.queryEditor.code.metricsBrowser.clear).isVisible();
+        .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.code.metricsBrowser.clear).isVisible();
     });
 
     test('selects a metric in the metrics browser and uses the query', async ({
@@ -150,34 +149,34 @@ test.describe('Prometheus query editor', () => {
       await explorePage.datasource.set(dsCodeEditor.name);
 
       await expect(explorePage
-        .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.queryEditor.code.queryField)).toBeVisible();
+        .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.code.queryField)).toBeVisible();
 
       await explorePage
-        .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.queryEditor.code.queryField).focus();
+        .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.code.queryField).focus();
 
       await expect(explorePage
-        .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.queryEditor.code.metricsBrowser.openButton)).toBeVisible();
+        .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.code.metricsBrowser.openButton)).toBeVisible();
 
       await explorePage
-        .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.queryEditor.code.metricsBrowser.openButton).focus();
+        .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.code.metricsBrowser.openButton).focus();
 
       await explorePage
-        .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.queryEditor.code.metricsBrowser.openButton).isEnabled();
+        .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.code.metricsBrowser.openButton).isEnabled();
         
       await explorePage
-        .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.queryEditor.code.metricsBrowser.openButton)
+        .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.code.metricsBrowser.openButton)
         .click()
         
       await expect(explorePage
-        .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.queryEditor.code.metricsBrowser.selectMetric)).toBeVisible();
+        .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.code.metricsBrowser.selectMetric)).toBeVisible();
 
       await page.getByRole('option', { name: 'go_gc_duration_seconds', exact: true }).click()
       
       await explorePage
-        .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.queryEditor.code.metricsBrowser.useQuery).click();
+        .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.code.metricsBrowser.useQuery).click();
 
       const testMetric = await explorePage
-        .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.queryEditor.code.queryField).textContent()
+        .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.code.queryField).textContent()
 
       expect(testMetric).toContain('go_gc_duration_seconds');
     });
@@ -189,7 +188,7 @@ test.describe('Prometheus query editor', () => {
       explorePage,
       page,
     }) => {
-      const dsDefaultEditorBuilder = await readProvisionedDataSource<DataSourcePluginOptionsEditorProps<PromOptions>>({ fileName: 'datasources.yml' });
+      // const dsDefaultEditorBuilder = await readProvisionedDataSource<DataSourcePluginOptionsEditorProps<PromOptions>>({ fileName: 'datasources.yml' });
 
       await explorePage.goto();
 
@@ -202,16 +201,16 @@ test.describe('Prometheus query editor', () => {
       await page.getByRole('button', { name: 'Prometheus-amazon Prometheus' }).click();
 
       await explorePage
-        .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect).isVisible();
+        .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect).isVisible();
 
       await explorePage
-        .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect).focus();
+        .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect).focus();
       
       await explorePage
-        .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect).isEnabled();
+        .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect).isEnabled();
 
       await expect(explorePage
-        .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect)).toBeVisible();
+        .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect)).toBeVisible();
     });
 
     test('the query builder contains metric select, label filters and operations', async ({
@@ -219,7 +218,7 @@ test.describe('Prometheus query editor', () => {
       explorePage,
       page,
     }) => {
-      const dsDefaultEditorBuilder = await readProvisionedDataSource<DataSourcePluginOptionsEditorProps<PromOptions>>({ fileName: 'datasources.yml' });
+      // const dsDefaultEditorBuilder = await readProvisionedDataSource<DataSourcePluginOptionsEditorProps<PromOptions>>({ fileName: 'datasources.yml' });
 
       await explorePage.goto();
 
@@ -232,31 +231,31 @@ test.describe('Prometheus query editor', () => {
       await page.getByRole('button', { name: 'Prometheus-amazon Prometheus' }).click();
 
       await explorePage
-        .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect).isEnabled();
+        .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect).isEnabled();
 
       await expect(explorePage
-        .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect)).toBeVisible();
+        .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect)).toBeVisible();
       
       await explorePage
-        .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect).focus();
+        .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect).focus();
 
       await expect(explorePage
-          .getByTestIdOrAriaLabel(selectors.components.QueryBuilder.labelSelect)).toBeVisible();
+          .getByGrafanaSelector(selectors.components.QueryBuilder.labelSelect)).toBeVisible();
 
       await explorePage
-        .getByTestIdOrAriaLabel(selectors.components.QueryBuilder.labelSelect).focus();  
+        .getByGrafanaSelector(selectors.components.QueryBuilder.labelSelect).focus();
 
       await explorePage
-        .getByTestIdOrAriaLabel(selectors.components.QueryBuilder.matchOperatorSelect).focus();  
+        .getByGrafanaSelector(selectors.components.QueryBuilder.matchOperatorSelect).focus();
 
       await expect(explorePage
-        .getByTestIdOrAriaLabel(selectors.components.QueryBuilder.matchOperatorSelect)).toBeVisible();
+        .getByGrafanaSelector(selectors.components.QueryBuilder.matchOperatorSelect)).toBeVisible();
 
       await explorePage
-        .getByTestIdOrAriaLabel(selectors.components.QueryBuilder.valueSelect).focus();  
+        .getByGrafanaSelector(selectors.components.QueryBuilder.valueSelect).focus();
       
       await expect(explorePage
-        .getByTestIdOrAriaLabel(selectors.components.QueryBuilder.valueSelect)).toBeVisible();
+        .getByGrafanaSelector(selectors.components.QueryBuilder.valueSelect)).toBeVisible();
     });
 
     test('it can select a metric and provide a hint', async ({
@@ -264,7 +263,7 @@ test.describe('Prometheus query editor', () => {
       explorePage,
       page,
     }) => {
-      const dsDefaultEditorBuilder = await readProvisionedDataSource<DataSourcePluginOptionsEditorProps<PromOptions>>({ fileName: 'datasources.yml' });
+      // const dsDefaultEditorBuilder = await readProvisionedDataSource<DataSourcePluginOptionsEditorProps<PromOptions>>({ fileName: 'datasources.yml' });
 
       await explorePage.goto();
 
@@ -277,19 +276,19 @@ test.describe('Prometheus query editor', () => {
       await page.getByRole('button', { name: 'Prometheus-amazon Prometheus' }).click();
 
       await explorePage
-        .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect).isVisible();
+        .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect).isVisible();
 
       await explorePage
-        .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect).isEnabled();
+        .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect).isEnabled();
 
       await explorePage
-        .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect).focus();
+        .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect).focus();
 
-      await explorePage.getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect).click()
+      await explorePage.getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect).click()
 
       await page.getByText(metric, { exact: true }).click();
 
-      const hintText = await explorePage.getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.queryEditor.builder.hints).textContent();
+      const hintText = await explorePage.getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.builder.hints).textContent();
 
       expect(hintText).toContain('hint: add rate');
     });
@@ -299,7 +298,7 @@ test.describe('Prometheus query editor', () => {
       explorePage,
       page,
     }) => {
-      const dsDefaultEditorBuilder = await readProvisionedDataSource<DataSourcePluginOptionsEditorProps<PromOptions>>({ fileName: 'datasources.yml' });
+      // const dsDefaultEditorBuilder = await readProvisionedDataSource<DataSourcePluginOptionsEditorProps<PromOptions>>({ fileName: 'datasources.yml' });
 
       await explorePage.goto();
 
@@ -312,19 +311,19 @@ test.describe('Prometheus query editor', () => {
       await page.getByRole('button', { name: 'Prometheus-amazon Prometheus' }).click();
       
       await explorePage
-        .getByTestIdOrAriaLabel(selectors.components.QueryBuilder.labelSelect).isVisible();
+        .getByGrafanaSelector(selectors.components.QueryBuilder.labelSelect).isVisible();
       
       await explorePage
-        .getByTestIdOrAriaLabel(selectors.components.QueryBuilder.labelSelect).isEnabled();  
+        .getByGrafanaSelector(selectors.components.QueryBuilder.labelSelect).isEnabled();
 
       await explorePage
-        .getByTestIdOrAriaLabel(selectors.components.QueryBuilder.labelSelect).focus();  
+        .getByGrafanaSelector(selectors.components.QueryBuilder.labelSelect).focus();
         
-      await explorePage.getByTestIdOrAriaLabel(selectors.components.QueryBuilder.labelSelect).click()
+      await explorePage.getByGrafanaSelector(selectors.components.QueryBuilder.labelSelect).click()
 
       await page.getByText('__name__', { exact: true }).click();
 
-      await explorePage.getByTestIdOrAriaLabel(selectors.components.QueryBuilder.valueSelect).click();
+      await explorePage.getByGrafanaSelector(selectors.components.QueryBuilder.valueSelect).click();
 
       await page.getByText(metric, { exact: true }).click();
 
@@ -336,7 +335,7 @@ test.describe('Prometheus query editor', () => {
       explorePage,
       page,
     }) => {
-      const dsDefaultEditorBuilder = await readProvisionedDataSource<DataSourcePluginOptionsEditorProps<PromOptions>>({ fileName: 'datasources.yml' });
+      // const dsDefaultEditorBuilder = await readProvisionedDataSource<DataSourcePluginOptionsEditorProps<PromOptions>>({ fileName: 'datasources.yml' });
 
       await explorePage.goto();
 
@@ -349,19 +348,19 @@ test.describe('Prometheus query editor', () => {
       await page.getByRole('button', { name: 'Prometheus-amazon Prometheus' }).click();
 
       await explorePage
-        .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect).isVisible();
+        .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect).isVisible();
 
         await explorePage
-        .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect).isEnabled();
+        .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect).isEnabled();
       
       await explorePage
-        .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect).focus();
+        .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect).focus();
 
-      await explorePage.getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect).click();
+      await explorePage.getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect).click();
 
       await page.getByText('Metrics explorer', { exact: true }).click();
 
-      await expect(explorePage.getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.queryEditor.builder.metricsExplorer)).toBeVisible();
+      await expect(explorePage.getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.builder.metricsExplorer)).toBeVisible();
     });
 
     // NEED TO COMPLETE QUEY ADVISOR WORK OR FIGURE OUT HOW TO ENABLE EXPERIMENTAL FEATURE TOGGLES

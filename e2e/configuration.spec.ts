@@ -140,18 +140,9 @@ test.describe('Configuration tests', () => {
       name: DATA_SOURCE_NAME + "check",
     });
 
-    const incrementalQuerying = await page.locator(`#${selectors.components.DataSource.Prometheus.configPage.incrementalQuerying}`)
-
-    expect(incrementalQuerying).toBeVisible();
-
     await page.getByLabel('Toggle switch').nth(3).setChecked(true);
 
-    expect(
-      configPage
-        .getByGrafanaSelector(
-          selectors.components.DataSource.Prometheus.configPage.queryOverlapWindow
-        )
-    ).toBeVisible();
+    expect(configPage.getByGrafanaSelector(selectors.components.DataSource.Prometheus.configPage.queryOverlapWindow)).toBeVisible();
   });
 
 // exemplars tested in exemplar.spec

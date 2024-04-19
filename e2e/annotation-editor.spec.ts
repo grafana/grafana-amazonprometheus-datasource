@@ -18,6 +18,6 @@ test.describe('Prometheus annotation query editor', () => {
     await page.getByRole('button', { name: `${ds.name} Prometheus` }).click();
 
     await expect(annotationEditPage
-      .getByTestIdOrAriaLabel(selectors.components.DataSource.Prometheus.queryEditor.code.queryField)).toBeVisible();
+      .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.code.queryField)).toBeVisible();
   });
 });

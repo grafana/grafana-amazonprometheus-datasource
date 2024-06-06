@@ -6,19 +6,21 @@
     "build": "webpack -c ./.config/webpack/webpack.config.ts --env production",
     "dev": "webpack -w -c ./.config/webpack/webpack.config.ts --env development",
     "test": "jest --watch --onlyChanged",
-    "e2e": "yarn playwright test",
+    "e2e": "playwright test",
     "e2e:ui": "yarn playwright test --ui",
     "test:ci": "jest --passWithNoTests --maxWorkers 4",
     "typecheck": "tsc --noEmit",
     "lint": "eslint --cache --ignore-path ./.gitignore --ext .js,.jsx,.ts,.tsx .",
     "lint:fix": "yarn run lint --fix",
     "server:configured": "GRAFANA_VERSION=11.0.0 GRAFANA_IMAGE=grafana-enterprise docker-compose up -d",
-    "sign": "npx --yes @grafana/sign-plugin@latest --rootUrls https://github.com/grafana/prometheus-amazon",
-    "spellcheck": "cspell -c cspell.config.json \"**/*.{ts,tsx,js,go,md,mdx,yml,yaml,json,scss,css}\""
+    "sign": "npx --yes @grafana/sign-plugin@latest",
+    "spellcheck": "cspell -c cspell.config.json \"**/*.{ts,tsx,js,go,md,mdx,yml,yaml,json,scss,css}\"",
+    "server": "docker-compose up --build"
   },
   "author": "Grafana Labs",
   "license": "Apache-2.0",
   "devDependencies": {
+    "@babel/core": "7.21.4",
     "@emotion/eslint-plugin": "11.11.0",
     "@grafana/e2e-selectors": "11.1.0-181468",
     "@grafana/eslint-config": "7.0.0",
@@ -38,6 +40,7 @@
     "@types/node": "20.14.2",
     "@types/react": "18.3.3",
     "@types/react-dom": "18.3.0",
+    "@types/react-router-dom": "5.3.3",
     "@types/semver": "7.5.8",
     "@types/uuid": "9.0.8",
     "@types/testing-library__jest-dom": "5.14.9",
@@ -48,6 +51,7 @@
     "css-loader": "7.1.2",
     "eslint": "8.56.0",
     "eslint-config-prettier": "9.1.0",
+    "eslint-plugin-deprecation": "2.0.0",
     "eslint-plugin-import": "2.29.1",
     "eslint-plugin-jest": "28.5.0",
     "eslint-plugin-jsdoc": "48.2.3",
@@ -93,6 +97,7 @@
     "react-dom": "18.2.0",
     "rxjs": "7.8.1",
     "semver": "7.6.0",
-    "uuid": "9.0.1"
+    "uuid": "9.0.1",
+    "tslib": "2.5.3"
   }
 }

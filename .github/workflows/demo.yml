@@ -1,0 +1,43 @@
+name: Demo
+on:
+  pull_request:
+
+permissions:
+  contents: read
+  id-token: write
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
+  cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
+
+jobs:
+  resolve-versions:
+    name: Resolve Grafana images
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    outputs:
+      matrix: ${{ steps.resolve-versions.outputs.matrix }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Resolve Grafana E2E versions
+        id: resolve-versions
+        uses: grafana/plugin-actions/e2e-version@main
+        with:
+          version-resolver-type: version-support-policy
+
+  demo-step:
+    needs: resolve-versions
+    timeout-minutes: 60
+    strategy:
+      fail-fast: false
+      matrix:
+        GRAFANA_IMAGE: ${{fromJson(needs.resolve-versions.outputs.matrix)}}
+        ${{ insert }}: ${{fromJson(needs.resolve-versions.outputs.matrix)}}
+        exclude:
+          - name: grafana-enterprise
+    name: e2e ${{ matrix.GRAFANA_IMAGE.name }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print Grafana Image Name
+        run: echo "Running for ${{ matrix.GRAFANA_IMAGE.name }}@${{ matrix.GRAFANA_IMAGE.VERSION }}"

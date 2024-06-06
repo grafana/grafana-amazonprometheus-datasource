@@ -33,7 +33,7 @@ jobs:
       fail-fast: false
       matrix:
         GRAFANA_IMAGE: ${{fromJson(needs.resolve-versions.outputs.matrix)}}
-        test_name: ${{ GRAFANA_IMAGE.name }}
+        test_name: ${{ matrix.GRAFANA_IMAGE.name }}
         exclude:
           - test_name: grafana-enterprise
     name: e2e ${{ matrix.GRAFANA_IMAGE.name }}

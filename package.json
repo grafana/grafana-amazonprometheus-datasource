@@ -86,7 +86,7 @@
     "@grafana/prometheus": "11.1.0-181468",
     "@grafana/runtime": "11.1.0-181468",
     "@grafana/schema": "11.1.0-181468",
-    "@grafana/ui": "11.1.0-173675",
+    "@grafana/ui": "11.1.0-181468",
     "lodash": "4.17.21",
     "react": "18.2.0",
     "react-dom": "18.2.0",

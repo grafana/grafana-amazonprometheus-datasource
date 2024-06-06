@@ -33,9 +33,9 @@ jobs:
       fail-fast: false
       matrix:
         GRAFANA_IMAGE: ${{fromJson(needs.resolve-versions.outputs.matrix)}}
-        GRAFANA_IMAGE_NAME: ${{fromJson(needs.resolve-versions.outputs.matrix).name}}
+        ${{ insert }}: ${{ fromJson(needs.matrix.outputs.built_matrix) }}
         exclude:
-          - GRAFANA_IMAGE_NAME: grafana-enterprise
+          - name: grafana-enterprise
     name: e2e ${{ matrix.GRAFANA_IMAGE.name }}
     runs-on: ubuntu-latest
     steps:

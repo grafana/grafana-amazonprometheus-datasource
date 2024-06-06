@@ -23,6 +23,8 @@ jobs:
       - name: Resolve Grafana E2E versions
         id: resolve-versions
         uses: grafana/plugin-actions/e2e-version@main
+        with:
+          version-resolver-type: version-support-policy
 
   playwright-tests:
     needs: resolve-versions
@@ -31,6 +33,8 @@ jobs:
       fail-fast: false
       matrix:
         GRAFANA_IMAGE: ${{fromJson(needs.resolve-versions.outputs.matrix)}}
+        exclude:
+          - GRAFANA_IMAGE: { name: 'grafana-enterprise' }
     name: e2e ${{ matrix.GRAFANA_IMAGE.name }}
     runs-on: ubuntu-latest
     steps:

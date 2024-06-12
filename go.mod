@@ -4,7 +4,7 @@ go 1.22.4
 
 require (
 	github.com/grafana/grafana-aws-sdk v0.27.0
-	github.com/grafana/grafana-plugin-sdk-go v0.234.0
+	github.com/grafana/grafana-plugin-sdk-go v0.235.0
 	github.com/grafana/grafana/pkg/promlib v0.0.6
 	github.com/stretchr/testify v1.9.0
 )
@@ -42,6 +42,8 @@ require (
 	github.com/google/uuid v1.6.0 // indirect
 	github.com/gorilla/mux v1.8.1 // indirect
 	github.com/grafana/dataplane/sdata v0.0.9 // indirect
+	github.com/grafana/otel-profiling-go v0.5.1 // indirect
+	github.com/grafana/pyroscope-go/godeltaprof v0.1.7 // indirect
 	github.com/grafana/regexp v0.0.0-20221123153739-15dc172cd2db // indirect
 	github.com/grafana/sqlds/v3 v3.2.0 // indirect
 	github.com/grpc-ecosystem/go-grpc-middleware/providers/prometheus v1.0.1 // indirect

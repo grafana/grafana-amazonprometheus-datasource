@@ -123,3 +123,4 @@ require (
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 	k8s.io/kube-openapi v0.0.0-20240228011516-70dd3763d340 // indirect
 )
+replace github.com/grafana/grafana-aws-sdk => /Users/isabellasiu/code/grafana-aws-sdk

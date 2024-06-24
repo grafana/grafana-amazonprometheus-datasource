@@ -3,7 +3,7 @@ module github.com/grafana/prometheus-amazon
 go 1.22.4
 
 require (
-	github.com/grafana/grafana-aws-sdk v0.27.0
+	github.com/grafana/grafana-aws-sdk v0.28.0
 	github.com/grafana/grafana-plugin-sdk-go v0.234.0
 	github.com/grafana/grafana/pkg/promlib v0.0.6
 	github.com/stretchr/testify v1.9.0
@@ -123,4 +123,3 @@ require (
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 	k8s.io/kube-openapi v0.0.0-20240228011516-70dd3763d340 // indirect
 )
-replace github.com/grafana/grafana-aws-sdk => /Users/isabellasiu/code/grafana-aws-sdk

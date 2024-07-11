@@ -22,11 +22,12 @@ export const ConfigEditor = (props: Props) => {
     <>
       {options.access === 'direct' && (
         <Alert title="Error" severity="error">
-          Browser access mode in the Prometheus data source is no longer available. Switch to server access mode.
+          Browser access mode in the Amazon Managed Service for Prometheus data source is no longer available. Switch to server access mode.
         </Alert>
       )}
       <DataSourceDescription
-        dataSourceName="Prometheus"
+        dataSourceName="Amazon Managed Service for Prometheus"
+        // TODO: point this at the new plugin's docs or README  }
         docsLink="https://grafana.com/docs/grafana/latest/datasources/prometheus/configure-prometheus-data-source/"
       />
       <hr className={`${styles.hrTopSpace} ${styles.hrBottomSpace}`} />
@@ -60,6 +61,7 @@ export const ConfigEditor = (props: Props) => {
  * @returns
  */
 export function docsTip(url?: string) {
+  /* TODO: point this at the new plugin's docs or README */
   const docsUrl = 'https://grafana.com/docs/grafana/latest/datasources/prometheus/#configure-the-data-source';
 
   return (

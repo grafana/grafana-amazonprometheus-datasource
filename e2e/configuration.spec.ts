@@ -108,7 +108,7 @@ test.describe('Configuration tests', () => {
     page,
   }) => {
     const configPage = await createDataSourceConfigPage({
-      type: "grafana-prometheusamazon-datasource",
+      type: "grafana-amazonprometheus-datasource",
       name: DATA_SOURCE_NAME,
     });
 
@@ -136,7 +136,7 @@ test.describe('Configuration tests', () => {
     page,
   }) => {
     const configPage = await createDataSourceConfigPage({
-      type: "grafana-prometheusamazon-datasource",
+      type: "grafana-amazonprometheus-datasource",
       name: DATA_SOURCE_NAME + "check",
     });
 

@@ -1,6 +1,6 @@
-# Prometheus Amazon Data Source
+# Amazon Managed Service for Prometheus Data Source
 
-This data source plugin is is for Amazon Prometheus. It has all the features of the Grafana core Prometheus plugin with Amazon specific authentication in the configuration page.
+This data source plugin is for the Amazon Managed Service for Prometheus. It has all the features of the Grafana core Prometheus plugin with Amazon specific authentication in the configuration page.
 
 Amazon Managed Service for Prometheus is a Prometheus-compatible service that monitors and provides alerts on containerized applications and infrastructure at scale.
 

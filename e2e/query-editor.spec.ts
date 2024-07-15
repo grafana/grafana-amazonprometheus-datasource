@@ -196,9 +196,9 @@ test.describe('Prometheus query editor', () => {
 
       await page.getByTestId('data-testid Select a data source').click();
 
-      await page.getByTestId('data-testid Select a data source').fill('Prometheus-amazon');
+      await page.getByTestId('data-testid Select a data source').fill('Amazon Managed Service for Prometheus');
 
-      await page.getByRole('button', { name: 'Prometheus-amazon Prometheus' }).click();
+      await page.getByRole('button', { name: 'Amazon Managed Service for Prometheus' }).click();
 
       await explorePage
         .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect).isVisible();
@@ -226,9 +226,9 @@ test.describe('Prometheus query editor', () => {
 
       await page.getByTestId('data-testid Select a data source').click();
 
-      await page.getByTestId('data-testid Select a data source').fill('Prometheus-amazon');
+      await page.getByTestId('data-testid Select a data source').fill('Amazon Managed Service for Prometheus');
 
-      await page.getByRole('button', { name: 'Prometheus-amazon Prometheus' }).click();
+      await page.getByRole('button', { name: 'Amazon Managed Service for Prometheus' }).click();
 
       await explorePage
         .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect).isEnabled();
@@ -271,9 +271,9 @@ test.describe('Prometheus query editor', () => {
 
       await page.getByTestId('data-testid Select a data source').click();
 
-      await page.getByTestId('data-testid Select a data source').fill('Prometheus-amazon');
+      await page.getByTestId('data-testid Select a data source').fill('Amazon Managed Service for Prometheus');
 
-      await page.getByRole('button', { name: 'Prometheus-amazon Prometheus' }).click();
+      await page.getByRole('button', { name: 'Amazon Managed Service for Prometheus' }).click();
 
       await explorePage
         .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect).isVisible();
@@ -306,9 +306,9 @@ test.describe('Prometheus query editor', () => {
 
       await page.getByTestId('data-testid Select a data source').click();
 
-      await page.getByTestId('data-testid Select a data source').fill('Prometheus-amazon');
+      await page.getByTestId('data-testid Select a data source').fill('Amazon Managed Service for Prometheus');
 
-      await page.getByRole('button', { name: 'Prometheus-amazon Prometheus' }).click();
+      await page.getByRole('button', { name: 'Amazon Managed Service for Prometheus' }).click();
       
       await explorePage
         .getByGrafanaSelector(selectors.components.QueryBuilder.labelSelect).isVisible();
@@ -343,9 +343,9 @@ test.describe('Prometheus query editor', () => {
 
       await page.getByTestId('data-testid Select a data source').click();
 
-      await page.getByTestId('data-testid Select a data source').fill('Prometheus-amazon');
+      await page.getByTestId('data-testid Select a data source').fill('Amazon Managed Service for Prometheus');
 
-      await page.getByRole('button', { name: 'Prometheus-amazon Prometheus' }).click();
+      await page.getByRole('button', { name: 'Amazon Managed Service for Prometheus' }).click();
 
       await explorePage
         .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect).isVisible();

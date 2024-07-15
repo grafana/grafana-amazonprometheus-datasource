@@ -1,7 +1,7 @@
 apiVersion: 1
 
 datasources:
-- name: Amazon-prometheus
+- name: Amazon Managed Service for Prometheus
   uid: grafana-amazonprometheus
   type: grafana-amazonprometheus-datasource
   url: http://prometheus:9090 

@@ -1,4 +1,4 @@
-module github.com/grafana/prometheus-amazon
+module github.com/grafana/grafana-amazonprometheus-datasource
 
 go 1.22.4
 

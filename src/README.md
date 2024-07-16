@@ -1,4 +1,4 @@
-# Prometheus Amazon Data Source
+# Amazon Managed Service for Prometheus Data Source
 
 Amazon Managed Service for Prometheus is a Prometheus-compatible service that monitors and provides alerts on containerized applications and infrastructure at scale.
 

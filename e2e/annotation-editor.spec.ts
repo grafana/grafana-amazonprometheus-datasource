@@ -15,7 +15,7 @@ test.describe('Prometheus annotation query editor', () => {
 
     await page.getByTestId('data-testid Select a data source').fill(ds.name);
 
-    await page.getByRole('button', { name: `${ds.name} Prometheus` }).click();
+    await page.getByRole('button', { name: `${ds.name}` }).click();
 
     await expect(annotationEditPage
       .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.code.queryField)).toBeVisible();

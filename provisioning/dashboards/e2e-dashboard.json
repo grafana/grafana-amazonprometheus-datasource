@@ -15,8 +15,8 @@
       },
       {
         "datasource": {
-          "type": "grafana-prometheusamazon-datasource",
-          "uid": "grafana-prometheusamazon"
+          "type": "grafana-amazonprometheus-datasource",
+          "uid": "grafana-amazonprometheus"
         },
         "enable": true,
         "expr": "go_goroutines",
@@ -38,8 +38,8 @@
   "panels": [
     {
       "datasource": {
-        "type": "grafana-prometheusamazon-datasource",
-        "uid": "grafana-prometheusamazon"
+        "type": "grafana-amazonprometheus-datasource",
+        "uid": "grafana-amazonprometheus"
       },
       "fieldConfig": {
         "defaults": {
@@ -119,7 +119,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "grafana-prometheusamazon"
+            "uid": "grafana-amazonprometheus"
           },
           "disableTextWrap": false,
           "editorMode": "builder",
@@ -149,8 +149,8 @@
           "value": "__name__"
         },
         "datasource": {
-          "type": "grafana-prometheusamazon-datasource",
-          "uid": "grafana-prometheusamazon"
+          "type": "grafana-amazonprometheus-datasource",
+          "uid": "grafana-amazonprometheus"
         },
         "definition": "label_names()",
         "hide": 0,
@@ -178,7 +178,7 @@
   "timeRangeUpdatedDuringEditOrView": false,
   "timepicker": {},
   "timezone": "browser",
-  "title": "grafana-prometheusamazon",
+  "title": "grafana-amazonprometheus",
   "uid": "fdewz0hu7qccge",
   "version": 2,
   "weekStart": ""

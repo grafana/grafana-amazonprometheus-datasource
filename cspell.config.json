@@ -32,7 +32,7 @@
     "grafana",
     "datasource",
     "datasources",
-    "prometheusamazon",
+    "amazonprometheus",
     "tsdb",
     "promlib",
     "instancemgmt",

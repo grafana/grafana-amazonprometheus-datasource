@@ -13,7 +13,7 @@ import (
 )
 
 func NewDatasource(ctx context.Context, dsInstanceSettings backend.DataSourceInstanceSettings) (instancemgmt.Instance, error) {
-	plog := backend.NewLoggerWith("logger", "tsdb.prometheus-amazon")
+	plog := backend.NewLoggerWith("logger", "tsdb.amazon-prometheus")
 	plog.Debug("Initializing")
 
 	authSettings, _ := awsds.ReadAuthSettingsFromContext(ctx)

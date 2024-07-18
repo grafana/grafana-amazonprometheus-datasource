@@ -51,10 +51,10 @@ If you are using core Prometheus with SigV4 authentication, you will want to mig
         "uid": "<AMP UID>"
       ```
     - Confirm the "datasource" change for all of the following categories in the JSON model.
-      - annotations
-      - panels
-      - targets
-      - templating
+      - `annotations`
+      - `panels`
+      - `targets`
+      - `templating`
     - Click “Save changes” in the bottom left side of the JSON model UI.
   Save your dashboard.
 

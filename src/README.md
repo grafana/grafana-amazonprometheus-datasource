@@ -17,10 +17,10 @@ If you are using core Prometheus with SigV4 authentication, you must migrate to 
 
 - Get the `UID` for Prometheus using SigV4.
 - Get the `UID` for your new Amazon Managed Service for Prometheus.
-- Update dashboards with the new datasource `UID`
+- Update dashboards with the new datasource `UID`.
 - Update alert rules by exporting provisioning files and updating the data source in the model or create new alert rules.
 - Recreate correlations.
-- Recreate recorded queries
+- Recreate recorded queries.
 
 #### Migration instructions
 

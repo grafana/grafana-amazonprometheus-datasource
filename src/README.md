@@ -36,11 +36,11 @@ If you are using core Prometheus with SigV4 authentication, you must migrate to 
     - Navigate to the dashboard JSON panel of your dashboard that uses the old Prometheus with SigV4 authentication.
     - Click on Dashboard settings.
     - Select the JSON model in the tabs.
-    - Search for the <Prom SigV4 UID>
+    - Search for the <Prom SigV4 UID>.
       - Example: `"uid": "<Prom SigV4 UID>"`
-      - Change both the `UID` and the `type`
-      - The old type is `prometheus`
-      - Example for changing `type` and `UID`
+      - Change both the `UID` and the `type`.
+      - The old type is `prometheus`.
+      - Example for changing `type` and `UID`.
       ```
         "type": "prometheus",
         "uid": "<Prom SigV4 UID>"
@@ -60,7 +60,7 @@ If you are using core Prometheus with SigV4 authentication, you must migrate to 
 
 2. Alert rules migration
     - Alert rule data sources cannot be changed without wiping out the query.
-    - There are two ways to migrate alert rules
+    - There are two ways to migrate alert rules.
       - First, edit the rule by exporting to a provisioned file [documentation here].
         - Navigate to the Alert rules page.
         - Identify the alert rule that uses the Prom SigV4 data source.

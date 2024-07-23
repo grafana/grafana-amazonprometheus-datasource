@@ -88,11 +88,11 @@ Read more about it here:
 
 ## Migrate from core Prometheus to Amazon Managed Service for Prometheus
 
-If you are using core Prometheus with SigV4 authentication, you will want to migrate to the Amazon Managed Service for Prometheus data source as SigV4 auth is deprecated in core Prometheus. This is a summary of the steps required to migrated from using core Prometheus to Amazon Managed Service for Prometheus. See a detailed list of steps [here](src/README.md).
+If you are using core Prometheus with SigV4 authentication, you must migrate to the Amazon Managed Service for Prometheus data source because SigV4 auth is deprecated in core Prometheus. This topic summarizes the steps required to migrate from core Prometheus to Amazon Managed Service for Prometheus. See a detailed list of steps [here](src/README.md).
 
-- Get the `UID` for Prometheus using SigV4
-- Get the `UID` for your new Amazon Managed Service for Prometheus
-- Update dashboards with the new datasource `UID`
+- Get the `UID` for Prometheus using SigV4.
+- Get the `UID` for your new Amazon Managed Service for Prometheus.
+- Update dashboards with the new datasource `UID`.
 - Update alert rules by exporting provisioning files and updating the data source in the model or create new alert rules.
 - Recreate correlations.
-- Recreate recorded queries
+- Recreate recorded queries.

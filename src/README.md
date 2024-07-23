@@ -13,18 +13,18 @@ Read more about it here:
 
 ## Migrate from core Prometheus to Amazon Managed Service for Prometheus
 
-If you are using core Prometheus with SigV4 authentication, you will want to migrate to the Amazon Managed Service for Prometheus data source as SigV4 auth is deprecated in core Prometheus. This is a summary of the steps required to migrated from using core Prometheus to Amazon Managed Service for Prometheus.
+If you are using core Prometheus with SigV4 authentication, you must migrate to the Amazon Managed Service for Prometheus data source because SigV4 auth is deprecated in core Prometheus. This topic summarizes the steps required to migrate from core Prometheus to Amazon Managed Service for Prometheus.
 
-- Get the `UID` for Prometheus using SigV4
-- Get the `UID` for your new Amazon Managed Service for Prometheus
+- Get the `UID` for Prometheus using SigV4.
+- Get the `UID` for your new Amazon Managed Service for Prometheus.
 - Update dashboards with the new datasource `UID`
 - Update alert rules by exporting provisioning files and updating the data source in the model or create new alert rules.
 - Recreate correlations.
 - Recreate recorded queries
 
-#### How to migrate
+#### Migration instructions
 
-1. Get the UID for the old and new data source
+1. Get the UID for the old and new data source.
     - Navigate to the configuration page for your new data source.
     - Find the `UID` in the url.
       - Example: “connections/datasources/edit/<DATA SOURCE UID>”
@@ -94,7 +94,7 @@ If you are using core Prometheus with SigV4 authentication, you will want to mig
     - Delete the old correlation.
 
 4. Recorded queries migration
-    - Only available in Grafana Enterprise and Grafana Cloud
+    - Only available in Grafana Enterprise and Grafana Cloud.
     - Create a new recorded query, see [documentation here](https://grafana.com/docs/grafana/latest/administration/correlations/create-a-new-correlation/).
     - Identify the recorded query that uses the old Prom SigV4 data source.
     - Copy the fields from your recorded query.

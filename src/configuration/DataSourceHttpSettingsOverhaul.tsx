@@ -41,7 +41,7 @@ export const DataSourceHttpSettingsOverhaul = (props: Props) => {
   const sigV4Option: CustomMethod = {
     id: sigV4Id,
     label: 'SigV4 auth',
-    description: 'Use SigV4 authentication to connect to to your Amazon Managed Service for Prometheus data source.',
+    description: 'Use SigV4 authentication to connect to your Amazon Managed Service for Prometheus workspace',
     component: <>{renderSigV4Editor}</>,
   };
 

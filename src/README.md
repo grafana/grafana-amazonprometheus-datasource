@@ -29,14 +29,14 @@ If you are using core Prometheus with SigV4 authentication, you must migrate to 
     - Find the `UID` in the url.
       - Example: “connections/datasources/edit/<DATA SOURCE UID>”
     - Copy the UID for both the old and new data sources.
-      - <Prom SigV4 UID>
-      - <AMP UID>
+      - "<Prom SigV4 UID>"
+      - "<AMP UID>"
 
 2. Dashboard migration
     - Navigate to the dashboard JSON panel of your dashboard that uses the old Prometheus with SigV4 authentication.
     - Click on Dashboard settings.
     - Select the JSON model in the tabs.
-    - Search for the <Prom SigV4 UID>.
+    - Search for the "<Prom SigV4 UID>".
       - Example: `"uid": "<Prom SigV4 UID>"`
       - Change both the `UID` and the `type`.
       - The old type is `prometheus`.
@@ -66,7 +66,7 @@ If you are using core Prometheus with SigV4 authentication, you must migrate to 
         - Identify the alert rule that uses the Prom SigV4 data source.
         - Select “Export rule.”
         - Export the rule in your choice of JSON, YAML or Terraform.
-        - Search the exported rule for the <Prom SigV4 UID>.
+        - Search the exported rule for the "<Prom SigV4 UID>".
         - Change the `UID` and the `type` in the exported rule.
       ```
         "type": "prometheus",

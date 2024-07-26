@@ -24,6 +24,10 @@ export const DataSourceHttpSettingsOverhaul = (props: Props) => {
     onChange: onOptionsChange,
   });
 
+  // Since we are not allowing users to select another auth,
+  // need to set this as this field needs to be true for auth to work.
+  options.jsonData.sigV4Auth = true;
+
   const theme = useTheme2();
   const styles = overhaulStyles(theme);
 
@@ -37,7 +41,7 @@ export const DataSourceHttpSettingsOverhaul = (props: Props) => {
   const sigV4Option: CustomMethod = {
     id: sigV4Id,
     label: 'SigV4 auth',
-    description: 'This is SigV4 auth description',
+    description: 'Use SigV4 authentication to connect to your Amazon Managed Service for Prometheus workspace',
     component: <>{renderSigV4Editor}</>,
   };
 
@@ -105,6 +109,7 @@ export const DataSourceHttpSettingsOverhaul = (props: Props) => {
         // If your method is selected pass its id to `selectedMethod`,
         // otherwise pass the id from converted legacy data
         selectedMethod={returnSelectedMethod()}
+        visibleMethods={[sigV4Id]}
       />
       <div className={styles.sectionBottomPadding} />
       {secureSocksDSProxyEnabled && (

@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.0.0
+- Initial public release
+
 ## 0.3.0
 - Rename plugin & repo
 

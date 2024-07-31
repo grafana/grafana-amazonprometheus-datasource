@@ -263,6 +263,13 @@
   dependencies:
     regenerator-runtime "^0.14.0"
 
+"@babel/runtime@^7.24.1":
+  version "7.25.0"
+  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.25.0.tgz#3af9a91c1b739c569d5d80cc917280919c544ecb"
+  integrity sha512-7dRy4DwXwtzBrPbZflqxnvfxLF8kdZXPkhymtDeFoFqE6ldzjQFgYTtYIFARcLEYDrqfBfYcZt1WqFxRoyC9Rw==
+  dependencies:
+    regenerator-runtime "^0.14.0"
+
 "@babel/template@^7.25.0", "@babel/template@^7.3.3":
   version "7.25.0"
   resolved "https://registry.yarnpkg.com/@babel/template/-/template-7.25.0.tgz#e733dc3134b4fede528c15bc95e89cb98c52592a"
@@ -650,7 +657,7 @@
   resolved "https://registry.npmjs.org/@emotion/memoize/-/memoize-0.8.1.tgz"
   integrity sha512-W2P2c/VRW1/1tLox0mVUalvnWXxavmv/Oum2aPsRcoDJuob75FC3Y8FbpfLwUegRcxINtGUMPq0tFCvYNTBXNA==
 
-"@emotion/react@11.11.4":
+"@emotion/react@11.11.4", "@emotion/react@^11.8.1":
   version "11.11.4"
   resolved "https://registry.yarnpkg.com/@emotion/react/-/react-11.11.4.tgz#3a829cac25c1f00e126408fab7f891f00ecc3c1d"
   integrity sha512-t8AjMlF0gHpvvxk5mAtCqR4vmxiGHCeJBaQO6gncUSdklELOgtwjerNY2yuJNfwnc6vi16U/+uMF+afIawJ9iw==
@@ -659,20 +666,6 @@
     "@emotion/babel-plugin" "^11.11.0"
     "@emotion/cache" "^11.11.0"
     "@emotion/serialize" "^1.1.3"
-    "@emotion/use-insertion-effect-with-fallbacks" "^1.0.1"
-    "@emotion/utils" "^1.2.1"
-    "@emotion/weak-memoize" "^0.3.1"
-    hoist-non-react-statics "^3.3.1"
-
-"@emotion/react@^11.8.1":
-  version "11.11.1"
-  resolved "https://registry.npmjs.org/@emotion/react/-/react-11.11.1.tgz"
-  integrity sha512-5mlW1DquU5HaxjLkfkGN1GA/fvVGdyHURRiX/0FHl2cfIfRxSOfmxEH5YS43edp0OldZrZ+dkBKbngxcNCdZvA==
-  dependencies:
-    "@babel/runtime" "^7.18.3"
-    "@emotion/babel-plugin" "^11.11.0"
-    "@emotion/cache" "^11.11.0"
-    "@emotion/serialize" "^1.1.2"
     "@emotion/use-insertion-effect-with-fallbacks" "^1.0.1"
     "@emotion/utils" "^1.2.1"
     "@emotion/weak-memoize" "^0.3.1"
@@ -880,28 +873,28 @@
   dependencies:
     tslib "^2.4.0"
 
-"@grafana/async-query-data@0.1.4":
-  version "0.1.4"
-  resolved "https://registry.npmjs.org/@grafana/async-query-data/-/async-query-data-0.1.4.tgz"
-  integrity sha512-3d7fm2sf5x/+JKTt4T6MSS/veB2J/YGfQp5Ck0Tbqtc5YIoI0p1JY+vFWfCstEHyVd1H0Ep/q/VSxf4VAs9YKQ==
+"@grafana/async-query-data@0.2.0":
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/@grafana/async-query-data/-/async-query-data-0.2.0.tgz#2df8a69da527ce1993fc74a6bce452582fb76649"
+  integrity sha512-CduRkX8Bl8/+uiDTrKXjPN2h3kjVE67VgeZAZlVKcjCsxDlDpbVYXMVbfTJBGr4HqzDHg1Km6UkmeuOAt2bBww==
   dependencies:
     tslib "^2.4.1"
 
-"@grafana/aws-sdk@0.3.3":
-  version "0.3.3"
-  resolved "https://registry.yarnpkg.com/@grafana/aws-sdk/-/aws-sdk-0.3.3.tgz#4028a2c03fa8c4a8ad8ab9994ed5b14e8d0bd054"
-  integrity sha512-5C1cq5d1FPAEeJz1XNifmy3ln9FNjFv+HvASztEXJWOGe5RFxGy1I1X1KAfxMbgUrse5xGLv7GBSVyEFOuBcrA==
+"@grafana/aws-sdk@0.4.1":
+  version "0.4.1"
+  resolved "https://registry.yarnpkg.com/@grafana/aws-sdk/-/aws-sdk-0.4.1.tgz#0f8051486d624c3ad612d081240909ac74fa47e1"
+  integrity sha512-qW32oZH0iu6sZGh0nD/k7ThDf2+8xuIxMqh+u4ObMOy+EfUi4NzeXQtIf0b/3BycUk5gJSZG930hmnCvOUFd8w==
   dependencies:
-    "@grafana/async-query-data" "0.1.4"
-    "@grafana/experimental" "1.7.0"
+    "@grafana/async-query-data" "0.2.0"
+    "@grafana/experimental" "1.7.12"
 
-"@grafana/data@11.1.0-181468":
-  version "11.1.0-181468"
-  resolved "https://registry.yarnpkg.com/@grafana/data/-/data-11.1.0-181468.tgz#65705a27a2896b0312d4235fc7de737ea2586aa4"
-  integrity sha512-yxifz546sbxwNWI0LZTMdjdj7K3qeIQuZzTJISUeaRWHFppv5RG6oK8qeVVfmIlIp4jNlSctS/Srg8XJnZrsxw==
+"@grafana/data@11.1.3":
+  version "11.1.3"
+  resolved "https://registry.yarnpkg.com/@grafana/data/-/data-11.1.3.tgz#4e9ddb8ff93fee76ebce8f84a238d920b3a228b5"
+  integrity sha512-7ldWX6mCGYemRBNmipyuUDpf7XfZvganne5wZvOSG5OuBkkk/aaD/g1rZUxaI9/6/bWTXzFj4AFEa01ixCfO1w==
   dependencies:
     "@braintree/sanitize-url" "7.0.1"
-    "@grafana/schema" "11.1.0-181468"
+    "@grafana/schema" "11.1.3"
     "@types/d3-interpolate" "^3.0.0"
     "@types/string-hash" "1.1.3"
     d3-interpolate "3.0.1"
@@ -925,10 +918,10 @@
     uplot "1.6.30"
     xss "^1.0.14"
 
-"@grafana/e2e-selectors@11.1.0-181468":
-  version "11.1.0-181468"
-  resolved "https://registry.yarnpkg.com/@grafana/e2e-selectors/-/e2e-selectors-11.1.0-181468.tgz#a572ac8b8e9b91ed7f15c76012e3e6a5bdcda5cc"
-  integrity sha512-981+Ti1WSRzN9RWHTGimjV3RopDUr7gp8laVjofFVYNpFoFm/OBtCJEsLgFCR021wTUsUBLNEUjG1H87k2Saww==
+"@grafana/e2e-selectors@11.1.3":
+  version "11.1.3"
+  resolved "https://registry.yarnpkg.com/@grafana/e2e-selectors/-/e2e-selectors-11.1.3.tgz#a3a12f78addb49787ecb688e7cb2f1e4b5e16247"
+  integrity sha512-b9TGYyqb7OlCho8OwzVjShCDdool05OiWN44y+wLbqwhlb90LbZWvyEUQJGUJkg4ChI2HDL+j3UCEMi+bRsocQ==
   dependencies:
     "@grafana/tsconfig" "^1.3.0-rc1"
     tslib "2.6.3"
@@ -948,14 +941,6 @@
     eslint-plugin-react-hooks "4.6.0"
     typescript "5.2.2"
 
-"@grafana/experimental@1.7.0":
-  version "1.7.0"
-  resolved "https://registry.yarnpkg.com/@grafana/experimental/-/experimental-1.7.0.tgz#f05ce178f3201cd5268645eb14dc5bcfefa05a4c"
-  integrity sha512-3DfDzGTUnvG/v2U0lhBaB05j4x0bczrgylrg5Co6LMyRYh1kPA4XnK0dTshSxA6igjKqAjSacfwZQ40f4rLdqw==
-  dependencies:
-    "@types/uuid" "^8.3.3"
-    uuid "^8.3.2"
-
 "@grafana/experimental@1.7.11":
   version "1.7.11"
   resolved "https://registry.yarnpkg.com/@grafana/experimental/-/experimental-1.7.11.tgz#2a68146a682550a66596eaae3e7e3fdf1a24a82c"
@@ -970,13 +955,33 @@
     semver "^7.5.4"
     uuid "^8.3.2"
 
-"@grafana/faro-core@^1.3.8":
-  version "1.3.8"
-  resolved "https://registry.yarnpkg.com/@grafana/faro-core/-/faro-core-1.3.8.tgz#d77f110d883fb9775f024d747eec74d19442fb5a"
-  integrity sha512-1bbuR906//gEyaAIUkBOee1bBMR8ZnxAfGttuNznItPKSV6R7aO4U6YhPurVXXPO7QflcZco60Ej6Ov6h8vXhw==
+"@grafana/experimental@1.7.12":
+  version "1.7.12"
+  resolved "https://registry.yarnpkg.com/@grafana/experimental/-/experimental-1.7.12.tgz#7fe0be35a4d5b242861afc5b4449dac3df761b97"
+  integrity sha512-Yp9TrfB42y/loeKqZWhuSVFgFYx6182Xx8FzrWlDdnJBmV5rlys7cX/RsIzf+6lcruJhrwtWCvACFwNeAjhPgg==
   dependencies:
-    "@opentelemetry/api" "^1.7.0"
-    "@opentelemetry/otlp-transformer" "^0.48.0"
+    "@types/uuid" "^8.3.3"
+    lodash "^4.17.21"
+    prismjs "^1.29.0"
+    react-beautiful-dnd "^13.1.1"
+    react-popper-tooltip "^4.4.2"
+    react-use "^17.4.2"
+    semver "^7.5.4"
+    uuid "^8.3.2"
+
+"@grafana/experimental@1.7.13":
+  version "1.7.13"
+  resolved "https://registry.yarnpkg.com/@grafana/experimental/-/experimental-1.7.13.tgz#40b019074f559d74247e97e611bd1b8cbcec9eb5"
+  integrity sha512-KHSzpMe9Q87vpQBDYnH+y4P/morspf+e8UpRp7fdDhJFzNgGDYtISjfZVw1bCwgET6UkzVWbSx1O95bFDl2m+Q==
+  dependencies:
+    "@hello-pangea/dnd" "^16.6.0"
+    "@types/uuid" "^8.3.3"
+    lodash "^4.17.21"
+    prismjs "^1.29.0"
+    react-popper-tooltip "^4.4.2"
+    react-use "^17.4.2"
+    semver "^7.5.4"
+    uuid "^8.3.2"
 
 "@grafana/faro-core@^1.7.3":
   version "1.7.3"
@@ -986,7 +991,7 @@
     "@opentelemetry/api" "^1.7.0"
     "@opentelemetry/otlp-transformer" "^0.48.0"
 
-"@grafana/faro-web-sdk@1.7.3":
+"@grafana/faro-web-sdk@1.7.3", "@grafana/faro-web-sdk@^1.3.6":
   version "1.7.3"
   resolved "https://registry.yarnpkg.com/@grafana/faro-web-sdk/-/faro-web-sdk-1.7.3.tgz#8be692fb4f5132ff8f06a5c028993feee12063f1"
   integrity sha512-fEOUY/JpUtkgSYcRivlqQ+YQ07arNu+J8wFSL3CXbp29eeP4zKVDyGDuGzSGyupQ3jV2xmAsQFdCYfiGoZtJSg==
@@ -995,37 +1000,28 @@
     ua-parser-js "^1.0.32"
     web-vitals "^3.1.1"
 
-"@grafana/faro-web-sdk@^1.3.6":
-  version "1.3.8"
-  resolved "https://registry.yarnpkg.com/@grafana/faro-web-sdk/-/faro-web-sdk-1.3.8.tgz#2dd88437b773fbc3024ceb210c346fbcb2cccc34"
-  integrity sha512-XFMBMr8Y+GdwHfOt+I5SlAr7VPulFBmpgPlHtmJ9YitMPWKyQxGOp5HRvmptwIsGMjFXgDdMbO5H2879dpkEjw==
-  dependencies:
-    "@grafana/faro-core" "^1.3.8"
-    ua-parser-js "^1.0.32"
-    web-vitals "^3.1.1"
-
-"@grafana/plugin-e2e@1.3.2":
-  version "1.3.2"
-  resolved "https://registry.yarnpkg.com/@grafana/plugin-e2e/-/plugin-e2e-1.3.2.tgz#aa954cdba87b1aa61727fc2d3b9b89c309d0ee72"
-  integrity sha512-J36SA+ey6m1Qvwu49yRX6q55jvEYsjVUJaHS+KApzHnWCcTALIwlDAJPwR3X7Y+MFtV/B4S5AiBxuFPvZ8hLrw==
+"@grafana/plugin-e2e@1.6.1":
+  version "1.6.1"
+  resolved "https://registry.yarnpkg.com/@grafana/plugin-e2e/-/plugin-e2e-1.6.1.tgz#51c4f9d32f5d92e38061f09f5bcaa9d5070d64b5"
+  integrity sha512-1Ww1luGFKeytiAhbg321+z8n0yZ5ARTkUgSN4YdRkupHThwi+pysqGmmiy9tJyewyqkZMt8maawL6gK2qyTKHA==
   dependencies:
     semver "^7.5.4"
     uuid "^9.0.1"
     yaml "^2.3.4"
 
-"@grafana/prometheus@11.1.0-181468":
-  version "11.1.0-181468"
-  resolved "https://registry.yarnpkg.com/@grafana/prometheus/-/prometheus-11.1.0-181468.tgz#3b3ce570cc48c7f06cddef61c86342812ba0edf1"
-  integrity sha512-hNShejF9WBe96e2esMxGxjuk6l8yvs/JXEgyg2RV9ObIlooOLTUKLa7OjenUjDYMR+9IG5SLMLmanxm+11d+hg==
+"@grafana/prometheus@11.1.3":
+  version "11.1.3"
+  resolved "https://registry.yarnpkg.com/@grafana/prometheus/-/prometheus-11.1.3.tgz#86125d9b472d5d6670e1859be850cff33756aa06"
+  integrity sha512-IiyZfmH6sbTAr4lswOMna83Xup/FRjMIlcff5+2m+CTzaaEMDjHGzRNjwhgMXifJj7LoBbzTZBaXB+WoXQKAGA==
   dependencies:
     "@emotion/css" "11.11.2"
     "@floating-ui/react" "0.26.16"
-    "@grafana/data" "11.1.0-181468"
+    "@grafana/data" "11.1.3"
     "@grafana/experimental" "1.7.11"
     "@grafana/faro-web-sdk" "1.7.3"
-    "@grafana/runtime" "11.1.0-181468"
-    "@grafana/schema" "11.1.0-181468"
-    "@grafana/ui" "11.1.0-181468"
+    "@grafana/runtime" "11.1.3"
+    "@grafana/schema" "11.1.3"
+    "@grafana/ui" "11.1.3"
     "@leeoniya/ufuzzy" "1.0.14"
     "@lezer/common" "1.2.1"
     "@lezer/highlight" "1.2.0"
@@ -1056,25 +1052,25 @@
     uuid "9.0.1"
     whatwg-fetch "3.6.20"
 
-"@grafana/runtime@11.1.0-181468":
-  version "11.1.0-181468"
-  resolved "https://registry.yarnpkg.com/@grafana/runtime/-/runtime-11.1.0-181468.tgz#bc3af420766c6cadd0e2815d48a6bcceeab8adb4"
-  integrity sha512-YuZK5LDX4nS3E35CoPlisZ8mrM49U5A0ljUgJQXl6n+AJwZzhf5IY5nxHN+bhwwJv+gblMtaipIOFGf8DDNw2Q==
+"@grafana/runtime@11.1.3":
+  version "11.1.3"
+  resolved "https://registry.yarnpkg.com/@grafana/runtime/-/runtime-11.1.3.tgz#c5ae7a16d3639ddb313ae4ed019f324abcb99885"
+  integrity sha512-XtzqlFMC3GAChvQVHwQcZ52r6mxaDP8ZMao1HqTPvSO8w2lpfRMZ55CmU4vKS+x0Ww9RI4FibPr8x3+x1G7VaQ==
   dependencies:
-    "@grafana/data" "11.1.0-181468"
-    "@grafana/e2e-selectors" "11.1.0-181468"
+    "@grafana/data" "11.1.3"
+    "@grafana/e2e-selectors" "11.1.3"
     "@grafana/faro-web-sdk" "^1.3.6"
-    "@grafana/schema" "11.1.0-181468"
-    "@grafana/ui" "11.1.0-181468"
+    "@grafana/schema" "11.1.3"
+    "@grafana/ui" "11.1.3"
     history "4.10.1"
     lodash "4.17.21"
     rxjs "7.8.1"
     tslib "2.6.3"
 
-"@grafana/schema@11.1.0-181468":
-  version "11.1.0-181468"
-  resolved "https://registry.yarnpkg.com/@grafana/schema/-/schema-11.1.0-181468.tgz#16e08a694806a4fc438aa8fa45cef2ec94644328"
-  integrity sha512-iuaqUjtggO+80gan7kwRmJ0BFyoTpey1aDGiOesN5MYYA80Da6t5GZGY0GoJCJ28vhgG4ur1dctn7J/6QARPKw==
+"@grafana/schema@11.1.3":
+  version "11.1.3"
+  resolved "https://registry.yarnpkg.com/@grafana/schema/-/schema-11.1.3.tgz#63f7585c0f10d6ed65cb1c4cf30c846d34752e2c"
+  integrity sha512-1vpFYFEKO4ifMIvpXkEBxorbXD3wyq48mqYqw8g22dtIvJPY8EMOKPY1WUwG0m4g8szAZFsqpr/KR6+pWJESpQ==
   dependencies:
     tslib "2.6.3"
 
@@ -1083,18 +1079,18 @@
   resolved "https://registry.yarnpkg.com/@grafana/tsconfig/-/tsconfig-1.3.0-rc1.tgz#ca5ffa03edb3cb59bd503a7e6b3a3e15ac528d77"
   integrity sha512-bi+qFOptejg/a2/WmCDVxQLQtobhKd3y+B6mxFBOMmzElqgr30MPnN60THTou6dGwtfw+ExX1H5FGm9DM35Qrw==
 
-"@grafana/ui@11.1.0-181468":
-  version "11.1.0-181468"
-  resolved "https://registry.yarnpkg.com/@grafana/ui/-/ui-11.1.0-181468.tgz#65d0ae77377272879ad4d2e0873613cbe7ebfa05"
-  integrity sha512-LAPjUHTUd0NnGkkFiY3FtfgjPzXO597/WUB5b97Ea+iBvIVkSPTD193+rsVD7RM6EGHrjDlQfbiZRD1c6eXHiA==
+"@grafana/ui@11.1.3":
+  version "11.1.3"
+  resolved "https://registry.yarnpkg.com/@grafana/ui/-/ui-11.1.3.tgz#1a4a7465f8b51a7f4379f689be2fd6cd1d934435"
+  integrity sha512-+a4e28HJq9DeG+Y84SwLQby4iHqE5ZLnoiGWgIHM2+kDX0dhmCVtE+6xrNp/isu008W1II5eIErY3MvBWsJcmw==
   dependencies:
     "@emotion/css" "11.11.2"
     "@emotion/react" "11.11.4"
     "@floating-ui/react" "0.26.16"
-    "@grafana/data" "11.1.0-181468"
-    "@grafana/e2e-selectors" "11.1.0-181468"
+    "@grafana/data" "11.1.3"
+    "@grafana/e2e-selectors" "11.1.3"
     "@grafana/faro-web-sdk" "^1.3.6"
-    "@grafana/schema" "11.1.0-181468"
+    "@grafana/schema" "11.1.3"
     "@leeoniya/ufuzzy" "1.0.14"
     "@monaco-editor/react" "4.6.0"
     "@popperjs/core" "2.11.8"
@@ -1148,6 +1144,19 @@
     tslib "2.6.3"
     uplot "1.6.30"
     uuid "9.0.1"
+
+"@hello-pangea/dnd@^16.6.0":
+  version "16.6.0"
+  resolved "https://registry.yarnpkg.com/@hello-pangea/dnd/-/dnd-16.6.0.tgz#7509639c7bd13f55e537b65a9dcfcd54e7c99ac7"
+  integrity sha512-vfZ4GydqbtUPXSLfAvKvXQ6xwRzIjUSjVU0Sx+70VOhc2xx6CdmJXJ8YhH70RpbTUGjxctslQTHul9sIOxCfFQ==
+  dependencies:
+    "@babel/runtime" "^7.24.1"
+    css-box-model "^1.2.1"
+    memoize-one "^6.0.0"
+    raf-schd "^4.0.3"
+    react-redux "^8.1.3"
+    redux "^4.2.1"
+    use-memo-one "^1.1.3"
 
 "@humanwhocodes/config-array@^0.11.13":
   version "0.11.14"
@@ -1507,15 +1516,10 @@
   resolved "https://registry.yarnpkg.com/@leeoniya/ufuzzy/-/ufuzzy-1.0.14.tgz#01572c0de9cfa1420cf6ecac76dd59db5ebd1337"
   integrity sha512-/xF4baYuCQMo+L/fMSUrZnibcu0BquEGnbxfVPiZhs/NbJeKj4c/UmFpQzW9Us0w45ui/yYW3vyaqawhNYsTzA==
 
-"@lezer/common@1.2.1":
+"@lezer/common@1.2.1", "@lezer/common@^1.0.0":
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/@lezer/common/-/common-1.2.1.tgz#198b278b7869668e1bebbe687586e12a42731049"
   integrity sha512-yemX0ZD2xS/73llMZIK6KplkjIjf2EvAHcinDi/TfJ9hS25G0388+ClHt6/3but0oOxinTcQHJLDXh6w1crzFQ==
-
-"@lezer/common@^1.0.0":
-  version "1.1.0"
-  resolved "https://registry.npmjs.org/@lezer/common/-/common-1.1.0.tgz"
-  integrity sha512-XPIN3cYDXsoJI/oDWoR2tD++juVrhgIago9xyKhZ7IhGlzdDM9QgC8D8saKNCz5pindGcznFr2HBSsEQSWnSjw==
 
 "@lezer/highlight@1.2.0":
   version "1.2.0"
@@ -2170,6 +2174,14 @@
     "@types/react" "*"
     hoist-non-react-statics "^3.3.0"
 
+"@types/hoist-non-react-statics@^3.3.1":
+  version "3.3.5"
+  resolved "https://registry.yarnpkg.com/@types/hoist-non-react-statics/-/hoist-non-react-statics-3.3.5.tgz#dab7867ef789d87e2b4b0003c9d65c49cc44a494"
+  integrity sha512-SbcrWzkKBw2cdwRTwQAswfpB9g9LJWfjtUeW/jvNwbhC8cpmmNYVePa+ncbUe0rGTQ7G3Ff6mYUN2VMfLVr+Sg==
+  dependencies:
+    "@types/react" "*"
+    hoist-non-react-statics "^3.3.0"
+
 "@types/istanbul-lib-coverage@*", "@types/istanbul-lib-coverage@^2.0.0", "@types/istanbul-lib-coverage@^2.0.1":
   version "2.0.5"
   resolved "https://registry.npmjs.org/@types/istanbul-lib-coverage/-/istanbul-lib-coverage-2.0.5.tgz"
@@ -2355,6 +2367,11 @@
   version "4.0.4"
   resolved "https://registry.npmjs.org/@types/tough-cookie/-/tough-cookie-4.0.4.tgz"
   integrity sha512-95Sfz4nvMAb0Nl9DTxN3j64adfwfbBPEYq14VN7zT5J5O2M9V6iZMIIQU1U+pJyl9agHYHNCqhCXgyEtIRRa5A==
+
+"@types/use-sync-external-store@^0.0.3":
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/@types/use-sync-external-store/-/use-sync-external-store-0.0.3.tgz#b6725d5f4af24ace33b36fafd295136e75509f43"
+  integrity sha512-EwmlvuaxPNej9+T4v5AuBPJa2x2UOJVdjCtDHgcDqitUeOtjnJKJ+apYjVcAoBEMjKW1VVFGZLUb5+qqa09XFA==
 
 "@types/uuid@9.0.8":
   version "9.0.8"
@@ -3408,15 +3425,10 @@ cjs-module-lexer@^1.0.0:
   resolved "https://registry.npmjs.org/cjs-module-lexer/-/cjs-module-lexer-1.2.3.tgz"
   integrity sha512-0TNiGstbQmCFwt4akjjBg5pLRTSyj/PkWQ1ZoO2zntmg9yLqSRxwEa4iCfQLGjqhiqBfOJa7W/E8wfGrTDmlZQ==
 
-classnames@2.5.1:
+classnames@2.5.1, classnames@2.x, classnames@^2.2.1, classnames@^2.2.5, classnames@^2.2.6, classnames@^2.3.1, classnames@^2.3.2:
   version "2.5.1"
   resolved "https://registry.yarnpkg.com/classnames/-/classnames-2.5.1.tgz#ba774c614be0f016da105c858e7159eae8e7687b"
   integrity sha512-saHYOzhIQs6wy2sVxTM6bUDsQO4F50V9RQ22qBpEdCW+I+/Wmke2HOl6lS6dTpdxVhb88/I6+Hs+438c3lfUow==
-
-classnames@2.x, classnames@^2.2.1, classnames@^2.2.5, classnames@^2.2.6, classnames@^2.3.1, classnames@^2.3.2:
-  version "2.3.2"
-  resolved "https://registry.npmjs.org/classnames/-/classnames-2.3.2.tgz"
-  integrity sha512-CSbhY4cFEJRe6/GQzIk5qXZ4Jeg5pcsP7b5peFSDpffpe1cqjASH/n9UTjBwOp6XpMSTwQ8Za2K5V02ueA7Tmw==
 
 clear-module@^4.1.2:
   version "4.1.2"
@@ -3770,7 +3782,7 @@ css-animation@^1.3.2:
     babel-runtime "6.x"
     component-classes "^1.2.5"
 
-css-box-model@^1.2.0:
+css-box-model@^1.2.0, css-box-model@^1.2.1:
   version "1.2.1"
   resolved "https://registry.npmjs.org/css-box-model/-/css-box-model-1.2.1.tgz"
   integrity sha512-a7Vr4Q/kd/aw96bnJG332W9V9LkJO69JRcaCYDUqjp6/z0w6VcZjgAcTbgFxEPfBgdnAwlh3iwu+hLopa+flJw==
@@ -5738,15 +5750,10 @@ immer@^10.0.3:
   resolved "https://registry.yarnpkg.com/immer/-/immer-10.1.1.tgz#206f344ea372d8ea176891545ee53ccc062db7bc"
   integrity sha512-s2MPrmjovJcoMaHtx6K11Ra7oD05NT97w1IC5zpMkT6Atjr7H8LjaDd81iIxUYpMKSRRNMJE703M1Fhr/TctHw==
 
-immutable@4.3.6:
+immutable@4.3.6, immutable@^4.0.0:
   version "4.3.6"
   resolved "https://registry.yarnpkg.com/immutable/-/immutable-4.3.6.tgz#6a05f7858213238e587fb83586ffa3b4b27f0447"
   integrity sha512-Ju0+lEMyzMVZarkTn/gqRpdqd5dOPaz1mCZ0SH3JV6iFw81PldE/PEB1hWVEA288HPt4WXW8O7AWxB10M+03QQ==
-
-immutable@^4.0.0:
-  version "4.3.4"
-  resolved "https://registry.npmjs.org/immutable/-/immutable-4.3.4.tgz"
-  integrity sha512-fsXeu4J4i6WNWSikpI88v/PcVflZz+6kMhUfIwc5SY+poQRPnaf5V7qds6SUyUN3cVxEzuCab7QIoLOQ+DQ1wA==
 
 import-fresh@^3.2.1, import-fresh@^3.3.0:
   version "3.3.0"
@@ -6841,15 +6848,10 @@ loose-envify@^1.0.0, loose-envify@^1.1.0, loose-envify@^1.2.0, loose-envify@^1.3
   dependencies:
     js-tokens "^3.0.0 || ^4.0.0"
 
-lru-cache@10.2.2:
+lru-cache@10.2.2, lru-cache@^10.2.0:
   version "10.2.2"
   resolved "https://registry.yarnpkg.com/lru-cache/-/lru-cache-10.2.2.tgz#48206bc114c1252940c41b25b41af5b545aca878"
   integrity sha512-9hp3Vp2/hFQUiIwKo8XCeFVnrg8Pk3TYNPIR7tJADKi5YfcF7vEaK7avFHTlSy3kOKYaJQaalfEo6YuXdceBOQ==
-
-lru-cache@^10.2.0:
-  version "10.2.0"
-  resolved "https://registry.yarnpkg.com/lru-cache/-/lru-cache-10.2.0.tgz#0bd445ca57363465900f4d1f9bd8db343a4d95c3"
-  integrity sha512-2bIM8x+VAf6JT4bKAljS1qUWgMsqZRPGJS6FSahIMPVvctcNhyVp7AJu7quxOW9jwkryBReKZY5tY5JYv2n/7Q==
 
 lru-cache@^5.1.1:
   version "5.1.1"
@@ -7043,15 +7045,10 @@ moment-timezone@0.5.45:
   dependencies:
     moment "^2.29.4"
 
-moment@2.30.1:
+moment@2.30.1, moment@2.x, moment@^2.29.4:
   version "2.30.1"
   resolved "https://registry.yarnpkg.com/moment/-/moment-2.30.1.tgz#f8c91c07b7a786e30c59926df530b4eac96974ae"
   integrity sha512-uEmtNhbDOrWPFS+hdjFCBfy9f2YoyzRpwcl+DqpC6taX21FzsTLQVbMV/W7PzNSX6x/bhC1zA3c2UQ5NzH6how==
-
-moment@2.x, moment@^2.29.4:
-  version "2.29.4"
-  resolved "https://registry.yarnpkg.com/moment/-/moment-2.29.4.tgz#3dbe052889fe7c1b2ed966fcb3a77328964ef108"
-  integrity sha512-5LC9SOxjSc2HF6vO2CyuTDNivEdoz2IvyJJGj6X8DJ0eFyfszE0QiEd+iXmBvUP3WHxSjFH/vIsA0EN00cgr8w==
 
 monaco-editor@0.34.1:
   version "0.34.1"
@@ -7642,7 +7639,7 @@ quickselect@^2.0.0:
   resolved "https://registry.npmjs.org/quickselect/-/quickselect-2.0.0.tgz"
   integrity sha512-RKJ22hX8mHe3Y6wH/N3wCM6BWtjaxIyyUIkpHOvfFnxdI4yD4tBXEBKSbriGujF6jnSVkJrffuo6vxACiSSxIw==
 
-raf-schd@^4.0.2:
+raf-schd@^4.0.2, raf-schd@^4.0.3:
   version "4.0.3"
   resolved "https://registry.npmjs.org/raf-schd/-/raf-schd-4.0.3.tgz"
   integrity sha512-tQkJl2GRWh83ui2DiPTJz9wEiMN20syf+5oKfB03yYP7ioZcJwsIK8FjrtLwH1m7C7e+Tt2yYBlrOpdT+dyeIQ==
@@ -8011,6 +8008,18 @@ react-redux@^7.2.0:
     prop-types "^15.7.2"
     react-is "^17.0.2"
 
+react-redux@^8.1.3:
+  version "8.1.3"
+  resolved "https://registry.yarnpkg.com/react-redux/-/react-redux-8.1.3.tgz#4fdc0462d0acb59af29a13c27ffef6f49ab4df46"
+  integrity sha512-n0ZrutD7DaX/j9VscF+uTALI3oUPa/pO4Z3soOBIjuRn/FzVu6aehhysxZCLi6y7duMf52WNZGMl7CtuK5EnRw==
+  dependencies:
+    "@babel/runtime" "^7.12.1"
+    "@types/hoist-non-react-statics" "^3.3.1"
+    "@types/use-sync-external-store" "^0.0.3"
+    hoist-non-react-statics "^3.3.2"
+    react-is "^18.0.0"
+    use-sync-external-store "^1.0.0"
+
 react-router-dom@5.3.3:
   version "5.3.3"
   resolved "https://registry.npmjs.org/react-router-dom/-/react-router-dom-5.3.3.tgz"
@@ -8137,7 +8146,7 @@ redux-thunk@^3.1.0:
   resolved "https://registry.yarnpkg.com/redux-thunk/-/redux-thunk-3.1.0.tgz#94aa6e04977c30e14e892eae84978c1af6058ff3"
   integrity sha512-NW2r5T6ksUKXCabzhL9z+h206HQw/NJkcLm1GPImRQ8IzfXwRGqjVhKJGauHirT0DAuyy6hjdnMZaRoAcy0Klw==
 
-redux@^4.0.0, redux@^4.0.4:
+redux@^4.0.0, redux@^4.0.4, redux@^4.2.1:
   version "4.2.1"
   resolved "https://registry.npmjs.org/redux/-/redux-4.2.1.tgz"
   integrity sha512-LAUYz4lc+Do8/g7aeRa8JkyDErK6ekstQaqWQrNRW//MY1TvCEpMtpTWvlQ+FPbWCx+Xixu/6SHt5N0HR+SB4w==
@@ -9231,7 +9240,7 @@ tslib@2.5.3:
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.5.3.tgz#24944ba2d990940e6e982c4bea147aba80209913"
   integrity sha512-mSxlJJwl3BMEQCUNnxXBU9jP4JBktcEGhURcPR6VQVlnP0FdDEsIaz0C35dXNGLyRfrATNofF0F5p2KPxQgB+w==
 
-tslib@2.6.3, tslib@^2.3.1:
+tslib@2.6.3, tslib@^2.1.0, tslib@^2.3.1, tslib@^2.4.0, tslib@^2.4.1:
   version "2.6.3"
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.6.3.tgz#0438f810ad7a9edcde7a241c3d80db693c8cbfe0"
   integrity sha512-xNvxJEOUiWPGhUuUdQgAJPKOOJfGnIyKySOc09XkKsgdUV/3E2zvwZYdejjmRgPCgcym1juLH3226yA7sEFJKQ==
@@ -9240,11 +9249,6 @@ tslib@^1.8.1:
   version "1.14.1"
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.14.1.tgz#cf2d38bdc34a134bcaf1091c41f6619e2f672d00"
   integrity sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg==
-
-tslib@^2.1.0, tslib@^2.4.0, tslib@^2.4.1:
-  version "2.6.2"
-  resolved "https://registry.npmjs.org/tslib/-/tslib-2.6.2.tgz"
-  integrity sha512-AEYxH93jGFPn/a2iVAwW87VuUIkR1FVUKB77NwMF7nBTDkDrrT/Hpt/IrCJ0QXhW27jTBDcf5ZY7w6RiqTMw2Q==
 
 tsutils@^3.21.0:
   version "3.21.0"
@@ -9463,10 +9467,15 @@ use-isomorphic-layout-effect@^1.1.2:
   resolved "https://registry.npmjs.org/use-isomorphic-layout-effect/-/use-isomorphic-layout-effect-1.1.2.tgz"
   integrity sha512-49L8yCO3iGT/ZF9QttjwLF/ZD9Iwto5LnH5LmEdk/6cFmXddqi2ulF0edxTwjj+7mqvpVVGQWvbXZdn32wRSHA==
 
-use-memo-one@^1.1.1:
+use-memo-one@^1.1.1, use-memo-one@^1.1.3:
   version "1.1.3"
   resolved "https://registry.npmjs.org/use-memo-one/-/use-memo-one-1.1.3.tgz"
   integrity sha512-g66/K7ZQGYrI6dy8GLpVcMsBp4s17xNkYJVSMvTEevGy3nDxHOfE6z8BVE22+5G5x7t3+bhzrlTDB7ObrEE0cQ==
+
+use-sync-external-store@^1.0.0:
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/use-sync-external-store/-/use-sync-external-store-1.2.2.tgz#c3b6390f3a30eba13200d2302dcdf1e7b57b2ef9"
+  integrity sha512-PElTlVMwpblvbNqQ82d2n6RjStvdSoNe9FG28kNfz3WiXilJm4DdNkEzRhCZuIDwY8U08WVihhGR5iRqAwfDiw==
 
 util-deprecate@^1.0.2:
   version "1.0.2"

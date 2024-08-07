@@ -60,11 +60,7 @@ func (d *Datasource) contextualMiddlewares(ctx context.Context) context.Context 
 
 	middlewares := []sdkhttpclient.Middleware{
 		sdkhttpclient.ResponseLimitMiddleware(cfg.ResponseLimit()),
-	}
-
-	sigv4Settings := awsds.ReadSigV4Settings(ctx)
-	if sigv4Settings.Enabled {
-		middlewares = append(middlewares, sigv4.SigV4MiddlewareWithAuthSettings(sigv4Settings.VerboseLogging, d.authSettings))
+		sigv4.SigV4MiddlewareWithAuthSettings(false, d.authSettings),
 	}
 
 	return sdkhttpclient.WithContextualMiddleware(ctx, middlewares...)

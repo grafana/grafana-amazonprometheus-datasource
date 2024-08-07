@@ -2,7 +2,7 @@ import { DataSourceSettings } from '@grafana/data';
 import { Auth, AuthMethod, ConnectionSettings, convertLegacyAuthProps } from '@grafana/experimental';
 import { PromOptions, docsTip, overhaulStyles } from '@grafana/prometheus';
 import { SecureSocksProxySettings, useTheme2 } from '@grafana/ui';
-import React, { ReactElement, useState } from 'react';
+import React, { ReactElement, useEffect, useState } from 'react';
 
 type Props = {
   options: DataSourceSettings<PromOptions, {}>;
@@ -24,9 +24,21 @@ export const DataSourceHttpSettingsOverhaul = (props: Props) => {
     onChange: onOptionsChange,
   });
 
+  useEffect(() => {
+    setSigV4Selected(true)
+    onOptionsChange({
+      ...options,
+      jsonData: {
+        ...options.jsonData,
+        sigV4Auth: true,
+      },
+    })
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
   // Since we are not allowing users to select another auth,
   // need to set this as this field needs to be true for auth to work.
-  options.jsonData.sigV4Auth = true;
+  // options.jsonData.sigV4Auth = true;
 
   const theme = useTheme2();
   const styles = overhaulStyles(theme);

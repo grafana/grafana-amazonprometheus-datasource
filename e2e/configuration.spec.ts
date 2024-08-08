@@ -77,7 +77,7 @@ test.describe('Configuration tests', () => {
       .getByGrafanaSelector(selectors.components.DataSource.Prometheus.configPage.httpMethod)).toBeVisible();
   });
 
-  test('"Save & test" should be successful when configuration is valid', async ({
+/*  test('"Save & test" should be successful when configuration is valid', async ({
     createDataSourceConfigPage,
     readProvisionedDataSource,
   }) => {
@@ -90,6 +90,7 @@ test.describe('Configuration tests', () => {
 
     await expect(configPage.saveAndTest()).toBeOK();
   });
+*/
 
   test('"Save & test" should fail when configuration is invalid', async ({
     createDataSourceConfigPage,

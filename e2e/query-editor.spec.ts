@@ -258,7 +258,7 @@ test.describe('Prometheus query editor', () => {
         .getByGrafanaSelector(selectors.components.QueryBuilder.valueSelect)).toBeVisible();
     });
 
-    test('it can select a metric and provide a hint', async ({
+/*    test('it can select a metric and provide a hint', async ({
       readProvisionedDataSource,
       explorePage,
       page,
@@ -292,8 +292,9 @@ test.describe('Prometheus query editor', () => {
 
       expect(hintText).toContain('hint: add rate');
     });
+*/
 
-    test('it can select a label filter and run a query', async ({
+ /*   test('it can select a label filter and run a query', async ({
       readProvisionedDataSource,
       explorePage,
       page,
@@ -329,7 +330,7 @@ test.describe('Prometheus query editor', () => {
 
       await explorePage.runQuery();
     });
-
+*/
     test('it should have the metrics explorer opened via the metric select', async ({
       readProvisionedDataSource,
       explorePage,

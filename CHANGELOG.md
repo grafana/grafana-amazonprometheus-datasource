@@ -1,5 +1,9 @@
 # Changelog
 
+
+## 1.0.1
+- Fix sigv4 auth in Cloud
+
 ## 1.0.0
 - Initial public release
 

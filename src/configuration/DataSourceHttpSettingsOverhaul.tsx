@@ -3,6 +3,7 @@ import { Auth, AuthMethod, ConnectionSettings, convertLegacyAuthProps } from '@g
 import { PromOptions, docsTip, overhaulStyles } from '@grafana/prometheus';
 import { SecureSocksProxySettings, useTheme2 } from '@grafana/ui';
 import React, { ReactElement, useState } from 'react';
+import { useEffectOnce } from 'react-use';
 
 type Props = {
   options: DataSourceSettings<PromOptions, {}>;
@@ -12,21 +13,25 @@ type Props = {
 };
 
 export const DataSourceHttpSettingsOverhaul = (props: Props) => {
-  const {
-    options,
-    onOptionsChange,
-    renderSigV4Editor,
-    secureSocksDSProxyEnabled,
-  } = props;
+  const { options, onOptionsChange, renderSigV4Editor, secureSocksDSProxyEnabled } = props;
 
   const newAuthProps = convertLegacyAuthProps({
     config: options,
     onChange: onOptionsChange,
   });
 
-  // Since we are not allowing users to select another auth,
-  // need to set this as this field needs to be true for auth to work.
-  options.jsonData.sigV4Auth = true;
+  useEffectOnce(() => {
+    // Since we are not allowing users to select another auth,
+    // need to update sigV4Auth field to true for auth to work.
+    setSigV4Selected(true);
+    onOptionsChange({
+      ...options,
+      jsonData: {
+        ...options.jsonData,
+        sigV4Auth: true,
+      },
+    });
+  });
 
   const theme = useTheme2();
   const styles = overhaulStyles(theme);

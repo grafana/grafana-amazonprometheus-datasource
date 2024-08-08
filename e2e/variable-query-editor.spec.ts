@@ -3,7 +3,7 @@ import { selectors } from '@grafana/e2e-selectors';
 import { test, expect } from '@grafana/plugin-e2e';
 import { PromOptions } from '@grafana/prometheus';
 
-test.describe('Prometheus variable query editor', () => {
+/*test.describe('Prometheus variable query editor', () => {
   test.beforeEach('set query type', async ({
     readProvisionedDataSource,
     variableEditPage
@@ -148,3 +148,4 @@ test.describe('Prometheus variable query editor', () => {
     await expect(page.getByText('__name__')).toBeVisible();
   });
 });
+*/

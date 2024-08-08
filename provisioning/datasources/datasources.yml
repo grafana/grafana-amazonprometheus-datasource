@@ -16,4 +16,5 @@ datasources:
     # disableRecordingRules: false
     # incrementalQueryOverlapWindow: 10m
     defaultEditor: builder
-    sigV4Auth: false
+    sigV4Auth: true
+    sigV4AuthType: keys

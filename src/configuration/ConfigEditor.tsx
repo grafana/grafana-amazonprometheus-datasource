@@ -27,8 +27,7 @@ export const ConfigEditor = (props: Props) => {
       )}
       <DataSourceDescription
         dataSourceName="Amazon Managed Service for Prometheus"
-        // TODO: point this at the new plugin's docs or README  }
-        docsLink="https://grafana.com/docs/grafana/latest/datasources/prometheus/configure-prometheus-data-source/"
+        docsLink="https://grafana.com/grafana/plugins/grafana-amazonprometheus-datasource/"
       />
       <hr className={`${styles.hrTopSpace} ${styles.hrBottomSpace}`} />
       <DataSourceHttpSettingsOverhaul
@@ -61,8 +60,7 @@ export const ConfigEditor = (props: Props) => {
  * @returns
  */
 export function docsTip(url?: string) {
-  /* TODO: point this at the new plugin's docs or README */
-  const docsUrl = 'https://grafana.com/docs/grafana/latest/datasources/prometheus/#configure-the-data-source';
+  const docsUrl = 'https://grafana.com/grafana/plugins/grafana-amazonprometheus-datasource/';
 
   return (
     <a href={url ? url : docsUrl} target="_blank" rel="noopener noreferrer">

@@ -13,53 +13,54 @@ import (
 )
 
 func NewDatasource(ctx context.Context, dsInstanceSettings backend.DataSourceInstanceSettings) (instancemgmt.Instance, error) {
-	plog := backend.NewLoggerWith("logger", "tsdb.prometheus-amazon")
+	plog := backend.NewLoggerWith("logger", "tsdb.amazon-prometheus")
 	plog.Debug("Initializing")
+
+	authSettings, _ := awsds.ReadAuthSettingsFromContext(ctx)
 	return &Datasource{
-		Service: promlib.NewService(sdkhttpclient.NewProvider(), plog, extendClientOpts),
+		Service:      promlib.NewService(sdkhttpclient.NewProvider(), plog, extendClientOpts),
+		authSettings: *authSettings,
 	}, nil
 }
 
 type Datasource struct {
 	Service *promlib.Service
+
+	authSettings awsds.AuthSettings
 }
 
 func (d *Datasource) QueryData(ctx context.Context, req *backend.QueryDataRequest) (*backend.QueryDataResponse, error) {
-	ctx = contextualMiddlewares(ctx)
+	ctx = d.contextualMiddlewares(ctx)
 	return d.Service.QueryData(ctx, req)
 }
 
 func (d *Datasource) CallResource(ctx context.Context, req *backend.CallResourceRequest, sender backend.CallResourceResponseSender) error {
-	ctx = contextualMiddlewares(ctx)
+	ctx = d.contextualMiddlewares(ctx)
 	return d.Service.CallResource(ctx, req, sender)
 }
 
 func (d *Datasource) GetBuildInfo(ctx context.Context, req promlib.BuildInfoRequest) (*promlib.BuildInfoResponse, error) {
-	ctx = contextualMiddlewares(ctx)
+	ctx = d.contextualMiddlewares(ctx)
 	return d.Service.GetBuildInfo(ctx, req)
 }
 
 func (d *Datasource) GetHeuristics(ctx context.Context, req promlib.HeuristicsRequest) (*promlib.Heuristics, error) {
-	ctx = contextualMiddlewares(ctx)
+	ctx = d.contextualMiddlewares(ctx)
 	return d.Service.GetHeuristics(ctx, req)
 }
 
 func (d *Datasource) CheckHealth(ctx context.Context, req *backend.CheckHealthRequest) (*backend.CheckHealthResult,
 	error) {
-	ctx = contextualMiddlewares(ctx)
+	ctx = d.contextualMiddlewares(ctx)
 	return d.Service.CheckHealth(ctx, req)
 }
 
-func contextualMiddlewares(ctx context.Context) context.Context {
+func (d *Datasource) contextualMiddlewares(ctx context.Context) context.Context {
 	cfg := backend.GrafanaConfigFromContext(ctx)
 
 	middlewares := []sdkhttpclient.Middleware{
 		sdkhttpclient.ResponseLimitMiddleware(cfg.ResponseLimit()),
-	}
-
-	sigv4Settings := awsds.ReadSigV4Settings(ctx)
-	if sigv4Settings.Enabled {
-		middlewares = append(middlewares, sigv4.SigV4Middleware(sigv4Settings.VerboseLogging))
+		sigv4.SigV4MiddlewareWithAuthSettings(false, d.authSettings),
 	}
 
 	return sdkhttpclient.WithContextualMiddleware(ctx, middlewares...)

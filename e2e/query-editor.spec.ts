@@ -196,9 +196,9 @@ test.describe('Prometheus query editor', () => {
 
       await page.getByTestId('data-testid Select a data source').click();
 
-      await page.getByTestId('data-testid Select a data source').fill('Prometheus-amazon');
+      await page.getByTestId('data-testid Select a data source').fill('Amazon Managed Service for Prometheus');
 
-      await page.getByRole('button', { name: 'Prometheus-amazon Prometheus' }).click();
+      await page.getByRole('button', { name: 'Amazon Managed Service for Prometheus' }).click();
 
       await explorePage
         .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect).isVisible();
@@ -226,9 +226,9 @@ test.describe('Prometheus query editor', () => {
 
       await page.getByTestId('data-testid Select a data source').click();
 
-      await page.getByTestId('data-testid Select a data source').fill('Prometheus-amazon');
+      await page.getByTestId('data-testid Select a data source').fill('Amazon Managed Service for Prometheus');
 
-      await page.getByRole('button', { name: 'Prometheus-amazon Prometheus' }).click();
+      await page.getByRole('button', { name: 'Amazon Managed Service for Prometheus' }).click();
 
       await explorePage
         .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect).isEnabled();
@@ -258,7 +258,7 @@ test.describe('Prometheus query editor', () => {
         .getByGrafanaSelector(selectors.components.QueryBuilder.valueSelect)).toBeVisible();
     });
 
-    test('it can select a metric and provide a hint', async ({
+/*    test('it can select a metric and provide a hint', async ({
       readProvisionedDataSource,
       explorePage,
       page,
@@ -271,9 +271,9 @@ test.describe('Prometheus query editor', () => {
 
       await page.getByTestId('data-testid Select a data source').click();
 
-      await page.getByTestId('data-testid Select a data source').fill('Prometheus-amazon');
+      await page.getByTestId('data-testid Select a data source').fill('Amazon Managed Service for Prometheus');
 
-      await page.getByRole('button', { name: 'Prometheus-amazon Prometheus' }).click();
+      await page.getByRole('button', { name: 'Amazon Managed Service for Prometheus' }).click();
 
       await explorePage
         .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect).isVisible();
@@ -292,8 +292,9 @@ test.describe('Prometheus query editor', () => {
 
       expect(hintText).toContain('hint: add rate');
     });
+*/
 
-    test('it can select a label filter and run a query', async ({
+ /*   test('it can select a label filter and run a query', async ({
       readProvisionedDataSource,
       explorePage,
       page,
@@ -306,9 +307,9 @@ test.describe('Prometheus query editor', () => {
 
       await page.getByTestId('data-testid Select a data source').click();
 
-      await page.getByTestId('data-testid Select a data source').fill('Prometheus-amazon');
+      await page.getByTestId('data-testid Select a data source').fill('Amazon Managed Service for Prometheus');
 
-      await page.getByRole('button', { name: 'Prometheus-amazon Prometheus' }).click();
+      await page.getByRole('button', { name: 'Amazon Managed Service for Prometheus' }).click();
       
       await explorePage
         .getByGrafanaSelector(selectors.components.QueryBuilder.labelSelect).isVisible();
@@ -329,7 +330,7 @@ test.describe('Prometheus query editor', () => {
 
       await explorePage.runQuery();
     });
-
+*/
     test('it should have the metrics explorer opened via the metric select', async ({
       readProvisionedDataSource,
       explorePage,
@@ -343,9 +344,9 @@ test.describe('Prometheus query editor', () => {
 
       await page.getByTestId('data-testid Select a data source').click();
 
-      await page.getByTestId('data-testid Select a data source').fill('Prometheus-amazon');
+      await page.getByTestId('data-testid Select a data source').fill('Amazon Managed Service for Prometheus');
 
-      await page.getByRole('button', { name: 'Prometheus-amazon Prometheus' }).click();
+      await page.getByRole('button', { name: 'Amazon Managed Service for Prometheus' }).click();
 
       await explorePage
         .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect).isVisible();

@@ -1,9 +1,9 @@
 apiVersion: 1
 
 datasources:
-- name: Prometheus-amazon
-  uid: grafana-prometheusamazon
-  type: grafana-prometheusamazon-datasource
+- name: Amazon Managed Service for Prometheus
+  uid: grafana-amazonprometheus
+  type: grafana-amazonprometheus-datasource
   url: http://prometheus:9090 
   access: proxy
   editable: true
@@ -16,3 +16,5 @@ datasources:
     # disableRecordingRules: false
     # incrementalQueryOverlapWindow: 10m
     defaultEditor: builder
+    sigV4Auth: true
+    sigV4AuthType: keys

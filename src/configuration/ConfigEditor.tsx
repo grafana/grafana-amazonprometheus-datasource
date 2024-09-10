@@ -22,12 +22,12 @@ export const ConfigEditor = (props: Props) => {
     <>
       {options.access === 'direct' && (
         <Alert title="Error" severity="error">
-          Browser access mode in the Prometheus data source is no longer available. Switch to server access mode.
+          Browser access mode in the Amazon Managed Service for Prometheus data source is no longer available. Switch to server access mode.
         </Alert>
       )}
       <DataSourceDescription
-        dataSourceName="Prometheus"
-        docsLink="https://grafana.com/docs/grafana/latest/datasources/prometheus/configure-prometheus-data-source/"
+        dataSourceName="Amazon Managed Service for Prometheus"
+        docsLink="https://grafana.com/grafana/plugins/grafana-amazonprometheus-datasource/"
       />
       <hr className={`${styles.hrTopSpace} ${styles.hrBottomSpace}`} />
       <DataSourceHttpSettingsOverhaul
@@ -60,7 +60,7 @@ export const ConfigEditor = (props: Props) => {
  * @returns
  */
 export function docsTip(url?: string) {
-  const docsUrl = 'https://grafana.com/docs/grafana/latest/datasources/prometheus/#configure-the-data-source';
+  const docsUrl = 'https://grafana.com/grafana/plugins/grafana-amazonprometheus-datasource/';
 
   return (
     <a href={url ? url : docsUrl} target="_blank" rel="noopener noreferrer">

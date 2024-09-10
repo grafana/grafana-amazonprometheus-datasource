@@ -2,9 +2,9 @@
   "category": "tsdb",
   "$schema": "https://raw.githubusercontent.com/grafana/grafana/main/docs/sources/developers/plugins/plugin.schema.json",
   "type": "datasource",
-  "name": "Prometheus Amazon",
-  "id": "grafana-prometheusamazon-datasource",
-  "executable": "gpx_prometheus_amazon",
+  "name": "Amazon Managed Service for Prometheus",
+  "id": "grafana-amazonprometheus-datasource",
+  "executable": "gpx_amazonprometheus",
   "routes": [
     {
       "method": "POST",
@@ -99,7 +99,7 @@
     "links": [
       {
         "name": "Learn more",
-        "url": "https://prometheus.io/"
+        "url": "https://aws.amazon.com/prometheus/"
       }
     ]
   },

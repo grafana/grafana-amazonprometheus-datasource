@@ -3,6 +3,7 @@ import { Auth, AuthMethod, ConnectionSettings, convertLegacyAuthProps } from '@g
 import { PromOptions, docsTip, overhaulStyles } from '@grafana/prometheus';
 import { SecureSocksProxySettings, useTheme2 } from '@grafana/ui';
 import React, { ReactElement, useState } from 'react';
+import { useEffectOnce } from 'react-use';
 
 type Props = {
   options: DataSourceSettings<PromOptions, {}>;
@@ -12,16 +13,24 @@ type Props = {
 };
 
 export const DataSourceHttpSettingsOverhaul = (props: Props) => {
-  const {
-    options,
-    onOptionsChange,
-    renderSigV4Editor,
-    secureSocksDSProxyEnabled,
-  } = props;
+  const { options, onOptionsChange, renderSigV4Editor, secureSocksDSProxyEnabled } = props;
 
   const newAuthProps = convertLegacyAuthProps({
     config: options,
     onChange: onOptionsChange,
+  });
+
+  useEffectOnce(() => {
+    // Since we are not allowing users to select another auth,
+    // need to update sigV4Auth field to true for auth to work.
+    setSigV4Selected(true);
+    onOptionsChange({
+      ...options,
+      jsonData: {
+        ...options.jsonData,
+        sigV4Auth: true,
+      },
+    });
   });
 
   const theme = useTheme2();
@@ -37,7 +46,7 @@ export const DataSourceHttpSettingsOverhaul = (props: Props) => {
   const sigV4Option: CustomMethod = {
     id: sigV4Id,
     label: 'SigV4 auth',
-    description: 'This is SigV4 auth description',
+    description: 'Use SigV4 authentication to connect to your Amazon Managed Service for Prometheus workspace',
     component: <>{renderSigV4Editor}</>,
   };
 
@@ -105,6 +114,7 @@ export const DataSourceHttpSettingsOverhaul = (props: Props) => {
         // If your method is selected pass its id to `selectedMethod`,
         // otherwise pass the id from converted legacy data
         selectedMethod={returnSelectedMethod()}
+        visibleMethods={[sigV4Id]}
       />
       <div className={styles.sectionBottomPadding} />
       {secureSocksDSProxyEnabled && (

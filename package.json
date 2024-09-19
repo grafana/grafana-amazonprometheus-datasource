@@ -24,7 +24,7 @@
     "@emotion/eslint-plugin": "11.11.0",
     "@grafana/e2e-selectors": "11.2.0",
     "@grafana/eslint-config": "7.0.0",
-    "@grafana/plugin-e2e": "1.7.2",
+    "@grafana/plugin-e2e": "1.8.0",
     "@grafana/tsconfig": "2.0.0",
     "@playwright/test": "1.44.1",
     "@swc/core": "1.5.25",
@@ -85,7 +85,7 @@
   },
   "dependencies": {
     "@emotion/css": "11.11.2",
-    "@grafana/aws-sdk": "0.4.1",
+    "@grafana/aws-sdk": "0.4.2",
     "@grafana/data": "11.2.0",
     "@grafana/experimental": "2.1.0",
     "@grafana/prometheus": "11.2.0",

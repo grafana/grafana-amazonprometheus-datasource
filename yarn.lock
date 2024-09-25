@@ -892,10 +892,10 @@
   dependencies:
     tslib "^2.4.1"
 
-"@grafana/aws-sdk@0.4.1":
-  version "0.4.1"
-  resolved "https://registry.yarnpkg.com/@grafana/aws-sdk/-/aws-sdk-0.4.1.tgz#0f8051486d624c3ad612d081240909ac74fa47e1"
-  integrity sha512-qW32oZH0iu6sZGh0nD/k7ThDf2+8xuIxMqh+u4ObMOy+EfUi4NzeXQtIf0b/3BycUk5gJSZG930hmnCvOUFd8w==
+"@grafana/aws-sdk@0.4.2":
+  version "0.4.2"
+  resolved "https://registry.yarnpkg.com/@grafana/aws-sdk/-/aws-sdk-0.4.2.tgz#a8a4b104c723dbfe3e75b78a88fc58735ca73a08"
+  integrity sha512-nUy1QmBaBbhlUkQZ2mqBwosXYfrvRflhym3AIy5cixVmTIqBA5ChtE+XgZ0vThTU4B7su6wn+aRfovw7foDNLw==
   dependencies:
     "@grafana/async-query-data" "0.2.0"
     "@grafana/experimental" "1.7.12"
@@ -1012,10 +1012,10 @@
     ua-parser-js "^1.0.32"
     web-vitals "^4.0.1"
 
-"@grafana/plugin-e2e@1.7.2":
-  version "1.7.2"
-  resolved "https://registry.yarnpkg.com/@grafana/plugin-e2e/-/plugin-e2e-1.7.2.tgz#69263980eb92ebd1142e64d3130ea4d9446d648a"
-  integrity sha512-5KdMWQfEq3kUewvKCU37Rc1a6PGHo4jkjoC+GKrm4KZWX+NC0x1xQpSP+OQzIsWL79HIRYq/AgLtA2tA0nTuHw==
+"@grafana/plugin-e2e@1.8.1":
+  version "1.8.1"
+  resolved "https://registry.yarnpkg.com/@grafana/plugin-e2e/-/plugin-e2e-1.8.1.tgz#bce4aec11052f5a5f26a742de6d72d8c5c9c2cbb"
+  integrity sha512-F3KhQJIFiJLOrHOogi/zUU5K90THze0q5j7EiEctEuacn+UNpuLToKVsTDzb235MHme7bvmbcGZkvkiuWeT8VQ==
   dependencies:
     semver "^7.5.4"
     uuid "^10.0.0"

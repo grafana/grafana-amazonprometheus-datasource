@@ -84,9 +84,7 @@
   "info": {
     "version": "%VERSION%",
     "updated": "%TODAY%",
-    "keywords": [
-      "datasource"
-    ],
+    "keywords": ["datasource", "aws", "amazon", "prometheus", "cloud provider", "database", "metrics", "time series"],
     "description": "Open source time series database & alerting",
     "author": {
       "name": "Grafana Labs",

@@ -26,12 +26,6 @@ updates:
     schedule:
       interval: "weekly"
     groups:
-      grafana-dependencies:
-        patterns:
-          - "@grafana/*"
-      grafana-dev-dependencies:
-        patterns:
-          - "@grafana/e2e*"
       all-dependencies:
         patterns:
           - '*'

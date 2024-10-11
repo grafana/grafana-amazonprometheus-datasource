@@ -1,7 +1,7 @@
 import { interval, Observable, of, throwError } from 'rxjs';
 import { map, mergeMap, take } from 'rxjs/operators';
 
-import { OBSERVABLE_TEST_TIMEOUT_IN_MS } from './types';
+import { OBSERVABLE_TEST_TIMEOUT_IN_MS } from './utils';
 
 describe('toEmitValues matcher', () => {
   describe('failing tests', () => {

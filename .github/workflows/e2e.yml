@@ -82,6 +82,8 @@ jobs:
       - name: Run Playwright tests
         id: run-tests
         run: yarn playwright test
+        env:
+          IRRELEVANT: "details"
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v4

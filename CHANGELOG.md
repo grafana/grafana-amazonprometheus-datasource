@@ -1,6 +1,13 @@
 # Changelog
 
+## 1.0.3
+
+- Bugfix: use GetAuthSettings for env variable fallback [#289](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/289)
+- Bump github.com/grafana/grafana-plugin-sdk-go from 0.251.0 to 0.256.0 in the all-dependencies group [#283](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/283)
+- Bump the all-dependencies group across 1 directory with 34 updates [#281](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/281)
+
 ## 1.0.2
+
 - Bump dependencies
   - github.com/grafana/grafana-aws-sdk from v0.30.0 to v0.31.3
   - github.com/grafana/grafana-plugin-sdk-go v0.241.0 to v0.251.0
@@ -33,15 +40,19 @@
 - Update links to documentation in the Config Editor
 
 ## 1.0.1
+
 - Fix sigv4 auth in Cloud
 
 ## 1.0.0
+
 - Initial public release
 
 ## 0.3.0
+
 - Rename plugin & repo
 
 ## 0.2.0 (Private release for testing)
+
 - Initial private release of the Amazon Managed Prometheus plugin, a wrapper around [the core Prometheus datasource](https://grafana.com/docs/grafana/latest/datasources/prometheus/) that uses Amazon-specific authentication.
 
 ## 0.1.0 (Unreleased)

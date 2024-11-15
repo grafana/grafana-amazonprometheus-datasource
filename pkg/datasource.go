@@ -16,7 +16,7 @@ func NewDatasource(ctx context.Context, dsInstanceSettings backend.DataSourceIns
 	plog := backend.NewLoggerWith("logger", "tsdb.amazon-prometheus")
 	plog.Debug("Initializing")
 
-	authSettings, _ := awsds.ReadAuthSettingsFromContext(ctx)
+	authSettings := awsds.ReadAuthSettings(ctx)
 	return &Datasource{
 		Service:      promlib.NewService(sdkhttpclient.NewProvider(), plog, extendClientOpts),
 		authSettings: *authSettings,

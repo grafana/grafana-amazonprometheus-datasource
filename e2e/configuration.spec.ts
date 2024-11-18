@@ -6,7 +6,6 @@ import { PromOptions } from '@grafana/prometheus';
 const DATA_SOURCE_NAME = 'prometheus-config';
 
 test.describe('Configuration tests', () => {
-
   test(`should have the following components:
     connection settings
     managed alerts
@@ -20,34 +19,34 @@ test.describe('Configuration tests', () => {
     disable recording rules
     custom query parameters
     http method
-  `, async ({
-    createDataSourceConfigPage,
-    readProvisionedDataSource,
-    page,
-  }) => {
-    const ds = await readProvisionedDataSource<DataSourcePluginOptionsEditorProps<PromOptions>>({ fileName: 'datasources.yml' });
+  `, async ({ createDataSourceConfigPage, readProvisionedDataSource, page }) => {
+    const ds = await readProvisionedDataSource<DataSourcePluginOptionsEditorProps<PromOptions>>({
+      fileName: 'datasources.yml',
+    });
     const configPage = await createDataSourceConfigPage({ type: ds.type });
 
     // connection settings
-    await expect(configPage
-      .getByGrafanaSelector(selectors.components.DataSource.Prometheus.configPage.connectionSettings)).toBeVisible();
-
-    // managed alerts
     await expect(
-      page.locator(`#${selectors.components.DataSource.Prometheus.configPage.manageAlerts}`)
+      configPage.getByGrafanaSelector(selectors.components.DataSource.Prometheus.configPage.connectionSettings)
     ).toBeVisible();
 
+    // managed alerts
+    await expect(page.locator(`#${selectors.components.DataSource.Prometheus.configPage.manageAlerts}`)).toBeVisible();
+
     // scrape interval
-    await expect(configPage
-      .getByGrafanaSelector(selectors.components.DataSource.Prometheus.configPage.scrapeInterval)).toBeVisible();
+    await expect(
+      configPage.getByGrafanaSelector(selectors.components.DataSource.Prometheus.configPage.scrapeInterval)
+    ).toBeVisible();
 
     // query timeout
-    await expect(configPage
-      .getByGrafanaSelector(selectors.components.DataSource.Prometheus.configPage.queryTimeout)).toBeVisible();
+    await expect(
+      configPage.getByGrafanaSelector(selectors.components.DataSource.Prometheus.configPage.queryTimeout)
+    ).toBeVisible();
 
     // default editor
-    await expect(configPage
-      .getByGrafanaSelector(selectors.components.DataSource.Prometheus.configPage.defaultEditor)).toBeVisible();
+    await expect(
+      configPage.getByGrafanaSelector(selectors.components.DataSource.Prometheus.configPage.defaultEditor)
+    ).toBeVisible();
 
     // disable metric lookup
     await expect(
@@ -55,29 +54,37 @@ test.describe('Configuration tests', () => {
     ).toBeVisible();
 
     // prometheus type
-    await expect(configPage
-      .getByGrafanaSelector(selectors.components.DataSource.Prometheus.configPage.prometheusType)).toBeVisible();
+    await expect(
+      configPage.getByGrafanaSelector(selectors.components.DataSource.Prometheus.configPage.prometheusType)
+    ).toBeVisible();
 
     // cache level
-    await expect(configPage
-      .getByGrafanaSelector(selectors.components.DataSource.Prometheus.configPage.cacheLevel)).toBeVisible();
+    await expect(
+      configPage.getByGrafanaSelector(selectors.components.DataSource.Prometheus.configPage.cacheLevel)
+    ).toBeVisible();
 
     // incremental querying
-    await expect(page.locator(`#${selectors.components.DataSource.Prometheus.configPage.incrementalQuerying}`)).toBeVisible();
+    await expect(
+      page.locator(`#${selectors.components.DataSource.Prometheus.configPage.incrementalQuerying}`)
+    ).toBeVisible();
 
     // disable recording rules
-    await expect(page.locator(`#${selectors.components.DataSource.Prometheus.configPage.disableRecordingRules}`)).toBeVisible();
+    await expect(
+      page.locator(`#${selectors.components.DataSource.Prometheus.configPage.disableRecordingRules}`)
+    ).toBeVisible();
 
     // custom query parameters
-    await expect(configPage
-      .getByGrafanaSelector(selectors.components.DataSource.Prometheus.configPage.customQueryParameters)).toBeVisible();
+    await expect(
+      configPage.getByGrafanaSelector(selectors.components.DataSource.Prometheus.configPage.customQueryParameters)
+    ).toBeVisible();
 
     // http method
-    await expect(configPage
-      .getByGrafanaSelector(selectors.components.DataSource.Prometheus.configPage.httpMethod)).toBeVisible();
+    await expect(
+      configPage.getByGrafanaSelector(selectors.components.DataSource.Prometheus.configPage.httpMethod)
+    ).toBeVisible();
   });
 
-/*  test('"Save & test" should be successful when configuration is valid', async ({
+  /*  test('"Save & test" should be successful when configuration is valid', async ({
     createDataSourceConfigPage,
     readProvisionedDataSource,
   }) => {
@@ -96,27 +103,27 @@ test.describe('Configuration tests', () => {
     createDataSourceConfigPage,
     readProvisionedDataSource,
   }) => {
-    const ds = await readProvisionedDataSource<DataSourcePluginOptionsEditorProps<PromOptions>>({ fileName: 'datasources.yml' });
+    const ds = await readProvisionedDataSource<DataSourcePluginOptionsEditorProps<PromOptions>>({
+      fileName: 'datasources.yml',
+    });
     const configPage = await createDataSourceConfigPage({ type: ds.type });
     await expect(configPage.saveAndTest()).not.toBeOK();
     await expect(configPage).toHaveAlert('error', { hasText: 'empty url' });
   });
 
-  test('it should allow a user to add the version when the Prom type is selected',
-  async ({
+  test('it should allow a user to add the version when the Prom type is selected', async ({
     createDataSourceConfigPage,
     // readProvisionedDataSource,
     page,
   }) => {
     const configPage = await createDataSourceConfigPage({
-      type: "grafana-amazonprometheus-datasource",
+      type: 'grafana-amazonprometheus-datasource',
       name: DATA_SOURCE_NAME,
     });
 
-    await expect(configPage
-      .getByGrafanaSelector(
-        selectors.components.DataSource.Prometheus.configPage.prometheusType
-      )).toBeVisible();
+    await expect(
+      configPage.getByGrafanaSelector(selectors.components.DataSource.Prometheus.configPage.prometheusType)
+    ).toBeVisible();
 
     // open the select dropdown
     await page.getByLabel('Prometheus type').click();
@@ -125,27 +132,26 @@ test.describe('Configuration tests', () => {
     await page.getByText('Cortex').click();
 
     // expect the version component to be displayed
-    await expect(configPage
-      .getByGrafanaSelector(
-        selectors.components.DataSource.Prometheus.configPage.prometheusVersion
-      )).toBeVisible();
+    await expect(
+      configPage.getByGrafanaSelector(selectors.components.DataSource.Prometheus.configPage.prometheusVersion)
+    ).toBeVisible();
   });
 
-  test('it should allow a user to select a query overlap window when incremental querying is selected',
-  async ({
+  test('it should allow a user to select a query overlap window when incremental querying is selected', async ({
     createDataSourceConfigPage,
     page,
   }) => {
     const configPage = await createDataSourceConfigPage({
-      type: "grafana-amazonprometheus-datasource",
-      name: DATA_SOURCE_NAME + "check",
+      type: 'grafana-amazonprometheus-datasource',
+      name: DATA_SOURCE_NAME + 'check',
     });
 
-    await page.getByLabel('Toggle switch').nth(3).setChecked(true);
+    await page.getByRole('switch').nth(3).setChecked(true);
 
-    expect(configPage.getByGrafanaSelector(selectors.components.DataSource.Prometheus.configPage.queryOverlapWindow)).toBeVisible();
+    expect(
+      configPage.getByGrafanaSelector(selectors.components.DataSource.Prometheus.configPage.queryOverlapWindow)
+    ).toBeVisible();
   });
 
-// exemplars tested in exemplar.spec
+  // exemplars tested in exemplar.spec
 });
-

@@ -1110,7 +1110,7 @@
     ua-parser-js "^1.0.32"
     web-vitals "^4.0.1"
 
-"@grafana/plugin-e2e@^1.9.0":
+"@grafana/plugin-e2e@^1.12.1":
   version "1.12.1"
   resolved "https://registry.yarnpkg.com/@grafana/plugin-e2e/-/plugin-e2e-1.12.1.tgz#4440b9c2358c7ffcb83b0d32d503cbc13c8ce35f"
   integrity sha512-pxmtBn/zFGoyNwfHgwSYEqfH1vTp4r6GnMl0cl3tsQJXO8S58QCD0PFG5Op/OcHhsoglIQTWFVkGvUqu8c5q0A==

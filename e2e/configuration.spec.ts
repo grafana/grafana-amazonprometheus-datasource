@@ -146,7 +146,9 @@ test.describe('Configuration tests', () => {
       name: DATA_SOURCE_NAME + 'check',
     });
 
-    await page.getByRole('switch').nth(3).setChecked(true);
+    await page
+      .getByGrafanaSelector(selectors.components.DataSource.Prometheus.configPage.incrementalQuerying)
+      .setChecked(true);
 
     expect(
       configPage.getByGrafanaSelector(selectors.components.DataSource.Prometheus.configPage.queryOverlapWindow)

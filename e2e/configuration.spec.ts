@@ -148,7 +148,7 @@ test.describe('Configuration tests', () => {
 
     await page
       .locator(`#${selectors.components.DataSource.Prometheus.configPage.incrementalQuerying}`)
-      .setChecked(true);
+      .setChecked(true, { force: true });
 
     expect(
       configPage.getByGrafanaSelector(selectors.components.DataSource.Prometheus.configPage.queryOverlapWindow)

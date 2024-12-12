@@ -18,165 +18,207 @@ test.describe('Prometheus query editor', () => {
     step
     type
     exemplars
-  `, async ({
-    readProvisionedDataSource,
-    explorePage,
-    page,
-  }) => {
-    const ds = await readProvisionedDataSource<DataSourcePluginOptionsEditorProps<PromOptions>>({ fileName: 'datasources.yml' });
-    
+  `, async ({ readProvisionedDataSource, explorePage, page }) => {
+    const ds = await readProvisionedDataSource<DataSourcePluginOptionsEditorProps<PromOptions>>({
+      fileName: 'datasources.yml',
+    });
+
     await explorePage.goto();
 
     await explorePage.datasource.set(ds.name);
     // query patterns
-    await expect(explorePage
-      .getByGrafanaSelector(selectors.components.QueryBuilder.queryPatterns)).toBeVisible();
-    
+    await expect(explorePage.getByGrafanaSelector(selectors.components.QueryBuilder.queryPatterns)).toBeVisible();
+
     // explain
-    await expect(explorePage
-      .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.explain)).toBeVisible();
-      
+    await expect(
+      explorePage.getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.explain)
+    ).toBeVisible();
+
     // editor toggle
-    await expect(explorePage
-      .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.editorToggle)).toBeVisible();
+    await expect(
+      explorePage.getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.editorToggle)
+    ).toBeVisible();
 
     // options
-    await expect(explorePage
-      .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.options)).toBeVisible();
-    
+    await expect(
+      explorePage.getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.options)
+    ).toBeVisible();
+
     // open the options
-    await explorePage
-      .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.options)
-      .click();
+    await explorePage.getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.options).click();
 
     // legend
-    await expect(explorePage
-      .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.legend)).toBeVisible();
-    
+    await expect(
+      explorePage.getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.legend)
+    ).toBeVisible();
+
     // format
-    await expect(explorePage
-      .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.format)).toBeVisible();
-    
-    // step
-    await expect(page.locator(`#${selectors.components.DataSource.Prometheus.queryEditor.step}`)).toBeVisible();
+    await expect(
+      explorePage.getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.format)
+    ).toBeVisible();
+
+    await expect(page.getByText('Min step')).toBeVisible();
 
     // type
-    await expect(explorePage
-      .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.type)).toBeVisible();
+    await expect(
+      explorePage.getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.type)
+    ).toBeVisible();
 
     // exemplars
-    await expect(page.locator(`#${selectors.components.DataSource.Prometheus.queryEditor.exemplars}`)).toBeVisible();
+    await expect(page.getByText('Exemplars')).toBeVisible();
   });
 
   test.describe('Code editor', () => {
     test('it navigates to the code editor with editor type as code', async ({
       readProvisionedDataSource,
-      explorePage
+      explorePage,
     }) => {
-      const dsCodeEditor = await readProvisionedDataSource<DataSourcePluginOptionsEditorProps<PromOptions>>({ fileName: codeEditorProvFile });
+      const dsCodeEditor = await readProvisionedDataSource<DataSourcePluginOptionsEditorProps<PromOptions>>({
+        fileName: codeEditorProvFile,
+      });
 
       await explorePage.goto();
 
       await explorePage.datasource.set(dsCodeEditor.name);
 
-      await expect(explorePage
-        .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.code.queryField)).toBeVisible();
+      await expect(
+        explorePage.getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.code.queryField)
+      ).toBeVisible();
     });
-    
+
     test('it navigates to the code editor and opens the metrics browser with metric search, labels, label values, and all components', async ({
       readProvisionedDataSource,
-      explorePage
-    }) => {      
-      const dsCodeEditor = await readProvisionedDataSource<DataSourcePluginOptionsEditorProps<PromOptions>>({ fileName: codeEditorProvFile });
+      explorePage,
+    }) => {
+      const dsCodeEditor = await readProvisionedDataSource<DataSourcePluginOptionsEditorProps<PromOptions>>({
+        fileName: codeEditorProvFile,
+      });
 
       await explorePage.goto();
 
       await explorePage.datasource.set(dsCodeEditor.name);
 
-      await expect(explorePage
-        .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.code.queryField)).toBeVisible();
+      await expect(
+        explorePage.getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.code.queryField)
+      ).toBeVisible();
 
       await explorePage
-        .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.code.queryField).focus();
-      
-      await expect(explorePage
-        .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.code.metricsBrowser.openButton)).toBeVisible();
+        .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.code.queryField)
+        .focus();
 
-      await explorePage
-        .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.code.metricsBrowser.openButton).focus();
-      
-      await explorePage
-        .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.code.metricsBrowser.openButton).isEnabled();
+      await expect(
+        explorePage.getByGrafanaSelector(
+          selectors.components.DataSource.Prometheus.queryEditor.code.metricsBrowser.openButton
+        )
+      ).toBeVisible();
 
       await explorePage
         .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.code.metricsBrowser.openButton)
-        .click()
-        
-      await explorePage
-        .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.code.metricsBrowser.selectMetric).isVisible();
-      
-      await expect(explorePage
-        .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.code.metricsBrowser.selectMetric)).toBeVisible();
+        .focus();
 
       await explorePage
-        .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.code.metricsBrowser.labelNamesFilter).isVisible();
+        .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.code.metricsBrowser.openButton)
+        .isEnabled();
 
       await explorePage
-        .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.code.metricsBrowser.labelValuesFilter).isVisible();
+        .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.code.metricsBrowser.openButton)
+        .click();
 
       await explorePage
-        .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.code.metricsBrowser.useQuery).isVisible();
+        .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.code.metricsBrowser.selectMetric)
+        .isVisible();
+
+      await expect(
+        explorePage.getByGrafanaSelector(
+          selectors.components.DataSource.Prometheus.queryEditor.code.metricsBrowser.selectMetric
+        )
+      ).toBeVisible();
 
       await explorePage
-        .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.code.metricsBrowser.useAsRateQuery).isVisible();
+        .getByGrafanaSelector(
+          selectors.components.DataSource.Prometheus.queryEditor.code.metricsBrowser.labelNamesFilter
+        )
+        .isVisible();
 
       await explorePage
-        .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.code.metricsBrowser.validateSelector).isVisible();
+        .getByGrafanaSelector(
+          selectors.components.DataSource.Prometheus.queryEditor.code.metricsBrowser.labelValuesFilter
+        )
+        .isVisible();
 
       await explorePage
-        .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.code.metricsBrowser.clear).isVisible();
+        .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.code.metricsBrowser.useQuery)
+        .isVisible();
+
+      await explorePage
+        .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.code.metricsBrowser.useAsRateQuery)
+        .isVisible();
+
+      await explorePage
+        .getByGrafanaSelector(
+          selectors.components.DataSource.Prometheus.queryEditor.code.metricsBrowser.validateSelector
+        )
+        .isVisible();
+
+      await explorePage
+        .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.code.metricsBrowser.clear)
+        .isVisible();
     });
 
     test('selects a metric in the metrics browser and uses the query', async ({
       readProvisionedDataSource,
       explorePage,
-      page
+      page,
     }) => {
-      const dsCodeEditor = await readProvisionedDataSource<DataSourcePluginOptionsEditorProps<PromOptions>>({ fileName: codeEditorProvFile });
+      const dsCodeEditor = await readProvisionedDataSource<DataSourcePluginOptionsEditorProps<PromOptions>>({
+        fileName: codeEditorProvFile,
+      });
 
       await explorePage.goto();
-      
+
       await explorePage.datasource.set(dsCodeEditor.name);
 
-      await expect(explorePage
-        .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.code.queryField)).toBeVisible();
+      await expect(
+        explorePage.getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.code.queryField)
+      ).toBeVisible();
 
       await explorePage
-        .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.code.queryField).focus();
+        .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.code.queryField)
+        .focus();
 
-      await expect(explorePage
-        .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.code.metricsBrowser.openButton)).toBeVisible();
+      await expect(
+        explorePage.getByGrafanaSelector(
+          selectors.components.DataSource.Prometheus.queryEditor.code.metricsBrowser.openButton
+        )
+      ).toBeVisible();
 
-      await explorePage
-        .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.code.metricsBrowser.openButton).focus();
-
-      await explorePage
-        .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.code.metricsBrowser.openButton).isEnabled();
-        
       await explorePage
         .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.code.metricsBrowser.openButton)
-        .click()
-        
-      await expect(explorePage
-        .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.code.metricsBrowser.selectMetric)).toBeVisible();
+        .focus();
 
-      await page.getByRole('option', { name: 'go_gc_duration_seconds', exact: true }).click()
-      
       await explorePage
-        .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.code.metricsBrowser.useQuery).click();
+        .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.code.metricsBrowser.openButton)
+        .isEnabled();
+
+      await explorePage
+        .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.code.metricsBrowser.openButton)
+        .click();
+
+      await expect(
+        explorePage.getByGrafanaSelector(
+          selectors.components.DataSource.Prometheus.queryEditor.code.metricsBrowser.selectMetric
+        )
+      ).toBeVisible();
+
+      await page.getByRole('option', { name: 'go_gc_duration_seconds', exact: true }).click();
+
+      await explorePage
+        .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.code.metricsBrowser.useQuery)
+        .click();
 
       const testMetric = await explorePage
-        .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.code.queryField).textContent()
+        .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.code.queryField)
+        .textContent();
 
       expect(testMetric).toContain('go_gc_duration_seconds');
     });
@@ -201,16 +243,20 @@ test.describe('Prometheus query editor', () => {
       await page.getByRole('button', { name: 'Amazon Managed Service for Prometheus' }).click();
 
       await explorePage
-        .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect).isVisible();
+        .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect)
+        .isVisible();
 
       await explorePage
-        .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect).focus();
-      
-      await explorePage
-        .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect).isEnabled();
+        .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect)
+        .focus();
 
-      await expect(explorePage
-        .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect)).toBeVisible();
+      await explorePage
+        .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect)
+        .isEnabled();
+
+      await expect(
+        explorePage.getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect)
+      ).toBeVisible();
     });
 
     test('the query builder contains metric select, label filters and operations', async ({
@@ -231,34 +277,33 @@ test.describe('Prometheus query editor', () => {
       await page.getByRole('button', { name: 'Amazon Managed Service for Prometheus' }).click();
 
       await explorePage
-        .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect).isEnabled();
+        .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect)
+        .isEnabled();
 
-      await expect(explorePage
-        .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect)).toBeVisible();
-      
-      await explorePage
-        .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect).focus();
-
-      await expect(explorePage
-          .getByGrafanaSelector(selectors.components.QueryBuilder.labelSelect)).toBeVisible();
+      await expect(
+        explorePage.getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect)
+      ).toBeVisible();
 
       await explorePage
-        .getByGrafanaSelector(selectors.components.QueryBuilder.labelSelect).focus();
+        .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect)
+        .focus();
 
-      await explorePage
-        .getByGrafanaSelector(selectors.components.QueryBuilder.matchOperatorSelect).focus();
+      await expect(explorePage.getByGrafanaSelector(selectors.components.QueryBuilder.labelSelect)).toBeVisible();
 
-      await expect(explorePage
-        .getByGrafanaSelector(selectors.components.QueryBuilder.matchOperatorSelect)).toBeVisible();
+      await explorePage.getByGrafanaSelector(selectors.components.QueryBuilder.labelSelect).focus();
 
-      await explorePage
-        .getByGrafanaSelector(selectors.components.QueryBuilder.valueSelect).focus();
-      
-      await expect(explorePage
-        .getByGrafanaSelector(selectors.components.QueryBuilder.valueSelect)).toBeVisible();
+      await explorePage.getByGrafanaSelector(selectors.components.QueryBuilder.matchOperatorSelect).focus();
+
+      await expect(
+        explorePage.getByGrafanaSelector(selectors.components.QueryBuilder.matchOperatorSelect)
+      ).toBeVisible();
+
+      await explorePage.getByGrafanaSelector(selectors.components.QueryBuilder.valueSelect).focus();
+
+      await expect(explorePage.getByGrafanaSelector(selectors.components.QueryBuilder.valueSelect)).toBeVisible();
     });
 
-/*    test('it can select a metric and provide a hint', async ({
+    /*    test('it can select a metric and provide a hint', async ({
       readProvisionedDataSource,
       explorePage,
       page,
@@ -294,7 +339,7 @@ test.describe('Prometheus query editor', () => {
     });
 */
 
- /*   test('it can select a label filter and run a query', async ({
+    /*   test('it can select a label filter and run a query', async ({
       readProvisionedDataSource,
       explorePage,
       page,
@@ -349,19 +394,26 @@ test.describe('Prometheus query editor', () => {
       await page.getByRole('button', { name: 'Amazon Managed Service for Prometheus' }).click();
 
       await explorePage
-        .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect).isVisible();
+        .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect)
+        .isVisible();
 
-        await explorePage
-        .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect).isEnabled();
-      
       await explorePage
-        .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect).focus();
+        .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect)
+        .isEnabled();
 
-      await explorePage.getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect).click();
+      await explorePage
+        .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect)
+        .focus();
+
+      await explorePage
+        .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect)
+        .click();
 
       await page.getByText('Metrics explorer', { exact: true }).click();
 
-      await expect(explorePage.getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.builder.metricsExplorer)).toBeVisible();
+      await expect(
+        explorePage.getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.builder.metricsExplorer)
+      ).toBeVisible();
     });
 
     // NEED TO COMPLETE QUEY ADVISOR WORK OR FIGURE OUT HOW TO ENABLE EXPERIMENTAL FEATURE TOGGLES

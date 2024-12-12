@@ -57,6 +57,7 @@ test.describe('Prometheus query editor', () => {
       explorePage.getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.format)
     ).toBeVisible();
 
+    // TODO: use selectors when  <EditorSwitch/> is fixed to pass data-testid
     await expect(page.getByText('Min step')).toBeVisible();
 
     // type
@@ -65,6 +66,7 @@ test.describe('Prometheus query editor', () => {
     ).toBeVisible();
 
     // exemplars
+    // TODO: use selectors when  <EditorSwitch/> is fixed to pass data-testid
     await expect(page.getByText('Exemplars')).toBeVisible();
   });
 

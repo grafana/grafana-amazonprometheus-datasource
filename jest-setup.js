@@ -8,19 +8,3 @@ global.TextDecoder = TextDecoder;
 import { matchers } from './src/matchers';
 
 expect.extend(matchers);
-
-window.MessageChannel = jest.fn().mockImplementation(() => {
-  let onmessage;
-  return {
-    port1: {
-      set onmessage(cb) {
-        onmessage = cb;
-      },
-    },
-    port2: {
-      postMessage: (data) => {
-        onmessage?.({ data });
-      },
-    },
-  };
-});

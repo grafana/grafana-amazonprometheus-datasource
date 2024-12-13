@@ -43,6 +43,7 @@
     "awsds",
     "httpss",
     "Mwdhmsy",
-    "templating"
+    "templating",
+    "stretchr"
   ]
 }

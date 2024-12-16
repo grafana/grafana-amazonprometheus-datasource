@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.0.4
+
+- Dependency updates: 
+  - Bump cross-spawn from 7.0.3 to 7.0.6 in the npm_and_yarn group [#294](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/294)
+  - Updates github.com/grafana/grafana-aws-sdk from 0.31.3 to 0.31.4 [#298](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/298)
+  - Updates github.com/grafana/grafana-plugin-sdk-go from 0.256.0 to 0.258.0 [#298](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/298)
+  - Updates github.com/stretchr/testify from 1.9.0 to 1.10.0 [#298](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/298)
+  - Bump github.com/grafana/grafana-plugin-sdk-go from 0.258.0 to 0.260.1 in [#302](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/302)
+  - Update dependencies with create-plugin in [#305](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/305)
 ## 1.0.3
 
 - Bugfix: use GetAuthSettings for env variable fallback [#289](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/289)

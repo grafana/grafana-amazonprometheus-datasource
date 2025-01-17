@@ -12,7 +12,7 @@
     "typecheck": "tsc --noEmit",
     "lint": "eslint --cache --ignore-path ./.gitignore --ext .js,.jsx,.ts,.tsx .",
     "lint:fix": "yarn run lint --fix",
-    "server:configured": "GRAFANA_VERSION=11.0.0 GRAFANA_IMAGE=grafana-enterprise docker compose up -d",
+    "server:configured": "GRAFANA_VERSION=11.4.0 GRAFANA_IMAGE=grafana-enterprise docker compose up -d",
     "sign": "npx --yes @grafana/sign-plugin@latest",
     "spellcheck": "cspell -c cspell.config.json \"**/*.{ts,tsx,js,go,md,mdx,yml,yaml,json,scss,css}\"",
     "server": "docker compose up --build"

@@ -33,8 +33,8 @@ jobs:
       fail-fast: false
       matrix:
         GRAFANA_IMAGE: ${{fromJson(needs.resolve-versions.outputs.matrix)}}
-        exclude:
-          - GRAFANA_IMAGE: { name: 'grafana-enterprise' }
+#        exclude:
+#          - GRAFANA_IMAGE: { name: 'grafana-enterprise' }
     name: e2e ${{ matrix.GRAFANA_IMAGE.name }}
     runs-on: ubuntu-latest
     steps:
@@ -74,7 +74,7 @@ jobs:
       - name: Wait for Grafana to start
         uses: nev7n/wait_for_response@v1
         with:
-          url: 'http://localhost:3000/'
+          url: 'http://localhost:3009/'
           responseCode: 200
           timeout: 60000
           interval: 500

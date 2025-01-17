@@ -378,47 +378,48 @@ test.describe('Prometheus query editor', () => {
       await explorePage.runQuery();
     });
 */
-    test('it should have the metrics explorer opened via the metric select', async ({
-      readProvisionedDataSource,
-      explorePage,
-      page,
-    }) => {
-      // const dsDefaultEditorBuilder = await readProvisionedDataSource<DataSourcePluginOptionsEditorProps<PromOptions>>({ fileName: 'datasources.yml' });
-
-      await explorePage.goto();
-
-      // await explorePage.datasource.set(dsDefaultEditorBuilder.name);
-
-      await page.getByTestId('data-testid Select a data source').click();
-
-      await page.getByTestId('data-testid Select a data source').fill('Amazon Managed Service for Prometheus');
-
-      await page.getByRole('button', { name: 'Amazon Managed Service for Prometheus' }).click();
-
-      await explorePage
-        .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect)
-        .isVisible();
-
-      await explorePage
-        .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect)
-        .isEnabled();
-
-      await explorePage
-        .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect)
-        .focus();
-
-      await explorePage
-        .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect)
-        .click();
-
-      await page.waitForTimeout(500);
-
-      await page.getByText('Metrics explorer', { exact: true }).click();
-
-      await expect(
-        explorePage.getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.builder.metricsExplorer)
-      ).toBeVisible();
-    });
+    // Metrics explorer option was removed https://github.com/grafana/grafana/pull/93262
+    // test('it should have the metrics explorer opened via the metric select', async ({
+    //   readProvisionedDataSource,
+    //   explorePage,
+    //   page,
+    // }) => {
+    //   // const dsDefaultEditorBuilder = await readProvisionedDataSource<DataSourcePluginOptionsEditorProps<PromOptions>>({ fileName: 'datasources.yml' });
+    //
+    //   await explorePage.goto();
+    //
+    //   // await explorePage.datasource.set(dsDefaultEditorBuilder.name);
+    //
+    //   await page.getByTestId('data-testid Select a data source').click();
+    //
+    //   await page.getByTestId('data-testid Select a data source').fill('Amazon Managed Service for Prometheus');
+    //
+    //   await page.getByRole('button', { name: 'Amazon Managed Service for Prometheus' }).click();
+    //
+    //   await explorePage
+    //     .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect)
+    //     .isVisible();
+    //
+    //   await explorePage
+    //     .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect)
+    //     .isEnabled();
+    //
+    //   await explorePage
+    //     .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect)
+    //     .focus();
+    //
+    //   await explorePage
+    //     .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect)
+    //     .click();
+    //
+    //   await page.waitForTimeout(500);
+    //
+    //   await page.getByText('Metrics explorer', { exact: true }).click();
+    //
+    //   await expect(
+    //     explorePage.getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.builder.metricsExplorer)
+    //   ).toBeVisible();
+    // });
 
     // NEED TO COMPLETE QUEY ADVISOR WORK OR FIGURE OUT HOW TO ENABLE EXPERIMENTAL FEATURE TOGGLES
     // it('should have a query advisor when enabled with feature toggle', () => {

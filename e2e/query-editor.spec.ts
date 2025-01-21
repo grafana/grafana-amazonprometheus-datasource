@@ -5,8 +5,6 @@ import { PromOptions } from '@grafana/prometheus';
 
 const codeEditorProvFile = 'code-editor.yml';
 
-// const metric = 'process_cpu_seconds_total';
-
 test.describe('Prometheus query editor', () => {
   test(`should have the following components:
     kickstart component
@@ -411,8 +409,6 @@ test.describe('Prometheus query editor', () => {
       await explorePage
         .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect)
         .click();
-
-      await page.waitForTimeout(500);
 
       await page.getByText('Metrics explorer', { exact: true }).click();
 

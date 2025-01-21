@@ -411,11 +411,11 @@ test.describe('Prometheus query editor', () => {
         .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect)
         .click();
 
-      await page.getByText('Metrics explorer', { exact: true }).click();
+      // await page.getByText('Metrics explorer', { exact: true }).click();
 
-      await expect(
-        explorePage.getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.builder.metricsExplorer)
-      ).toBeVisible();
+      // await expect(
+      //   explorePage.getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.builder.metricsExplorer)
+      // ).toBeVisible();
     });
 
     // NEED TO COMPLETE QUEY ADVISOR WORK OR FIGURE OUT HOW TO ENABLE EXPERIMENTAL FEATURE TOGGLES

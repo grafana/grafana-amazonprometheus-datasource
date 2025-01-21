@@ -28,8 +28,6 @@ services:
     ports:
       - 3000:3000/tcp
       - 2345:2345/tcp # delve
-#    environment:
-#      - GF_FEATURE_TOGGLES_ENABLE=prometheusUsesCombobox
     extra_hosts:
       - "host.docker.internal:host-gateway"
     security_opt:

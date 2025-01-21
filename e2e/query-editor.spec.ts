@@ -376,7 +376,7 @@ test.describe('Prometheus query editor', () => {
       await explorePage.runQuery();
     });
 */
-    // Metrics explorer option was removed https://github.com/grafana/grafana/pull/93262
+    // TODO query for metrics explorer button once prometheusUsesCombobox is GA and enabled by default
     test('it should have the metrics explorer opened via the metric select', async ({
       readProvisionedDataSource,
       explorePage,

@@ -18,19 +18,7 @@ datasources:
     defaultEditor: builder
     sigV4Auth: true
     sigV4AuthType: keys
-    sigV4ExternalId: asf
+    sigV4ExternalId: externalId
   secureJsonFields:
-    sigV4AccessKey: "aaa"
-    sigV4SecretKey: "bbbbb"
-  accessControl:
-    alert.instances.external:read: true
-    alert.instances.external:write: true
-    alert.notifications.external:read: true
-    alert.notifications.external:write: true
-    alert.rules.external:read: true
-    alert.rules.external:write: true
-    datasources.id:read: true
-    datasources:delete: true
-    datasources:query: true
-    datasources:read: true
-    datasources:write: true
+    sigV4AccessKey: accessKey
+    sigV4SecretKey: secretKey

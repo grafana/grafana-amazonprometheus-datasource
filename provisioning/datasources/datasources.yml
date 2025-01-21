@@ -17,8 +17,8 @@ datasources:
     # incrementalQueryOverlapWindow: 10m
     defaultEditor: builder
     sigV4Auth: true
-    sigV4AuthType: keys
-    sigV4ExternalId: externalId
+    authType: keys
+    externalId: externalId
   secureJsonFields:
-    sigV4AccessKey: accessKey
-    sigV4SecretKey: secretKey
+    accessKey: accessKey
+    secretKey: secretKey

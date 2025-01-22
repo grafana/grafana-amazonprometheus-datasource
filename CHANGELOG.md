@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.5
+
+- Update compatibility info in plugin.json in [#327](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/327)
+
 ## 1.0.4
 
 - Dependency updates: 

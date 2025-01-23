@@ -3,6 +3,9 @@
 ## 1.0.5
 
 - Update compatibility info in plugin.json in [#327](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/327)
+- Dependency updates: 
+  - Bump nanoid from 3.3.7 to 3.3.8 in the npm_and_yarn group in [#304](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/304)
+  - Bump golang.org/x/crypto from 0.29.0 to 0.31.0 in the go_modules group in [#307](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/307)
 
 ## 1.0.4
 

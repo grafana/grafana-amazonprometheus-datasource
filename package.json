@@ -1,6 +1,6 @@
 {
   "name": "grafana-amazonprometheus-datasource",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "A plugin for Amazon Managed Prometheus",
   "scripts": {
     "build": "webpack -c ./.config/webpack/webpack.config.ts --env production",

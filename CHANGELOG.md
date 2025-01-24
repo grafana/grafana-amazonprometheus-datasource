@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.0.0
+
+- Update promlib to v0.0.7 and grafana/prometheus to 11.5.0-218678 [#319](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/319)
+- Bump golang.org/x/net from 0.31.0 to 0.33.0 in the go_modules group [#329](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/329)
+- Chore: Add react and react-dom major updates to dependabot ignore [#331](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/331)
+
 ## 1.0.5
 
 - Update compatibility info in plugin.json in [#327](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/327)

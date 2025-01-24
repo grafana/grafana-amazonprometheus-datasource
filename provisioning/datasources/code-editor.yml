@@ -4,7 +4,7 @@ datasources:
 - name: a-prometheus-code-editor
   uid: a-prometheus-code-editor
   type: grafana-amazonprometheus-datasource
-  url: http://prometheus:9090 
+  url: http://prometheus:9090
   access: proxy
   editable: true
   jsonData:

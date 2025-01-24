@@ -4,7 +4,7 @@ datasources:
 - name: Amazon Managed Service for Prometheus
   uid: grafana-amazonprometheus
   type: grafana-amazonprometheus-datasource
-  url: http://prometheus:9090 
+  url: http://prometheus:9090
   access: proxy
   editable: true
   jsonData:
@@ -18,3 +18,7 @@ datasources:
     defaultEditor: builder
     sigV4Auth: true
     sigV4AuthType: keys
+    externalId: externalId
+  secureJsonData:
+      sigV4AccessKey: abc
+      sigV4SecretKey: def

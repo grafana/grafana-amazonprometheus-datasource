@@ -8,6 +8,7 @@ import (
 	"github.com/grafana/grafana-plugin-sdk-go/backend"
 	sdkhttpclient "github.com/grafana/grafana-plugin-sdk-go/backend/httpclient"
 	"github.com/grafana/grafana-plugin-sdk-go/backend/instancemgmt"
+	"github.com/grafana/grafana-plugin-sdk-go/backend/log"
 
 	"github.com/grafana/grafana/pkg/promlib"
 )
@@ -66,7 +67,7 @@ func (d *Datasource) contextualMiddlewares(ctx context.Context) context.Context 
 	return sdkhttpclient.WithContextualMiddleware(ctx, middlewares...)
 }
 
-func extendClientOpts(_ context.Context, _ backend.DataSourceInstanceSettings, clientOpts *sdkhttpclient.Options) error {
+func extendClientOpts(_ context.Context, _ backend.DataSourceInstanceSettings, clientOpts *sdkhttpclient.Options, _ log.Logger) error {
 	// Set SigV4 service namespace
 	if clientOpts.SigV4 != nil {
 		clientOpts.SigV4.Service = "aps"

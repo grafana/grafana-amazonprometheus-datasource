@@ -5,8 +5,6 @@ import { PromOptions } from '@grafana/prometheus';
 
 const codeEditorProvFile = 'code-editor.yml';
 
-const metric = 'process_cpu_seconds_total';
-
 test.describe('Prometheus query editor', () => {
   test(`should have the following components:
     kickstart component
@@ -378,6 +376,7 @@ test.describe('Prometheus query editor', () => {
       await explorePage.runQuery();
     });
 */
+    // TODO query for metrics explorer button once prometheusUsesCombobox is GA and enabled by default
     test('it should have the metrics explorer opened via the metric select', async ({
       readProvisionedDataSource,
       explorePage,

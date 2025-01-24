@@ -102,7 +102,7 @@
     ]
   },
   "dependencies": {
-    "grafanaDependency": "<=11.4.x",
+    "grafanaDependency": ">=11.5.0",
     "plugins": []
   }
 }

@@ -6,7 +6,7 @@ toolchain go1.23.4
 
 require (
 	github.com/grafana/grafana-aws-sdk v0.31.6
-	github.com/grafana/grafana-plugin-sdk-go v0.261.0
+	github.com/grafana/grafana-plugin-sdk-go v0.263.0
 	github.com/grafana/grafana/pkg/promlib v0.0.7
 	github.com/stretchr/testify v1.10.0
 )
@@ -25,7 +25,7 @@ require (
 	github.com/cpuguy83/go-md2man/v2 v2.0.5 // indirect
 	github.com/davecgh/go-spew v1.1.2-0.20180830191138-d8f796af33cc // indirect
 	github.com/dennwc/varint v1.0.0 // indirect
-	github.com/elazarl/goproxy v1.2.6 // indirect
+	github.com/elazarl/goproxy v1.3.0 // indirect
 	github.com/emicklei/go-restful/v3 v3.11.0 // indirect
 	github.com/fatih/color v1.17.0 // indirect
 	github.com/fxamacker/cbor/v2 v2.7.0 // indirect
@@ -118,7 +118,7 @@ require (
 	golang.org/x/crypto v0.32.0 // indirect
 	golang.org/x/exp v0.0.0-20240909161429-701f63a606c0 // indirect
 	golang.org/x/mod v0.22.0 // indirect
-	golang.org/x/net v0.33.0 // indirect
+	golang.org/x/net v0.34.0 // indirect
 	golang.org/x/sync v0.10.0 // indirect
 	golang.org/x/sys v0.29.0 // indirect
 	golang.org/x/term v0.28.0 // indirect

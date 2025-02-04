@@ -1,5 +1,5 @@
 import { DataSourceSettings } from '@grafana/data';
-import { Auth, AuthMethod, ConnectionSettings, convertLegacyAuthProps } from '@grafana/experimental';
+import { Auth, AuthMethod, ConnectionSettings, convertLegacyAuthProps } from '@grafana/plugin-ui';
 import { PromOptions, docsTip, overhaulStyles } from '@grafana/prometheus';
 import { SecureSocksProxySettings, useTheme2 } from '@grafana/ui';
 import React, { ReactElement, useState } from 'react';

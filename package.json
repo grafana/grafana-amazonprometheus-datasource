@@ -1,6 +1,6 @@
 {
   "name": "grafana-amazonprometheus-datasource",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "A plugin for Amazon Managed Prometheus",
   "scripts": {
     "build": "webpack -c ./.config/webpack/webpack.config.ts --env production",
@@ -87,9 +87,9 @@
   },
   "dependencies": {
     "@emotion/css": "11.13.5",
-    "@grafana/aws-sdk": "0.5.0",
+    "@grafana/aws-sdk": "^0.6.1",
     "@grafana/data": "11.5.1",
-    "@grafana/experimental": "2.1.4",
+    "@grafana/plugin-ui": "^0.10.1",
     "@grafana/prometheus": "11.6.0-221778",
     "@grafana/runtime": "11.4.0",
     "@grafana/schema": "11.5.1",

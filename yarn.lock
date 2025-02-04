@@ -1009,20 +1009,21 @@
   dependencies:
     tslib "^2.7.0"
 
-"@grafana/async-query-data@0.2.0":
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/@grafana/async-query-data/-/async-query-data-0.2.0.tgz#2df8a69da527ce1993fc74a6bce452582fb76649"
-  integrity sha512-CduRkX8Bl8/+uiDTrKXjPN2h3kjVE67VgeZAZlVKcjCsxDlDpbVYXMVbfTJBGr4HqzDHg1Km6UkmeuOAt2bBww==
+"@grafana/async-query-data@0.4.0":
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/@grafana/async-query-data/-/async-query-data-0.4.0.tgz#5324187dc2bebbdf8e8fccfdcb8c5dee9af683b7"
+  integrity sha512-2J0qvntcgjk2FbZQ51zZoNIMUdMJoSFXhJD4FPsg5IpGs5J5F+9dwbWBZ5Cnfaztqnk8SFR/MKSvsoZk0NjCXg==
   dependencies:
-    tslib "^2.4.1"
+    semver "^7.6.3"
+    tslib "^2.8.0"
 
-"@grafana/aws-sdk@0.5.0":
-  version "0.5.0"
-  resolved "https://registry.yarnpkg.com/@grafana/aws-sdk/-/aws-sdk-0.5.0.tgz#0bf076ba104c6eccc5cab88d21e380df53d5a169"
-  integrity sha512-CL2YB8FSvzgTF2uyb440SpJNNdiWX31pEZ0CgE/iSMRrWvODN8GL8qX8lmY5/quZz0slckAjbqi2QxE6iicQlg==
+"@grafana/aws-sdk@^0.6.1":
+  version "0.6.1"
+  resolved "https://registry.yarnpkg.com/@grafana/aws-sdk/-/aws-sdk-0.6.1.tgz#e484c1ea7bf25be57e91350b872e64c1b4e70262"
+  integrity sha512-GZcrdWJhBjLml+6GlVZAYQ2Hf0NJYArbUXkPuwRoPD9J/PpiOorVG/IQCB2tymq34HV8kFgA0ubqhm1TN6wd8A==
   dependencies:
-    "@grafana/async-query-data" "0.2.0"
-    "@grafana/experimental" "2.1.1"
+    "@grafana/async-query-data" "0.4.0"
+    "@grafana/plugin-ui" "^0.10.1"
 
 "@grafana/data@11.4.0":
   version "11.4.0"
@@ -1158,34 +1159,6 @@
   resolved "https://registry.yarnpkg.com/@grafana/eslint-config/-/eslint-config-8.0.0.tgz#207049e69bb9fe7c007d207cd79fcfe28a781288"
   integrity sha512-2e/Zk7dEB8k4r7mPiTua9vXZIqv/nN6prWvNcr/kfglz4y9kllEagANE1loxJ7whZsIqwB++UR7s0MAOFA0Iog==
 
-"@grafana/experimental@2.1.1":
-  version "2.1.1"
-  resolved "https://registry.yarnpkg.com/@grafana/experimental/-/experimental-2.1.1.tgz#58bc55c63cfc07138962f1459ce4c436570e0bd7"
-  integrity sha512-gj9Hb3JZEEewxQxTa3kxl4se3kbU9VM2XnXvxEqvL4gaF5xJYZqiSKaismaCq0aMLPqi9ydHAvy3MVn7dcsMXA==
-  dependencies:
-    "@hello-pangea/dnd" "^16.6.0"
-    "@types/uuid" "^8.3.3"
-    lodash "^4.17.21"
-    prismjs "^1.29.0"
-    react-popper-tooltip "^4.4.2"
-    react-use "^17.4.2"
-    semver "^7.5.4"
-    uuid "^8.3.2"
-
-"@grafana/experimental@2.1.4":
-  version "2.1.4"
-  resolved "https://registry.yarnpkg.com/@grafana/experimental/-/experimental-2.1.4.tgz#1bc2b27ce03a7f1378a4b05a82fb1522332b3e5c"
-  integrity sha512-QXH/23ZE/dDcYSeoE84rxxdt60Jz7bLHMQRUm9+aJJx2UuKcczQKku23w6e6x14cbBFnK0tcu/uxB518W2qMLw==
-  dependencies:
-    "@hello-pangea/dnd" "^16.6.0"
-    "@types/uuid" "^8.3.3"
-    lodash "^4.17.21"
-    prismjs "^1.29.0"
-    react-popper-tooltip "^4.4.2"
-    react-use "^17.4.2"
-    semver "^7.5.4"
-    uuid "^8.3.2"
-
 "@grafana/faro-core@^1.10.2":
   version "1.10.2"
   resolved "https://registry.yarnpkg.com/@grafana/faro-core/-/faro-core-1.10.2.tgz#fdda191221c12681bb75442e1657714017f1db81"
@@ -1243,7 +1216,7 @@
     uuid "^11.0.2"
     yaml "^2.3.4"
 
-"@grafana/plugin-ui@0.10.1":
+"@grafana/plugin-ui@0.10.1", "@grafana/plugin-ui@^0.10.1":
   version "0.10.1"
   resolved "https://registry.yarnpkg.com/@grafana/plugin-ui/-/plugin-ui-0.10.1.tgz#af96d9a6b5892ac540d2d77979b548b0bae7a8a8"
   integrity sha512-ZuxpPgyhNFJbR2X7BHWLS+O5g8+GzO2s09cQWaK0GZYmYdS6mYtlyUQs+C9aqpvQyR6xQFjg9/YjahrJiKAW1g==
@@ -1261,7 +1234,7 @@
     sql-formatter-plus "^1.3.6"
     uuid "^11.0.0"
 
-"@grafana/prometheus@11.6.0":
+"@grafana/prometheus@11.6.0-221778":
   version "11.6.0-221778"
   resolved "https://registry.yarnpkg.com/@grafana/prometheus/-/prometheus-11.6.0-221778.tgz#1cb5e6e6868063f65f0bb78cd23aca9b13173956"
   integrity sha512-YQty8TsTYU7OJShtijEBXMKFHrauT84mKBPJ4ISlQygBrbS5+ukVO1e/jWzKGbdC4X3Msi/nqvTzLGGAYfKb+A==
@@ -1594,7 +1567,7 @@
     uplot "1.6.31"
     uuid "11.0.5"
 
-"@hello-pangea/dnd@16.6.0", "@hello-pangea/dnd@^16.6.0":
+"@hello-pangea/dnd@16.6.0":
   version "16.6.0"
   resolved "https://registry.yarnpkg.com/@hello-pangea/dnd/-/dnd-16.6.0.tgz#7509639c7bd13f55e537b65a9dcfcd54e7c99ac7"
   integrity sha512-vfZ4GydqbtUPXSLfAvKvXQ6xwRzIjUSjVU0Sx+70VOhc2xx6CdmJXJ8YhH70RpbTUGjxctslQTHul9sIOxCfFQ==
@@ -3302,11 +3275,6 @@
   version "0.0.6"
   resolved "https://registry.yarnpkg.com/@types/use-sync-external-store/-/use-sync-external-store-0.0.6.tgz#60be8d21baab8c305132eb9cb912ed497852aadc"
   integrity sha512-zFDAD+tlpf2r4asuHEj0XH6pY6i0g5NeAHPn+15wk3BV6JA69eERFXC1gyGThDkVa1zCyKr5jox1+2LbV/AMLg==
-
-"@types/uuid@^8.3.3":
-  version "8.3.4"
-  resolved "https://registry.yarnpkg.com/@types/uuid/-/uuid-8.3.4.tgz#bd86a43617df0594787d38b735f55c805becf1bc"
-  integrity sha512-c/I8ZRb51j+pYGAu5CrFMRxqZ2ke4y2grEBO5AUjgSkSk+qT2Ea+OdWElz/OiMf5MNpn2b17kuVBwZLQJXzihw==
 
 "@types/yargs-parser@*":
   version "21.0.3"
@@ -9022,7 +8990,7 @@ react-universal-interface@^0.6.2:
   resolved "https://registry.yarnpkg.com/react-universal-interface/-/react-universal-interface-0.6.2.tgz#5e8d438a01729a4dbbcbeeceb0b86be146fe2b3b"
   integrity sha512-dg8yXdcQmvgR13RIlZbTRQOoUrDciFVoSBZILwjE2LFISxZZ8loVJKAkuzswl5js8BHda79bIb2b84ehU8IjXw==
 
-react-use@17.5.1, react-use@^17.4.2:
+react-use@17.5.1:
   version "17.5.1"
   resolved "https://registry.yarnpkg.com/react-use/-/react-use-17.5.1.tgz#19fc2ae079775d8450339e9fa8dbe25b17f2263c"
   integrity sha512-LG/uPEVRflLWMwi3j/sZqR00nF6JGqTTDblkXK2nzXsIvij06hXl1V/MZIlwj1OKIQUtlh1l9jK8gLsRyCQxMg==
@@ -10137,7 +10105,7 @@ tslib@2.7.0:
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.7.0.tgz#d9b40c5c40ab59e8738f297df3087bf1a2690c01"
   integrity sha512-gLXCKdN1/j47AiHiOkJN69hJmcbGTHI0ImLmbYLHykhgeN0jVGola9yVjFgzCUklsZQMW55o+dW7IXv3RCXDzA==
 
-tslib@2.8.1, tslib@^2.1.0, tslib@^2.3.1, tslib@^2.4.0, tslib@^2.4.1, tslib@^2.6.2, tslib@^2.7.0, tslib@^2.8.0:
+tslib@2.8.1, tslib@^2.1.0, tslib@^2.3.1, tslib@^2.4.0, tslib@^2.6.2, tslib@^2.7.0, tslib@^2.8.0:
   version "2.8.1"
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.8.1.tgz#612efe4ed235d567e8aba5f2a5fab70280ade83f"
   integrity sha512-oJFu94HQb+KVduSUQL7wnpmqnfmLsOA/nAh6b6EH0wCEoK0/mPeXU6c3wKDV83MkOuHPRHtSXKKU99IBazS/2w==
@@ -10362,11 +10330,6 @@ uuid@^11.0.2:
   version "11.0.3"
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-11.0.3.tgz#248451cac9d1a4a4128033e765d137e2b2c49a3d"
   integrity sha512-d0z310fCWv5dJwnX1Y/MncBAqGMKEzlBb1AOf7z9K8ALnd0utBX/msg/fA0+sbyN1ihbMsLhrBlnl1ak7Wa0rg==
-
-uuid@^8.3.2:
-  version "8.3.2"
-  resolved "https://registry.yarnpkg.com/uuid/-/uuid-8.3.2.tgz#80d5b5ced271bb9af6c445f21a1a04c606cefbe2"
-  integrity sha512-+NYs2QeMWy+GWFOEm9xnn6HCDp0l7QBD7ml8zLUmJ+93Q5NF0NocErnwkTkXVFNiX3/fpC6afS8Dhb/gz7R7eg==
 
 v8-compile-cache-lib@^3.0.1:
   version "3.0.1"

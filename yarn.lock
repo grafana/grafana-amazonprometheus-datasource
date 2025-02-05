@@ -1261,7 +1261,7 @@
     sql-formatter-plus "^1.3.6"
     uuid "^11.0.0"
 
-"@grafana/prometheus@11.6.0":
+"@grafana/prometheus@11.6.0-221778":
   version "11.6.0-221778"
   resolved "https://registry.yarnpkg.com/@grafana/prometheus/-/prometheus-11.6.0-221778.tgz#1cb5e6e6868063f65f0bb78cd23aca9b13173956"
   integrity sha512-YQty8TsTYU7OJShtijEBXMKFHrauT84mKBPJ4ISlQygBrbS5+ukVO1e/jWzKGbdC4X3Msi/nqvTzLGGAYfKb+A==

@@ -1,6 +1,7 @@
 module github.com/grafana/grafana-amazonprometheus-datasource
 
-go 1.23.1
+go 1.23.5
+
 toolchain go1.23.6
 
 require (

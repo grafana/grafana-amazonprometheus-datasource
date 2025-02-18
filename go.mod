@@ -6,7 +6,7 @@ toolchain go1.23.6
 
 require (
 	github.com/grafana/grafana-aws-sdk v0.31.7
-	github.com/grafana/grafana-plugin-sdk-go v0.265.0
+	github.com/grafana/grafana-plugin-sdk-go v0.266.0
 	github.com/grafana/grafana/pkg/promlib v0.0.8
 	github.com/stretchr/testify v1.10.0
 )

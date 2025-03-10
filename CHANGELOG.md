@@ -2,6 +2,7 @@
 
 ## 2.1.0
 
+- Bump github.com/grafana/grafana-plugin-sdk-go from 0.265.0 to 0.266.0 in the all-dependencies group in [#350](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/350)
 - Bump the all-dependencies group across 1 directory with 2 updates in [#345](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/345)
 - Migrate to plugin-ui in [#343](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/343)
 - Dependencies: Update @grafana/prometheus and promlib with support for UTF8 metrics and labels in [#339](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/339)

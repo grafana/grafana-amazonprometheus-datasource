@@ -24,10 +24,7 @@
     "src/dashboards/**",
     "yarn.lock"
   ],
-  "ignoreRegExpList": [
-    "import\\s*\\((.|[\r\n])*?\\)",
-    "import\\s*.*\".*?\""
-  ],
+  "ignoreRegExpList": ["import\\s*\\((.|[\r\n])*?\\)", "import\\s*.*\".*?\""],
   "words": [
     "grafana",
     "datasource",
@@ -44,6 +41,7 @@
     "httpss",
     "Mwdhmsy",
     "templating",
-    "stretchr"
+    "stretchr",
+    "zizmor"
   ]
 }

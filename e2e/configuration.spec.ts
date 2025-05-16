@@ -108,7 +108,7 @@ test.describe('Configuration tests', () => {
     });
     const configPage = await createDataSourceConfigPage({ type: ds.type });
     await expect(configPage.saveAndTest()).not.toBeOK();
-    await expect(configPage).toHaveAlert('error', { hasText: 'empty url' });
+    await expect(configPage).toHaveAlert('error', { hasText: 'Invalid url' });
   });
 
   test('it should allow a user to add the version when the Prom type is selected', async ({

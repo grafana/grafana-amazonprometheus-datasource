@@ -22,7 +22,7 @@ export const ConfigEditor = (props: Props) => {
     <>
       {options.access === 'direct' && (
         <Alert title="Error" severity="error">
-          Browser access mode in the Amazon Managed Service for Prometheus data source is no longer available. Switch to server access mode.
+          Brrowser access mode in the Amazon Managed Service for Prometheus data source is no longer available. Switch to server access mode.
         </Alert>
       )}
       <DataSourceDescription

@@ -228,56 +228,61 @@ test.describe('Prometheus query editor', () => {
     test('it navigates to the query builder with default editor type as builder', async ({
       readProvisionedDataSource,
       explorePage,
-      isFeatureToggleEnabled,
+      grafanaVersion,
+      page
     }) => {
       const ds = await readProvisionedDataSource<DataSourcePluginOptionsEditorProps<PromOptions>>({
         fileName: 'datasources.yml',
       });
 
-      console.log(await isFeatureToggleEnabled('secureSocksDSProxyEnabled'));
-
       await explorePage.datasource.set(ds.name);
+      if (semver.lte(grafanaVersion, '11.5.4')) {
+        await page.getByLabel('Metric').isVisible();
+      } else {
+        await explorePage
+          .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect)
+          .isVisible();
 
-      await explorePage
-        .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect)
-        .isVisible();
+        await explorePage
+          .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect)
+          .focus();
 
-      await explorePage
-        .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect)
-        .focus();
+        await explorePage
+          .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect)
+          .isEnabled();
 
-      await explorePage
-        .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect)
-        .isEnabled();
-
-      await expect(
-        explorePage.getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect)
-      ).toBeVisible();
+        await expect(
+          explorePage.getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect)
+        ).toBeVisible();
+      }
     });
 
     test('the query builder contains metric select, label filters and operations', async ({
       readProvisionedDataSource,
       explorePage,
       page,
+      grafanaVersion,
     }) => {
       const ds = await readProvisionedDataSource<DataSourcePluginOptionsEditorProps<PromOptions>>({
         fileName: 'datasources.yml',
       });
 
       await explorePage.datasource.set(ds.name);
+      if (semver.lte(grafanaVersion, '11.5.4')) {
+        await page.getByLabel('Metric').isVisible();
+      } else {
+        await explorePage
+          .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect)
+          .isEnabled();
 
-      await explorePage
-        .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect)
-        .isEnabled();
+        await expect(
+          explorePage.getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect)
+        ).toBeVisible();
 
-      await expect(
-        explorePage.getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect)
-      ).toBeVisible();
-
-      await explorePage
-        .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect)
-        .focus();
-
+        await explorePage
+          .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect)
+          .focus();
+      }
       await expect(explorePage.getByGrafanaSelector(selectors.components.QueryBuilder.labelSelect)).toBeVisible();
 
       await explorePage.getByGrafanaSelector(selectors.components.QueryBuilder.labelSelect).focus();

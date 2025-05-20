@@ -2,7 +2,7 @@ import { DataSourcePluginOptionsEditorProps } from '@grafana/data';
 import { selectors } from '@grafana/e2e-selectors';
 import { test, expect } from '@grafana/plugin-e2e';
 import { PromOptions } from '@grafana/prometheus';
-
+import semver from 'semver';
 const codeEditorProvFile = 'code-editor.yml';
 
 test.describe('Prometheus query editor', () => {
@@ -228,13 +228,13 @@ test.describe('Prometheus query editor', () => {
     test('it navigates to the query builder with default editor type as builder', async ({
       readProvisionedDataSource,
       explorePage,
-      isFeatureToggleEnabled
+      isFeatureToggleEnabled,
     }) => {
       const ds = await readProvisionedDataSource<DataSourcePluginOptionsEditorProps<PromOptions>>({
         fileName: 'datasources.yml',
       });
 
-      console.log(await isFeatureToggleEnabled('secureSocksDSProxyEnabled'))
+      console.log(await isFeatureToggleEnabled('secureSocksDSProxyEnabled'));
 
       await explorePage.datasource.set(ds.name);
 
@@ -366,10 +366,12 @@ test.describe('Prometheus query editor', () => {
       await explorePage.runQuery();
     });
 */
- // TODO query for metrics explorer button once prometheusUsesCombobox is GA and enabled by default
+    // TODO query for metrics explorer button once prometheusUsesCombobox is GA and enabled by default
     test('it should have the metrics explorer opened via the metric select', async ({
       readProvisionedDataSource,
       explorePage,
+      grafanaVersion,
+      page,
     }) => {
       const ds = await readProvisionedDataSource<DataSourcePluginOptionsEditorProps<PromOptions>>({
         fileName: 'datasources.yml',
@@ -377,21 +379,25 @@ test.describe('Prometheus query editor', () => {
 
       await explorePage.datasource.set(ds.name);
 
-      await explorePage
-        .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect)
-        .isVisible();
+      if (semver.lte(grafanaVersion, '11.5.4')) {
+        await page.getByLabel('Metric').isVisible();
+      } else {
+        await explorePage
+          .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect)
+          .isVisible();
 
-      await explorePage
-        .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect)
-        .isEnabled();
+        await explorePage
+          .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect)
+          .isEnabled();
 
-      await explorePage
-        .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect)
-        .focus();
+        await explorePage
+          .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect)
+          .focus();
 
-      await explorePage
-        .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect)
-        .click();
+        await explorePage
+          .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect)
+          .click();
+      }
 
       // await page.getByText('Metrics explorer', { exact: true }).click();
 

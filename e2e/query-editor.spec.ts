@@ -5,12 +5,6 @@ import { PromOptions } from '@grafana/prometheus';
 
 const codeEditorProvFile = 'code-editor.yml';
 
-test.use({
-  featureToggles: {
-    prometheusUsesCombobox: true,
-  },
-});
-
 test.describe('Prometheus query editor', () => {
   test(`should have the following components:
     kickstart component
@@ -234,7 +228,6 @@ test.describe('Prometheus query editor', () => {
     test('it navigates to the query builder with default editor type as builder', async ({
       readProvisionedDataSource,
       explorePage,
-      page,
     }) => {
       const ds = await readProvisionedDataSource<DataSourcePluginOptionsEditorProps<PromOptions>>({
         fileName: 'datasources.yml',
@@ -250,9 +243,9 @@ test.describe('Prometheus query editor', () => {
         .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect)
         .focus();
 
-      await explorePage
-        .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect)
-        .isEnabled();
+      expect(
+        explorePage.getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect)
+      ).toBeEnabled();
 
       await expect(
         explorePage.getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect)

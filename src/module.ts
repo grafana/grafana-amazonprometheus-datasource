@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { DataSourcePlugin } from '@grafana/data';
 import { PromQueryEditorByApp, PrometheusDatasource, PromCheatSheet } from '@grafana/prometheus';
 

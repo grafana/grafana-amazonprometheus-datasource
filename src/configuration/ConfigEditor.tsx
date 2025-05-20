@@ -21,7 +21,6 @@ export const ConfigEditor = (props: Props) => {
   return (
     <>
       {options.access === 'direct' && (
-        // @ts-ignore
         <Alert title="Error" severity="error">
           Browser access mode in the Amazon Managed Service for Prometheus data source is no longer available. Switch to
           server access mode.

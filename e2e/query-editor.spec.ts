@@ -5,6 +5,12 @@ import { PromOptions } from '@grafana/prometheus';
 
 const codeEditorProvFile = 'code-editor.yml';
 
+test.use({
+  featureToggles: {
+    prometheusUsesCombobox: true,
+  },
+});
+
 test.describe('Prometheus query editor', () => {
   test(`should have the following components:
     kickstart component
@@ -230,7 +236,9 @@ test.describe('Prometheus query editor', () => {
       explorePage,
       page,
     }) => {
-      const ds = await readProvisionedDataSource<DataSourcePluginOptionsEditorProps<PromOptions>>({ fileName: 'datasources.yml' });
+      const ds = await readProvisionedDataSource<DataSourcePluginOptionsEditorProps<PromOptions>>({
+        fileName: 'datasources.yml',
+      });
 
       await explorePage.datasource.set(ds.name);
 
@@ -256,7 +264,9 @@ test.describe('Prometheus query editor', () => {
       explorePage,
       page,
     }) => {
-      const ds = await readProvisionedDataSource<DataSourcePluginOptionsEditorProps<PromOptions>>({ fileName: 'datasources.yml' });
+      const ds = await readProvisionedDataSource<DataSourcePluginOptionsEditorProps<PromOptions>>({
+        fileName: 'datasources.yml',
+      });
 
       await explorePage.datasource.set(ds.name);
 
@@ -365,7 +375,9 @@ test.describe('Prometheus query editor', () => {
       readProvisionedDataSource,
       explorePage,
     }) => {
-      const ds = await readProvisionedDataSource<DataSourcePluginOptionsEditorProps<PromOptions>>({ fileName: 'datasources.yml' });
+      const ds = await readProvisionedDataSource<DataSourcePluginOptionsEditorProps<PromOptions>>({
+        fileName: 'datasources.yml',
+      });
 
       await explorePage.datasource.set(ds.name);
 

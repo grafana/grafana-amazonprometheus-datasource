@@ -230,17 +230,9 @@ test.describe('Prometheus query editor', () => {
       explorePage,
       page,
     }) => {
-      // const dsDefaultEditorBuilder = await readProvisionedDataSource<DataSourcePluginOptionsEditorProps<PromOptions>>({ fileName: 'datasources.yml' });
+      const ds = await readProvisionedDataSource<DataSourcePluginOptionsEditorProps<PromOptions>>({ fileName: 'datasources.yml' });
 
-      await explorePage.goto();
-
-      // await explorePage.datasource.set(dsDefaultEditorBuilder.name);
-
-      await page.getByTestId('data-testid Select a data source').click();
-
-      await page.getByTestId('data-testid Select a data source').fill('Amazon Managed Service for Prometheus');
-
-      await page.getByRole('button', { name: 'Amazon Managed Service for Prometheus' }).click();
+      await explorePage.datasource.set(ds.name);
 
       await explorePage
         .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect)
@@ -264,17 +256,9 @@ test.describe('Prometheus query editor', () => {
       explorePage,
       page,
     }) => {
-      // const dsDefaultEditorBuilder = await readProvisionedDataSource<DataSourcePluginOptionsEditorProps<PromOptions>>({ fileName: 'datasources.yml' });
+      const ds = await readProvisionedDataSource<DataSourcePluginOptionsEditorProps<PromOptions>>({ fileName: 'datasources.yml' });
 
-      await explorePage.goto();
-
-      // await explorePage.datasource.set(dsDefaultEditorBuilder.name);
-
-      await page.getByTestId('data-testid Select a data source').click();
-
-      await page.getByTestId('data-testid Select a data source').fill('Amazon Managed Service for Prometheus');
-
-      await page.getByRole('button', { name: 'Amazon Managed Service for Prometheus' }).click();
+      await explorePage.datasource.set(ds.name);
 
       await explorePage
         .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect)
@@ -381,9 +365,9 @@ test.describe('Prometheus query editor', () => {
       readProvisionedDataSource,
       explorePage,
     }) => {
-      // const dsDefaultEditorBuilder = await readProvisionedDataSource<DataSourcePluginOptionsEditorProps<PromOptions>>({ fileName: 'datasources.yml' });
+      const ds = await readProvisionedDataSource<DataSourcePluginOptionsEditorProps<PromOptions>>({ fileName: 'datasources.yml' });
 
-      await explorePage.datasource.set('Amazon Managed Service for Prometheus');
+      await explorePage.datasource.set(ds.name);
 
       await explorePage
         .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect)

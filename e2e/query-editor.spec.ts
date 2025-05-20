@@ -228,10 +228,13 @@ test.describe('Prometheus query editor', () => {
     test('it navigates to the query builder with default editor type as builder', async ({
       readProvisionedDataSource,
       explorePage,
+      isFeatureToggleEnabled
     }) => {
       const ds = await readProvisionedDataSource<DataSourcePluginOptionsEditorProps<PromOptions>>({
         fileName: 'datasources.yml',
       });
+
+      console.log(await isFeatureToggleEnabled('secureSocksDSProxyEnabled'))
 
       await explorePage.datasource.set(ds.name);
 

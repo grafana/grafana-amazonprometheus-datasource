@@ -380,19 +380,10 @@ test.describe('Prometheus query editor', () => {
     test('it should have the metrics explorer opened via the metric select', async ({
       readProvisionedDataSource,
       explorePage,
-      page,
     }) => {
       // const dsDefaultEditorBuilder = await readProvisionedDataSource<DataSourcePluginOptionsEditorProps<PromOptions>>({ fileName: 'datasources.yml' });
 
-      await explorePage.goto();
-
-      // await explorePage.datasource.set(dsDefaultEditorBuilder.name);
-
-      await page.getByTestId('data-testid Select a data source').click();
-
-      await page.getByTestId('data-testid Select a data source').fill('Amazon Managed Service for Prometheus');
-
-      await page.getByRole('button', { name: 'Amazon Managed Service for Prometheus' }).click();
+      await explorePage.datasource.set('Amazon Managed Service for Prometheus');
 
       await explorePage
         .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect)

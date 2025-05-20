@@ -229,14 +229,14 @@ test.describe('Prometheus query editor', () => {
       readProvisionedDataSource,
       explorePage,
       grafanaVersion,
-      page
+      page,
     }) => {
       const ds = await readProvisionedDataSource<DataSourcePluginOptionsEditorProps<PromOptions>>({
         fileName: 'datasources.yml',
       });
 
       await explorePage.datasource.set(ds.name);
-      if (semver.lte(grafanaVersion, '11.5.4')) {
+      if (semver.lt(grafanaVersion, '12.0.0')) {
         await page.getByLabel('Metric').isVisible();
       } else {
         await explorePage
@@ -268,7 +268,7 @@ test.describe('Prometheus query editor', () => {
       });
 
       await explorePage.datasource.set(ds.name);
-      if (semver.lte(grafanaVersion, '11.5.4')) {
+      if (semver.lt(grafanaVersion, '12.0.0')) {
         await page.getByLabel('Metric').isVisible();
       } else {
         await explorePage
@@ -384,7 +384,7 @@ test.describe('Prometheus query editor', () => {
 
       await explorePage.datasource.set(ds.name);
 
-      if (semver.lte(grafanaVersion, '11.5.4')) {
+      if (semver.lt(grafanaVersion, '12.0.0')) {
         await page.getByLabel('Metric').isVisible();
       } else {
         await explorePage

@@ -20,5 +20,5 @@ datasources:
     sigV4AuthType: keys
     externalId: externalId
   secureJsonData:
-      sigV4AccessKey: 
+      sigV4AccessKey: abc
       sigV4SecretKey: def

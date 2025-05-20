@@ -102,11 +102,13 @@ test.describe('Configuration tests', () => {
   test('"Save & test" should fail when configuration is invalid', async ({
     readProvisionedDataSource,
     gotoDataSourceConfigPage,
+    page,
   }) => {
     const ds = await readProvisionedDataSource<DataSourcePluginOptionsEditorProps<PromOptions>>({
       fileName: 'datasources.yml',
     });
     const configPage = await gotoDataSourceConfigPage(ds.uid);
+    await page.getByLabel('Access Key ID').fill('');
     await expect(configPage.saveAndTest()).not.toBeOK();
     await expect(configPage).toHaveAlert('error', {
       hasText: /.*there was an error returned querying the prometheus api/i,
@@ -122,7 +124,7 @@ test.describe('Configuration tests', () => {
     });
     const configPage = await createDataSourceConfigPage({ type: ds.type });
     await configPage.getByGrafanaSelector(selectors.pages.DataSource.saveAndTest).click();
-    await expect(configPage).toHaveAlert('error', {hasText: /invalid URL/i});
+    await expect(configPage).toHaveAlert('error', { hasText: /invalid URL/i });
   });
 
   test('it should allow a user to add the version when the Prom type is selected', async ({

@@ -246,9 +246,9 @@ test.describe('Prometheus query editor', () => {
         .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect)
         .focus();
 
-      expect(
-        explorePage.getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect)
-      ).toBeEnabled();
+      await explorePage
+        .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect)
+        .isEnabled();
 
       await expect(
         explorePage.getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect)
@@ -366,7 +366,7 @@ test.describe('Prometheus query editor', () => {
       await explorePage.runQuery();
     });
 */
-    // TODO query for metrics explorer button once prometheusUsesCombobox is GA and enabled by default
+ // TODO query for metrics explorer button once prometheusUsesCombobox is GA and enabled by default
     test('it should have the metrics explorer opened via the metric select', async ({
       readProvisionedDataSource,
       explorePage,

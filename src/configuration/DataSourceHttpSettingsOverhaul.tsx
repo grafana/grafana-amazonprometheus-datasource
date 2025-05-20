@@ -34,6 +34,7 @@ export const DataSourceHttpSettingsOverhaul = (props: Props) => {
   });
 
   const theme = useTheme2();
+  // @ts-ignore
   const styles = overhaulStyles(theme);
 
   // for custom auth methods sigV4

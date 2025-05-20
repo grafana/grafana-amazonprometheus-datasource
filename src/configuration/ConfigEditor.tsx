@@ -21,8 +21,10 @@ export const ConfigEditor = (props: Props) => {
   return (
     <>
       {options.access === 'direct' && (
+        // @ts-ignore
         <Alert title="Error" severity="error">
-          Browser access mode in the Amazon Managed Service for Prometheus data source is no longer available. Switch to server access mode.
+          Browser access mode in the Amazon Managed Service for Prometheus data source is no longer available. Switch to
+          server access mode.
         </Alert>
       )}
       <DataSourceDescription
@@ -33,7 +35,9 @@ export const ConfigEditor = (props: Props) => {
       <DataSourceHttpSettingsOverhaul
         options={options}
         onOptionsChange={onOptionsChange}
-        renderSigV4Editor={<SIGV4ConnectionConfig inExperimentalAuthComponent={true} {...props}></SIGV4ConnectionConfig>}
+        renderSigV4Editor={
+          <SIGV4ConnectionConfig inExperimentalAuthComponent={true} {...props}></SIGV4ConnectionConfig>
+        }
         secureSocksDSProxyEnabled={config.secureSocksDSProxyEnabled}
       />
       <hr />
@@ -131,7 +135,7 @@ export function overhaulStyles(theme: GrafanaTheme2) {
       font-weight: 400;
     `,
     container: css`
-      maxWidth: 578;
+      maxwidth: 578;
     `,
   };
 }

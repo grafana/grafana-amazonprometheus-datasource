@@ -134,7 +134,7 @@ export function overhaulStyles(theme: GrafanaTheme2) {
       font-weight: 400;
     `,
     container: css`
-      maxwidth: 578;
+      max-width: 578;
     `,
   };
 }

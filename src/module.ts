@@ -9,3 +9,4 @@ export const plugin = new DataSourcePlugin(PrometheusDatasource)
   .setQueryEditor(PromQueryEditorByApp)
   .setConfigEditor(ConfigEditor)
   .setQueryEditorHelp(PromCheatSheet);
+  

@@ -1,5 +1,22 @@
 # Changelog
 
+## 2.1.0
+
+- Dependencies: Update @grafana/prometheus and promlib with support for UTF8 metrics and labels in [#339](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/339)
+- Chore: Migrate from Drone to Github Actions and fix e2e tests in [#371](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/371)
+- add zizmor ignore rule in [#368](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/368)
+- Cleanup github actions files in [#367](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/367)
+- Migrate to plugin-ui in [#343](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/343)
+- Chore: add label to external contributions in [#340](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/340)
+- Bump the all-dependencies group with 34 updates and migrate to eslintconfig in [#374](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/374)
+- Bump the all-dependencies group across 1 directory with 2 updates in [#361](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/361)
+- Bump @babel/runtime from 7.26.0 to 7.26.10 in the npm_and_yarn group in [#356](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/356)
+- Bump the all-dependencies group across 1 directory with 43 updates in [#353](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/353)
+- Bump the all-dependencies group across 1 directory with 2 updates in [#354](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/354)
+- Bump golang.org/x/net from 0.34.0 to 0.36.0 in the go_modules group in [#355](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/355)
+- Bump github.com/grafana/grafana-plugin-sdk-go from 0.265.0 to 0.266.0 in the all-dependencies group in [#350](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/350)
+- Bump the all-dependencies group across 1 directory with 2 updates in [#345](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/345)
+
 ## 2.0.0
 
 - Update promlib to v0.0.7 and grafana/prometheus to 11.5.0-218678 [#319](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/319)

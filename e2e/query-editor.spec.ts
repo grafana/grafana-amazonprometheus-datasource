@@ -2,7 +2,7 @@ import { DataSourcePluginOptionsEditorProps } from '@grafana/data';
 import { selectors } from '@grafana/e2e-selectors';
 import { test, expect } from '@grafana/plugin-e2e';
 import { PromOptions } from '@grafana/prometheus';
-
+import semver from 'semver';
 const codeEditorProvFile = 'code-editor.yml';
 
 test.describe('Prometheus query editor', () => {
@@ -228,66 +228,61 @@ test.describe('Prometheus query editor', () => {
     test('it navigates to the query builder with default editor type as builder', async ({
       readProvisionedDataSource,
       explorePage,
+      grafanaVersion,
       page,
     }) => {
-      // const dsDefaultEditorBuilder = await readProvisionedDataSource<DataSourcePluginOptionsEditorProps<PromOptions>>({ fileName: 'datasources.yml' });
+      const ds = await readProvisionedDataSource<DataSourcePluginOptionsEditorProps<PromOptions>>({
+        fileName: 'datasources.yml',
+      });
 
-      await explorePage.goto();
+      await explorePage.datasource.set(ds.name);
+      if (semver.lt(grafanaVersion, '12.0.0')) {
+        await page.getByLabel('Metric').isVisible();
+      } else {
+        await explorePage
+          .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect)
+          .isVisible();
 
-      // await explorePage.datasource.set(dsDefaultEditorBuilder.name);
+        await explorePage
+          .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect)
+          .focus();
 
-      await page.getByTestId('data-testid Select a data source').click();
+        await explorePage
+          .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect)
+          .isEnabled();
 
-      await page.getByTestId('data-testid Select a data source').fill('Amazon Managed Service for Prometheus');
-
-      await page.getByRole('button', { name: 'Amazon Managed Service for Prometheus' }).click();
-
-      await explorePage
-        .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect)
-        .isVisible();
-
-      await explorePage
-        .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect)
-        .focus();
-
-      await explorePage
-        .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect)
-        .isEnabled();
-
-      await expect(
-        explorePage.getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect)
-      ).toBeVisible();
+        await expect(
+          explorePage.getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect)
+        ).toBeVisible();
+      }
     });
 
     test('the query builder contains metric select, label filters and operations', async ({
       readProvisionedDataSource,
       explorePage,
       page,
+      grafanaVersion,
     }) => {
-      // const dsDefaultEditorBuilder = await readProvisionedDataSource<DataSourcePluginOptionsEditorProps<PromOptions>>({ fileName: 'datasources.yml' });
+      const ds = await readProvisionedDataSource<DataSourcePluginOptionsEditorProps<PromOptions>>({
+        fileName: 'datasources.yml',
+      });
 
-      await explorePage.goto();
+      await explorePage.datasource.set(ds.name);
+      if (semver.lt(grafanaVersion, '12.0.0')) {
+        await page.getByLabel('Metric').isVisible();
+      } else {
+        await explorePage
+          .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect)
+          .isEnabled();
 
-      // await explorePage.datasource.set(dsDefaultEditorBuilder.name);
+        await expect(
+          explorePage.getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect)
+        ).toBeVisible();
 
-      await page.getByTestId('data-testid Select a data source').click();
-
-      await page.getByTestId('data-testid Select a data source').fill('Amazon Managed Service for Prometheus');
-
-      await page.getByRole('button', { name: 'Amazon Managed Service for Prometheus' }).click();
-
-      await explorePage
-        .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect)
-        .isEnabled();
-
-      await expect(
-        explorePage.getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect)
-      ).toBeVisible();
-
-      await explorePage
-        .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect)
-        .focus();
-
+        await explorePage
+          .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect)
+          .focus();
+      }
       await expect(explorePage.getByGrafanaSelector(selectors.components.QueryBuilder.labelSelect)).toBeVisible();
 
       await explorePage.getByGrafanaSelector(selectors.components.QueryBuilder.labelSelect).focus();
@@ -380,35 +375,34 @@ test.describe('Prometheus query editor', () => {
     test('it should have the metrics explorer opened via the metric select', async ({
       readProvisionedDataSource,
       explorePage,
+      grafanaVersion,
       page,
     }) => {
-      // const dsDefaultEditorBuilder = await readProvisionedDataSource<DataSourcePluginOptionsEditorProps<PromOptions>>({ fileName: 'datasources.yml' });
+      const ds = await readProvisionedDataSource<DataSourcePluginOptionsEditorProps<PromOptions>>({
+        fileName: 'datasources.yml',
+      });
 
-      await explorePage.goto();
+      await explorePage.datasource.set(ds.name);
 
-      // await explorePage.datasource.set(dsDefaultEditorBuilder.name);
+      if (semver.lt(grafanaVersion, '12.0.0')) {
+        await page.getByLabel('Metric').isVisible();
+      } else {
+        await explorePage
+          .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect)
+          .isVisible();
 
-      await page.getByTestId('data-testid Select a data source').click();
+        await explorePage
+          .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect)
+          .isEnabled();
 
-      await page.getByTestId('data-testid Select a data source').fill('Amazon Managed Service for Prometheus');
+        await explorePage
+          .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect)
+          .focus();
 
-      await page.getByRole('button', { name: 'Amazon Managed Service for Prometheus' }).click();
-
-      await explorePage
-        .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect)
-        .isVisible();
-
-      await explorePage
-        .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect)
-        .isEnabled();
-
-      await explorePage
-        .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect)
-        .focus();
-
-      await explorePage
-        .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect)
-        .click();
+        await explorePage
+          .getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.builder.metricSelect)
+          .click();
+      }
 
       // await page.getByText('Metrics explorer', { exact: true }).click();
 

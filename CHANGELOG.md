@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.1.1
+
+- Republish plugin to fix hashes
+
 ## 2.1.0
 
 - Dependencies: Update @grafana/prometheus and promlib with support for UTF8 metrics and labels in [#339](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/339)
@@ -26,19 +30,20 @@
 ## 1.0.5
 
 - Update compatibility info in plugin.json in [#327](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/327)
-- Dependency updates: 
+- Dependency updates:
   - Bump nanoid from 3.3.7 to 3.3.8 in the npm_and_yarn group in [#304](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/304)
   - Bump golang.org/x/crypto from 0.29.0 to 0.31.0 in the go_modules group in [#307](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/307)
 
 ## 1.0.4
 
-- Dependency updates: 
+- Dependency updates:
   - Bump cross-spawn from 7.0.3 to 7.0.6 in the npm_and_yarn group [#294](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/294)
   - Updates github.com/grafana/grafana-aws-sdk from 0.31.3 to 0.31.4 [#298](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/298)
   - Updates github.com/grafana/grafana-plugin-sdk-go from 0.256.0 to 0.258.0 [#298](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/298)
   - Updates github.com/stretchr/testify from 1.9.0 to 1.10.0 [#298](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/298)
   - Bump github.com/grafana/grafana-plugin-sdk-go from 0.258.0 to 0.260.1 in [#302](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/302)
   - Update dependencies with create-plugin in [#305](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/305)
+
 ## 1.0.3
 
 - Bugfix: use GetAuthSettings for env variable fallback [#289](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/289)

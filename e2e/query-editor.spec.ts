@@ -56,7 +56,7 @@ test.describe('Prometheus query editor', () => {
     ).toBeVisible();
 
     // min step
-    await expect(page.getByTestId(selectors.components.DataSource.Prometheus.queryEditor.step)).toBeVisible();
+    await expect(explorePage.getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.step)).toBeVisible();
 
     // type
     await expect(
@@ -64,7 +64,7 @@ test.describe('Prometheus query editor', () => {
     ).toBeVisible();
 
     // exemplars
-    await expect(page.getByTestId(selectors.components.DataSource.Prometheus.queryEditor.exemplars)).toBeVisible();
+    await expect(explorePage.getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.exemplars)).toBeVisible();
   });
 
   test.describe('Code editor', () => {

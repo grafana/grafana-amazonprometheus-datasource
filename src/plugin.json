@@ -91,8 +91,8 @@
       "url": "https://grafana.com"
     },
     "logos": {
-      "small": "img/prometheus_logo.svg",
-      "large": "img/prometheus_logo.svg"
+      "small": "img/prometheus_aws_logo.svg",
+      "large": "img/prometheus_aws_logo.svg"
     },
     "links": [
       {

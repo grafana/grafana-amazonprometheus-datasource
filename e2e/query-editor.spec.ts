@@ -16,7 +16,7 @@ test.describe('Prometheus query editor', () => {
     step
     type
     exemplars
-  `, async ({ readProvisionedDataSource, explorePage, grafanaVersion }) => {
+  `, async ({ readProvisionedDataSource, explorePage, grafanaVersion, page }) => {
     const ds = await readProvisionedDataSource<DataSourcePluginOptionsEditorProps<PromOptions>>({
       fileName: 'datasources.yml',
     });
@@ -69,6 +69,11 @@ test.describe('Prometheus query editor', () => {
       await expect(
         explorePage.getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.exemplars)
       ).toBeVisible();
+    } else {
+      // min step
+      await expect(page.getByText('Min step')).toBeVisible();
+      // exemplars
+      await expect(page.getByText('Exemplars')).toBeVisible();
     }
   });
 

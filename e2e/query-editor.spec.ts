@@ -60,7 +60,7 @@ test.describe('Prometheus query editor', () => {
       explorePage.getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.type)
     ).toBeVisible();
 
-    if (semver.lte(grafanaVersion, '12.1.0')) {
+    if (semver.gte(grafanaVersion, '12.1.0')) {
       // min step
       await expect(
         explorePage.getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.step)

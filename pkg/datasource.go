@@ -3,8 +3,8 @@ package main
 import (
 	"context"
 
+	"github.com/grafana/grafana-aws-sdk/pkg/awsauth"
 	"github.com/grafana/grafana-aws-sdk/pkg/awsds"
-	"github.com/grafana/grafana-aws-sdk/pkg/sigv4"
 	"github.com/grafana/grafana-plugin-sdk-go/backend"
 	sdkhttpclient "github.com/grafana/grafana-plugin-sdk-go/backend/httpclient"
 	"github.com/grafana/grafana-plugin-sdk-go/backend/instancemgmt"
@@ -61,7 +61,7 @@ func (d *Datasource) contextualMiddlewares(ctx context.Context) context.Context 
 
 	middlewares := []sdkhttpclient.Middleware{
 		sdkhttpclient.ResponseLimitMiddleware(cfg.ResponseLimit()),
-		sigv4.SigV4MiddlewareWithAuthSettings(false, d.authSettings),
+		awsauth.NewSigV4Middleware(),
 	}
 
 	return sdkhttpclient.WithContextualMiddleware(ctx, middlewares...)

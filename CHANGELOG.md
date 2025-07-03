@@ -1,5 +1,8 @@
 # Changelog
 
+## 2.2.0
+- Update for new sigv4 middleware by @njvrzm in [#392](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/392)
+
 ## 2.1.1
 
 - Republish plugin to fix hashes

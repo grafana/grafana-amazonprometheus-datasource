@@ -16,7 +16,7 @@ test.describe('Prometheus query editor', () => {
     step
     type
     exemplars
-  `, async ({ readProvisionedDataSource, explorePage, page }) => {
+  `, async ({ readProvisionedDataSource, explorePage, grafanaVersion, page }) => {
     const ds = await readProvisionedDataSource<DataSourcePluginOptionsEditorProps<PromOptions>>({
       fileName: 'datasources.yml',
     });
@@ -55,17 +55,26 @@ test.describe('Prometheus query editor', () => {
       explorePage.getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.format)
     ).toBeVisible();
 
-    // TODO: use selectors when  <EditorSwitch/> is fixed to pass data-testid
-    await expect(page.getByText('Min step')).toBeVisible();
-
     // type
     await expect(
       explorePage.getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.type)
     ).toBeVisible();
 
-    // exemplars
-    // TODO: use selectors when  <EditorSwitch/> is fixed to pass data-testid
-    await expect(page.getByText('Exemplars')).toBeVisible();
+    if (semver.gte(grafanaVersion, '12.1.0')) {
+      // min step
+      await expect(
+        explorePage.getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.step)
+      ).toBeVisible();
+      // exemplars
+      await expect(
+        explorePage.getByGrafanaSelector(selectors.components.DataSource.Prometheus.queryEditor.exemplars)
+      ).toBeVisible();
+    } else {
+      // min step
+      await expect(page.getByText('Min step')).toBeVisible();
+      // exemplars
+      await expect(page.getByText('Exemplars')).toBeVisible();
+    }
   });
 
   test.describe('Code editor', () => {

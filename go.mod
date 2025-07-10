@@ -3,7 +3,7 @@ module github.com/grafana/grafana-amazonprometheus-datasource
 go 1.24.4
 
 require (
-	github.com/grafana/grafana-aws-sdk v1.0.3
+	github.com/grafana/grafana-aws-sdk v1.0.5
 	github.com/grafana/grafana-plugin-sdk-go v0.278.0
 	github.com/grafana/grafana/pkg/promlib v0.0.8
 	github.com/stretchr/testify v1.10.0

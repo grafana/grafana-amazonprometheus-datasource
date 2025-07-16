@@ -1,5 +1,24 @@
 # Changelog
 
+## 2.2.1
+
+- E2E: Use grafana selectors instead of getByText in [#380](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/380)
+- Add support for auto-merging dependabot updates in [#390](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/390)
+- Remove pr_commands in [#393](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/393)
+- Dependency updates:
+  - Bump @playwright/test from 1.52.0 to 1.53.2 (#408)
+  - Bump @types/node from 22.15.21 to 22.15.35 (#407)
+  - Bump @babel/core from 7.27.1 to 7.27.7 (#402)
+  - Bump eslint-webpack-plugin from 5.0.1 to 5.0.2 (#405)
+  - Bump @grafana/plugin-e2e from 2.1.2 to 2.1.4 (#406)
+  - Bump github.com/grafana/grafana-aws-sdk from 1.0.3 to 1.0.5 (#401)
+  - Bump glob from 11.0.2 to 11.0.3 (#398)
+  - Bump eslint from 9.30.0 to 9.30.1 (#399)
+  - Bump sass from 1.89.0 to 1.89.2 (#397)
+  - Bump @eslint/js from 9.30.0 to 9.30.1 (#400)
+  - Bump github.com/grafana/grafana-aws-sdk from 1.0.2 to 1.0.3 (#395)
+  - Bump github.com/grafana/grafana-plugin-sdk-go from 0.277.1 to 0.278.0 (#394)
+  
 ## 2.2.0
 - Update for new sigv4 middleware by @njvrzm in [#392](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/392)
 

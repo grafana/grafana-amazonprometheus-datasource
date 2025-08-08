@@ -27,7 +27,7 @@
     "@eslint/js": "^9.31.0",
     "@grafana/e2e-selectors": "12.1.0",
     "@grafana/eslint-config": "^8.0.0",
-    "@grafana/plugin-e2e": "^2.1.7",
+    "@grafana/plugin-e2e": "^2.1.8",
     "@grafana/tsconfig": "^2.0.0",
     "@playwright/test": "1.53.2",
     "@stylistic/eslint-plugin-ts": "^4.2.0",

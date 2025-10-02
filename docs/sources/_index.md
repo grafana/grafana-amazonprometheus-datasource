@@ -32,3 +32,7 @@ If you are using core Prometheus with SigV4 authentication, you must migrate to 
 ### Authentication
 
 Depending on the environment in which it is run, Grafana supports different authentication providers such as keys, a credentials file, or using the "Default" provider from AWS which supports using service-based IAM roles. These providers can be manually enabled/disabled with the `allowed_auth_providers` field in Grafana's config file. To read more about supported authentication providers refer to [the AWS authentication section](https://grafana.com/docs/grafana/latest/datasources/aws-cloudwatch/aws-authentication/#select-an-authentication-method)
+
+### Plugin repository
+
+You can request new features, report issues, or contribute code directly through the [Grafana Amazon Prometheus Data Source Github repository](https://github.com/grafana/grafana-amazonprometheus-datasource)

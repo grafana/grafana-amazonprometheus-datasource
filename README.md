@@ -1,4 +1,4 @@
-# Amazon Prometheus data source plugin
+# Amazon Managed Service for Prometheus Data Source
 
 Access data source plugin documentation [here](https://grafana.com/docs/plugins/grafana-amazonprometheus-datasource/latest/)
 

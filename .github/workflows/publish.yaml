@@ -36,3 +36,4 @@ jobs:
       docs-only: ${{ fromJSON(github.event.inputs.docs-only) }}
       scopes: universal
       golangci-lint-version: 2.1.6
+      github-draft-release: false # publish the github release directly, skipping the draft

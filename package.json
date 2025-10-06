@@ -84,7 +84,6 @@
     "webpack-livereload-plugin": "^3.0.2",
     "webpack-subresource-integrity": "^5.1.0",
     "webpack-virtual-modules": "^0.6.2",
-    "@types/testing-library__jest-dom": "6.0.0",
     "semver": "^7.6.3"
   },
   "dependencies": {

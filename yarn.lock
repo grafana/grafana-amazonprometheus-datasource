@@ -1509,18 +1509,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@grafana/e2e-selectors@npm:12.1.0":
-  version: 12.1.0
-  resolution: "@grafana/e2e-selectors@npm:12.1.0"
-  dependencies:
-    "@grafana/tsconfig": "npm:^2.0.0"
-    semver: "npm:^7.7.0"
-    tslib: "npm:2.8.1"
-    typescript: "npm:5.8.3"
-  checksum: 10c0/596dd5944027926def168516b502c330c0973dd6377cbea4ede7dadc14ebb9eab783c2c7d9777041c89f0944477d0b1287d662be495003a249a2879e9f2d478b
-  languageName: node
-  linkType: hard
-
 "@grafana/e2e-selectors@npm:12.2.0":
   version: 12.2.0
   resolution: "@grafana/e2e-selectors@npm:12.2.0"
@@ -7905,7 +7893,7 @@ __metadata:
     "@eslint/js": "npm:^9.31.0"
     "@grafana/aws-sdk": "npm:^0.7.0"
     "@grafana/data": "npm:^12.2.0"
-    "@grafana/e2e-selectors": "npm:12.1.0"
+    "@grafana/e2e-selectors": "npm:12.2.0"
     "@grafana/eslint-config": "npm:^8.0.0"
     "@grafana/plugin-e2e": "npm:^2.1.13"
     "@grafana/plugin-ui": "npm:^0.10.9"

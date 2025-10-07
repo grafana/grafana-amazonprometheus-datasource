@@ -1613,7 +1613,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@grafana/plugin-ui@npm:^0.10.1, @grafana/plugin-ui@npm:^0.10.9":
+"@grafana/plugin-ui@npm:^0.10.1":
   version: 0.10.9
   resolution: "@grafana/plugin-ui@npm:0.10.9"
   dependencies:
@@ -7908,7 +7908,7 @@ __metadata:
     "@grafana/e2e-selectors": "npm:12.1.0"
     "@grafana/eslint-config": "npm:^8.0.0"
     "@grafana/plugin-e2e": "npm:^2.1.13"
-    "@grafana/plugin-ui": "npm:^0.10.9"
+    "@grafana/plugin-ui": "npm:^0.10.10"
     "@grafana/prometheus": "npm:^12.2.0"
     "@grafana/runtime": "npm:^12.2.0"
     "@grafana/schema": "npm:^12.2.0"

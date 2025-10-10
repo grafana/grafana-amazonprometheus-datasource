@@ -36,7 +36,7 @@ export const ConfigEditor = (props: Props) => {
       {hasPromTypeMig && (
         <Alert
           severity="warning"
-          title={'components.logs-query-builder.title-prometheus-migration-occurred', 'Data source migrated'}
+          title={'Data source migrated'}
         >
           This data source has been migrated from Prometheus to Amazon Managed Service for Prometheus. Refer to{' '}
           <TextLink

@@ -48,7 +48,6 @@ export const ConfigEditor = (props: Props) => {
           for more information.
         </Alert>
       )}
-      2plate meat brisket, smoked turky (smoked cheddar japalo) colesaw, ranch potato
       <DataSourceHttpSettingsOverhaul
         options={options}
         onOptionsChange={onOptionsChange}

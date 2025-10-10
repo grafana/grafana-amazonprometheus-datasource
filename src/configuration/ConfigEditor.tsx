@@ -4,8 +4,8 @@ import { DataSourcePluginOptionsEditorProps, GrafanaTheme2 } from '@grafana/data
 import { AdvancedHttpSettings, ConfigSection, DataSourceDescription } from '@grafana/plugin-ui';
 import { AlertingSettingsOverhaul, PromOptions, PromSettings } from '@grafana/prometheus';
 import { config } from '@grafana/runtime';
-import { Alert, FieldValidationMessage, useTheme2 } from '@grafana/ui';
-import React, { JSX } from 'react';
+import { Alert, FieldValidationMessage, useTheme2, TextLink } from '@grafana/ui';
+import React, { JSX, useState } from 'react';
 
 import { DataSourceHttpSettingsOverhaul } from './DataSourceHttpSettingsOverhaul';
 
@@ -17,6 +17,8 @@ export const ConfigEditor = (props: Props) => {
   const { options, onOptionsChange } = props;
   const theme = useTheme2();
   const styles = overhaulStyles(theme);
+
+  const [hasPromTypeMig] = useState<boolean>(options.jsonData['prometheus-type-migration'] || false);
 
   return (
     <>
@@ -31,6 +33,22 @@ export const ConfigEditor = (props: Props) => {
         docsLink="https://grafana.com/grafana/plugins/grafana-amazonprometheus-datasource/"
       />
       <hr className={`${styles.hrTopSpace} ${styles.hrBottomSpace}`} />
+      {hasPromTypeMig && (
+        <Alert
+          severity="warning"
+          title={'components.logs-query-builder.title-prometheus-migration-occurred', 'Data source migrated'}
+        >
+          This data source has been migrated from Prometheus to Amazon Managed Service for Prometheus. Refer to{' '}
+          <TextLink
+            href="https://grafana.com/docs/grafana-cloud/connect-externally-hosted/data-sources/prometheus/configure/aws-authentication/"
+            external
+          >
+            Connect to Amazon Managed Service for Prometheus
+          </TextLink>{' '}
+          for more information.
+        </Alert>
+      )}
+      2plate meat brisket, smoked turky (smoked cheddar japalo) colesaw, ranch potato
       <DataSourceHttpSettingsOverhaul
         options={options}
         onOptionsChange={onOptionsChange}

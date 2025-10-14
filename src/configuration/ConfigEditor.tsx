@@ -19,7 +19,7 @@ export const ConfigEditor = (props: Props) => {
   const theme = useTheme2();
   const styles = overhaulStyles(theme);
 
-  const [hasPromTypeMig] = useState<boolean>(options.jsonData['prometheus-type-migration'] || false);
+  const hasPromTypeMig = options.jsonData['prometheus-type-migration'] || false;
 
   return (
     <>

@@ -2,21 +2,24 @@ import { css } from '@emotion/css';
 import { SIGV4ConnectionConfig } from '@grafana/aws-sdk';
 import { DataSourcePluginOptionsEditorProps, GrafanaTheme2 } from '@grafana/data';
 import { AdvancedHttpSettings, ConfigSection, DataSourceDescription } from '@grafana/plugin-ui';
-import { AlertingSettingsOverhaul, PromOptions, PromSettings } from '@grafana/prometheus';
+import { AlertingSettingsOverhaul, PromSettings } from '@grafana/prometheus';
 import { config } from '@grafana/runtime';
-import { Alert, FieldValidationMessage, useTheme2 } from '@grafana/ui';
+import { Alert, FieldValidationMessage, useTheme2, TextLink } from '@grafana/ui';
 import React, { JSX } from 'react';
 
 import { DataSourceHttpSettingsOverhaul } from './DataSourceHttpSettingsOverhaul';
+import { DataSourceOptions } from './DataSourceOptions';
 
 export const PROM_CONFIG_LABEL_WIDTH = 30;
 
-export type Props = DataSourcePluginOptionsEditorProps<PromOptions>;
+export type Props = DataSourcePluginOptionsEditorProps<DataSourceOptions>;
 
 export const ConfigEditor = (props: Props) => {
   const { options, onOptionsChange } = props;
   const theme = useTheme2();
   const styles = overhaulStyles(theme);
+
+  const hasPromTypeMig = options.jsonData['prometheus-type-migration'] || false;
 
   return (
     <>
@@ -31,6 +34,21 @@ export const ConfigEditor = (props: Props) => {
         docsLink="https://grafana.com/grafana/plugins/grafana-amazonprometheus-datasource/"
       />
       <hr className={`${styles.hrTopSpace} ${styles.hrBottomSpace}`} />
+      {hasPromTypeMig && (
+        <Alert
+          severity="warning"
+          title={'Data source migrated'}
+        >
+          This data source has been migrated from Prometheus to Amazon Managed Service for Prometheus. Refer to{' '}
+          <TextLink
+            href="https://grafana.com/docs/grafana-cloud/connect-externally-hosted/data-sources/prometheus/configure/aws-authentication/"
+            external
+          >
+            Connect to Amazon Managed Service for Prometheus
+          </TextLink>{' '}
+          for more information.
+        </Alert>
+      )}
       <DataSourceHttpSettingsOverhaul
         options={options}
         onOptionsChange={onOptionsChange}
@@ -50,7 +68,7 @@ export const ConfigEditor = (props: Props) => {
           config={options}
           onChange={onOptionsChange}
         />
-        <AlertingSettingsOverhaul<PromOptions> options={options} onOptionsChange={onOptionsChange} />
+        <AlertingSettingsOverhaul<DataSourceOptions> options={options} onOptionsChange={onOptionsChange} />
         <PromSettings options={options} onOptionsChange={onOptionsChange} />
       </ConfigSection>
     </>

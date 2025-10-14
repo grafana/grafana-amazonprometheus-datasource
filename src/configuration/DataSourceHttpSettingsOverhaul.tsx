@@ -1,13 +1,15 @@
 import { DataSourceSettings } from '@grafana/data';
 import { Auth, AuthMethod, ConnectionSettings, convertLegacyAuthProps } from '@grafana/plugin-ui';
-import { PromOptions, docsTip, overhaulStyles } from '@grafana/prometheus';
+import { docsTip, overhaulStyles } from '@grafana/prometheus';
 import { SecureSocksProxySettings, useTheme2 } from '@grafana/ui';
 import React, { ReactElement, useState } from 'react';
 import { useEffectOnce } from 'react-use';
 
+import { DataSourceOptions } from './DataSourceOptions';
+
 type Props = {
-  options: DataSourceSettings<PromOptions, {}>;
-  onOptionsChange: (options: DataSourceSettings<PromOptions, {}>) => void;
+  options: DataSourceSettings<DataSourceOptions, {}>;
+  onOptionsChange: (options: DataSourceSettings<DataSourceOptions, {}>) => void;
   renderSigV4Editor: React.ReactNode;
   secureSocksDSProxyEnabled: boolean;
 };

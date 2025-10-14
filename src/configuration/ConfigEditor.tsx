@@ -2,16 +2,17 @@ import { css } from '@emotion/css';
 import { SIGV4ConnectionConfig } from '@grafana/aws-sdk';
 import { DataSourcePluginOptionsEditorProps, GrafanaTheme2 } from '@grafana/data';
 import { AdvancedHttpSettings, ConfigSection, DataSourceDescription } from '@grafana/plugin-ui';
-import { AlertingSettingsOverhaul, PromOptions, PromSettings } from '@grafana/prometheus';
+import { AlertingSettingsOverhaul, PromSettings } from '@grafana/prometheus';
 import { config } from '@grafana/runtime';
 import { Alert, FieldValidationMessage, useTheme2, TextLink } from '@grafana/ui';
 import React, { JSX, useState } from 'react';
 
 import { DataSourceHttpSettingsOverhaul } from './DataSourceHttpSettingsOverhaul';
+import { DataSourceOptions } from './DataSourceOptions';
 
 export const PROM_CONFIG_LABEL_WIDTH = 30;
 
-export type Props = DataSourcePluginOptionsEditorProps<PromOptions>;
+export type Props = DataSourcePluginOptionsEditorProps<DataSourceOptions>;
 
 export const ConfigEditor = (props: Props) => {
   const { options, onOptionsChange } = props;
@@ -67,7 +68,7 @@ export const ConfigEditor = (props: Props) => {
           config={options}
           onChange={onOptionsChange}
         />
-        <AlertingSettingsOverhaul<PromOptions> options={options} onOptionsChange={onOptionsChange} />
+        <AlertingSettingsOverhaul<DataSourceOptions> options={options} onOptionsChange={onOptionsChange} />
         <PromSettings options={options} onOptionsChange={onOptionsChange} />
       </ConfigSection>
     </>

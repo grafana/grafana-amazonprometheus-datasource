@@ -5,7 +5,7 @@ import { AdvancedHttpSettings, ConfigSection, DataSourceDescription } from '@gra
 import { AlertingSettingsOverhaul, PromSettings } from '@grafana/prometheus';
 import { config } from '@grafana/runtime';
 import { Alert, FieldValidationMessage, useTheme2, TextLink } from '@grafana/ui';
-import React, { JSX, useState } from 'react';
+import React, { JSX } from 'react';
 
 import { DataSourceHttpSettingsOverhaul } from './DataSourceHttpSettingsOverhaul';
 import { DataSourceOptions } from './DataSourceOptions';

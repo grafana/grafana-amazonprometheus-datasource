@@ -1607,8 +1607,8 @@ __metadata:
   linkType: hard
 
 "@grafana/plugin-ui@npm:^0.11.0":
-  version: 0.11.0
-  resolution: "@grafana/plugin-ui@npm:0.11.0"
+  version: 0.11.1
+  resolution: "@grafana/plugin-ui@npm:0.11.1"
   dependencies:
     "@emotion/css": "npm:^11.11.2"
     "@hello-pangea/dnd": "npm:^17.0.0"
@@ -1630,7 +1630,7 @@ __metadata:
     react: ^18.2.0
     react-dom: ^18.2.0
     rxjs: ^7.8.1
-  checksum: 10c0/1d7c37b5b782d11c1022ec08f9b66e1c34913d34675fc37580dd9cf4c6254f92c85a66907ab7617771f50fbed89202907c53e5b1fbe3c920b920f034985e27c7
+  checksum: 10c0/59ced7b9f20e2c0af5e9a307bbc79759d8e17c30ea9c2ecc72ba23da2c4891b5049f258fd25b158811233293863dab446a21f14d7cfee03f6d31ee09a02b4cf7
   languageName: node
   linkType: hard
 

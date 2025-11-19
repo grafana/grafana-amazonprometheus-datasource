@@ -3751,12 +3751,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:22.18.13":
-  version: 22.18.13
-  resolution: "@types/node@npm:22.18.13"
+"@types/node@npm:22.19.1":
+  version: 22.19.1
+  resolution: "@types/node@npm:22.19.1"
   dependencies:
     undici-types: "npm:~6.21.0"
-  checksum: 10c0/4d97b447274f6e566fc5afb464146e9db77b5892c318364eb927b13441e6dbf9fe0ec9d1ed2cb6b5e7e85f5154a5ff52913d2cfc4b952bcf19fb0ddaaff5e533
+  checksum: 10c0/6edd93aea86da740cb7872626839cd6f4a67a049d3a3a6639cb592c620ec591408a30989ab7410008d1a0b2d4985ce50f1e488e79c033e4476d3bec6833b0a2f
   languageName: node
   linkType: hard
 
@@ -7814,7 +7814,7 @@ __metadata:
     "@types/eslint": "npm:9.6.1"
     "@types/jest": "npm:30.0.0"
     "@types/lodash": "npm:4.17.20"
-    "@types/node": "npm:22.18.13"
+    "@types/node": "npm:22.19.1"
     "@types/react": "npm:18.3.1"
     "@types/react-dom": "npm:18.3.1"
     "@types/semver": "npm:7.7.1"

@@ -7829,7 +7829,7 @@ __metadata:
     rxjs: "npm:7.8.2"
     sass: "npm:1.89.2"
     sass-loader: "npm:16.0.6"
-    semver: "npm:7.7.2"
+    semver: "npm:7.7.3"
     style-loader: "npm:4.0.0"
     swc-loader: "npm:0.2.6"
     terser-webpack-plugin: "npm:5.3.16"
@@ -11881,15 +11881,6 @@ __metadata:
   version: 1.0.0
   resolution: "selection-is-backward@npm:1.0.0"
   checksum: 10c0/ee163b8c230c57b9e92795b8d7cd3af7387c535a8f15c097f7d69bd326f95850f0ecaa7080ea9bfe4a623263b256fc93535b2ec6412cb81787e0a331d8f33ff2
-  languageName: node
-  linkType: hard
-
-"semver@npm:7.7.2":
-  version: 7.7.2
-  resolution: "semver@npm:7.7.2"
-  bin:
-    semver: bin/semver.js
-  checksum: 10c0/aca305edfbf2383c22571cb7714f48cadc7ac95371b4b52362fb8eeffdfbc0de0669368b82b2b15978f8848f01d7114da65697e56cd8c37b0dab8c58e543f9ea
   languageName: node
   linkType: hard
 

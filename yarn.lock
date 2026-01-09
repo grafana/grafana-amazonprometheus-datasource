@@ -1450,12 +1450,12 @@ __metadata:
   linkType: hard
 
 "@grafana/aws-sdk@npm:^0.8.1":
-  version: 0.8.1
-  resolution: "@grafana/aws-sdk@npm:0.8.1"
+  version: 0.8.3
+  resolution: "@grafana/aws-sdk@npm:0.8.3"
   dependencies:
     "@grafana/async-query-data": "npm:0.4.2"
-    "@grafana/plugin-ui": "npm:^0.10.1"
-  checksum: 10c0/660f2294023a5d36dc956b4d10aba057b1a6c11a2bf86db4a6e292eaa88081009e90213f46818a5075b60f13a8e607b7e821b107e6629b694a8e2119e3574d4c
+    "@grafana/plugin-ui": "npm:^0.11.0"
+  checksum: 10c0/6791ca41c849d944601a3dd857ab05bc1da48aed3de80dc987589ffbbf662e8e595d6e118dba0da3fb16f49aab15d2691aebd1eece3e4f03957e818033e29093
   languageName: node
   linkType: hard
 
@@ -1578,7 +1578,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@grafana/plugin-ui@npm:^0.10.1, @grafana/plugin-ui@npm:^0.10.10":
+"@grafana/plugin-ui@npm:^0.10.10":
   version: 0.10.10
   resolution: "@grafana/plugin-ui@npm:0.10.10"
   dependencies:

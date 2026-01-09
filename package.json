@@ -40,7 +40,7 @@
     "@testing-library/user-event": "14.6.1",
     "@types/eslint": "9.6.1",
     "@types/jest": "30.0.0",
-    "@types/lodash": "4.17.20",
+    "@types/lodash": "4.17.21",
     "@types/node": "22.18.13",
     "@types/react": "18.3.27",
     "@types/react-dom": "18.3.7",
@@ -73,7 +73,7 @@
     "replace-in-file-webpack-plugin": "1.0.6",
     "sass": "1.89.2",
     "sass-loader": "16.0.6",
-    "semver": "7.7.2",
+    "semver": "7.7.3",
     "style-loader": "4.0.0",
     "swc-loader": "0.2.6",
     "terser-webpack-plugin": "5.3.16",
@@ -101,7 +101,7 @@
     "react-dom": "18.3.1",
     "react-router-dom": "^6.22.0",
     "rxjs": "7.8.2",
-    "semver": "7.7.2",
+    "semver": "7.7.3",
     "tslib": "2.8.1"
   },
   "engines": {

@@ -98,6 +98,7 @@ export const DataSourceHttpSettingsOverhaul = (props: Props) => {
       <hr className={`${styles.hrTopSpace} ${styles.hrBottomSpace}`} />
       <Auth
         {...newAuthProps}
+        TLS={undefined}
         customMethods={customMethods}
         onAuthMethodSelect={(method) => {
           setSigV4Selected(method === sigV4Id);

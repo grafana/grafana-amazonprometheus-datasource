@@ -13,7 +13,6 @@ test.describe('Configuration tests', () => {
     query timeout
     default editor
     disable metric lookup
-    prometheus type
     cache level
     incremental querying
     disable recording rules
@@ -53,11 +52,6 @@ test.describe('Configuration tests', () => {
       page.locator(`#${selectors.components.DataSource.Prometheus.configPage.disableMetricLookup}`)
     ).toBeVisible();
 
-    // prometheus type
-    await expect(
-      configPage.getByGrafanaSelector(selectors.components.DataSource.Prometheus.configPage.prometheusType)
-    ).toBeVisible();
-
     // cache level
     await expect(
       configPage.getByGrafanaSelector(selectors.components.DataSource.Prometheus.configPage.cacheLevel)
@@ -82,6 +76,21 @@ test.describe('Configuration tests', () => {
     await expect(
       configPage.getByGrafanaSelector(selectors.components.DataSource.Prometheus.configPage.httpMethod)
     ).toBeVisible();
+  });
+
+  test('it should hide prometheus type and version settings', async ({ createDataSourceConfigPage }) => {
+    const configPage = await createDataSourceConfigPage({
+      type: 'grafana-amazonprometheus-datasource',
+      name: DATA_SOURCE_NAME,
+    });
+
+    await expect(
+      configPage.getByGrafanaSelector(selectors.components.DataSource.Prometheus.configPage.prometheusType)
+    ).toHaveCount(0);
+
+    await expect(
+      configPage.getByGrafanaSelector(selectors.components.DataSource.Prometheus.configPage.prometheusVersion)
+    ).toHaveCount(0);
   });
 
   /*  test('"Save & test" should be successful when configuration is valid', async ({
@@ -126,32 +135,6 @@ test.describe('Configuration tests', () => {
     const configPage = await createDataSourceConfigPage({ type: ds.type });
     await configPage.getByGrafanaSelector(selectors.pages.DataSource.saveAndTest).click();
     await expect(configPage).toHaveAlert('error', { hasText: /invalid URL/i });
-  });
-
-  test('it should allow a user to add the version when the Prom type is selected', async ({
-    createDataSourceConfigPage,
-    // readProvisionedDataSource,
-    page,
-  }) => {
-    const configPage = await createDataSourceConfigPage({
-      type: 'grafana-amazonprometheus-datasource',
-      name: DATA_SOURCE_NAME,
-    });
-
-    await expect(
-      configPage.getByGrafanaSelector(selectors.components.DataSource.Prometheus.configPage.prometheusType)
-    ).toBeVisible();
-
-    // open the select dropdown
-    await page.getByLabel('Prometheus type').click();
-
-    // select a prometheus type
-    await page.getByText('Cortex').click();
-
-    // expect the version component to be displayed
-    await expect(
-      configPage.getByGrafanaSelector(selectors.components.DataSource.Prometheus.configPage.prometheusVersion)
-    ).toBeVisible();
   });
 
   test('it should allow a user to select a query overlap window when incremental querying is selected', async ({

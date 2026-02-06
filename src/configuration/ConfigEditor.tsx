@@ -2,10 +2,11 @@ import { css } from '@emotion/css';
 import { SIGV4ConnectionConfig } from '@grafana/aws-sdk';
 import { DataSourcePluginOptionsEditorProps, GrafanaTheme2 } from '@grafana/data';
 import { AdvancedHttpSettings, ConfigSection, DataSourceDescription } from '@grafana/plugin-ui';
-import { AlertingSettingsOverhaul, PromSettings } from '@grafana/prometheus';
+import { AlertingSettingsOverhaul, PromApplication, PromSettings } from '@grafana/prometheus';
 import { config } from '@grafana/runtime';
 import { Alert, FieldValidationMessage, useTheme2, TextLink } from '@grafana/ui';
 import React, { JSX } from 'react';
+import { useEffectOnce } from 'react-use';
 
 import { DataSourceHttpSettingsOverhaul } from './DataSourceHttpSettingsOverhaul';
 import { DataSourceOptions } from './DataSourceOptions';
@@ -21,6 +22,19 @@ export const ConfigEditor = (props: Props) => {
 
   const hasPromTypeMig = options.jsonData['prometheus-type-migration'] || false;
 
+  useEffectOnce(() => {
+    if (options.jsonData.prometheusType !== PromApplication.Cortex || options.jsonData.prometheusVersion !== '1.14.0') {
+      onOptionsChange({
+        ...options,
+        jsonData: {
+          ...options.jsonData,
+          prometheusType: PromApplication.Cortex,
+          prometheusVersion: '1.14.0',
+        },
+      });
+    }
+  });
+
   return (
     <>
       {options.access === 'direct' && (
@@ -35,10 +49,7 @@ export const ConfigEditor = (props: Props) => {
       />
       <hr className={`${styles.hrTopSpace} ${styles.hrBottomSpace}`} />
       {hasPromTypeMig && (
-        <Alert
-          severity="warning"
-          title={'Data source migrated'}
-        >
+        <Alert severity="warning" title={'Data source migrated'}>
           This data source has been migrated from Prometheus to Amazon Managed Service for Prometheus. Refer to{' '}
           <TextLink
             href="https://grafana.com/docs/grafana-cloud/connect-externally-hosted/data-sources/prometheus/configure/aws-authentication/"
@@ -69,7 +80,12 @@ export const ConfigEditor = (props: Props) => {
           onChange={onOptionsChange}
         />
         <AlertingSettingsOverhaul<DataSourceOptions> options={options} onOptionsChange={onOptionsChange} />
-        <PromSettings options={options} onOptionsChange={onOptionsChange} />
+        <PromSettings
+          options={options}
+          onOptionsChange={onOptionsChange}
+          hidePrometheusTypeVersion={true}
+          hideExemplars={true}
+        />
       </ConfigSection>
     </>
   );

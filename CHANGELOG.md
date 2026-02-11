@@ -2,6 +2,7 @@
 
 ## 2.3.1
 
+- Add Grafana Assume Role auth option in [#625](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/625)
 - fix(deps): update dependency lodash to v4.17.23 [security] in [#608](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/608)
 - chore(deps): update dependency css-loader to v7.1.3 in [#621](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/621)
 - chore(deps): update typescript-eslint monorepo to v8.54.0 in [#615](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/615)

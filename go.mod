@@ -4,7 +4,7 @@ go 1.24.6
 
 require (
 	github.com/grafana/grafana-aws-sdk v1.4.2
-	github.com/grafana/grafana-plugin-sdk-go v0.284.0
+	github.com/grafana/grafana-plugin-sdk-go v0.290.0
 	github.com/grafana/grafana/pkg/promlib v0.0.8
 	github.com/stretchr/testify v1.11.1
 )

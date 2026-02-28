@@ -1,6 +1,6 @@
 module github.com/grafana/grafana-amazonprometheus-datasource
 
-go 1.24.6
+go 1.25.7
 
 require (
 	github.com/grafana/grafana-aws-sdk v1.4.2

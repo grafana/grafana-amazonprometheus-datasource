@@ -1,5 +1,13 @@
 # Changelog
 
+## 2.3.2
+
+- chore(deps): update dependency css-loader to v7.1.4 in [#642](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/642)
+- fix(deps): update module github.com/grafana/grafana-plugin-sdk-go to v0.290.0 in [#611](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/611)
+- chore(deps): update dependency webpack to v5.105.2 in [#636](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/636)
+- chore(deps): update module go.opentelemetry.io/otel/sdk to v1.40.0 [security] in [#641](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/641)
+- chore(deps): update typescript-eslint monorepo to v8.55.0 in [#637](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/637)
+
 ## 2.3.1
 
 - Add Grafana Assume Role auth option in [#625](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/625)

@@ -162,8 +162,8 @@ github.com/grafana/grafana/apps/scope v0.0.0-20251007093103-792853df9134 h1:xly7
 github.com/grafana/grafana/apps/scope v0.0.0-20251007093103-792853df9134/go.mod h1:zijsUNa1zi476JJIR2Lcm/Paz1nRCno9XCp6hbS6G9o=
 github.com/grafana/grafana/pkg/apimachinery v0.0.0-20251007081214-26e147d01f0a h1:L7xgV9mP6MRF3L2/vDOjNR7heaBPbXPMGTDN9/jXSFQ=
 github.com/grafana/grafana/pkg/apimachinery v0.0.0-20251007081214-26e147d01f0a/go.mod h1:OK8NwS87D5YphchOcAsiIWk/feMZ0EzfAGME1Kff860=
-github.com/grafana/grafana/pkg/promlib v0.0.10-0.20260226165017-6a3dbdd10cfc h1:vWcVLWffGdcUgjDJYI4udNu3z/R0xmc2fcixCIF+6bg=
-github.com/grafana/grafana/pkg/promlib v0.0.10-0.20260226165017-6a3dbdd10cfc/go.mod h1:WdZRoHHWcsg5WgSbcQtgaG11Mjw664SmxSgq5IA90fE=
+github.com/grafana/grafana/pkg/promlib v0.0.10-0.20260305205805-f476c0d46ce6 h1:I5gV2Zpd516QS2CAB7VHEtD38rQVAiGcltXI/zAlNBU=
+github.com/grafana/grafana/pkg/promlib v0.0.10-0.20260305205805-f476c0d46ce6/go.mod h1:r1G+w62PrIIKjgcdpvrwyv4EbsV5R+1fqTzHH0ys5UU=
 github.com/grafana/otel-profiling-go v0.5.1 h1:stVPKAFZSa7eGiqbYuG25VcqYksR6iWvF3YH66t4qL8=
 github.com/grafana/otel-profiling-go v0.5.1/go.mod h1:ftN/t5A/4gQI19/8MoWurBEtC6gFw8Dns1sJZ9W4Tls=
 github.com/grafana/pyroscope-go/godeltaprof v0.1.9 h1:c1Us8i6eSmkW+Ez05d3co8kasnuOY813tbMN8i/a3Og=
@@ -176,8 +176,8 @@ github.com/grpc-ecosystem/go-grpc-middleware/providers/prometheus v1.1.0 h1:QGLs
 github.com/grpc-ecosystem/go-grpc-middleware/providers/prometheus v1.1.0/go.mod h1:hM2alZsMUni80N33RBe6J0e423LB+odMj7d3EMP9l20=
 github.com/grpc-ecosystem/go-grpc-middleware/v2 v2.3.3 h1:B+8ClL/kCQkRiU82d9xajRPKYMrB7E0MbtzWVi1K4ns=
 github.com/grpc-ecosystem/go-grpc-middleware/v2 v2.3.3/go.mod h1:NbCUVmiS4foBGBHOYlCT25+YmGpJ32dZPi75pGEUpj4=
-github.com/grpc-ecosystem/grpc-gateway/v2 v2.27.8 h1:NpbJl/eVbvrGE0MJ6X16X9SAifesl6Fwxg/YmCvubRI=
-github.com/grpc-ecosystem/grpc-gateway/v2 v2.27.8/go.mod h1:mi7YA+gCzVem12exXy46ZespvGtX/lZmD/RLnQhVW7U=
+github.com/grpc-ecosystem/grpc-gateway/v2 v2.28.0 h1:HWRh5R2+9EifMyIHV7ZV+MIZqgz+PMpZ14Jynv3O2Zs=
+github.com/grpc-ecosystem/grpc-gateway/v2 v2.28.0/go.mod h1:JfhWUomR1baixubs02l85lZYYOm7LV6om4ceouMv45c=
 github.com/hashicorp/go-hclog v1.6.3 h1:Qr2kF+eVWjTiYmU7Y31tYlP1h0q/X3Nl3tPGdaB11/k=
 github.com/hashicorp/go-hclog v1.6.3/go.mod h1:W4Qnvbt70Wk/zYJryRzDRU/4r0kIg0PVHBcfoyhpF5M=
 github.com/hashicorp/go-plugin v1.7.0 h1:YghfQH/0QmPNc/AZMTFE3ac8fipZyZECHdDPshfk+mA=

@@ -5,7 +5,7 @@ go 1.25.7
 require (
 	github.com/grafana/grafana-aws-sdk v1.4.2
 	github.com/grafana/grafana-plugin-sdk-go v0.290.0
-	github.com/grafana/grafana/pkg/promlib v0.0.10-0.20260226165017-6a3dbdd10cfc
+	github.com/grafana/grafana/pkg/promlib v0.0.10-0.20260305205805-f476c0d46ce6
 	github.com/stretchr/testify v1.11.1
 )
 
@@ -74,7 +74,7 @@ require (
 	github.com/grafana/sqlds/v5 v5.0.3 // indirect
 	github.com/grpc-ecosystem/go-grpc-middleware/providers/prometheus v1.1.0 // indirect
 	github.com/grpc-ecosystem/go-grpc-middleware/v2 v2.3.3 // indirect
-	github.com/grpc-ecosystem/grpc-gateway/v2 v2.27.8 // indirect
+	github.com/grpc-ecosystem/grpc-gateway/v2 v2.28.0 // indirect
 	github.com/hashicorp/go-hclog v1.6.3 // indirect
 	github.com/hashicorp/go-plugin v1.7.0 // indirect
 	github.com/hashicorp/yamux v0.1.2 // indirect

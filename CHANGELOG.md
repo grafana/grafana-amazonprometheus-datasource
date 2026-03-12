@@ -1,5 +1,23 @@
 # Changelog
 
+## 2.4.0
+
+- fix(deps): update frontend dependencies in [#662](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/662)
+- chore(deps): update prom/prometheus docker tag to v3.10.0 in [#663](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/663)
+- Use `promlib` from `grafana/grafana-prometheus-datasource` in [#655](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/655)
+- Update renovate config to use data-sources base preset in [#650](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/650)
+- fix(deps): update module github.com/grafana/grafana-aws-sdk to v1.4.3 in [#613](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/613)
+- chore(deps): update grafana/plugin-ci-workflows/ci-cd-workflows action to v6.1.1 in [#658](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/658)
+- chore(deps): update dependency eslint-plugin-jsdoc to v62 in [#591](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/591)
+- chore(deps): update dependency webpack to v5.105.3 in [#656](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/656)
+- chore(deps): update dependency glob to v13.0.6 in [#627](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/627)
+- chore(deps): update dependency @types/lodash to v4.17.24 in [#653](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/653)
+- chore(deps): update dependency @eslint/eslintrc to v3.3.4 in [#649](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/649)
+- chore(deps): update actions/setup-node digest to 53b8394 in [#651](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/651)
+- chore(deps): update grafana/grafana-enterprise:latest docker digest to 582fc54 in [#648](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/648)
+- Remove data source settings that do not apply to AMP in [#600](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/600)
+- chore(deps): update module golang.org/x/net to v0.51.0 [security] in [#645](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/645)
+
 ## 2.3.2
 
 - chore(deps): update dependency css-loader to v7.1.4 in [#642](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/642)

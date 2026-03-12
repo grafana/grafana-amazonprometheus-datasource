@@ -22,6 +22,8 @@ export const DataSourceHttpSettingsOverhaul = (props: Props) => {
     onChange: onOptionsChange,
   });
 
+  const [sigV4Selected, setSigV4Selected] = useState<boolean>(options.jsonData.sigV4Auth || false);
+
   useEffectOnce(() => {
     // Since we are not allowing users to select another auth,
     // need to update sigV4Auth field to true for auth to work.
@@ -40,8 +42,6 @@ export const DataSourceHttpSettingsOverhaul = (props: Props) => {
 
   // for custom auth methods sigV4
   let customMethods: CustomMethod[] = [];
-
-  const [sigV4Selected, setSigV4Selected] = useState<boolean>(options.jsonData.sigV4Auth || false);
 
   const sigV4Id = 'custom-sigV4Id';
 

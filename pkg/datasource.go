@@ -76,11 +76,11 @@ func extendClientOpts(_ context.Context, settings backend.DataSourceInstanceSett
 		if err != nil {
 			return err
 		}
-		service, _ := maputil.GetStringOptional(jsonData, "sigv4-service")
-		if service != "" {
-			clientOpts.SigV4.Service = service
-		} else if clientOpts.SigV4.Service == "" {
+		service, err := maputil.GetStringOptional(jsonData, "sigv4Service")
+		if err != nil || service == "" {
 			clientOpts.SigV4.Service = "aps"
+		} else {
+			clientOpts.SigV4.Service = service
 		}
 	}
 

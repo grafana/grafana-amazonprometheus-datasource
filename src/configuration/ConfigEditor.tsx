@@ -79,13 +79,13 @@ export const ConfigEditor = (props: Props) => {
               >
                 <Input
                   className="width-20"
-                  value={options.jsonData['sigv4-service']}
+                  value={options.jsonData.sigv4Service}
                   onChange={(e) =>
                     onOptionsChange({
                       ...options,
                       jsonData: {
                         ...options.jsonData,
-                        'sigv4-service': e.currentTarget.value,
+                        sigv4Service: e.currentTarget.value,
                       },
                     })
                   }

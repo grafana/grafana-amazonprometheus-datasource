@@ -63,7 +63,7 @@ func TestExtendClientOpts_SigV4Service(t *testing.T) {
 	t.Run("service name is applied when provided", func(t *testing.T) {
 		settings := backend.DataSourceInstanceSettings{
 			JSONData: []byte(`{
-				"sigv4-service": "another-service"
+				"sigv4Service": "another-service"
 			}`),
 			DecryptedSecureJSONData: map[string]string{},
 		}
@@ -86,7 +86,7 @@ func TestExtendClientOpts_SigV4Service(t *testing.T) {
 		require.Nil(t, opts.SigV4)
 	})
 
-	t.Run("defaults to aps when sigv4-service is not provided", func(t *testing.T) {
+	t.Run("defaults to aps when sigv4Service is not provided", func(t *testing.T) {
 		settings := backend.DataSourceInstanceSettings{
 			JSONData:                []byte("{}"),
 			DecryptedSecureJSONData: map[string]string{},

@@ -19,13 +19,11 @@ func TestNewDatasource(t *testing.T) {
 func TestExtendClientOpts_SigV4Service(t *testing.T) {
 	t.Run("service name persists", func(t *testing.T) {
 		settings := backend.DataSourceInstanceSettings{
-			JSONData:                []byte("{}"),
+			JSONData:                []byte(`{"sigv4Service": "another-service"}`),
 			DecryptedSecureJSONData: map[string]string{},
 		}
 		opts := &sdkhttpclient.Options{
-			SigV4: &sdkhttpclient.SigV4Config{
-				Service: "another-service",
-			},
+			SigV4: &sdkhttpclient.SigV4Config{},
 		}
 		err := extendClientOpts(context.Background(), settings, opts, log.NewNullLogger())
 		require.NoError(t, err)
@@ -47,13 +45,11 @@ func TestExtendClientOpts_SigV4Service(t *testing.T) {
 
 	t.Run("default aps when field is empty string", func(t *testing.T) {
 		settings := backend.DataSourceInstanceSettings{
-			JSONData:                []byte("{}"),
+			JSONData:                []byte(`{"sigv4Service": ""}`),
 			DecryptedSecureJSONData: map[string]string{},
 		}
 		opts := &sdkhttpclient.Options{
-			SigV4: &sdkhttpclient.SigV4Config{
-				Service: "",
-			},
+			SigV4: &sdkhttpclient.SigV4Config{},
 		}
 		err := extendClientOpts(context.Background(), settings, opts, log.NewNullLogger())
 		require.NoError(t, err)

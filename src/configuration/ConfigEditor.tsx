@@ -4,7 +4,7 @@ import { DataSourcePluginOptionsEditorProps, GrafanaTheme2 } from '@grafana/data
 import { AdvancedHttpSettings, ConfigSection, DataSourceDescription } from '@grafana/plugin-ui';
 import { AlertingSettingsOverhaul, PromApplication, PromSettings } from '@grafana/prometheus';
 import { config } from '@grafana/runtime';
-import { Alert, FieldValidationMessage, useTheme2, TextLink } from '@grafana/ui';
+import { Alert, FieldValidationMessage, Field, Input, useTheme2, TextLink } from '@grafana/ui';
 import React, { JSX } from 'react';
 import { useEffectOnce } from 'react-use';
 
@@ -64,7 +64,37 @@ export const ConfigEditor = (props: Props) => {
         options={options}
         onOptionsChange={onOptionsChange}
         renderSigV4Editor={
-          <SIGV4ConnectionConfig inExperimentalAuthComponent={true} {...props}></SIGV4ConnectionConfig>
+          <>
+            <SIGV4ConnectionConfig inExperimentalAuthComponent={true} {...props}></SIGV4ConnectionConfig>
+            <div
+              className={css({
+                marginTop: '32px',
+              })}
+            >
+              <h6>Service Provider</h6>
+              <Field
+                label="Service"
+                description="Specify the AWS service to sign requests against (e.g., 'aps' for Prometheus)."
+                disabled={options.readOnly}
+              >
+                <Input
+                  className="width-20"
+                  value={options.jsonData.sigv4Service}
+                  onChange={(e) =>
+                    onOptionsChange({
+                      ...options,
+                      jsonData: {
+                        ...options.jsonData,
+                        sigv4Service: e.currentTarget.value,
+                      },
+                    })
+                  }
+                  placeholder="aps"
+                  defaultValue="aps"
+                />
+              </Field>
+            </div>
+          </>
         }
         secureSocksDSProxyEnabled={config.secureSocksDSProxyEnabled}
       />

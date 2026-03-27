@@ -4,7 +4,7 @@ import { DataSourcePluginOptionsEditorProps, GrafanaTheme2 } from '@grafana/data
 import { AdvancedHttpSettings, ConfigSection, DataSourceDescription } from '@grafana/plugin-ui';
 import { AlertingSettingsOverhaul, PromApplication, PromSettings } from '@grafana/prometheus';
 import { config } from '@grafana/runtime';
-import { Alert, FieldValidationMessage, Field, Input, useTheme2, TextLink } from '@grafana/ui';
+import { Alert, Box, FieldValidationMessage, Field, Input, useTheme2, TextLink } from '@grafana/ui';
 import React, { JSX } from 'react';
 import { useEffectOnce } from 'react-use';
 
@@ -66,18 +66,16 @@ export const ConfigEditor = (props: Props) => {
         renderSigV4Editor={
           <>
             <SIGV4ConnectionConfig inExperimentalAuthComponent={true} {...props}></SIGV4ConnectionConfig>
-            <div
-              className={css({
-                marginTop: '32px',
-              })}
-            >
+            <Box marginTop={2}>
               <h6>Service Provider</h6>
               <Field
+                htmlFor="sigv4-service"
                 label="Service"
                 description="Specify the AWS service to sign requests against (e.g., 'aps' for Prometheus)."
                 disabled={options.readOnly}
               >
                 <Input
+                  id="sigv4-service"
                   className="width-20"
                   value={options.jsonData.sigv4Service}
                   onChange={(e) =>
@@ -93,7 +91,7 @@ export const ConfigEditor = (props: Props) => {
                   defaultValue="aps"
                 />
               </Field>
-            </div>
+            </Box>
           </>
         }
         secureSocksDSProxyEnabled={config.secureSocksDSProxyEnabled}

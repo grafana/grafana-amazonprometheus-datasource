@@ -2,11 +2,10 @@ import { css } from '@emotion/css';
 import { SIGV4ConnectionConfig } from '@grafana/aws-sdk';
 import { DataSourcePluginOptionsEditorProps, GrafanaTheme2 } from '@grafana/data';
 import { AdvancedHttpSettings, ConfigSection, DataSourceDescription } from '@grafana/plugin-ui';
-import { AlertingSettingsOverhaul, PromApplication, PromSettings } from '@grafana/prometheus';
+import { AlertingSettingsOverhaul, PromSettings } from '@grafana/prometheus';
 import { config } from '@grafana/runtime';
 import { Alert, Box, FieldValidationMessage, Field, Input, useTheme2, TextLink } from '@grafana/ui';
 import React, { JSX } from 'react';
-import { useEffectOnce } from 'react-use';
 
 import { DataSourceHttpSettingsOverhaul } from './DataSourceHttpSettingsOverhaul';
 import { DataSourceOptions } from './DataSourceOptions';
@@ -21,19 +20,6 @@ export const ConfigEditor = (props: Props) => {
   const styles = overhaulStyles(theme);
 
   const hasPromTypeMig = options.jsonData['prometheus-type-migration'] || false;
-
-  useEffectOnce(() => {
-    if (options.jsonData.prometheusType !== PromApplication.Cortex || options.jsonData.prometheusVersion !== '1.14.0') {
-      onOptionsChange({
-        ...options,
-        jsonData: {
-          ...options.jsonData,
-          prometheusType: PromApplication.Cortex,
-          prometheusVersion: '1.14.0',
-        },
-      });
-    }
-  });
 
   return (
     <>

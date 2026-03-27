@@ -18,6 +18,7 @@ datasources:
     defaultEditor: builder
     sigV4Auth: true
     sigV4AuthType: keys
+    sigv4Service: aps
     externalId: externalId
   secureJsonData:
       sigV4AccessKey: abc

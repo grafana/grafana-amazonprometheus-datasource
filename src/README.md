@@ -15,4 +15,4 @@ Read more about it here:
 1. Configure this data source similar to the [Prometheus data source](https://grafana.com/docs/grafana/latest/datasources/prometheus/configure-prometheus-data-source/).
 1. Configure AWS authentication with SigV4. Read these [docs](https://grafana.com/docs/grafana/latest/datasources/aws-cloudwatch/aws-authentication/) for more information on using AWS authentication in Grafana data sources. Read more about SigV4 [here](https://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html).
 
-Read more about connecting to Prometheus using SigV4 authenitication here: [Connect to Amazon Managed Service for Prometheus](https://grafana.com/docs/grafana/latest/datasources/prometheus/configure/aws-authentication/)
+Read more about connecting to Prometheus using SigV4 authentication here: [Connect to Amazon Managed Service for Prometheus](https://grafana.com/docs/grafana/latest/datasources/prometheus/configure/aws-authentication/)

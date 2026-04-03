@@ -2,10 +2,11 @@ import { css } from '@emotion/css';
 import { SIGV4ConnectionConfig } from '@grafana/aws-sdk';
 import { DataSourcePluginOptionsEditorProps, GrafanaTheme2 } from '@grafana/data';
 import { AdvancedHttpSettings, ConfigSection, DataSourceDescription } from '@grafana/plugin-ui';
-import { AlertingSettingsOverhaul, PromSettings } from '@grafana/prometheus';
+import { AlertingSettingsOverhaul, PromApplication, PromSettings } from '@grafana/prometheus';
 import { config } from '@grafana/runtime';
-import { Alert, FieldValidationMessage, useTheme2, TextLink } from '@grafana/ui';
+import { Alert, Box, FieldValidationMessage, Field, Input, useTheme2, TextLink } from '@grafana/ui';
 import React, { JSX } from 'react';
+import { useEffectOnce } from 'react-use';
 
 import { DataSourceHttpSettingsOverhaul } from './DataSourceHttpSettingsOverhaul';
 import { DataSourceOptions } from './DataSourceOptions';
@@ -21,6 +22,19 @@ export const ConfigEditor = (props: Props) => {
 
   const hasPromTypeMig = options.jsonData['prometheus-type-migration'] || false;
 
+  useEffectOnce(() => {
+    if (options.jsonData.prometheusType !== PromApplication.Cortex || options.jsonData.prometheusVersion !== '1.14.0') {
+      onOptionsChange({
+        ...options,
+        jsonData: {
+          ...options.jsonData,
+          prometheusType: PromApplication.Cortex,
+          prometheusVersion: '1.14.0',
+        },
+      });
+    }
+  });
+
   return (
     <>
       {options.access === 'direct' && (
@@ -35,10 +49,7 @@ export const ConfigEditor = (props: Props) => {
       />
       <hr className={`${styles.hrTopSpace} ${styles.hrBottomSpace}`} />
       {hasPromTypeMig && (
-        <Alert
-          severity="warning"
-          title={'Data source migrated'}
-        >
+        <Alert severity="warning" title={'Data source migrated'}>
           This data source has been migrated from Prometheus to Amazon Managed Service for Prometheus. Refer to{' '}
           <TextLink
             href="https://grafana.com/docs/grafana-cloud/connect-externally-hosted/data-sources/prometheus/configure/aws-authentication/"
@@ -53,7 +64,35 @@ export const ConfigEditor = (props: Props) => {
         options={options}
         onOptionsChange={onOptionsChange}
         renderSigV4Editor={
-          <SIGV4ConnectionConfig inExperimentalAuthComponent={true} {...props}></SIGV4ConnectionConfig>
+          <>
+            <SIGV4ConnectionConfig inExperimentalAuthComponent={true} {...props}></SIGV4ConnectionConfig>
+            <Box marginTop={2}>
+              <h6>Service Provider</h6>
+              <Field
+                htmlFor="sigv4-service"
+                label="Service"
+                description="Specify the AWS service to sign requests against (e.g., 'aps' for Prometheus)."
+                disabled={options.readOnly}
+              >
+                <Input
+                  id="sigv4-service"
+                  className="width-20"
+                  value={options.jsonData.sigv4Service}
+                  onChange={(e) =>
+                    onOptionsChange({
+                      ...options,
+                      jsonData: {
+                        ...options.jsonData,
+                        sigv4Service: e.currentTarget.value,
+                      },
+                    })
+                  }
+                  placeholder="aps"
+                  defaultValue="aps"
+                />
+              </Field>
+            </Box>
+          </>
         }
         secureSocksDSProxyEnabled={config.secureSocksDSProxyEnabled}
       />
@@ -69,7 +108,12 @@ export const ConfigEditor = (props: Props) => {
           onChange={onOptionsChange}
         />
         <AlertingSettingsOverhaul<DataSourceOptions> options={options} onOptionsChange={onOptionsChange} />
-        <PromSettings options={options} onOptionsChange={onOptionsChange} />
+        <PromSettings
+          options={options}
+          onOptionsChange={onOptionsChange}
+          hidePrometheusTypeVersion={true}
+          hideExemplars={true}
+        />
       </ConfigSection>
     </>
   );

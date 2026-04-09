@@ -1,5 +1,24 @@
 # Changelog
 
+## 3.0.0
+
+- Breaking change: this release is versioned as `3.0.0` to reflect the Grafana compatibility restriction introduced in [#666](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/666). The plugin now supports `>=11.6.11 <12 || >=12.0.10 <12.1 || >=12.1.7 <12.2 || >=12.2.5` instead of `>=11.5.0`.
+- chore(deps): update module go.opentelemetry.io/otel/sdk to v1.43.0 [security] in [#700](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/700)
+- fix: remove default Prometheus type and version in ConfigEditor in [#685](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/685)
+- Remove old mig steps and add link to prom auth docs in [#522](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/522)
+- chore(deps): update dependency @grafana/plugin-e2e to v3.4.11 in [#692](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/692)
+- Update codeowners in [#691](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/691)
+- chore(deps): update grafana/shared-workflows action in [#689](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/689)
+- chore(deps): lock file maintenance in [#688](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/688)
+- fix(deps): update frontend dependencies in [#687](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/687)
+- chore(deps): update grafana/grafana-enterprise:latest docker digest to 8b65309 in [#686](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/686)
+- Add config to override aps sigv4 service in [#661](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/661)
+- chore(deps): update dependency @grafana/plugin-e2e to v3.4.10 in [#682](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/682)
+- chore(deps): update grafana/shared-workflows action in [#684](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/684)
+- chore(deps): lock file maintenance in [#681](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/681)
+- chore(deps): update frontend dependencies in [#680](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/680)
+- chore(deps): update dependency webpack-cli to v7 in [#679](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/679)
+
 ## 2.4.0
 
 - fix(deps): update frontend dependencies in [#662](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/662)

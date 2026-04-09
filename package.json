@@ -95,7 +95,7 @@
     "@grafana/ui": "12.4.2",
     "@openfeature/core": "^1.9.2",
     "@openfeature/web-sdk": "^1.5.0",
-    "lodash": "4.17.23",
+    "lodash": "4.18.1",
     "react": "18.3.1",
     "react-dom": "18.3.1",
     "react-router-dom": "^6.22.0",

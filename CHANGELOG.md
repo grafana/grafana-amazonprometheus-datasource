@@ -3,6 +3,9 @@
 ## 3.0.0
 
 - Breaking change: this release is versioned as `3.0.0` to reflect the Grafana compatibility restriction introduced in [#666](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/666). The plugin now supports `>=11.6.11 <12 || >=12.0.10 <12.1 || >=12.1.7 <12.2 || >=12.2.5` instead of `>=11.5.0`.
+- chore(deps): update dependency cspell to v10 in [#701](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/701)
+- chore(deps): lock file maintenance in [#698](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/698)
+- fix(deps): update module github.com/grafana/grafana-plugin-sdk-go to v0.291.0 in [#697](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/697)
 - chore(deps): update prom/prometheus docker tag to v3.11.0 in [#696](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/696)
 - chore(deps): update frontend dependencies in [#695](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/695)
 - fix(deps): update dependency lodash to v4.18.1 [security] in [#693](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/693)

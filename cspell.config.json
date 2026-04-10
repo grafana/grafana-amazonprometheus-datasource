@@ -43,6 +43,7 @@
     "templating",
     "stretchr",
     "awsauth",
+    "codeowners",
     "njvrzm",
     "zizmor",
     "maputil"

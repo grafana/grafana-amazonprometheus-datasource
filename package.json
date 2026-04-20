@@ -87,7 +87,7 @@
   "dependencies": {
     "@emotion/css": "11.13.5",
     "@grafana/aws-sdk": "^0.10.2",
-    "@grafana/data": "12.4.2",
+    "@grafana/data": "12.4.3",
     "@grafana/plugin-ui": "^0.13.1",
     "@grafana/prometheus": "12.4.2",
     "@grafana/runtime": "12.4.2",

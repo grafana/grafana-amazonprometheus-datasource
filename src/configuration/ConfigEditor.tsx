@@ -99,7 +99,7 @@ export const ConfigEditor = (props: Props) => {
           onOptionsChange={onOptionsChange}
           hidePrometheusTypeVersion={true}
           hideExemplars={true}
-          showAmpQueryThresholds={true}
+          showQuerySamplesProcessedThresholdFields={true}
         />
       </ConfigSection>
     </>

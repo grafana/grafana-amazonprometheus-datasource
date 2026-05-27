@@ -227,10 +227,6 @@ const config = async (env: Env): Promise<Configuration> => {
 
     resolve: {
       extensions: ['.js', '.jsx', '.ts', '.tsx'],
-      alias: {
-        '@grafana/i18n$': path.resolve(process.cwd(), 'node_modules/@grafana/i18n'),
-        'react-i18next$': path.resolve(process.cwd(), 'node_modules/react-i18next'),
-      },
       // handle resolving "rootDir" paths
       modules: [path.resolve(process.cwd(), 'src'), 'node_modules'],
       unsafeCache: true,

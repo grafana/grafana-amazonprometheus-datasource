@@ -21,4 +21,4 @@ jobs:
       - name: Build plugin
         run: yarn run build
       - name: Compatibility check
-        run: npx @grafana/levitate@latest is-compatible --path src/module.ts --target @grafana/data,@grafana/ui,@grafana/runtime
+        run: yarn levitate:is-compatible

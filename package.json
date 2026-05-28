@@ -13,7 +13,8 @@
     "lint": "eslint --cache .",
     "lint:fix": "yarn run lint --fix && prettier --write --list-different .",
     "server:configured": "GRAFANA_VERSION=11.5.0 GRAFANA_IMAGE=grafana-enterprise docker compose up -d",
-    "sign": "npx --yes @grafana/sign-plugin@latest",
+    "levitate:is-compatible": "levitate is-compatible --path src/module.ts --target @grafana/data,@grafana/ui,@grafana/runtime",
+    "sign": "sign-plugin",
     "spellcheck": "cspell -c cspell.config.json \"**/*.{ts,tsx,js,go,md,mdx,yml,yaml,json,scss,css}\"",
     "server": "docker compose up --build"
   },
@@ -25,7 +26,9 @@
     "@eslint/compat": "2.0.5",
     "@grafana/e2e-selectors": "12.4.2",
     "@grafana/eslint-config": "9.0.0",
+    "@grafana/levitate": "0.17.2",
     "@grafana/plugin-e2e": "3.4.12",
+    "@grafana/sign-plugin": "3.2.2",
     "@grafana/tsconfig": "2.0.1",
     "@playwright/test": "1.59.1",
     "@stylistic/eslint-plugin-ts": "4.4.1",
@@ -106,5 +109,5 @@
   "engines": {
     "node": ">=20"
   },
-  "packageManager": "yarn@4.13.0"
+  "packageManager": "yarn@4.14.0"
 }

@@ -1,0 +1,6 @@
+# https://github.com/grafana/security-docs/blob/main/docs/appsec/security-tools/trufflehog.md#per-repo-exclusions-trufflehogignore
+
+# Vendored Yarn 4 release binary. Integrity is enforced by the pinned release
+# in .yarnrc.yml (`yarnPath`) and `checksumBehavior: throw`; the version is
+# pinned in package.json `packageManager`.
+.yarn/releases/.*\.cjs$

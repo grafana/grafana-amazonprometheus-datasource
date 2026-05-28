@@ -7,7 +7,7 @@ ARG anonymous_auth_enabled=true
 ARG development=false
 ARG TARGETARCH
 
-ARG GO_VERSION=1.21.6
+ARG GO_VERSION=1.25.7
 ARG GO_ARCH=${TARGETARCH:-amd64}
 
 ENV DEV "${development}"
@@ -57,15 +57,13 @@ RUN if [ "${development}" = "true" ]; then \
 
 # Installing delve for debugging
 RUN if [ "${development}" = "true" ]; then \
-    /usr/local/go/bin/go install github.com/go-delve/delve/cmd/dlv@latest; \
+    /usr/local/go/bin/go install github.com/go-delve/delve/cmd/dlv@v1.26.3; \
     fi
 
 # Installing mage for plugin (re)building
 RUN if [ "${development}" = "true" ]; then \
-    git clone https://github.com/magefile/mage; \
-    cd mage; \
     export PATH=$PATH:/usr/local/go/bin; \
-    go run bootstrap.go; \
+    go install github.com/magefile/mage@v1.17.2; \
     fi
 
 # Inject livereload script into grafana index.html

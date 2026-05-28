@@ -42,10 +42,18 @@
     "Mwdhmsy",
     "templating",
     "stretchr",
+    "approvedGitRepositories",
     "awsauth",
+    "checksumBehavior",
     "codeowners",
+    "defaultSemverRangePrefix",
+    "enableHardenedMode",
+    "enableImmutableInstalls",
+    "nmHoistingLimits",
     "njvrzm",
     "zizmor",
-    "maputil"
+    "maputil",
+    "unsafeHttpWhitelist",
+    "yarnrc"
   ]
 }

@@ -38,7 +38,6 @@ services:
       GF_LOG_FILTERS: plugin.grafana-amazonprometheus-datasource:debug
       GF_LOG_LEVEL: debug
       GF_DATAPROXY_LOGGING: 1
-      GF_SERVER_HTTP_ADDR: 0.0.0.0
       GF_PLUGINS_ALLOW_LOADING_UNSIGNED_PLUGINS: grafana-amazonprometheus-datasource
       # Grafana 13 enables splashScreen by default; the overlay blocks Playwright interactions.
       GF_FEATURE_TOGGLES_splashScreen: 'false'

@@ -54,11 +54,36 @@ Use the following options to control how Grafana builds each annotation from the
 | **Title** | A template for the annotation title. Reference labels with the `{{label_name}}` syntax. |
 | **Tags** | A template for the annotation tags, populated from series labels. |
 | **Text** | A template for the annotation description. Reference labels with the `{{label_name}}` syntax. |
+| **Series value as timestamp** | When enabled, Grafana interprets the series value as a Unix timestamp in seconds and places the annotation at that time instead of at the data point's own time. |
 
-For example, to create an annotation each time a Prometheus alert fires, query the built-in `ALERTS` metric:
+## Annotation query examples
+
+The following examples show common annotation queries. After you enter a query, use the **Title**, **Text**, and **Tags** fields to format each marker from the series labels.
+
+To create an annotation each time a Prometheus alert fires, query the built-in `ALERTS` metric:
 
 ```promql
 ALERTS{alertstate="firing"}
 ```
 
-Then set the **Title** to `{{alertname}}` and the **Text** to `{{alertstate}}` so each marker shows the alert name and state.
+Set the **Title** to `{{alertname}}` and the **Text** to `{{alertstate}}` so each marker shows the alert name and state.
+
+To mark when a monitored target goes down, query for targets that report as down:
+
+```promql
+up == 0
+```
+
+Set the **Title** to `{{job}} down` and add `{{instance}}` to the **Tags** field.
+
+To mark host reboots, query for changes in the node boot time within each step:
+
+```promql
+changes(node_boot_time_seconds[$__interval]) > 0
+```
+
+To place annotations from a metric that stores an event time as its value, such as a deployment timestamp, enable **Series value as timestamp**:
+
+```promql
+deployment_timestamp_seconds
+```

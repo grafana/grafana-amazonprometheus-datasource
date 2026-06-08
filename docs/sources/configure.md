@@ -88,6 +88,8 @@ Select an authentication provider in the **Authentication Provider** drop-down, 
 | **EC2 IAM role** | Uses the IAM role attached to the EC2 instance that runs Grafana. |
 | **Grafana Assume Role** | Lets Grafana Cloud assume a role in your AWS account without sharing long-lived keys. Available in Grafana Cloud. |
 
+The providers available in the drop-down depend on your Grafana version and the `allowed_auth_providers` setting in the Grafana configuration file.
+
 Depending on the provider you select, configure the following fields:
 
 | Setting | Description |
@@ -156,7 +158,7 @@ datasources:
       sigV4SecretKey: <SECRET_ACCESS_KEY>
 ```
 
-When you use the **Grafana Assume Role** or an assume-role configuration, set `sigV4AuthType` to `default` or `ec2_iam_role` as appropriate, and provide `assumeRoleArn` and `externalId` instead of the access keys:
+To assume an IAM role, set `sigV4AuthType` to the base provider you want to use, such as `default` or `ec2_iam_role`, and add `assumeRoleArn` and `externalId` instead of the access keys. For the **Grafana Assume Role** provider, set `sigV4AuthType` to `grafana_assume_role`:
 
 ```yaml
 apiVersion: 1

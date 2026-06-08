@@ -96,13 +96,27 @@ Use macros in your queries to reference the dashboard time range and interval. G
 
 ## Query examples
 
-The following examples show common PromQL queries you can run against your workspace.
+The following examples show common PromQL queries you can run against your workspace. Replace the metric and label names with the ones in your workspace.
 
-Calculate the per-second rate of HTTP requests over the rate interval:
+### Rates and throughput
+
+Use the `rate` function with `$__rate_interval` to chart per-second rates from counters.
+
+Calculate the per-second rate of HTTP requests:
 
 ```promql
 rate(http_requests_total[$__rate_interval])
 ```
+
+Calculate total requests per second across all instances of a service:
+
+```promql
+sum(rate(http_requests_total{job="api"}[$__rate_interval]))
+```
+
+### Aggregations
+
+Use aggregation operators such as `sum`, `avg`, and `max` with `by` to group results.
 
 Aggregate CPU usage by instance:
 
@@ -110,10 +124,57 @@ Aggregate CPU usage by instance:
 sum by (instance) (rate(node_cpu_seconds_total{mode!="idle"}[$__rate_interval]))
 ```
 
+Find the top five pods by memory usage:
+
+```promql
+topk(5, sum by (pod) (container_memory_working_set_bytes))
+```
+
+### Error rates and ratios
+
+Divide a filtered rate by a total rate to compute an error percentage.
+
+Calculate the percentage of HTTP 5xx responses:
+
+```promql
+sum(rate(http_requests_total{status=~"5.."}[$__rate_interval]))
+/
+sum(rate(http_requests_total[$__rate_interval]))
+* 100
+```
+
+### Latency percentiles
+
+Use `histogram_quantile` with a `_bucket` metric to chart latency percentiles.
+
 Calculate the 95th percentile request latency:
 
 ```promql
 histogram_quantile(0.95, sum by (le) (rate(http_request_duration_seconds_bucket[$__rate_interval])))
+```
+
+### Resource utilization
+
+Combine metrics to express utilization as a percentage.
+
+Calculate memory utilization per node as a percentage:
+
+```promql
+100 * (1 - node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes)
+```
+
+Show which targets are currently down:
+
+```promql
+up == 0
+```
+
+### Use a template variable in a query
+
+Reference a [template variable](https://grafana.com/docs/plugins/grafana-amazonprometheus-datasource/latest/template-variables/) to make a query interactive. For example, filter by a selected `instance` value:
+
+```promql
+rate(node_cpu_seconds_total{instance=~"$instance"}[$__rate_interval])
 ```
 
 ## Use cases

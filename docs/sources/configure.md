@@ -125,6 +125,10 @@ To verify the connection, click **Save & test**. When the configuration is valid
 
 ## Provision the data source
 
+You can define and configure the data source in code so it's reproducible across environments. This section covers provisioning with a Grafana YAML file and with Terraform.
+
+### Provision with a YAML file
+
 You can define the data source in YAML files as part of Grafana's provisioning system. For more information, refer to [Provisioning Grafana](https://grafana.com/docs/grafana/<GRAFANA_VERSION>/administration/provisioning/#data-sources).
 
 The following example provisions the data source with the **Access & secret key** provider:
@@ -177,3 +181,73 @@ Replace the placeholder values:
 - `<WORKSPACE_ID>`: The ID of your Amazon Managed Service for Prometheus workspace.
 - `<ACCESS_KEY_ID>` and `<SECRET_ACCESS_KEY>`: AWS credentials for the **Access & secret key** provider.
 - `<ACCOUNT_ID>`, `<ROLE_NAME>`, and `<EXTERNAL_ID>`: The values for the role you want Grafana to assume.
+
+### Provision with Terraform
+
+You can manage the data source with the [Grafana Terraform provider](https://registry.terraform.io/providers/grafana/grafana/latest/docs) using the `grafana_data_source` resource. Store secrets such as AWS keys in Terraform variables or a secrets manager rather than in plain text.
+
+The following example provisions the data source with the **Access & secret key** provider:
+
+```hcl
+resource "grafana_data_source" "amazonprometheus" {
+  type = "grafana-amazonprometheus-datasource"
+  name = "Amazon Managed Service for Prometheus"
+  url  = "https://aps-workspaces.${var.region}.amazonaws.com/workspaces/${var.workspace_id}"
+
+  json_data_encoded = jsonencode({
+    httpMethod    = "POST"
+    sigV4Auth     = true
+    sigV4AuthType = "keys"
+    sigV4Region   = var.region
+    sigv4Service  = "aps"
+    defaultEditor = "builder"
+    manageAlerts  = true
+  })
+
+  secure_json_data_encoded = jsonencode({
+    sigV4AccessKey = var.access_key_id
+    sigV4SecretKey = var.secret_access_key
+  })
+}
+```
+
+To use an assume-role configuration instead of static keys, set `sigV4AuthType` to `default` or `ec2_iam_role` and provide the role details:
+
+```hcl
+resource "grafana_data_source" "amazonprometheus" {
+  type = "grafana-amazonprometheus-datasource"
+  name = "Amazon Managed Service for Prometheus"
+  url  = "https://aps-workspaces.${var.region}.amazonaws.com/workspaces/${var.workspace_id}"
+
+  json_data_encoded = jsonencode({
+    sigV4Auth     = true
+    sigV4AuthType = "default"
+    sigV4Region   = var.region
+    sigv4Service  = "aps"
+    assumeRoleArn = var.assume_role_arn
+    externalId    = var.external_id
+  })
+}
+```
+
+Define the referenced variables, for example in a `variables.tf` file:
+
+```hcl
+variable "region" {
+  type = string
+}
+
+variable "workspace_id" {
+  type = string
+}
+
+variable "access_key_id" {
+  type      = string
+  sensitive = true
+}
+
+variable "secret_access_key" {
+  type      = string
+  sensitive = true
+}
+```

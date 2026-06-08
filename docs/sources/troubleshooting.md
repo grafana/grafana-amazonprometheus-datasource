@@ -50,6 +50,8 @@ An outdated plugin version is a common cause of interface errors and missing set
 1. Confirm your Grafana version meets the plugin's minimum requirement. For the supported versions, refer to [Requirements](https://grafana.com/docs/plugins/grafana-amazonprometheus-datasource/latest/#requirements).
 1. If the errors persist, restart Grafana and clear your browser cache.
 
+For install, upgrade, and catalog issues, refer to [Troubleshoot installation issues](https://grafana.com/docs/plugins/grafana-amazonprometheus-datasource/latest/install/#troubleshoot-installation-issues).
+
 ## Authentication errors
 
 These errors occur when AWS credentials are invalid, missing, or don't have the required permissions, or when the SigV4 authentication option isn't enabled on your instance.

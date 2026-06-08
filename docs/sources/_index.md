@@ -54,6 +54,7 @@ Before you use the Amazon Managed Service for Prometheus data source, ensure you
 
 The following topics help you get started with the data source:
 
+- [Install the Amazon Managed Service for Prometheus plugin](https://grafana.com/docs/plugins/grafana-amazonprometheus-datasource/latest/install/)
 - [Configure the Amazon Managed Service for Prometheus data source](https://grafana.com/docs/plugins/grafana-amazonprometheus-datasource/latest/configure/)
 - [Amazon Managed Service for Prometheus query editor](https://grafana.com/docs/plugins/grafana-amazonprometheus-datasource/latest/query-editor/)
 - [Template variables](https://grafana.com/docs/plugins/grafana-amazonprometheus-datasource/latest/template-variables/)
@@ -63,7 +64,7 @@ The following topics help you get started with the data source:
 
 To install the plugin and add the data source:
 
-1. [Install the plugin](https://grafana.com/docs/grafana/<GRAFANA_VERSION>/administration/plugin-management/#install-grafana-plugins).
+1. [Install the plugin](https://grafana.com/docs/plugins/grafana-amazonprometheus-datasource/latest/install/).
 1. [Add a new data source in the UI](https://grafana.com/docs/grafana/<GRAFANA_VERSION>/datasources/#add-a-data-source) or [provision one](https://grafana.com/docs/grafana/<GRAFANA_VERSION>/administration/provisioning/#data-sources).
 1. [Configure the data source](https://grafana.com/docs/plugins/grafana-amazonprometheus-datasource/latest/configure/).
 1. Start querying your metrics.

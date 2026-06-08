@@ -60,21 +60,59 @@ Query variables get their values from your workspace. To create a query variable
 
 ## Query variable functions
 
-The query variable editor supports the following Prometheus functions to populate variable values.
+When you select **Query** as the variable type, the variable editor provides a query type selector with options such as **Label names**, **Label values**, **Metrics**, **Query result**, and **Series query**. Each option maps to one of the following Prometheus functions, which you can also enter directly.
 
 | Function | Description |
 |----------|-------------|
 | `label_names()` | Returns a list of all label names in the workspace. |
 | `label_values(label)` | Returns a list of values for the specified label across all metrics. |
 | `label_values(metric, label)` | Returns a list of values for the specified label on the specified metric. |
-| `metrics(regex)` | Returns a list of metrics that match the regular expression. |
+| `metrics(regex)` | Returns a list of metrics whose names match the regular expression. |
 | `query_result(query)` | Returns the result of a PromQL query, useful for filtering on computed values. |
 
-For example, to populate a variable with every value of the `instance` label on the `node_cpu_seconds_total` metric:
+### Query variable examples
+
+The following examples show how to use each function in a query variable.
+
+Return every label name in the workspace:
+
+```promql
+label_names()
+```
+
+Return all values of the `job` label:
+
+```promql
+label_values(job)
+```
+
+Return the `instance` values that exist on the `node_cpu_seconds_total` metric:
 
 ```promql
 label_values(node_cpu_seconds_total, instance)
 ```
+
+Return all metrics whose names contain `node`:
+
+```promql
+metrics(node)
+```
+
+Use `query_result` to list the instances with high memory usage:
+
+```promql
+query_result(topk(5, sum by (instance) (node_memory_MemTotal_bytes)))
+```
+
+### Chain variables
+
+You can reference one variable in another variable's query to create dependent, or cascading, variables. For example, if you have a `job` variable, create an `instance` variable whose values depend on the selected job:
+
+```promql
+label_values(up{job="$job"}, instance)
+```
+
+When you change the `job` variable, Grafana refreshes the `instance` variable to show only the instances for that job.
 
 ## Use variables in queries
 

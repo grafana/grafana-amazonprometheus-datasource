@@ -76,6 +76,10 @@ Browser (direct) access mode isn't available in this data source. Use server (pr
 
 The Amazon Managed Service for Prometheus data source authenticates with AWS SigV4. Unlike the core Prometheus data source, SigV4 is the only authentication method, and Grafana signs every request to the workspace.
 
+{{< admonition type="note" >}}
+If the **SigV4 auth** option is missing from the authentication drop-down in Grafana Cloud, contact [Grafana Support](https://grafana.com/help/) to enable SigV4 authentication for your instance.
+{{< /admonition >}}
+
 ### SigV4 authentication
 
 Select an authentication provider in the **Authentication Provider** drop-down, then complete the fields for the provider you choose.
@@ -102,6 +106,20 @@ Depending on the provider you select, configure the following fields:
 | **Endpoint** | A custom endpoint for the AWS API. Leave empty to use the default endpoint for the selected region. |
 | **Default Region** | The AWS region of your workspace. SigV4 uses this region to sign requests. |
 | **Service** | The AWS service to sign requests against. Defaults to `aps` for Amazon Managed Service for Prometheus. Change this only if AWS instructs you to use a different service name. |
+
+## Private data source connect
+
+The data source supports [Private data source connect (PDC)](https://grafana.com/docs/grafana-cloud/connect-externally-hosted/private-data-source-connect/), which lets Grafana Cloud query an Amazon Managed Service for Prometheus workspace that isn't exposed to the public internet, such as a workspace reached through a VPC endpoint.
+
+To use PDC with this data source:
+
+1. Set up a PDC connection. Refer to [Configure Private data source connect](https://grafana.com/docs/grafana-cloud/connect-externally-hosted/private-data-source-connect/configure-pdc/).
+1. On the data source configuration page, expand **Secure Socks Proxy** and select the PDC connection.
+1. Click **Save & test** to verify connectivity through the private network.
+
+{{< admonition type="note" >}}
+The **Secure Socks Proxy** settings appear only when the secure SOCKS data source proxy is enabled on your Grafana instance. PDC is available in Grafana Cloud.
+{{< /admonition >}}
 
 ## Additional settings
 

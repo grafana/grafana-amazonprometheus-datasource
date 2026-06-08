@@ -28,6 +28,28 @@ review_date: 2026-06-08
 
 This document provides solutions to common issues you may encounter when configuring or using the Amazon Managed Service for Prometheus data source. For configuration instructions, refer to [Configure the Amazon Managed Service for Prometheus data source](https://grafana.com/docs/plugins/grafana-amazonprometheus-datasource/latest/configure/).
 
+## Plugin and interface errors
+
+These errors occur when the plugin is outdated or fails to load in the Grafana interface.
+
+### "Plugin not found", "Datasource not found", or blank settings tabs
+
+An outdated plugin version is a common cause of interface errors and missing settings.
+
+**Symptoms:**
+
+- The data source settings tabs are blank or fail to render.
+- Errors such as **Plugin not found** or **Datasource not found** appear.
+- The browser console shows JavaScript errors such as `TypeError: Cannot read properties of undefined`.
+
+**Solutions:**
+
+1. Check the installed plugin version. Navigate to **Plugins and data** > **Plugins** and select **Amazon Managed Service for Prometheus**.
+1. If an update is available, click **Update** to install the latest version. In Grafana Cloud, plugins update automatically.
+1. After updating, reload the data source configuration page.
+1. Confirm your Grafana version meets the plugin's minimum requirement. For the supported versions, refer to [Requirements](https://grafana.com/docs/plugins/grafana-amazonprometheus-datasource/latest/#requirements).
+1. If the errors persist, restart Grafana and clear your browser cache.
+
 ## Authentication errors
 
 These errors occur when AWS credentials are invalid, missing, or don't have the required permissions, or when the SigV4 authentication option isn't enabled on your instance.
@@ -319,28 +341,6 @@ This error appears when Grafana can't retrieve the alerting and recording rules 
 {{< admonition type="note" >}}
 The **Unable to fetch alert rules** error isn't always a configuration problem. When IAM permissions and the workspace URL are correct, the cause can be platform-side and require escalation to Grafana Support rather than a change on your end.
 {{< /admonition >}}
-
-## Plugin and interface errors
-
-These errors occur when the plugin is outdated or fails to load in the Grafana interface.
-
-### "Plugin not found", "Datasource not found", or blank settings tabs
-
-An outdated plugin version is a common cause of interface errors and missing settings.
-
-**Symptoms:**
-
-- The data source settings tabs are blank or fail to render.
-- Errors such as **Plugin not found** or **Datasource not found** appear.
-- The browser console shows JavaScript errors such as `TypeError: Cannot read properties of undefined`.
-
-**Solutions:**
-
-1. Check the installed plugin version. Navigate to **Plugins and data** > **Plugins** and select **Amazon Managed Service for Prometheus**.
-1. If an update is available, click **Update** to install the latest version. In Grafana Cloud, plugins update automatically.
-1. After updating, reload the data source configuration page.
-1. Confirm your Grafana version meets the plugin's minimum requirement. For the supported versions, refer to [Requirements](https://grafana.com/docs/plugins/grafana-amazonprometheus-datasource/latest/#requirements).
-1. If the errors persist, restart Grafana and clear your browser cache.
 
 ## Enable debug logging
 

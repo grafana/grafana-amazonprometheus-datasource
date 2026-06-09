@@ -9,8 +9,8 @@ import { DataSourceHttpSettingsOverhaul } from './DataSourceHttpSettingsOverhaul
 // @grafana/prometheus style helpers are not under test here, so stub them to
 // keep the test focused on the "Forward OAuth Identity" toggle behavior.
 jest.mock('@grafana/plugin-ui', () => ({
-  Auth: () => <div data-testid="auth" />,
-  ConnectionSettings: () => <div data-testid="connection-settings" />,
+  Auth: () => <div />,
+  ConnectionSettings: () => <div />,
   convertLegacyAuthProps: () => ({ selectedMethod: 'default' }),
   AuthMethod: {
     BasicAuth: 'BasicAuth',
@@ -60,7 +60,7 @@ function renderComponent(
     <DataSourceHttpSettingsOverhaul
       options={options}
       onOptionsChange={onOptionsChange}
-      renderSigV4Editor={<div data-testid="sigv4-editor" />}
+      renderSigV4Editor={<div />}
       secureSocksDSProxyEnabled={false}
     />
   );

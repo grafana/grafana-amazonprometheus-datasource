@@ -100,3 +100,50 @@ func TestExtendClientOpts_SigV4Service(t *testing.T) {
 		require.Equal(t, "aps", opts.SigV4.Service)
 	})
 }
+
+func TestExtendClientOpts_ForwardHTTPHeaders(t *testing.T) {
+	t.Run("enables forwarding when oauthPassThru is true", func(t *testing.T) {
+		settings := backend.DataSourceInstanceSettings{
+			JSONData:                []byte(`{"oauthPassThru": true}`),
+			DecryptedSecureJSONData: map[string]string{},
+		}
+		opts := &sdkhttpclient.Options{}
+		err := extendClientOpts(context.Background(), settings, opts, log.NewNullLogger())
+		require.NoError(t, err)
+		require.True(t, opts.ForwardHTTPHeaders)
+	})
+
+	t.Run("disables forwarding when oauthPassThru is false", func(t *testing.T) {
+		settings := backend.DataSourceInstanceSettings{
+			JSONData:                []byte(`{"oauthPassThru": false}`),
+			DecryptedSecureJSONData: map[string]string{},
+		}
+		opts := &sdkhttpclient.Options{}
+		err := extendClientOpts(context.Background(), settings, opts, log.NewNullLogger())
+		require.NoError(t, err)
+		require.False(t, opts.ForwardHTTPHeaders)
+	})
+
+	t.Run("disables forwarding when oauthPassThru is not provided", func(t *testing.T) {
+		settings := backend.DataSourceInstanceSettings{
+			JSONData:                []byte("{}"),
+			DecryptedSecureJSONData: map[string]string{},
+		}
+		opts := &sdkhttpclient.Options{}
+		err := extendClientOpts(context.Background(), settings, opts, log.NewNullLogger())
+		require.NoError(t, err)
+		require.False(t, opts.ForwardHTTPHeaders)
+	})
+
+	t.Run("enables forwarding alongside SigV4 configuration", func(t *testing.T) {
+		settings := backend.DataSourceInstanceSettings{
+			JSONData:                []byte(`{"oauthPassThru": true, "sigv4Service": "aps"}`),
+			DecryptedSecureJSONData: map[string]string{},
+		}
+		opts := &sdkhttpclient.Options{SigV4: &sdkhttpclient.SigV4Config{}}
+		err := extendClientOpts(context.Background(), settings, opts, log.NewNullLogger())
+		require.NoError(t, err)
+		require.True(t, opts.ForwardHTTPHeaders)
+		require.Equal(t, "aps", opts.SigV4.Service)
+	})
+}

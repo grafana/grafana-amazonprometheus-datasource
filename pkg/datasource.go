@@ -88,8 +88,7 @@ func extendClientOpts(_ context.Context, settings backend.DataSourceInstanceSett
 	// Forward the logged-in user's OAuth identity (Authorization / X-Id-Token)
 	// and Grafana headers such as X-Grafana-User to the upstream workspace when
 	// the data source is configured with "Forward OAuth Identity". The SDK's
-	// header middleware only forwards these headers when ForwardHTTPHeaders is
-	// enabled.
+	// header middleware only forwards these headers when ForwardHTTPHeaders is enabled.
 	oauthPassThru, err := maputil.GetBoolOptional(jsonData, "oauthPassThru")
 	if err != nil {
 		return err

@@ -71,12 +71,13 @@ describe('DataSourceHttpSettingsOverhaul - Forward OAuth Identity', () => {
   it('renders the toggle, off by default', () => {
     renderComponent(makeOptions());
     const toggle = screen.getByRole('switch', { name: /Forward OAuth Identity/i });
-    expect(toggle).not.toBeChecked();
+    expect((toggle as HTMLInputElement).checked).toBe(false);
   });
 
   it('reflects oauthPassThru=true as a checked toggle', () => {
     renderComponent(makeOptions({ oauthPassThru: true }));
-    expect(screen.getByRole('switch', { name: /Forward OAuth Identity/i })).toBeChecked();
+    const toggle = screen.getByRole('switch', { name: /Forward OAuth Identity/i });
+    expect((toggle as HTMLInputElement).checked).toBe(true);
   });
 
   it('sets jsonData.oauthPassThru to true when toggled on', () => {

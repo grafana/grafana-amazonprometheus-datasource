@@ -69,7 +69,7 @@ func (d *Datasource) contextualMiddlewares(ctx context.Context) context.Context 
 	return sdkhttpclient.WithContextualMiddleware(ctx, middlewares...)
 }
 
-func extendClientOpts(_ context.Context, settings backend.DataSourceInstanceSettings, clientOpts *sdkhttpclient.Options, logger log.Logger) error {
+func extendClientOpts(_ context.Context, settings backend.DataSourceInstanceSettings, clientOpts *sdkhttpclient.Options, _ log.Logger) error {
 	jsonData, err := utils.GetJsonData(settings)
 	if err != nil {
 		return err
@@ -95,7 +95,6 @@ func extendClientOpts(_ context.Context, settings backend.DataSourceInstanceSett
 		return err
 	}
 	clientOpts.ForwardHTTPHeaders = oauthPassThru
-	logger.Debug("configured HTTP header forwarding", "oauthPassThru", oauthPassThru, "forwardHTTPHeaders", clientOpts.ForwardHTTPHeaders)
 
 	return nil
 }

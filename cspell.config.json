@@ -54,6 +54,11 @@
     "zizmor",
     "maputil",
     "unsafeHttpWhitelist",
-    "yarnrc"
+    "yarnrc",
+    "alertname",
+    "alertstate",
+    "curlimages",
+    "jsonencode",
+    "topk"
   ]
 }

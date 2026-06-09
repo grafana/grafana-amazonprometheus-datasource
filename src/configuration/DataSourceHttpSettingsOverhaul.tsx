@@ -1,7 +1,7 @@
 import { DataSourceSettings } from '@grafana/data';
 import { Auth, AuthMethod, ConnectionSettings, convertLegacyAuthProps } from '@grafana/plugin-ui';
 import { docsTip, overhaulStyles } from '@grafana/prometheus';
-import { SecureSocksProxySettings, useTheme2 } from '@grafana/ui';
+import { Box, InlineField, InlineSwitch, SecureSocksProxySettings, useTheme2 } from '@grafana/ui';
 import React, { ReactElement, useState } from 'react';
 import { useEffectOnce } from 'react-use';
 
@@ -119,6 +119,28 @@ export const DataSourceHttpSettingsOverhaul = (props: Props) => {
         selectedMethod={returnSelectedMethod()}
         visibleMethods={[sigV4Id]}
       />
+      <Box marginTop={3}>
+        <InlineField
+          label="Forward OAuth Identity"
+          tooltip="Forward the user's upstream OAuth identity and Grafana headers (such as X-Grafana-User) to the data source. Their access token gets passed along."
+          labelWidth={30}
+          disabled={options.readOnly}
+        >
+          <InlineSwitch
+            id="forward-oauth-identity"
+            value={options.jsonData.oauthPassThru || false}
+            onChange={(event) =>
+              onOptionsChange({
+                ...options,
+                jsonData: {
+                  ...options.jsonData,
+                  oauthPassThru: event.currentTarget.checked,
+                },
+              })
+            }
+          />
+        </InlineField>
+      </Box>
       <div className={styles.sectionBottomPadding} />
       {secureSocksDSProxyEnabled && (
         <>

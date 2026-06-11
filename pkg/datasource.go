@@ -70,12 +70,13 @@ func (d *Datasource) contextualMiddlewares(ctx context.Context) context.Context 
 }
 
 func extendClientOpts(_ context.Context, settings backend.DataSourceInstanceSettings, clientOpts *sdkhttpclient.Options, _ log.Logger) error {
+	jsonData, err := utils.GetJsonData(settings)
+	if err != nil {
+		return err
+	}
+
 	// Set SigV4 service namespace
 	if clientOpts.SigV4 != nil {
-		jsonData, err := utils.GetJsonData(settings)
-		if err != nil {
-			return err
-		}
 		service, err := maputil.GetStringOptional(jsonData, "sigv4Service")
 		if err != nil || service == "" {
 			clientOpts.SigV4.Service = "aps"
@@ -83,6 +84,16 @@ func extendClientOpts(_ context.Context, settings backend.DataSourceInstanceSett
 			clientOpts.SigV4.Service = service
 		}
 	}
+
+	// Forward the logged-in user's OAuth identity (Authorization / X-Id-Token)
+	// and Grafana headers such as X-Grafana-User to the upstream workspace when
+	// the data source is configured with "Forward OAuth Identity". The SDK's
+	// header middleware only forwards these headers when ForwardHTTPHeaders is enabled.
+	oauthPassThru, err := maputil.GetBoolOptional(jsonData, "oauthPassThru")
+	if err != nil {
+		return err
+	}
+	clientOpts.ForwardHTTPHeaders = oauthPassThru
 
 	return nil
 }

@@ -1,0 +1,25 @@
+apiVersion: 1
+
+datasources:
+- name: Amazon Managed Service for Prometheus
+  uid: grafana-amazonprometheus
+  type: grafana-amazonprometheus-datasource
+  url: http://localhost:9090
+  access: proxy
+  editable: true
+  jsonData:
+    # httpMethod: POST
+    # manageAlerts: true
+    # prometheusType: Prometheus
+    # prometheusVersion: 2.44.0
+    # cacheLevel: 'High'
+    # disableRecordingRules: false
+    # incrementalQueryOverlapWindow: 10m
+    defaultEditor: builder
+    sigV4Auth: true
+    sigV4AuthType: keys
+    sigv4Service: aps
+    externalId: externalId
+  secureJsonData:
+      sigV4AccessKey: abc
+      sigV4SecretKey: def

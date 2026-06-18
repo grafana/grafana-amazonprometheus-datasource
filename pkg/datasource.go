@@ -10,6 +10,7 @@ import (
 	sdkhttpclient "github.com/grafana/grafana-plugin-sdk-go/backend/httpclient"
 	"github.com/grafana/grafana-plugin-sdk-go/backend/instancemgmt"
 	"github.com/grafana/grafana-plugin-sdk-go/backend/log"
+	"github.com/grafana/grafana-plugin-sdk-go/config"
 	"github.com/grafana/grafana-plugin-sdk-go/data/utils/maputil"
 
 	"github.com/grafana/grafana-prometheus-datasource/pkg/promlib"
@@ -81,7 +82,7 @@ func (d *Datasource) CheckHealth(ctx context.Context, req *backend.CheckHealthRe
 }
 
 func (d *Datasource) contextualMiddlewares(ctx context.Context, headers http.Header) context.Context {
-	cfg := backend.GrafanaConfigFromContext(ctx)
+	cfg := config.GrafanaConfigFromContext(ctx)
 
 	middlewares := []sdkhttpclient.Middleware{
 		sdkhttpclient.ResponseLimitMiddleware(cfg.ResponseLimit()),

@@ -8,7 +8,7 @@ jobs:
     permissions:
       contents: read
     steps:
-      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
         with:
           persist-credentials: false
       - name: Setup Node.js environment
@@ -20,5 +20,18 @@ jobs:
         run: yarn install --immutable
       - name: Build plugin
         run: yarn run build
+      - name: Find module.ts or module.tsx
+        id: find-module-ts
+        run: |
+          MODULETS="$(find ./src -type f \( -name "module.ts" -o -name "module.tsx" \) -print -quit)"
+          if [ -z "$MODULETS" ]; then
+            echo "No module.ts/module.tsx found under ./src" >&2
+            exit 1
+          fi
+          echo "modulets=${MODULETS}" >> $GITHUB_OUTPUT
       - name: Compatibility check
-        run: yarn levitate:is-compatible
+        uses: grafana/plugin-actions/is-compatible@4698961fa64137fcac207108397ebe8a738a33d1 # v1.0.3
+        with:
+          module: ${{ steps.find-module-ts.outputs.modulets }}
+          comment-pr: no
+          fail-if-incompatible: yes

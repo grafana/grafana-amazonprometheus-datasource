@@ -6,12 +6,6 @@ import { loadResources, PromCheatSheet, PrometheusDatasource, PromQueryEditorByA
 import { ConfigEditor } from './configuration/ConfigEditor';
 import pluginJson from './plugin.json';
 
-declare const process: {
-  env: {
-    NODE_ENV?: string;
-  };
-};
-
 if (process.env.NODE_ENV !== 'test') {
   void initPluginTranslations(pluginJson.id, [loadResources]);
 }

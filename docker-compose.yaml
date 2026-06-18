@@ -1,19 +1,14 @@
-version: '3.7'
-
 services:
   prometheus:
-    image: prom/prometheus:v3.11.2@sha256:5550dc63da361dc30f6fe02ac0e4dfc736ededfef3c8d12a634db04a67824d78
+    image: prom/prometheus:v3.12.0@sha256:69f5241418838263316593f7274a304b095c40bcf22e57272865da91bd60a8ac
     ports:
       - '9090:9090'
     volumes:
       - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
     command: >
-      --config.file=/etc/prometheus/prometheus.yml
-      --storage.tsdb.path=/prometheus
+      --config.file=/etc/prometheus/prometheus.yml --storage.tsdb.path=/prometheus
 
   grafana:
-    user: root
-    container_name: 'grafana-amazonprometheus-datasource'
     platform: linux/amd64
 
     depends_on:
@@ -21,27 +16,8 @@ services:
         condition: service_started
 
     build:
-      context: ./.config
       args:
-        grafana_image: ${GRAFANA_IMAGE:-grafana-enterprise}
-        grafana_version: ${GRAFANA_VERSION:-11.6.11}
-    ports:
-      - 3000:3000/tcp
-      - 2345:2345/tcp # delve
-    security_opt:
-      - 'apparmor:unconfined'
-      - 'seccomp:unconfined'
-    cap_add:
-      - SYS_PTRACE
-    environment:
-      NODE_ENV: development
-      GF_LOG_FILTERS: plugin.grafana-amazonprometheus-datasource:debug
-      GF_LOG_LEVEL: debug
-      GF_DATAPROXY_LOGGING: 1
-      GF_PLUGINS_ALLOW_LOADING_UNSIGNED_PLUGINS: grafana-amazonprometheus-datasource
-      # Grafana 13 enables splashScreen by default; the overlay blocks Playwright interactions.
-      GF_FEATURE_TOGGLES_splashScreen: 'false'
-    volumes:
-      - ./dist:/var/lib/grafana/plugins/grafana-amazonprometheus-datasource
-      - ./provisioning:/etc/grafana/provisioning
-      - .:/root/grafana-amazonprometheus-datasource
+        grafana_version: ${GRAFANA_VERSION:-13.0.2}
+    extends:
+      file: .config/docker-compose-base.yaml
+      service: grafana

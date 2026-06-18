@@ -9,52 +9,62 @@
     {
       "method": "POST",
       "path": "api/v1/query",
-      "reqRole": "Viewer"
+      "reqRole": "Viewer",
+      "reqAction": "datasources:query"
     },
     {
       "method": "POST",
       "path": "api/v1/query_range",
-      "reqRole": "Viewer"
+      "reqRole": "Viewer",
+      "reqAction": "datasources:query"
     },
     {
       "method": "POST",
       "path": "api/v1/series",
-      "reqRole": "Viewer"
+      "reqRole": "Viewer",
+      "reqAction": "datasources:query"
     },
     {
       "method": "POST",
       "path": "api/v1/labels",
-      "reqRole": "Viewer"
+      "reqRole": "Viewer",
+      "reqAction": "datasources:query"
     },
     {
       "method": "POST",
       "path": "api/v1/query_exemplars",
-      "reqRole": "Viewer"
+      "reqRole": "Viewer",
+      "reqAction": "datasources:query"
     },
     {
       "method": "GET",
       "path": "/rules",
-      "reqRole": "Viewer"
+      "reqRole": "Viewer",
+      "reqAction": "alert.rules.external:read"
     },
     {
       "method": "POST",
       "path": "/rules",
-      "reqRole": "Editor"
+      "reqRole": "Editor",
+      "reqAction": "alert.rules.external:write"
     },
     {
       "method": "DELETE",
       "path": "/rules",
-      "reqRole": "Editor"
+      "reqRole": "Editor",
+      "reqAction": "alert.rules.external:write"
     },
     {
       "method": "DELETE",
       "path": "/config/v1/rules",
-      "reqRole": "Editor"
+      "reqRole": "Editor",
+      "reqAction": "alert.rules.external:write"
     },
     {
       "method": "POST",
       "path": "/config/v1/rules",
-      "reqRole": "Editor"
+      "reqRole": "Editor",
+      "reqAction": "alert.rules.external:write"
     }
   ],
   "includes": [
@@ -102,7 +112,7 @@
     ]
   },
   "dependencies": {
-    "grafanaDependency": ">=11.6.11 <12 || >=12.0.10 <12.1 || >=12.1.7 <12.2 || >=12.2.5",
+    "grafanaDependency": ">=11.6.11-0 <12 || >=12.0.10-0 <12.1 || >=12.1.7-0 <12.2 || >=12.2.5-0",
     "plugins": []
   }
 }

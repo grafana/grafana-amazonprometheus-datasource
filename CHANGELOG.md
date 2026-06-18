@@ -1,5 +1,11 @@
 # Changelog
 
+## Unreleased
+
+- chore(deps): update Go dependencies and drop the stale `github.com/prometheus/prometheus` pin so version selection resolves to the current release required by `promlib`
+- chore: update to the latest `@grafana/create-plugin` tooling (webpack, tsconfig, eslint flat config, yarn 4.17)
+- chore: align the local Docker dev environment and point the provisioned datasource at the in-network `prometheus` service
+
 ## 3.0.0
 
 - Breaking change: this release is versioned as `3.0.0` to reflect the Grafana compatibility restriction introduced in [#666](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/666). The plugin now supports `>=11.6.11 <12 || >=12.0.10 <12.1 || >=12.1.7 <12.2 || >=12.2.5` instead of `>=11.5.0`.

@@ -2,9 +2,9 @@
 
 ## Unreleased
 
-- chore(deps): update Go dependencies and drop the stale `github.com/prometheus/prometheus` pin so version selection resolves to the current release required by `promlib`
-- chore: update to the latest `@grafana/create-plugin` tooling (webpack, tsconfig, eslint flat config, yarn 4.17)
-- chore: align the local Docker dev environment and point the provisioned datasource at the in-network `prometheus` service
+- chore(deps): update Go dependencies and drop the stale `github.com/prometheus/prometheus` pin so version selection resolves to the current release required by `promlib` in [#756](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/756)
+- chore: update to the latest `@grafana/create-plugin` tooling (webpack, tsconfig, eslint flat config, yarn 4.17) in [#756](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/756)
+- chore: align the local Docker dev environment and point the provisioned datasource at the in-network `prometheus` service in [#756](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/756)
 
 ## 3.0.0
 

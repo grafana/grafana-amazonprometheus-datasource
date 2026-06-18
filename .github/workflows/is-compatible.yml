@@ -20,5 +20,16 @@ jobs:
         run: yarn install --immutable
       - name: Build plugin
         run: yarn run build
+      - name: Find module.ts or module.tsx
+        id: find-module-ts
+        run: >-
+          MODULETS="$(find ./src -type f \( -name "module.ts" -o -name
+          "module.tsx" \))"
+
+          echo "modulets=${MODULETS}" >> $GITHUB_OUTPUT
       - name: Compatibility check
-        run: yarn levitate:is-compatible
+        uses: grafana/plugin-actions/is-compatible@main
+        with:
+          module: ${{ steps.find-module-ts.outputs.modulets }}
+          comment-pr: no
+          fail-if-incompatible: yes

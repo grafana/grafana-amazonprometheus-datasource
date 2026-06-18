@@ -4,7 +4,7 @@
     "name": "datasource/AmazonPrometheus",
     "action": "addToProject",
     "addToProject": {
-      "url": "https://github.com/orgs/grafana/projects/97"
+      "url": "https://github.com/orgs/grafana/projects/1085"
     }
   },
   {
@@ -12,7 +12,7 @@
     "name": "datasource/AmazonPrometheus",
     "action": "removeFromProject",
     "removeFromProject": {
-      "url": "https://github.com/orgs/grafana/projects/97"
+      "url": "https://github.com/orgs/grafana/projects/1085"
     }
   },
   {

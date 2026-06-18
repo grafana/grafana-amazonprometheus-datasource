@@ -22,6 +22,7 @@ jobs:
         run: yarn run build
       - name: Find module.ts or module.tsx
         id: find-module-ts
+        run: |
           MODULETS="$(find ./src -type f \( -name "module.ts" -o -name "module.tsx" \) -print -quit)"
           if [ -z "$MODULETS" ]; then
             echo "No module.ts/module.tsx found under ./src" >&2
@@ -29,7 +30,7 @@ jobs:
           fi
           echo "modulets=${MODULETS}" >> $GITHUB_OUTPUT
       - name: Compatibility check
-        uses: grafana/plugin-actions/is-compatible@main
+        uses: grafana/plugin-actions/is-compatible@4698961fa64137fcac207108397ebe8a738a33d1 # v1.0.3
         with:
           module: ${{ steps.find-module-ts.outputs.modulets }}
           comment-pr: no

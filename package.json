@@ -92,7 +92,7 @@
     "@grafana/aws-sdk": "^0.10.2",
     "@grafana/data": "12.4.2",
     "@grafana/plugin-ui": "^0.13.1",
-    "@grafana/prometheus": "13.1.4",
+    "@grafana/prometheus": "13.1.5",
     "@grafana/runtime": "12.4.2",
     "@grafana/schema": "12.4.2",
     "@grafana/ui": "12.4.2",

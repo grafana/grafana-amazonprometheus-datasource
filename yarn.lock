@@ -1719,9 +1719,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@grafana/prometheus@npm:13.1.4":
-  version: 13.1.4
-  resolution: "@grafana/prometheus@npm:13.1.4"
+"@grafana/prometheus@npm:13.1.5":
+  version: 13.1.5
+  resolution: "@grafana/prometheus@npm:13.1.5"
   dependencies:
     "@emotion/css": "npm:11.13.5"
     "@floating-ui/react": "npm:0.27.19"
@@ -1755,7 +1755,7 @@ __metadata:
     "@grafana/ui": ">=11.5.0"
     react: ^18.0.0
     react-dom: ^18.0.0
-  checksum: 10c0/c773dffe917180d1fc73c00f313a86dc64deced61d81bd2d805bf3bf87475ef8d70d87ada05ec9ae71d18b06fa991aca222a8c8f6ce00026474d9e4072f62bc5
+  checksum: 10c0/153b7cd284d163d4114542a7778d2737f8c8b2849a6ae24baf4ab89066df072267c498ddedaff0c0696066a63106393b972703108ec600519e530f6bc8e8197e
   languageName: node
   linkType: hard
 
@@ -8362,7 +8362,7 @@ __metadata:
     "@grafana/levitate": "npm:0.17.2"
     "@grafana/plugin-e2e": "npm:3.4.12"
     "@grafana/plugin-ui": "npm:^0.13.1"
-    "@grafana/prometheus": "npm:13.1.4"
+    "@grafana/prometheus": "npm:13.1.5"
     "@grafana/runtime": "npm:12.4.2"
     "@grafana/schema": "npm:12.4.2"
     "@grafana/sign-plugin": "npm:3.2.2"

@@ -16,18 +16,20 @@ export const externals: ExternalsType = [
   'slate-plain-serializer',
   '@grafana/slate-react',
   'react',
+  'react/jsx-runtime',
+  'react/jsx-dev-runtime',
   'react-dom',
   'react-redux',
   'redux',
   'rxjs',
   'i18next',
   'react-router',
-  'react-router-dom',
   'd3',
   'angular',
   /^@grafana\/ui/i,
   /^@grafana\/runtime/i,
   /^@grafana\/data/i,
+  'react-inlinesvg',
 
   // Mark legacy SDK imports as external if their name starts with the "grafana/" prefix
   ({ request }: ExternalItemFunctionData, callback: (error?: Error, result?: string) => void) => {

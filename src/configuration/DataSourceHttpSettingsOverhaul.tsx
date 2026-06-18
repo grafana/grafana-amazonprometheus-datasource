@@ -121,20 +121,20 @@ export const DataSourceHttpSettingsOverhaul = (props: Props) => {
       />
       <Box marginTop={3}>
         <InlineField
-          label="Forward OAuth Identity"
-          tooltip="Forward the user's upstream OAuth identity and Grafana headers (such as X-Grafana-User) to the data source. Their access token gets passed along."
-          labelWidth={30}
+          label="Forward Grafana User HTTP Header"
+          tooltip="Forward the logged-in Grafana user's X-Grafana-User header to the workspace. No OAuth token or other headers are forwarded. Requires send_user_header to be enabled in the Grafana server configuration."
+          labelWidth={32}
           disabled={options.readOnly}
         >
           <InlineSwitch
-            id="forward-oauth-identity"
-            value={options.jsonData.oauthPassThru || false}
+            id="forward-grafana-user-header"
+            value={options.jsonData.forwardGrafanaUserHeader || false}
             onChange={(event) =>
               onOptionsChange({
                 ...options,
                 jsonData: {
                   ...options.jsonData,
-                  oauthPassThru: event.currentTarget.checked,
+                  forwardGrafanaUserHeader: event.currentTarget.checked,
                 },
               })
             }

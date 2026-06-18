@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"net/http"
 	"testing"
 
 	"github.com/grafana/grafana-plugin-sdk-go/backend"
@@ -101,49 +102,57 @@ func TestExtendClientOpts_SigV4Service(t *testing.T) {
 	})
 }
 
-func TestExtendClientOpts_ForwardHTTPHeaders(t *testing.T) {
-	t.Run("enables forwarding when oauthPassThru is true", func(t *testing.T) {
-		settings := backend.DataSourceInstanceSettings{
-			JSONData:                []byte(`{"oauthPassThru": true}`),
-			DecryptedSecureJSONData: map[string]string{},
-		}
-		opts := &sdkhttpclient.Options{}
-		err := extendClientOpts(context.Background(), settings, opts, log.NewNullLogger())
+func TestNewDatasource_ForwardGrafanaUserHeader(t *testing.T) {
+	t.Run("enabled when forwardGrafanaUserHeader is true", func(t *testing.T) {
+		ds, err := NewDatasource(context.Background(), backend.DataSourceInstanceSettings{
+			JSONData: []byte(`{"forwardGrafanaUserHeader": true}`),
+		})
 		require.NoError(t, err)
-		require.True(t, opts.ForwardHTTPHeaders)
+		require.True(t, ds.(*Datasource).forwardGrafanaUser)
 	})
 
-	t.Run("disables forwarding when oauthPassThru is false", func(t *testing.T) {
-		settings := backend.DataSourceInstanceSettings{
-			JSONData:                []byte(`{"oauthPassThru": false}`),
-			DecryptedSecureJSONData: map[string]string{},
-		}
-		opts := &sdkhttpclient.Options{}
-		err := extendClientOpts(context.Background(), settings, opts, log.NewNullLogger())
+	t.Run("disabled when forwardGrafanaUserHeader is false", func(t *testing.T) {
+		ds, err := NewDatasource(context.Background(), backend.DataSourceInstanceSettings{
+			JSONData: []byte(`{"forwardGrafanaUserHeader": false}`),
+		})
 		require.NoError(t, err)
-		require.False(t, opts.ForwardHTTPHeaders)
+		require.False(t, ds.(*Datasource).forwardGrafanaUser)
 	})
 
-	t.Run("disables forwarding when oauthPassThru is not provided", func(t *testing.T) {
-		settings := backend.DataSourceInstanceSettings{
-			JSONData:                []byte("{}"),
-			DecryptedSecureJSONData: map[string]string{},
-		}
-		opts := &sdkhttpclient.Options{}
-		err := extendClientOpts(context.Background(), settings, opts, log.NewNullLogger())
+	t.Run("disabled when forwardGrafanaUserHeader is not provided", func(t *testing.T) {
+		ds, err := NewDatasource(context.Background(), backend.DataSourceInstanceSettings{
+			JSONData: []byte("{}"),
+		})
 		require.NoError(t, err)
-		require.False(t, opts.ForwardHTTPHeaders)
+		require.False(t, ds.(*Datasource).forwardGrafanaUser)
+	})
+}
+
+func TestForwardHeaderMiddleware(t *testing.T) {
+	roundTrip := func(mw sdkhttpclient.Middleware, setup func(*http.Request)) *http.Request {
+		var captured *http.Request
+		final := sdkhttpclient.RoundTripperFunc(func(req *http.Request) (*http.Response, error) {
+			captured = req
+			return &http.Response{StatusCode: http.StatusOK, Body: http.NoBody}, nil
+		})
+		req, _ := http.NewRequest(http.MethodGet, "http://example.com", nil)
+		if setup != nil {
+			setup(req)
+		}
+		_, err := mw.CreateMiddleware(sdkhttpclient.Options{}, final).RoundTrip(req)
+		require.NoError(t, err)
+		return captured
+	}
+
+	t.Run("sets the header on the outgoing request", func(t *testing.T) {
+		req := roundTrip(forwardHeaderMiddleware(grafanaUserHeader, "alice"), nil)
+		require.Equal(t, "alice", req.Header.Get(grafanaUserHeader))
 	})
 
-	t.Run("enables forwarding alongside SigV4 configuration", func(t *testing.T) {
-		settings := backend.DataSourceInstanceSettings{
-			JSONData:                []byte(`{"oauthPassThru": true, "sigv4Service": "aps"}`),
-			DecryptedSecureJSONData: map[string]string{},
-		}
-		opts := &sdkhttpclient.Options{SigV4: &sdkhttpclient.SigV4Config{}}
-		err := extendClientOpts(context.Background(), settings, opts, log.NewNullLogger())
-		require.NoError(t, err)
-		require.True(t, opts.ForwardHTTPHeaders)
-		require.Equal(t, "aps", opts.SigV4.Service)
+	t.Run("does not overwrite an existing header", func(t *testing.T) {
+		req := roundTrip(forwardHeaderMiddleware(grafanaUserHeader, "alice"), func(r *http.Request) {
+			r.Header.Set(grafanaUserHeader, "existing")
+		})
+		require.Equal(t, "existing", req.Header.Get(grafanaUserHeader))
 	})
 }

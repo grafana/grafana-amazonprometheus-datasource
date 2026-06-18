@@ -7,7 +7,7 @@ import { DataSourceHttpSettingsOverhaul } from './DataSourceHttpSettingsOverhaul
 
 // The Auth/ConnectionSettings components from @grafana/plugin-ui and the
 // @grafana/prometheus style helpers are not under test here, so stub them to
-// keep the test focused on the "Forward OAuth Identity" toggle behavior.
+// keep the test focused on the "Forward Grafana User HTTP Header" toggle behavior.
 jest.mock('@grafana/plugin-ui', () => ({
   Auth: () => <div />,
   ConnectionSettings: () => <div />,
@@ -67,35 +67,35 @@ function renderComponent(
   return { onOptionsChange };
 }
 
-describe('DataSourceHttpSettingsOverhaul - Forward OAuth Identity', () => {
+describe('DataSourceHttpSettingsOverhaul - Forward Grafana User HTTP Header', () => {
   it('renders the toggle, off by default', () => {
     renderComponent(makeOptions());
-    const toggle = screen.getByRole('switch', { name: /Forward OAuth Identity/i });
+    const toggle = screen.getByRole('switch', { name: /Forward Grafana User HTTP Header/i });
     expect((toggle as HTMLInputElement).checked).toBe(false);
   });
 
-  it('reflects oauthPassThru=true as a checked toggle', () => {
-    renderComponent(makeOptions({ oauthPassThru: true }));
-    const toggle = screen.getByRole('switch', { name: /Forward OAuth Identity/i });
+  it('reflects forwardGrafanaUserHeader=true as a checked toggle', () => {
+    renderComponent(makeOptions({ forwardGrafanaUserHeader: true }));
+    const toggle = screen.getByRole('switch', { name: /Forward Grafana User HTTP Header/i });
     expect((toggle as HTMLInputElement).checked).toBe(true);
   });
 
-  it('sets jsonData.oauthPassThru to true when toggled on', () => {
+  it('sets jsonData.forwardGrafanaUserHeader to true when toggled on', () => {
     const { onOptionsChange } = renderComponent(makeOptions());
-    fireEvent.click(screen.getByRole('switch', { name: /Forward OAuth Identity/i }));
+    fireEvent.click(screen.getByRole('switch', { name: /Forward Grafana User HTTP Header/i }));
     expect(onOptionsChange).toHaveBeenCalledWith(
       expect.objectContaining({
-        jsonData: expect.objectContaining({ oauthPassThru: true }),
+        jsonData: expect.objectContaining({ forwardGrafanaUserHeader: true }),
       })
     );
   });
 
-  it('sets jsonData.oauthPassThru to false when toggled off', () => {
-    const { onOptionsChange } = renderComponent(makeOptions({ oauthPassThru: true }));
-    fireEvent.click(screen.getByRole('switch', { name: /Forward OAuth Identity/i }));
+  it('sets jsonData.forwardGrafanaUserHeader to false when toggled off', () => {
+    const { onOptionsChange } = renderComponent(makeOptions({ forwardGrafanaUserHeader: true }));
+    fireEvent.click(screen.getByRole('switch', { name: /Forward Grafana User HTTP Header/i }));
     expect(onOptionsChange).toHaveBeenCalledWith(
       expect.objectContaining({
-        jsonData: expect.objectContaining({ oauthPassThru: false }),
+        jsonData: expect.objectContaining({ forwardGrafanaUserHeader: false }),
       })
     );
   });

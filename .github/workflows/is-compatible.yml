@@ -22,10 +22,11 @@ jobs:
         run: yarn run build
       - name: Find module.ts or module.tsx
         id: find-module-ts
-        run: >-
-          MODULETS="$(find ./src -type f \( -name "module.ts" -o -name
-          "module.tsx" \))"
-
+          MODULETS="$(find ./src -type f \( -name "module.ts" -o -name "module.tsx" \) -print -quit)"
+          if [ -z "$MODULETS" ]; then
+            echo "No module.ts/module.tsx found under ./src" >&2
+            exit 1
+          fi
           echo "modulets=${MODULETS}" >> $GITHUB_OUTPUT
       - name: Compatibility check
         uses: grafana/plugin-actions/is-compatible@main

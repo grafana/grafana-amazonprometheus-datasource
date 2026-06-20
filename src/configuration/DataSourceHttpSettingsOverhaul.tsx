@@ -122,7 +122,7 @@ export const DataSourceHttpSettingsOverhaul = (props: Props) => {
       <Box marginTop={3}>
         <InlineField
           label="Forward Grafana User HTTP Header"
-          tooltip="Forward the logged-in Grafana user's X-Grafana-User header to the workspace. No OAuth token or other headers are forwarded. Requires send_user_header to be enabled in the Grafana server configuration."
+          tooltip="Forward the logged-in Grafana user's X-Grafana-User header to the workspace. Requires send_user_header to be enabled in the Grafana server configuration."
           labelWidth={32}
           disabled={options.readOnly}
         >

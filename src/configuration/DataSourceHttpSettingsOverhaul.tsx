@@ -1,7 +1,7 @@
 import { DataSourceSettings } from '@grafana/data';
 import { Auth, AuthMethod, ConnectionSettings, convertLegacyAuthProps } from '@grafana/plugin-ui';
 import { docsTip, overhaulStyles } from '@grafana/prometheus';
-import { SecureSocksProxySettings, useTheme2 } from '@grafana/ui';
+import { Box, InlineField, InlineSwitch, SecureSocksProxySettings, useTheme2 } from '@grafana/ui';
 import React, { ReactElement, useState } from 'react';
 import { useEffectOnce } from 'react-use';
 
@@ -119,6 +119,28 @@ export const DataSourceHttpSettingsOverhaul = (props: Props) => {
         selectedMethod={returnSelectedMethod()}
         visibleMethods={[sigV4Id]}
       />
+      <Box marginTop={3}>
+        <InlineField
+          label="Forward Grafana User HTTP Header"
+          tooltip="Forward the logged-in Grafana user's X-Grafana-User header to the workspace. Requires send_user_header to be enabled in the Grafana server configuration."
+          labelWidth={32}
+          disabled={options.readOnly}
+        >
+          <InlineSwitch
+            id="forward-grafana-user-header"
+            value={options.jsonData.forwardGrafanaUserHeader || false}
+            onChange={(event) =>
+              onOptionsChange({
+                ...options,
+                jsonData: {
+                  ...options.jsonData,
+                  forwardGrafanaUserHeader: event.currentTarget.checked,
+                },
+              })
+            }
+          />
+        </InlineField>
+      </Box>
       <div className={styles.sectionBottomPadding} />
       {secureSocksDSProxyEnabled && (
         <>

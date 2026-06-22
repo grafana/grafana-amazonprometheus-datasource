@@ -4,7 +4,7 @@
 
 - feat: forward logged-in Grafana user identity headers to Amazon Managed Service for Prometheus in [#751](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/751)
 - Supporting AMP in query in [#728](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/728)
-- update plugin.json reoutes with reqAction in [#732](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/732)
+- update plugin.json routes with reqAction in [#732](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/732)
 - Fix i18n initialization in dev builds in [#731](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/731)
 - Supply Chain Security Hardening PR in [#741](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/741)
 - Use GATB in GitHub workflows in [#727](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/727)

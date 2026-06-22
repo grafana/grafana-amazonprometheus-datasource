@@ -46,6 +46,7 @@
     "awsauth",
     "checksumBehavior",
     "codeowners",
+    "GATB",
     "defaultSemverRangePrefix",
     "enableHardenedMode",
     "enableImmutableInstalls",

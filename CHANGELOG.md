@@ -2,34 +2,13 @@
 
 ## 3.1.0
 
-- chore(deps): update @grafana/aws-sdk and @grafana/plugin-ui in [#759](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/759)
 - feat: forward logged-in Grafana user identity headers to Amazon Managed Service for Prometheus in [#751](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/751)
-- fix(deps): update backend dependencies in [#746](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/746)
+
 - chore: update create-plugin tooling, Go deps, and dev environment in [#756](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/756)
+
 - update plugin.json routes with reqAction in [#732](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/732)
-- chore(deps): update actions/checkout digest to df4cb1c in [#749](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/749)
-- chore(deps): update docker dependencies in [#745](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/745)
-- fix(deps): update grafana monorepo to v13 in [#740](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/740)
-- chore(deps): update grafana/plugin-ci-workflows/ci-cd-workflows action to v9.0.0 in [#744](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/744)
-- chore(deps): update grafana/shared-workflows/create-github-app-token action to v0.3.1 in [#748](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/748)
-- chore(deps): update dependency sass-loader to v17 in [#736](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/736)
-- chore: make grafanaDependency prerelease-inclusive in [#754](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/754)
+
 - Supporting AMP in query in [#728](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/728)
-- Supply Chain Security Hardening PR in [#741](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/741)
-- Fix i18n initialization in dev builds in [#731](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/731)
-- Use GATB in GitHub workflows in [#727](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/727)
-- chore: define .yarnrc, .yarnrc.yml, and .npmrc ignore-scripts settings in [#723](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/723)
-- chore(deps): lock file maintenance in [#717](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/717)
-- chore(deps): update grafana/plugin-ci-workflows/ci-cd-workflows action to v7.3.1 in [#675](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/675)
-- chore(deps): update grafana/shared-workflows/ action to in [#690](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/690)
-- chore(deps): update actions/setup-node digest to 48b55a0 in [#712](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/712)
-- chore(deps): update docker dependencies in [#709](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/709)
-- chore(deps): lock file maintenance in [#711](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/711)
-- chore(deps): update actions/create-github-app-token action to v3 in [#676](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/676)
-- chore(deps): lock file maintenance in [#706](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/706)
-- fix(deps): update module github.com/grafana/grafana-plugin-sdk-go to v0.291.1 in [#705](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/705)
-- chore(deps): update frontend dependencies in [#703](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/703)
-- chore(deps): update prom/prometheus docker tag to v3.11.1 in [#704](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/704)
 
 ## 3.0.0
 

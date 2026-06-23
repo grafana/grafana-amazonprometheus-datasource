@@ -1,10 +1,14 @@
 # Changelog
 
-## Unreleased
+## 3.1.0
 
-- chore(deps): update Go dependencies and drop the stale `github.com/prometheus/prometheus` pin so version selection resolves to the current release required by `promlib` in [#756](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/756)
-- chore: update to the latest `@grafana/create-plugin` tooling (webpack, tsconfig, eslint flat config, yarn 4.17) in [#756](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/756)
-- chore: align the local Docker dev environment and point the provisioned datasource at the in-network `prometheus` service in [#756](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/756)
+- feat: forward logged-in Grafana user identity headers to Amazon Managed Service for Prometheus in [#751](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/751)
+
+- chore: update create-plugin tooling, Go deps, and dev environment in [#756](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/756)
+
+- update plugin.json routes with reqAction in [#732](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/732)
+
+- Supporting AMP in query in [#728](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/728)
 
 ## 3.0.0
 

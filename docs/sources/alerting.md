@@ -63,7 +63,7 @@ The data source manages two kinds of rules:
 
 To manage these rules from Grafana, enable **Manage alerts via Alerting UI** on the data source [configuration page](https://grafana.com/docs/plugins/grafana-amazonprometheus-datasource/latest/configure/). When enabled, the rules appear in the Grafana Alerting UI, where you can view and edit them.
 
-The data source reaches the workspace ruler through the `/api/v1/rules` and `/config/v1/rules` paths under the **Prometheus server URL** you configure, so you don't need to set a separate ruler URL. If the rules fail to load with an **Unable to fetch alert rules** error, refer to [Troubleshooting](https://grafana.com/docs/plugins/grafana-amazonprometheus-datasource/latest/troubleshooting/).
+The data source reaches the workspace ruler through the `/rules` and `/config/v1/rules` paths under the **Prometheus server URL** you configure, so you don't need to set a separate ruler URL. If the rules fail to load with an **Unable to fetch alert rules** error, refer to [Troubleshooting](https://grafana.com/docs/plugins/grafana-amazonprometheus-datasource/latest/troubleshooting/).
 
 Managing rules in the workspace requires AWS credentials with the appropriate `aps` rule-management permissions, such as `aps:ListRuleGroupsNamespaces`, `aps:DescribeRuleGroupsNamespace`, `aps:CreateRuleGroupsNamespace`, `aps:PutRuleGroupsNamespace`, and `aps:DeleteRuleGroupsNamespace`.
 

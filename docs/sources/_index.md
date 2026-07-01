@@ -71,9 +71,13 @@ To install the plugin and add the data source:
 
 ## Migrate from core Prometheus to Amazon Managed Service for Prometheus
 
-If you use the core Prometheus data source with SigV4 authentication, migrate to the Amazon Managed Service for Prometheus data source. SigV4 authentication is deprecated in the core Prometheus data source.
+SigV4 authentication is deprecated in the core Prometheus data source. If you use the core Prometheus data source with SigV4 authentication, migrate to the Amazon Managed Service for Prometheus data source.
 
-To migrate from core Prometheus to Amazon Managed Service for Prometheus:
+In Grafana 13, this migration is automatic. Data sources that use SigV4 authentication are migrated to the Amazon Managed Service for Prometheus plugin on startup, and your dashboards, alerts, and queries continue to work without changes. For migration steps, how to check migration status, and rollback instructions, refer to [Migrate from Prometheus SigV4 to Amazon Managed Service for Prometheus](https://grafana.com/docs/grafana-cloud/connect-externally-hosted/data-sources/prometheus/configure/aws-authentication/).
+
+### Update dashboards and alerts
+
+If you add a new Amazon Managed Service for Prometheus data source instead of relying on the automatic migration, update your existing dashboards and alert rules to use the new data source:
 
 1. Get the `UID` of your existing Prometheus data source that uses SigV4.
 1. Get the `UID` of your new Amazon Managed Service for Prometheus data source.

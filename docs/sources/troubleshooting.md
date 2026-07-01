@@ -337,7 +337,7 @@ This error appears when Grafana can't retrieve the alerting and recording rules 
 | Rule management not enabled | Enable **Manage alerts via Alerting UI** on the data source [configuration page](https://grafana.com/docs/plugins/grafana-amazonprometheus-datasource/latest/configure/). |
 | Missing rule read permissions | Grant `aps:ListRules`, `aps:ListRuleGroupsNamespaces`, and `aps:DescribeRuleGroupsNamespace` to the identity. |
 | No rule groups namespace | Create a rule groups namespace in the workspace. The ruler returns an error until at least one namespace exists. |
-| Incorrect workspace URL | Verify the **Prometheus server URL** is correct. The data source serves the ruler from the `/api/v1/rules` and `/config/v1/rules` paths under this URL, so no separate ruler URL is required. |
+| Incorrect workspace URL | Verify the **Prometheus server URL** is correct. The data source serves the ruler from the `/rules` and `/config/v1/rules` paths under this URL, so no separate ruler URL is required. |
 | Platform-side issue | If your configuration and permissions are correct, this error can be a Grafana Cloud platform issue, such as a data proxy problem on a specific cluster. Contact [Grafana Support](https://grafana.com/help/) to escalate. |
 
 {{< admonition type="note" >}}

@@ -62,6 +62,7 @@ describe('AmazonPrometheusDatasource', () => {
     it('should preserve queries verbatim when switching from a core Prometheus data source', async () => {
       const origin = { meta: { id: 'prometheus' } } as DataSourceApi;
 
+      // eslint-disable-next-line @typescript-eslint/no-deprecated -- deliberate: importQueries is the only hook that receives raw origin queries, see datasource.ts
       const imported = await createDatasource().importQueries(promQueries, origin);
 
       expect(imported).toEqual(promQueries);
@@ -70,6 +71,7 @@ describe('AmazonPrometheusDatasource', () => {
     it('should preserve queries verbatim when switching from the Azure Prometheus data source', async () => {
       const origin = { meta: { id: 'grafana-azureprometheus-datasource' } } as DataSourceApi;
 
+      // eslint-disable-next-line @typescript-eslint/no-deprecated -- deliberate: importQueries is the only hook that receives raw origin queries, see datasource.ts
       const imported = await createDatasource().importQueries(promQueries, origin);
 
       expect(imported).toEqual(promQueries);
@@ -89,6 +91,7 @@ describe('AmazonPrometheusDatasource', () => {
         ],
       } as unknown as DataSourceApi;
 
+      // eslint-disable-next-line @typescript-eslint/no-deprecated -- deliberate: importQueries is the only hook that receives raw origin queries, see datasource.ts
       const imported = await createDatasource().importQueries([{ refId: 'A' }], origin);
 
       expect(imported).toHaveLength(1);
@@ -98,6 +101,7 @@ describe('AmazonPrometheusDatasource', () => {
     it('should return no queries when the origin has no compatible queries', async () => {
       const origin = { meta: { id: 'testdata' } } as DataSourceApi;
 
+      // eslint-disable-next-line @typescript-eslint/no-deprecated -- deliberate: importQueries is the only hook that receives raw origin queries, see datasource.ts
       const imported = await createDatasource().importQueries(promQueries, origin);
 
       expect(imported).toEqual([]);

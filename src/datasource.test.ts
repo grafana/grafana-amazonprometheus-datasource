@@ -47,6 +47,12 @@ describe('AmazonPrometheusDatasource', () => {
     });
   });
 
+  describe('constructor arity', () => {
+    it('should have exactly one required constructor parameter, or Grafana 11.x loads it as an Angular plugin', () => {
+      expect(AmazonPrometheusDatasource.length).toBe(1);
+    });
+  });
+
   describe('importQueries', () => {
     const promQueries: PromQuery[] = [
       { refId: 'A', expr: 'avg(node_cpu_seconds_total{mode="idle"})' },

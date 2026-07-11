@@ -1,5 +1,11 @@
-import { DataSourceApi, hasQueryExportSupport } from '@grafana/data';
-import { PrometheusDatasource, PromQuery } from '@grafana/prometheus';
+import { DataSourceApi, DataSourceInstanceSettings, hasQueryExportSupport } from '@grafana/data';
+import {
+  PrometheusDatasource,
+  PrometheusLanguageProviderInterface,
+  PromOptions,
+  PromQuery,
+} from '@grafana/prometheus';
+import { getTemplateSrv, TemplateSrv } from '@grafana/runtime';
 import { DataQuery } from '@grafana/schema';
 
 // Data source types whose queries are PromQL, so they can be reused as-is.
@@ -21,6 +27,17 @@ const importFromAbstractQueries = PrometheusDatasource.prototype.importFromAbstr
 delete (PrometheusDatasource.prototype as Partial<PrometheusDatasource>).importFromAbstractQueries;
 
 export class AmazonPrometheusDatasource extends PrometheusDatasource {
+  // Grafana 11.x treats a datasource class as a legacy Angular plugin unless
+  // its constructor length is exactly 1, so the second parameter must have a
+  // default value rather than being merely optional.
+  constructor(
+    instanceSettings: DataSourceInstanceSettings<PromOptions>,
+    templateSrv: TemplateSrv = getTemplateSrv(),
+    languageProvider?: PrometheusLanguageProviderInterface
+  ) {
+    super(instanceSettings, templateSrv, languageProvider);
+  }
+
   async importQueries(queries: DataQuery[], originDataSource: DataSourceApi): Promise<PromQuery[]> {
     if (PROMQL_COMPATIBLE_TYPES.has(originDataSource.meta.id)) {
       // The origin queries are PromQL queries, they only need a shallow copy.

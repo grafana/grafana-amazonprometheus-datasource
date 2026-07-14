@@ -1640,9 +1640,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@eslint/eslintrc@npm:^3.3.5":
-  version: 3.3.5
-  resolution: "@eslint/eslintrc@npm:3.3.5"
+"@eslint/eslintrc@npm:^3.3.6":
+  version: 3.3.6
+  resolution: "@eslint/eslintrc@npm:3.3.6"
   dependencies:
     ajv: "npm:^6.14.0"
     debug: "npm:^4.3.2"
@@ -1650,17 +1650,17 @@ __metadata:
     globals: "npm:^14.0.0"
     ignore: "npm:^5.2.0"
     import-fresh: "npm:^3.2.1"
-    js-yaml: "npm:^4.1.1"
+    js-yaml: "npm:^4.3.0"
     minimatch: "npm:^3.1.5"
     strip-json-comments: "npm:^3.1.1"
-  checksum: 10c0/9fb9f1ca65e46d6173966e3aaa5bd353e3a65d7f1f582bebf77f578fab7d7960a399fac1ecfb1e7d52bd61f5cefd6531087ca52a3a3c388f2e1b4f1ebd3da8b7
+  checksum: 10c0/349697171ee116f501a2f483bf47cd38937a61880aeb1c23481a69afc95e95859430a0947acbe1f5507f223180bf57530ecf2989e73bcbea763a6dcffdf1d010
   languageName: node
   linkType: hard
 
-"@eslint/js@npm:9.39.4":
-  version: 9.39.4
-  resolution: "@eslint/js@npm:9.39.4"
-  checksum: 10c0/5aa7dea2cbc5decf7f5e3b0c6f86a084ccee0f792d288ca8e839f8bc1b64e03e227068968e49b26096e6f71fd857ab6e42691d1b993826b9a3883f1bdd7a0e46
+"@eslint/js@npm:9.39.5":
+  version: 9.39.5
+  resolution: "@eslint/js@npm:9.39.5"
+  checksum: 10c0/49894e98ba313a7d3bfb1b20d55c0f9826be45a7db876fd84e533ac7f101b1d95b51cd22c6a6db3a45066b9c0d068c31b4a22fa0db8a6cc8744a25540efdb824
   languageName: node
   linkType: hard
 
@@ -1939,9 +1939,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@grafana/plugin-e2e@npm:3.9.1":
-  version: 3.9.1
-  resolution: "@grafana/plugin-e2e@npm:3.9.1"
+"@grafana/plugin-e2e@npm:3.9.2":
+  version: 3.9.2
+  resolution: "@grafana/plugin-e2e@npm:3.9.2"
   dependencies:
     "@grafana/e2e-selectors": "npm:13.1.0-25644485979"
     yaml: "npm:^2.3.4"
@@ -1951,7 +1951,7 @@ __metadata:
   peerDependenciesMeta:
     "@axe-core/playwright":
       optional: true
-  checksum: 10c0/93e17213c8a63f52a08cdb2716ea5a1a799b435a14e4bc2ce8fbc710a3afa03e54aa097f4d81b1f452c659867aad0fe475f861aa8523f74790216f18bee528ba
+  checksum: 10c0/6dbdf6bd966034ce074835c5816e7d4e483110493875d97907a65b7d0d9229a40ed1601c12e02b6bfacc1c300c8319299c9db50e7a219824721cd80f0b26de40
   languageName: node
   linkType: hard
 
@@ -1987,9 +1987,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@grafana/plugin-ui@npm:0.16.0":
-  version: 0.16.0
-  resolution: "@grafana/plugin-ui@npm:0.16.0"
+"@grafana/plugin-ui@npm:0.16.1":
+  version: 0.16.1
+  resolution: "@grafana/plugin-ui@npm:0.16.1"
   dependencies:
     "@emotion/css": "npm:11.13.5"
     "@hello-pangea/dnd": "npm:17.0.0"
@@ -2012,7 +2012,7 @@ __metadata:
     "@testing-library/user-event": ">=14.5.2"
     react: ">=18.2.0"
     react-dom: ">=18.2.0"
-  checksum: 10c0/19df22d4c6a527078dc848138ce797ee9e981a39df7c13f03d9fbee6435c7f0d7d9666564d036214eb77a35de4d4eb770ae037359bab99d87405eaf0105ae673
+  checksum: 10c0/884692f87027e1c6695c7f1533e8a2ae927e9de61d0899bdec0df8272848da6e943f8acccb54b3e163680fa560f4770015bebce44f36f5c1b56fa7f4536b845f
   languageName: node
   linkType: hard
 
@@ -2104,16 +2104,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@grafana/sign-plugin@npm:3.3.1":
-  version: 3.3.1
-  resolution: "@grafana/sign-plugin@npm:3.3.1"
+"@grafana/sign-plugin@npm:3.3.2":
+  version: 3.3.2
+  resolution: "@grafana/sign-plugin@npm:3.3.2"
   dependencies:
-    find-up: "npm:8.0.0"
     minimist: "npm:1.2.8"
     proxy-agent: "npm:8.0.1"
   bin:
     sign-plugin: dist/bin/run.js
-  checksum: 10c0/296d47310823aeab9ac421d2cc5df0cd0b634ce8c00a1aff8a59a02ce006c4c3705a1d4f6b2f1926c2a825ced2b4b7e1b1fe3a6f2b1f8a895e41e561f016cf25
+  checksum: 10c0/07fc4b55eeb9aeeb437cbbdaa805240e694134cdf74aadd01612b123f03577f55d77cb7069fcb91419101d0f6ca13d9baffb9ca15b533c1e728b95bcada79117
   languageName: node
   linkType: hard
 
@@ -7039,17 +7038,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint@npm:9.39.4":
-  version: 9.39.4
-  resolution: "eslint@npm:9.39.4"
+"eslint@npm:9.39.5":
+  version: 9.39.5
+  resolution: "eslint@npm:9.39.5"
   dependencies:
     "@eslint-community/eslint-utils": "npm:^4.8.0"
     "@eslint-community/regexpp": "npm:^4.12.1"
     "@eslint/config-array": "npm:^0.21.2"
     "@eslint/config-helpers": "npm:^0.4.2"
     "@eslint/core": "npm:^0.17.0"
-    "@eslint/eslintrc": "npm:^3.3.5"
-    "@eslint/js": "npm:9.39.4"
+    "@eslint/eslintrc": "npm:^3.3.6"
+    "@eslint/js": "npm:9.39.5"
     "@eslint/plugin-kit": "npm:^0.4.1"
     "@humanfs/node": "npm:^0.16.6"
     "@humanwhocodes/module-importer": "npm:^1.0.1"
@@ -7084,7 +7083,7 @@ __metadata:
       optional: true
   bin:
     eslint: bin/eslint.js
-  checksum: 10c0/1955067c2d991f0c84f4c4abfafe31bb47fa3b717a7fd3e43fe1e511c6f859d7700cbca969f85661dc4c130f7aeced5e5444884314198a54428f5e5141db9337
+  checksum: 10c0/46335bfcf180ffea9955b38122b578ac9e075b6220e5695be1c988354ea429b04f5db05edc132aa9019ce9847736e9ca0c9ea6d6cedda3c06209c9b52dbd0fd5
   languageName: node
   linkType: hard
 
@@ -7344,16 +7343,6 @@ __metadata:
   version: 1.1.0
   resolution: "find-root@npm:1.1.0"
   checksum: 10c0/1abc7f3bf2f8d78ff26d9e00ce9d0f7b32e5ff6d1da2857bcdf4746134c422282b091c672cde0572cac3840713487e0a7a636af9aa1b74cb11894b447a521efa
-  languageName: node
-  linkType: hard
-
-"find-up@npm:8.0.0":
-  version: 8.0.0
-  resolution: "find-up@npm:8.0.0"
-  dependencies:
-    locate-path: "npm:^8.0.0"
-    unicorn-magic: "npm:^0.3.0"
-  checksum: 10c0/4c6d2cb92f74bd42ec7344c881a46f6455010d3993f8f55b09bb64298c0a13e11e10200147624db8938590890a15ade69c40f0172698388d0999899f0f2a70a5
   languageName: node
   linkType: hard
 
@@ -7793,12 +7782,12 @@ __metadata:
     "@grafana/eslint-config": "npm:10.0.0"
     "@grafana/i18n": "npm:13.1.0"
     "@grafana/levitate": "npm:0.17.3"
-    "@grafana/plugin-e2e": "npm:3.9.1"
-    "@grafana/plugin-ui": "npm:0.16.0"
+    "@grafana/plugin-e2e": "npm:3.9.2"
+    "@grafana/plugin-ui": "npm:0.16.1"
     "@grafana/prometheus": "npm:13.1.7"
     "@grafana/runtime": "npm:13.1.0"
     "@grafana/schema": "npm:13.1.0"
-    "@grafana/sign-plugin": "npm:3.3.1"
+    "@grafana/sign-plugin": "npm:3.3.2"
     "@grafana/tsconfig": "npm:2.2.0"
     "@grafana/ui": "npm:13.1.0"
     "@playwright/test": "npm:1.61.1"
@@ -7819,7 +7808,7 @@ __metadata:
     copy-webpack-plugin: "npm:14.0.0"
     cspell: "npm:10.0.1"
     css-loader: "npm:7.1.4"
-    eslint: "npm:9.39.4"
+    eslint: "npm:9.39.5"
     eslint-config-prettier: "npm:10.1.8"
     eslint-plugin-jsdoc: "npm:62.9.0"
     eslint-plugin-react: "npm:7.37.5"
@@ -7832,7 +7821,7 @@ __metadata:
     jest: "npm:30.4.2"
     jest-environment-jsdom: "npm:30.4.1"
     lodash: "npm:4.18.1"
-    prettier: "npm:3.9.4"
+    prettier: "npm:3.9.5"
     react: "npm:18.3.1"
     react-dom: "npm:18.3.1"
     replace-in-file-webpack-plugin: "npm:1.0.6"
@@ -9279,7 +9268,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"js-yaml@npm:^4.1.0, js-yaml@npm:^4.1.1":
+"js-yaml@npm:^4.1.0, js-yaml@npm:^4.3.0":
   version: 4.3.0
   resolution: "js-yaml@npm:4.3.0"
   dependencies:
@@ -9505,15 +9494,6 @@ __metadata:
   dependencies:
     p-locate: "npm:^5.0.0"
   checksum: 10c0/d3972ab70dfe58ce620e64265f90162d247e87159b6126b01314dd67be43d50e96a50b517bce2d9452a79409c7614054c277b5232377de50416564a77ac7aad3
-  languageName: node
-  linkType: hard
-
-"locate-path@npm:^8.0.0":
-  version: 8.0.0
-  resolution: "locate-path@npm:8.0.0"
-  dependencies:
-    p-locate: "npm:^6.0.0"
-  checksum: 10c0/4c837878b6d1b8557c5d1c624d11d6721d77f4627c14bd84182c85cbb9ec8fc01b5b5f089e21fab17b30fc5ecc14216a3d31f754dfcc5299f1fe9f4c83482fee
   languageName: node
   linkType: hard
 
@@ -10232,15 +10212,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"p-limit@npm:^4.0.0":
-  version: 4.0.0
-  resolution: "p-limit@npm:4.0.0"
-  dependencies:
-    yocto-queue: "npm:^1.0.0"
-  checksum: 10c0/a56af34a77f8df2ff61ddfb29431044557fcbcb7642d5a3233143ebba805fc7306ac1d448de724352861cb99de934bc9ab74f0d16fe6a5460bdbdf938de875ad
-  languageName: node
-  linkType: hard
-
 "p-locate@npm:^4.1.0":
   version: 4.1.0
   resolution: "p-locate@npm:4.1.0"
@@ -10256,15 +10227,6 @@ __metadata:
   dependencies:
     p-limit: "npm:^3.0.2"
   checksum: 10c0/2290d627ab7903b8b70d11d384fee714b797f6040d9278932754a6860845c4d3190603a0772a663c8cb5a7b21d1b16acb3a6487ebcafa9773094edc3dfe6009a
-  languageName: node
-  linkType: hard
-
-"p-locate@npm:^6.0.0":
-  version: 6.0.0
-  resolution: "p-locate@npm:6.0.0"
-  dependencies:
-    p-limit: "npm:^4.0.0"
-  checksum: 10c0/d72fa2f41adce59c198270aa4d3c832536c87a1806e0f69dffb7c1a7ca998fb053915ca833d90f166a8c082d3859eabfed95f01698a3214c20df6bb8de046312
   languageName: node
   linkType: hard
 
@@ -10630,12 +10592,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prettier@npm:3.9.4":
-  version: 3.9.4
-  resolution: "prettier@npm:3.9.4"
+"prettier@npm:3.9.5":
+  version: 3.9.5
+  resolution: "prettier@npm:3.9.5"
   bin:
     prettier: bin/prettier.cjs
-  checksum: 10c0/dc6ec13d692745c6b7e7bf39beda9eb1b3b76c619118319bce393928c392264b1273337c75f80499695e165affefc7b3a9d2ebb18983af0a8f4dfbb2f45f6ff3
+  checksum: 10c0/0349dd9e6d8010965de6f69e6b6ee2484b8caf78c66675afced6c75ad60ff24c3a2a4f41153fb8adeaee4d8f539641b48cebc71d283cec4d146e9962126c5ceb
   languageName: node
   linkType: hard
 
@@ -13077,13 +13039,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"unicorn-magic@npm:^0.3.0":
-  version: 0.3.0
-  resolution: "unicorn-magic@npm:0.3.0"
-  checksum: 10c0/0a32a997d6c15f1c2a077a15b1c4ca6f268d574cf5b8975e778bb98e6f8db4ef4e86dfcae4e158cd4c7e38fb4dd383b93b13eefddc7f178dea13d3ac8a603271
-  languageName: node
-  linkType: hard
-
 "universalify@npm:^2.0.0":
   version: 2.0.1
   resolution: "universalify@npm:2.0.1"
@@ -13894,13 +13849,6 @@ __metadata:
   version: 0.1.0
   resolution: "yocto-queue@npm:0.1.0"
   checksum: 10c0/dceb44c28578b31641e13695d200d34ec4ab3966a5729814d5445b194933c096b7ced71494ce53a0e8820685d1d010df8b2422e5bf2cdea7e469d97ffbea306f
-  languageName: node
-  linkType: hard
-
-"yocto-queue@npm:^1.0.0":
-  version: 1.2.2
-  resolution: "yocto-queue@npm:1.2.2"
-  checksum: 10c0/36d4793e9cf7060f9da543baf67c55e354f4862c8d3d34de1a1b1d7c382d44171315cc54abf84d8900b8113d742b830108a1434f4898fb244f9b7e8426d4b8f5
   languageName: node
   linkType: hard
 

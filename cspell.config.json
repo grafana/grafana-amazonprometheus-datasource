@@ -22,7 +22,7 @@
     "prometheus/**",
     "provisioning/**",
     "src/dashboards/**",
-    "yarn.lock"
+    "package-lock.json"
   ],
   "ignoreRegExpList": ["import\\s*\\((.|[\r\n])*?\\)", "import\\s*.*\".*?\""],
   "words": [
@@ -55,7 +55,6 @@
     "zizmor",
     "maputil",
     "unsafeHttpWhitelist",
-    "yarnrc",
     "alertname",
     "alertstate",
     "curlimages",

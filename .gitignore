@@ -2,8 +2,6 @@
 logs
 *.log
 npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
 .pnpm-debug.log*
 
 node_modules/
@@ -41,12 +39,3 @@ e2e-results/
 
 *.toml
 .DS_Store
-
-# yarn
-.pnp.*
-.yarn/*
-!.yarn/patches
-!.yarn/plugins
-!.yarn/releases
-!.yarn/sdks
-!.yarn/versions

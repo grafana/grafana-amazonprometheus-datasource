@@ -61,6 +61,8 @@
     "alertstate",
     "curlimages",
     "jsonencode",
-    "topk"
+    "topk",
+    "azureprometheus",
+    "testdata"
   ]
 }

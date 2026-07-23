@@ -138,6 +138,9 @@ Expand **Advanced settings** to configure optional behavior. These settings are 
 | **Disable recording rules** | Prevents Grafana from querying for and processing recording rules. |
 | **Custom query parameters** | Appends custom URL parameters to all queries, such as `max_source_resolution=5m`. |
 | **HTTP method** | The HTTP method Grafana uses for queries. `POST` is recommended and is the default. |
+| **Query statistics** | Requests AMP query processing statistics and displays **Total queryable samples** in **Query Inspector > Stats**. This option is disabled by default because AMP returns additional response metadata, including per-step sample counts. |
+
+When **Query statistics** is enabled, Grafana adds `stats=all` to instant and range queries. The Query Inspector Stats tab shows the total number of queryable samples. The complete AMP `stats` object remains available in the response frame metadata, including `totalQueryableSamplesPerStep`.
 
 ## Verify the connection
 
@@ -171,6 +174,7 @@ datasources:
       sigv4Service: aps
       defaultEditor: builder
       manageAlerts: true
+      queryStatsEnabled: false
     secureJsonData:
       sigV4AccessKey: <ACCESS_KEY_ID>
       sigV4SecretKey: <SECRET_ACCESS_KEY>

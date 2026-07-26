@@ -80,7 +80,7 @@
     "@grafana/data": "13.1.1",
     "@grafana/i18n": "13.1.1",
     "@grafana/plugin-ui": "0.17.3",
-    "@grafana/prometheus": "13.1.8",
+    "@grafana/prometheus": "13.1.9",
     "@grafana/runtime": "13.1.1",
     "@grafana/schema": "13.1.1",
     "@grafana/ui": "13.1.1",

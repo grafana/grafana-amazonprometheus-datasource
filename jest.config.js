@@ -7,5 +7,7 @@ module.exports = {
   // Jest configuration provided by @grafana/create-plugin
   ...require('./.config/jest.config'),
   // Inform Jest to only transform specific node_module packages.
-  transformIgnorePatterns: [nodeModulesToTransform([...grafanaESModules, 'monaco-promql', '@marcbachmann/cel-js'])],
+  transformIgnorePatterns: [nodeModulesToTransform([...grafanaESModules,
+      '@grafana/plugin-ui',
+      '@marcbachmann/cel-js', 'monaco-promql', '@marcbachmann/cel-js'])],
 };

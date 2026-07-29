@@ -9,5 +9,5 @@ module.exports = {
   // Inform Jest to only transform specific node_module packages.
   transformIgnorePatterns: [nodeModulesToTransform([...grafanaESModules,
       '@grafana/plugin-ui',
-      '@marcbachmann/cel-js', 'monaco-promql', '@marcbachmann/cel-js'])],
+      'monaco-promql', '@marcbachmann/cel-js'])],
 };

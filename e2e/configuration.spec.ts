@@ -93,20 +93,21 @@ test.describe('Configuration tests', () => {
     ).toHaveCount(0);
   });
 
-  /*  test('"Save & test" should be successful when configuration is valid', async ({
-    createDataSourceConfigPage,
+  test('should load the provisioned default region', async ({
     readProvisionedDataSource,
+    gotoDataSourceConfigPage,
+    page,
   }) => {
-    const ds = await readProvisionedDataSource<DataSourcePluginOptionsEditorProps<PromOptions>>({ fileName: 'datasources.yml' });
-    const configPage = await createDataSourceConfigPage({ type: ds.type });
+    const ds = await readProvisionedDataSource<DataSourcePluginOptionsEditorProps<PromOptions>>({
+      fileName: 'datasources.yml',
+    });
+    await gotoDataSourceConfigPage(ds.uid);
 
-    await configPage
-      .getByGrafanaSelector(selectors.components.DataSource.Prometheus.configPage.connectionSettings)
-      .fill(ds.url || '');
-
-    await expect(configPage.saveAndTest()).toBeOK();
+    const defaultRegion = (ds.jsonData as { sigV4Region?: string }).sigV4Region;
+    expect(defaultRegion).toBeTruthy();
+    await expect(page.getByLabel('Default Region')).toBeVisible();
+    await expect(page.getByText(defaultRegion!, { exact: true })).toBeVisible();
   });
-*/
 
   test('"Save & test" should fail when configuration is invalid', async ({
     readProvisionedDataSource,
@@ -123,6 +124,32 @@ test.describe('Configuration tests', () => {
     await expect(configPage).toHaveAlert('error', {
       hasText: /.*there was an error returned querying the prometheus api/i,
     });
+  });
+
+  test('should show an authentication error for invalid access and secret keys', async ({
+    createDataSourceConfigPage,
+    page,
+  }) => {
+    const configPage = await createDataSourceConfigPage({
+      type: 'grafana-amazonprometheus-datasource',
+      name: DATA_SOURCE_NAME + '-bad-keys',
+    });
+
+    await configPage
+      .getByGrafanaSelector(selectors.components.DataSource.Prometheus.configPage.connectionSettings)
+      .fill('https://aps-workspaces.us-east-2.amazonaws.com/workspaces/ws-invalid');
+    await page.getByLabel('Access Key ID').fill('fake-access-key');
+    await page.getByLabel('Secret Access Key').fill('fake-secret-key');
+
+    const regionField = page.getByLabel('Default Region');
+    if (await regionField.isVisible().catch(() => false)) {
+      await regionField.click();
+      await page.getByText('us-east-2', { exact: true }).click();
+    }
+
+    const response = await configPage.saveAndTest();
+    expect(response.ok()).toBe(false);
+    await expect(configPage).toHaveAlert('error');
   });
 
   test('"Save & test" should fail when url is empty', async ({

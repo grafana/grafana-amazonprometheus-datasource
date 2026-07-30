@@ -58,13 +58,30 @@
 
 6. Run the E2E tests (using Playwright and @grafana/plugin-e2e)
 
+   Smoke tests run against the local Prometheus in `docker-compose.yaml`. Tests tagged
+   `@aws` use the AMP workspace provisioned for the Data Sources team's AWS test
+   environment (Vault path `amazonManagedPrometheus`). Export those credentials before
+   starting Grafana if you want the live suite to run.
+
    ```bash
-   # Spins up a Grafana docker instance (v11.0.0) (port 3000) with an actual Prometheus instance (port 9090)
+   # Install Playwright browsers
+   yarn playwright install --with-deps
+
+   # Optional — required for @aws / live AMP tests (otherwise they are skipped)
+   export DS_INSTANCE_URL=<amp-workspace-url>
+   export DS_INSTANCE_SIGV4_REGION=<region>
+   export DS_INSTANCE_SIGV4_ACCESS_KEY=<access-key>
+   export DS_INSTANCE_SIGV4_SECRET_KEY=<secret-key>
+
+   # Spins up Grafana + a local Prometheus (defaults used when the env vars above are unset)
    yarn run server:configured
 
    # Starts the e2e tests
    yarn run e2e
    ```
+
+   Fork PRs run `playwright.smoke.config.ts`, which excludes `@aws` tests because Vault
+   secrets are unavailable to untrusted workflows.
 
 7. Run the linter
 

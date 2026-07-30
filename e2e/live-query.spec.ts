@@ -69,67 +69,71 @@ test.describe('Live AMP against real workspace', () => {
   test.describe.configure({ mode: 'serial', timeout: 60000 });
 
   test.beforeEach(() => {
+    // Fork PRs use playwright.smoke.config.ts (grepInvert /@aws/) so these never run there.
+    // Locally, skip unless Vault-style live credentials are exported.
     test.skip(
       !hasLiveCredentials && !isCloudRun,
-      'Live AMP credentials (DS_INSTANCE_*) or Cloud GRAFANA_URL required'
+      'Live AMP credentials (DS_INSTANCE_*) or Cloud GRAFANA_URL required — see CONTRIBUTING.md'
     );
   });
 
-  test('save & test passes with live credentials', async ({ createDataSourceConfigPage, page }) => {
-    // On DSE2EDEV, prefer the managed datasource query coverage below — ad-hoc DS
-    // health checks through PDC from a fresh config page are flaky (see clickhouse e2e).
-    test.skip(isCloudRun, 'Ad-hoc save & test on DSE2EDEV is covered by the managed datasource query test');
-    test.skip(!hasLiveCredentials, 'DS_INSTANCE_* secrets required');
+  test(
+    'save & test passes with live credentials',
+    { tag: '@aws' },
+    async ({ createDataSourceConfigPage, page }) => {
+      // On DSE2EDEV, prefer the managed datasource query coverage below — ad-hoc DS
+      // health checks through PDC from a fresh config page are flaky (see clickhouse e2e).
+      test.skip(isCloudRun, 'Ad-hoc save & test on DSE2EDEV is covered by the managed datasource query test');
+      test.skip(!hasLiveCredentials, 'DS_INSTANCE_* secrets required');
 
-    const configPage = await createDataSourceConfigPage({ type: PLUGIN_TYPE });
+      const configPage = await createDataSourceConfigPage({ type: PLUGIN_TYPE });
 
-    await configPage
-      .getByGrafanaSelector(selectors.components.DataSource.Prometheus.configPage.connectionSettings)
-      .fill(process.env.DS_INSTANCE_URL!);
+      await configPage
+        .getByGrafanaSelector(selectors.components.DataSource.Prometheus.configPage.connectionSettings)
+        .fill(process.env.DS_INSTANCE_URL!);
 
-    // SIGV4 auth is selected by default for AMP; fill keys + region from Vault.
-    await page.getByLabel('Access Key ID').fill(process.env.DS_INSTANCE_SIGV4_ACCESS_KEY!);
-    await page.getByLabel('Secret Access Key').fill(process.env.DS_INSTANCE_SIGV4_SECRET_KEY!);
+      // SIGV4 auth is selected by default for AMP; fill keys + region from Vault.
+      await page.getByLabel('Access Key ID').fill(process.env.DS_INSTANCE_SIGV4_ACCESS_KEY!);
+      await page.getByLabel('Secret Access Key').fill(process.env.DS_INSTANCE_SIGV4_SECRET_KEY!);
 
-    const region = process.env.DS_INSTANCE_SIGV4_REGION;
-    if (region) {
-      const regionField = page.getByLabel('Default Region');
-      if (await regionField.isVisible().catch(() => false)) {
+      const region = process.env.DS_INSTANCE_SIGV4_REGION;
+      if (region) {
+        const regionField = page.getByLabel('Default Region');
+        await expect(regionField).toBeVisible();
         await regionField.click();
         await page.getByText(region, { exact: true }).click();
       }
+
+      if (process.env.DS_PDC_NETWORK_NAME) {
+        await configurePDC(page, process.env.DS_PDC_NETWORK_NAME);
+      }
+
+      const response = await configPage.saveAndTest();
+      expect(response.ok()).toBe(true);
     }
+  );
 
-    if (process.env.DS_PDC_NETWORK_NAME) {
-      await configurePDC(page, process.env.DS_PDC_NETWORK_NAME);
+  test(
+    'PromQL query against live AMP returns frames',
+    { tag: '@aws' },
+    async ({ page, readProvisionedDataSource }) => {
+      let uid = DATASOURCE_UID;
+
+      if (!isCloudRun) {
+        test.skip(!hasLiveCredentials, 'DS_INSTANCE_* secrets required');
+        // Prefer the provisioned datasource uid when available (PR CI with playwright-secrets).
+        const ds = await readProvisionedDataSource({ fileName: PROVISIONED_FILE });
+        uid = ds.uid || LOCAL_DEFAULT_UID;
+      }
+
+      // `up` is scraped into AMP by the agentless scraper on the provisioned workspace.
+      const responsePromise = waitForMainQueryResponse(page);
+      await page.goto(exploreUrl(uid, 'up'));
+      const { response, body } = await responsePromise;
+
+      expect(response.ok()).toBe(true);
+      expect(body.results?.A?.error).toBeUndefined();
+      expect(body.results?.A?.frames?.length).toBeGreaterThan(0);
     }
-
-    const response = await configPage.saveAndTest();
-    expect(response.ok()).toBe(true);
-  });
-
-  test('PromQL query against live AMP returns frames', async ({
-    page,
-    readProvisionedDataSource,
-  }) => {
-    let uid = DATASOURCE_UID;
-
-    if (!isCloudRun) {
-      test.skip(!hasLiveCredentials, 'DS_INSTANCE_* secrets required');
-      // Prefer the provisioned datasource uid when available (PR CI with playwright-secrets).
-      const ds = await readProvisionedDataSource({ fileName: PROVISIONED_FILE });
-      uid = ds.uid || LOCAL_DEFAULT_UID;
-    }
-
-    // `up` is scraped into AMP by the agentless scraper on the provisioned workspace.
-    // Falls back to an empty-but-successful result shape if the scraper is lagging —
-    // we still assert HTTP OK and a frames array (no query error).
-    const responsePromise = waitForMainQueryResponse(page);
-    await page.goto(exploreUrl(uid, 'up'));
-    const { response, body } = await responsePromise;
-
-    expect(response.ok()).toBe(true);
-    expect(body.results?.A?.error).toBeUndefined();
-    expect(Array.isArray(body.results?.A?.frames)).toBe(true);
-  });
+  );
 });

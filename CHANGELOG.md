@@ -1,5 +1,33 @@
 # Changelog
 
+## 3.2.0
+
+- chore(deps): bump promlib to v0.0.18 to fix Prometheus build-info health check 405
+- AMP: expose query statistics in [#785](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/785)
+- Update dependencies in [#796](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/796)
+- Bump @grafana/* to 13.1.1 and update dependencies in [#795](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/795)
+- Bump dependencies in [#794](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/794)
+- fix: preserve PromQL queries when switching a panel from a Prometheus data source to AMP in [#775](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/775)
+- chore(deps): bump fast-uri from 3.1.3 to 3.1.4 in [#792](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/792)
+- Dependency updates in [#791](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/791)
+- chore(deps): update grafana/grafana-enterprise:latest docker digest to b92dd30 in [#788](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/788)
+- fix(deps): update backend dependencies in [#782](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/782)
+- chore(deps): update actions/setup-node action to v7 in [#783](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/783)
+- ci: use shared reusable add-to-project workflow in [#787](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/787)
+- ci: use shared reusable stale workflow in [#786](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/786)
+- chore(deps): update frontend dependencies to v8.64.0 in [#781](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/781)
+- fix(deps): update frontend dependencies in [#776](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/776)
+- ci: add stale issue and PR workflow in [#777](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/777)
+- chore(deps): lock file maintenance frontend dependencies in [#771](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/771)
+- chore(deps): update docker dependencies in [#767](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/767)
+- chore(deps): update babel monorepo to v8 in [#765](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/765)
+- fix(deps): update frontend dependencies in [#768](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/768)
+- chore: use shared data-sources Renovate base preset in [#774](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/774)
+- Add add-to-project workflow and remove issue_commands in [#773](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/773)
+- Docs: Updated Amazon Managed Prometheus docs in [#752](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/752)
+- chore: bump plugin CI/CD workflows to v10.1.0 in [#766](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/766)
+- fix(deps): update frontend dependencies in [#747](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/747)
+
 ## 3.1.0
 
 - feat: forward logged-in Grafana user identity headers to Amazon Managed Service for Prometheus in [#751](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/751)

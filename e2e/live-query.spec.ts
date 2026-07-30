@@ -74,18 +74,19 @@ test.describe('Live AMP against real workspace', () => {
   });
 
   test(
-    'provisioned datasource passes save & test',
+    'provisioned datasource passes health check',
     { tag: '@aws' },
-    async ({ readProvisionedDataSource, gotoDataSourceConfigPage }) => {
+    async ({ readProvisionedDataSource, request }) => {
       // On DSE2EDEV the local provisioning file is not applied; managed DS query covers connectivity.
-      test.skip(isCloudRun, 'Ad-hoc provisioned save & test is not available on DSE2EDEV');
+      test.skip(isCloudRun, 'Ad-hoc provisioned health check is not available on DSE2EDEV');
 
       const ds = await readProvisionedDataSource({ fileName: PROVISIONED_FILE });
-      const configPage = await gotoDataSourceConfigPage(ds.uid);
 
-      // Credentials come from provisioning ($DS_INSTANCE_*), already loaded into Grafana.
-      const response = await configPage.saveAndTest();
-      expect(response.ok()).toBe(true);
+      // Probe the health API directly — Save & test on an editable provisioned DS can
+      // rewrite secure fields and is flaky; the health endpoint uses the stored credentials.
+      const response = await request.get(`/api/datasources/uid/${ds.uid}/health`);
+      const body = await response.json();
+      expect(body, JSON.stringify(body)).toMatchObject({ status: 'OK' });
     }
   );
 

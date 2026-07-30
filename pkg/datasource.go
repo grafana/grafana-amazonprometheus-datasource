@@ -2,7 +2,6 @@ package main
 
 import (
 	"context"
-	"encoding/json"
 	"net/http"
 
 	"github.com/grafana/grafana-aws-sdk/pkg/awsauth"
@@ -12,8 +11,10 @@ import (
 	"github.com/grafana/grafana-plugin-sdk-go/backend/instancemgmt"
 	"github.com/grafana/grafana-plugin-sdk-go/backend/log"
 	"github.com/grafana/grafana-plugin-sdk-go/config"
+	"github.com/grafana/grafana-plugin-sdk-go/data/utils/maputil"
 
 	"github.com/grafana/grafana-prometheus-datasource/pkg/promlib"
+	"github.com/grafana/grafana-prometheus-datasource/pkg/promlib/utils"
 )
 
 // grafanaUserHeader is the header Grafana uses to forward the logged-in user's
@@ -24,16 +25,23 @@ func NewDatasource(ctx context.Context, dsInstanceSettings backend.DataSourceIns
 	plog := backend.NewLoggerWith("logger", "tsdb.amazon-prometheus")
 	plog.Debug("Initializing")
 
-	settings, err := parseAMPSettings(dsInstanceSettings)
-	if err != nil {
-		return nil, err
+	forwardGrafanaUser := false
+	if len(dsInstanceSettings.JSONData) > 0 {
+		jsonData, err := utils.GetJsonData(dsInstanceSettings)
+		if err != nil {
+			return nil, err
+		}
+		forwardGrafanaUser, err = maputil.GetBoolOptional(jsonData, "forwardGrafanaUserHeader")
+		if err != nil {
+			return nil, err
+		}
 	}
 
 	authSettings := awsds.ReadAuthSettings(ctx)
 	return &Datasource{
 		Service:            promlib.NewService(sdkhttpclient.NewProvider(), plog, extendClientOpts),
 		authSettings:       *authSettings,
-		forwardGrafanaUser: settings.ForwardGrafanaUserHeader,
+		forwardGrafanaUser: forwardGrafanaUser,
 	}, nil
 }
 
@@ -109,32 +117,17 @@ func forwardHeaderMiddleware(name, value string) sdkhttpclient.Middleware {
 func extendClientOpts(_ context.Context, settings backend.DataSourceInstanceSettings, clientOpts *sdkhttpclient.Options, _ log.Logger) error {
 	// Set SigV4 service namespace
 	if clientOpts.SigV4 != nil {
-		ampSettings, err := parseAMPSettings(settings)
+		jsonData, err := utils.GetJsonData(settings)
 		if err != nil {
 			return err
 		}
-		if ampSettings.SigV4Service == "" {
+		service, err := maputil.GetStringOptional(jsonData, "sigv4Service")
+		if err != nil || service == "" {
 			clientOpts.SigV4.Service = "aps"
 		} else {
-			clientOpts.SigV4.Service = ampSettings.SigV4Service
+			clientOpts.SigV4.Service = service
 		}
 	}
 
 	return nil
-}
-
-type ampSettings struct {
-	ForwardGrafanaUserHeader bool   `json:"forwardGrafanaUserHeader"`
-	SigV4Service             string `json:"sigv4Service"`
-}
-
-func parseAMPSettings(settings backend.DataSourceInstanceSettings) (ampSettings, error) {
-	var parsed ampSettings
-	if len(settings.JSONData) == 0 {
-		return parsed, nil
-	}
-	if err := json.Unmarshal(settings.JSONData, &parsed); err != nil {
-		return ampSettings{}, err
-	}
-	return parsed, nil
 }

@@ -2,6 +2,7 @@
 
 ## 3.2.0
 
+- chore(deps): bump promlib to v0.0.18 to fix Prometheus build-info health check 405
 - AMP: expose query statistics in [#785](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/785)
 - Update dependencies in [#796](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/796)
 - Bump @grafana/* to 13.1.1 and update dependencies in [#795](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/795)

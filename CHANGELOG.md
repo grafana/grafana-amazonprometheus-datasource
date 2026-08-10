@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- Bump `@grafana/aws-sdk` to 0.12.1 for SigV4 per-datasource Grafana Assume Role external IDs
+
 ## 3.2.0
 
 - chore(deps): bump promlib to v0.0.18 to fix Prometheus build-info health check 405

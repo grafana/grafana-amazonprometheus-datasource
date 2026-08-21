@@ -100,6 +100,7 @@ export const ConfigEditor = (props: Props) => {
           hidePrometheusTypeVersion={true}
           hideExemplars={true}
           showQuerySamplesProcessedThresholdFields={true}
+          showQueryStats={true}
         />
       </ConfigSection>
     </>

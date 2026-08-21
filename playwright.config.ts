@@ -1,3 +1,4 @@
+import type { PluginOptions } from '@grafana/plugin-e2e';
 import { defineConfig, devices } from '@playwright/test';
 import { dirname } from 'path';
 
@@ -12,7 +13,7 @@ const pluginE2eAuth = `${dirname(require.resolve('@grafana/plugin-e2e'))}/auth`;
 /**
  * See https://playwright.dev/docs/test-configuration.
  */
-export default defineConfig({
+export default defineConfig<PluginOptions>({
   testDir: './e2e',
   /* Run tests in files in parallel */
   fullyParallel: true,
@@ -29,7 +30,7 @@ export default defineConfig({
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
-    baseURL: 'http://127.0.0.1:3000',
+    baseURL: process.env.GRAFANA_URL || 'http://127.0.0.1:3000',
     featureToggles: {
       dashboardNewLayouts: false,
     },
@@ -57,7 +58,7 @@ export default defineConfig({
       name: 'run-tests',
       use: {
         ...devices['Desktop Chrome'],
-        storageState: 'playwright/.auth/admin.json',
+        storageState: `playwright/.auth/${process.env.GRAFANA_ADMIN_USER || 'admin'}.json`,
       },
       dependencies: ['auth'],
     },

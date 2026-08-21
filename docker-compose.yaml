@@ -21,3 +21,12 @@ services:
     extends:
       file: .config/docker-compose-base.yaml
       service: grafana
+    environment:
+      # Prevent Grafana 13's splash screen from blocking Playwright.
+      GF_FEATURE_TOGGLES_splashScreen: 'false'
+      # Local defaults keep docker-compose usable without Vault secrets.
+      # PR CI injects real amazonManagedPrometheus values via playwright-secrets.
+      DS_INSTANCE_URL: ${DS_INSTANCE_URL:-http://prometheus:9090}
+      DS_INSTANCE_SIGV4_REGION: ${DS_INSTANCE_SIGV4_REGION:-us-east-2}
+      DS_INSTANCE_SIGV4_ACCESS_KEY: ${DS_INSTANCE_SIGV4_ACCESS_KEY:-abc}
+      DS_INSTANCE_SIGV4_SECRET_KEY: ${DS_INSTANCE_SIGV4_SECRET_KEY:-def}

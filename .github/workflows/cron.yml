@@ -1,0 +1,24 @@
+name: Scheduled Cloud E2E tests
+
+on:
+  schedule:
+    - cron: '0 6 * * *' # Daily at 06:00 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  playwright-cloud:
+    uses: grafana/data-sources-ci-workflows/.github/workflows/playwright-cloud.yml@main
+    secrets: inherit
+    permissions:
+      contents: read
+      id-token: write
+    with:
+      run-stage: nightly
+      # DSE2EDEV already provisions the managed AMP datasource, including credentials and PDC.
+      # Only run the live AWS-tagged coverage; local provisioning tests run in the regular CI lane.
+      bench-prepare-cmd: yarn install --immutable && yarn playwright install chromium
+      bench-execute-cmd: yarn e2e --grep @aws

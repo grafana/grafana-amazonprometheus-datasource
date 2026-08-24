@@ -19,6 +19,28 @@ function isLocalPrometheusUrl(url: string | undefined): boolean {
   return url.includes('prometheus:9090') || url.includes('localhost') || url.includes('127.0.0.1');
 }
 
+// A developer machine is the only place a missing-credentials skip is allowed. Skipping in CI or
+// on the nightly Cloud run would turn a broken Vault injection into a green report, so those lanes
+// deliberately fall through to the assertions and fail instead.
+//
+// The provisioned URL is only a reliable credential signal locally. Trusted CI injects
+// DS_INSTANCE_* into Grafana through docker-compose, not into the Playwright process, so
+// readProvisionedDataSource expands the placeholder to an empty string there and would look
+// uncredentialed even when the datasource is fully configured. Hence the early return.
+async function skipOnlyLocallyWithoutLiveCredentials(
+  readProvisionedDataSource: (options: { fileName: string }) => Promise<{ url?: string }>
+): Promise<void> {
+  if (isCloudRun || process.env.CI) {
+    return;
+  }
+
+  const ds = await readProvisionedDataSource({ fileName: PROVISIONED_FILE });
+  test.skip(
+    isLocalPrometheusUrl(ds.url),
+    'Live AMP credentials required. Export DS_INSTANCE_* before yarn server (see CONTRIBUTING.md)'
+  );
+}
+
 // Waits for the first /api/ds/query response where results.A.frames is an array.
 // response.json() must be called inside the predicate while the CDP body is still live.
 async function waitForMainQueryResponse(page: Page): Promise<{ response: Response; body: any }> {
@@ -58,19 +80,9 @@ test.describe('Live AMP against real workspace', () => {
   // Live AMP health checks / queries can exceed the default 15s suite timeout.
   test.describe.configure({ mode: 'serial', timeout: 60000 });
 
+  // Fork PRs use playwright.smoke.config.ts (grepInvert /@aws/) so these never run there.
   test.beforeEach(async ({ readProvisionedDataSource }) => {
-    // Fork PRs use playwright.smoke.config.ts (grepInvert /@aws/) so these never run there.
-    // Trusted CI injects Vault secrets into the provisioned datasource via docker-compose —
-    // do not gate on process.env (Playwright often does not see those vars).
-    // Locally, skip when the provisioned URL still points at the in-compose Prometheus.
-    if (isCloudRun || process.env.CI) {
-      return;
-    }
-    const ds = await readProvisionedDataSource({ fileName: PROVISIONED_FILE });
-    test.skip(
-      isLocalPrometheusUrl(ds.url),
-      'Live AMP credentials required — export DS_INSTANCE_* before yarn server (see CONTRIBUTING.md)'
-    );
+    await skipOnlyLocallyWithoutLiveCredentials(readProvisionedDataSource);
   });
 
   test(

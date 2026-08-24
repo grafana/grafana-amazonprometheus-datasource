@@ -28,9 +28,6 @@ jobs:
 
   publish-and-deploy:
     if: github.ref == 'refs/heads/main'
-    # Must stay recent enough to reach cd.yml v11.x. Older pins resolve to a
-    # create-github-app-token revision the org action policy now blocks, which
-    # fails the whole workflow at startup before any job runs.
     uses: grafana/data-sources-ci-workflows/.github/workflows/cd-dev.yml@b400d490687700082808b90d2200239a820b3186 # main
     permissions:
       attestations: write

@@ -93,36 +93,73 @@ test.describe('Configuration tests', () => {
     ).toHaveCount(0);
   });
 
-  /*  test('"Save & test" should be successful when configuration is valid', async ({
-    createDataSourceConfigPage,
-    readProvisionedDataSource,
-  }) => {
-    const ds = await readProvisionedDataSource<DataSourcePluginOptionsEditorProps<PromOptions>>({ fileName: 'datasources.yml' });
-    const configPage = await createDataSourceConfigPage({ type: ds.type });
-
-    await configPage
-      .getByGrafanaSelector(selectors.components.DataSource.Prometheus.configPage.connectionSettings)
-      .fill(ds.url || '');
-
-    await expect(configPage.saveAndTest()).toBeOK();
-  });
-*/
-
-  test('"Save & test" should fail when configuration is invalid', async ({
+  test('should load the provisioned default region', async ({
     readProvisionedDataSource,
     gotoDataSourceConfigPage,
     page,
+    request,
   }) => {
     const ds = await readProvisionedDataSource<DataSourcePluginOptionsEditorProps<PromOptions>>({
       fileName: 'datasources.yml',
     });
-    const configPage = await gotoDataSourceConfigPage(ds.uid);
-    await page.getByLabel('Edit Access Key ID').click();
-    await page.getByLabel('Access Key ID').fill('');
-    await expect(configPage.saveAndTest()).not.toBeOK();
-    await expect(configPage).toHaveAlert('error', {
-      hasText: /.*there was an error returned querying the prometheus api/i,
+    await gotoDataSourceConfigPage(ds.uid);
+
+    // Region comes from $DS_INSTANCE_SIGV4_REGION at Grafana provision time. The YAML
+    // reader in Playwright often does not see that env var, so read it from the API.
+    const apiDs = await request.get(`/api/datasources/uid/${ds.uid}`).then((r) => r.json());
+    const defaultRegion = (apiDs.jsonData as { sigV4Region?: string } | undefined)?.sigV4Region;
+    expect(defaultRegion).toBeTruthy();
+    await expect(page.getByLabel('Default Region')).toBeVisible();
+    await expect(page.getByText(defaultRegion!, { exact: true })).toBeVisible();
+  });
+
+  test('"Save & test" should fail when configuration is invalid', async ({
+    createDataSourceConfigPage,
+    page,
+  }) => {
+    // Use a throwaway datasource — mutating the provisioned DS would race live @aws tests.
+    const configPage = await createDataSourceConfigPage({
+      type: 'grafana-amazonprometheus-datasource',
+      name: DATA_SOURCE_NAME + '-empty-key',
     });
+
+    await configPage
+      .getByGrafanaSelector(selectors.components.DataSource.Prometheus.configPage.connectionSettings)
+      .fill('https://aps-workspaces.us-east-2.amazonaws.com/workspaces/ws-invalid');
+    await page.getByRole('combobox', { name: 'Authentication Provider', exact: true }).click();
+    await page.getByText('Access & secret key', { exact: true }).click();
+    await page.getByLabel('Access Key ID').fill('');
+    await page.getByLabel('Secret Access Key').fill('fake-secret-key');
+    await page.getByLabel('Default Region').click();
+    await page.getByText('us-east-2', { exact: true }).click();
+
+    await expect(configPage.saveAndTest()).not.toBeOK();
+    await expect(configPage).toHaveAlert('error');
+  });
+
+  test('should show an authentication error for invalid access and secret keys', async ({
+    createDataSourceConfigPage,
+    page,
+  }) => {
+    const configPage = await createDataSourceConfigPage({
+      type: 'grafana-amazonprometheus-datasource',
+      name: DATA_SOURCE_NAME + '-bad-keys',
+    });
+
+    await configPage
+      .getByGrafanaSelector(selectors.components.DataSource.Prometheus.configPage.connectionSettings)
+      .fill('https://aps-workspaces.us-east-2.amazonaws.com/workspaces/ws-invalid');
+    // New datasources default to a non-keys auth provider; key fields only render for "keys".
+    await page.getByRole('combobox', { name: 'Authentication Provider', exact: true }).click();
+    await page.getByText('Access & secret key', { exact: true }).click();
+    await page.getByLabel('Access Key ID').fill('fake-access-key');
+    await page.getByLabel('Secret Access Key').fill('fake-secret-key');
+    await page.getByLabel('Default Region').click();
+    await page.getByText('us-east-2', { exact: true }).click();
+
+    const response = await configPage.saveAndTest();
+    expect(response.ok()).toBe(false);
+    await expect(configPage).toHaveAlert('error');
   });
 
   test('"Save & test" should fail when url is empty', async ({

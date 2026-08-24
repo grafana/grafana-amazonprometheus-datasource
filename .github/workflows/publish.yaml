@@ -36,4 +36,10 @@ jobs:
       environment: 'prod'
       docs-only: ${{ fromJSON(github.event.inputs.docs-only) }}
       scopes: ${{ github.event.inputs.environment == 'cloud (recommended)' && 'grafana_cloud' || github.event.inputs.environment == 'on-prem (for emergencies fix to On Prem customers)' && 'universal' }}
+      playwright-secrets: |
+        DS_INSTANCE_URL=amazonManagedPrometheus:url
+        DS_INSTANCE_SIGV4_REGION=amazonManagedPrometheus:json_sigV4Region
+        DS_INSTANCE_SIGV4_ACCESS_KEY=amazonManagedPrometheus:secure_sigV4AccessKey
+        DS_INSTANCE_SIGV4_SECRET_KEY=amazonManagedPrometheus:secure_sigV4SecretKey
       github-draft-release: false # publish the github release directly, skipping the draft step
+

@@ -22,10 +22,10 @@ jobs:
       # Only run the live AWS-tagged coverage; local provisioning tests run in the regular CI lane.
       #
       # Bench runs each command without a shell, so use ';' to separate them.
-      bench-prepare-cmd: yarn install --immutable; yarn playwright install chromium
+      bench-prepare-cmd: npm ci; npx playwright install chromium
       # Bench appends its own '-- --reporter=json <suite-path>', so the tag
       # filter has to live in the script rather than in extra args here.
-      bench-execute-cmd: yarn e2e:cloud
+      bench-execute-cmd: npm run e2e:cloud
 
   notify-slack:
     name: Notify Slack on failure

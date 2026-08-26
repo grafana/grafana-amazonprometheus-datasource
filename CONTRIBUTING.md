@@ -25,35 +25,35 @@
 1. Install dependencies
 
    ```bash
-   yarn install
+   npm install
    ```
 
 2. Build plugin in development mode and run in watch mode
 
    ```bash
-   yarn run dev
+   npm run dev
    ```
 
 3. Build plugin in production mode
 
    ```bash
-   yarn run build
+   npm run build
    ```
 
 4. Run the tests (using Jest)
 
    ```bash
    # Runs the tests and watches for changes, requires git init first
-   yarn run test
+   npm test
 
    # Exits after running all the tests
-   yarn run test:ci
+   npm run test:ci
    ```
 
 5. Spin up a Grafana instance and run the plugin inside it (using Docker)
 
    ```bash
-   yarn run server:configured
+   npm run server:configured
    ```
 
 6. Run the E2E tests (using Playwright and @grafana/plugin-e2e)
@@ -66,7 +66,7 @@
 
    ```bash
    # Install Playwright browsers
-   yarn playwright install --with-deps
+   npx playwright install --with-deps
 
    # Optional — required for @aws / live AMP tests (otherwise they are skipped)
    export DS_INSTANCE_URL=<amp-workspace-url>
@@ -75,10 +75,10 @@
    export DS_INSTANCE_SIGV4_SECRET_KEY=<secret-key>
 
    # Spins up Grafana + a local Prometheus (defaults used when the env vars above are unset)
-   yarn run server:configured
+   npm run server:configured
 
    # Starts the e2e tests
-   yarn run e2e
+   npm run e2e
    ```
 
    Fork PRs run `playwright.smoke.config.ts`, which excludes `@aws` tests because Vault
@@ -87,11 +87,11 @@
 7. Run the linter
 
    ```bash
-   yarn run lint
+   npm run lint
 
    # or
 
-   yarn run lint:fix
+   npm run lint:fix
    ```
 
 ## Releasing

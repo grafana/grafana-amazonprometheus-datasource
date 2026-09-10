@@ -35,5 +35,5 @@ jobs:
       id-token: write
       pull-requests: read
     with:
-      go-version: '1.26.5'
-      golangci-lint-version: '2.11.0'
+      go-version: '1.27.1'
+      golangci-lint-version: '2.13.2'

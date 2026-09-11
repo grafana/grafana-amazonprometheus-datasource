@@ -1,8 +1,10 @@
 # Changelog
 
-## Unreleased
+## 3.2.1
 
 - Bump `@grafana/aws-sdk` to 0.12.1 for SigV4 per-datasource Grafana Assume Role external IDs
+- Update backend dependencies [#789](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/789)
+- Update frontend dependencies [#790](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/790)
 
 ## 3.2.0
 

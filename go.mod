@@ -28,7 +28,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/sts v1.49.0 // indirect
 	github.com/aws/smithy-go v1.28.1 // indirect
 	github.com/beorn7/perks v1.0.1 // indirect
-	github.com/cenkalti/backoff/v5 v5.0.3 // indirect
+	github.com/cenkalti/backoff/v7 v7.0.0 // indirect
 	github.com/cespare/xxhash/v2 v2.3.0 // indirect
 	github.com/cheekybits/genny v1.0.0 // indirect
 	github.com/clipperhouse/displaywidth v0.11.0 // indirect
@@ -64,8 +64,8 @@ require (
 	github.com/google/uuid v1.6.0 // indirect
 	github.com/grafana/dataplane/sdata v0.0.9 // indirect
 	github.com/grafana/dskit v0.0.0-20260427162712-0457a92dacc3 // indirect
-	github.com/grafana/grafana/apps/scope v0.0.0-20260427171703-d4f46decefcb // indirect
-	github.com/grafana/grafana/pkg/apimachinery v0.0.0-20260118065639-60cb766a97d6 // indirect
+	github.com/grafana/grafana/apps/scope/v13 v13.2.1 // indirect
+	github.com/grafana/grafana/pkg/apimachinery/v13 v13.2.1 // indirect
 	github.com/grafana/otel-profiling-go v0.6.0 // indirect
 	github.com/grafana/pyroscope-go/godeltaprof v0.1.12 // indirect
 	github.com/grafana/regexp v0.0.0-20250905093917-f7b3be9d1853 // indirect
@@ -112,7 +112,7 @@ require (
 	github.com/unknwon/bra v0.0.0-20200517080246-1e3013ecaff8 // indirect
 	github.com/unknwon/com v1.0.1 // indirect
 	github.com/unknwon/log v0.0.0-20200308114134-929b1006e34a // indirect
-	github.com/urfave/cli v1.22.17 // indirect
+	github.com/urfave/cli/v3 v3.11.0 // indirect
 	github.com/x448/float16 v0.8.4 // indirect
 	github.com/zeebo/xxh3 v1.1.0 // indirect
 	go.opentelemetry.io/auto/sdk v1.2.1 // indirect
@@ -128,7 +128,7 @@ require (
 	go.opentelemetry.io/otel/trace v1.46.0 // indirect
 	go.opentelemetry.io/proto/otlp v1.11.0 // indirect
 	go.uber.org/atomic v1.11.0 // indirect
-	go.yaml.in/yaml/v2 v2.4.4 // indirect
+	go.yaml.in/yaml/v3 v3.0.5 // indirect
 	go.yaml.in/yaml/v3 v3.0.5 // indirect
 	golang.org/x/crypto v0.56.0 // indirect
 	golang.org/x/exp v0.0.0-20260824195058-e88cd73687aa // indirect
@@ -149,5 +149,5 @@ require (
 	k8s.io/utils v0.0.0-20260707023825-cf1189d6abe3 // indirect
 	sigs.k8s.io/json v0.0.0-20250730193827-2d320260d730 // indirect
 	sigs.k8s.io/randfill v1.0.0 // indirect
-	sigs.k8s.io/structured-merge-diff/v6 v6.4.2 // indirect
+	sigs.k8s.io/structured-merge-diff/v7 v7.0.0 // indirect
 )

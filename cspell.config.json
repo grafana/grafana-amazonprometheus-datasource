@@ -65,6 +65,8 @@
     "jsonencode",
     "topk",
     "azureprometheus",
-    "testdata"
+    "testdata",
+    "dsconfig",
+    "promlibmodels"
   ]
 }

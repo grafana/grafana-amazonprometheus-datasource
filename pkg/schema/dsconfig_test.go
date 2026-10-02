@@ -5,8 +5,7 @@ import (
 	"testing"
 
 	"github.com/grafana/dsconfig/schema"
-
-	"github.com/grafana/grafana-amazonprometheus-datasource/pkg/models"
+	"github.com/grafana/grafana-amazonprometheus-datasource/pkg/schema/models"
 )
 
 //go:embed dsconfig.json

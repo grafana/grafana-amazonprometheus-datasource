@@ -179,24 +179,12 @@
       "id": "jsonData_sigV4Region",
       "key": "sigV4Region",
       "label": "Default Region",
-      "description": "Specify the region, such as for US West (Oregon) use ` us-west-2 ` as the region.",
+      "description": "The AWS region of the workspace, such as `us-west-2`. Any valid AWS region is accepted (e.g. `eu-west-2`, `ca-central-1`).",
       "valueType": "string",
       "target": "jsonData",
       "ui": {
-        "component": "select",
-        "allowCustom": true,
-        "options": [
-          { "label": "us-east-1", "value": "us-east-1" },
-          { "label": "us-east-2", "value": "us-east-2" },
-          { "label": "us-west-1", "value": "us-west-1" },
-          { "label": "us-west-2", "value": "us-west-2" },
-          { "label": "eu-west-1", "value": "eu-west-1" },
-          { "label": "eu-central-1", "value": "eu-central-1" },
-          { "label": "ap-south-1", "value": "ap-south-1" },
-          { "label": "ap-southeast-2", "value": "ap-southeast-2" },
-          { "label": "ap-northeast-1", "value": "ap-northeast-1" },
-          { "label": "us-gov-west-1", "value": "us-gov-west-1" }
-        ]
+        "component": "input",
+        "placeholder": "us-west-2"
       }
     },
     {

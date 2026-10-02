@@ -231,20 +231,8 @@
               "x-dsconfig-depends-on": "jsonData_sigV4AuthType == 'credentials'"
             },
             "sigV4Region": {
-              "description": "Specify the region, such as for US West (Oregon) use ` us-west-2 ` as the region.",
-              "type": "string",
-              "enum": [
-                "us-east-1",
-                "us-east-2",
-                "us-west-1",
-                "us-west-2",
-                "eu-west-1",
-                "eu-central-1",
-                "ap-south-1",
-                "ap-southeast-2",
-                "ap-northeast-1",
-                "us-gov-west-1"
-              ]
+              "description": "The AWS region of the workspace, such as `us-west-2`. Any valid AWS region is accepted (e.g. `eu-west-2`, `ca-central-1`).",
+              "type": "string"
             },
             "sigV4UsePerDatasourceExternalId": {
               "description": "Grafana Assume Role only. When enabled, this datasource uses its own external ID (below) instead of the stack-wide external ID.",

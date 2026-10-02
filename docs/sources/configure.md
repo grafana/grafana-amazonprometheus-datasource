@@ -180,7 +180,7 @@ datasources:
       sigV4SecretKey: <SECRET_ACCESS_KEY>
 ```
 
-To assume an IAM role, set `sigV4AuthType` to the base provider you want to use, such as `default` or `ec2_iam_role`, and add `assumeRoleArn` and `externalId` instead of the access keys. For the **Grafana Assume Role** provider, set `sigV4AuthType` to `grafana_assume_role`:
+To assume an IAM role, set `sigV4AuthType` to the base provider you want to use, such as `default` or `ec2_iam_role`, and add `sigV4AssumeRoleArn` and `sigV4ExternalId` instead of the access keys. For the **Grafana Assume Role** provider, set `sigV4AuthType` to `grafana_assume_role`:
 
 ```yaml
 apiVersion: 1
@@ -195,8 +195,8 @@ datasources:
       sigV4AuthType: default
       sigV4Region: <REGION>
       sigv4Service: aps
-      assumeRoleArn: arn:aws:iam::<ACCOUNT_ID>:role/<ROLE_NAME>
-      externalId: <EXTERNAL_ID>
+      sigV4AssumeRoleArn: arn:aws:iam::<ACCOUNT_ID>:role/<ROLE_NAME>
+      sigV4ExternalId: <EXTERNAL_ID>
 ```
 
 Replace the placeholder values:
@@ -244,12 +244,12 @@ resource "grafana_data_source" "amazonprometheus" {
   url  = "https://aps-workspaces.${var.region}.amazonaws.com/workspaces/${var.workspace_id}"
 
   json_data_encoded = jsonencode({
-    sigV4Auth     = true
-    sigV4AuthType = "default"
-    sigV4Region   = var.region
-    sigv4Service  = "aps"
-    assumeRoleArn = var.assume_role_arn
-    externalId    = var.external_id
+    sigV4Auth          = true
+    sigV4AuthType      = "default"
+    sigV4Region        = var.region
+    sigv4Service       = "aps"
+    sigV4AssumeRoleArn = var.assume_role_arn
+    sigV4ExternalId    = var.external_id
   })
 }
 ```

@@ -1,0 +1,271 @@
+{
+  "spec": {
+    "type": "object",
+    "required": [
+      "url"
+    ],
+    "properties": {
+      "access": {
+        "description": "Controls how requests to the datasource are routed. `proxy` (Server) sends requests through the Grafana backend; `direct` (Browser) sends them straight from the browser and is subject to CORS.",
+        "type": "string",
+        "default": "proxy",
+        "enum": [
+          "proxy",
+          "direct"
+        ]
+      },
+      "jsonData": {
+        "type": "object",
+        "required": [
+          "sigV4Auth"
+        ],
+        "properties": {
+          "alertmanagerUid": {
+            "description": "Backend-only. Part of the base @grafana/data `DataSourceJsonData` fields inherited by every datasource's jsonData, set by Grafana core's Alerting UI when this datasource is linked to an Alertmanager data source. Not rendered by this plugin's own config editor.",
+            "type": "string"
+          },
+          "allowAsRecordingRulesTarget": {
+            "description": "Allow this data source to be selected as a target for writing recording rules. Defaults to the Grafana instance's `default_allow_recording_rules_target_alerts_ui_toggle` setting when unset.",
+            "type": "boolean"
+          },
+          "authType": {
+            "description": "Backend-only. Part of the base @grafana/data `DataSourceJsonData` fields inherited via the shared PromOptions settings model, but unused by this plugin — the SigV4-prefixed `sigV4AuthType` is the field this plugin's editor and backend actually read.",
+            "type": "string"
+          },
+          "cacheLevel": {
+            "description": "Sets the browser caching level for editor queries. Higher cache settings are recommended for high cardinality data sources.",
+            "type": "string",
+            "default": "Low",
+            "enum": [
+              "Low",
+              "Medium",
+              "High",
+              "None"
+            ]
+          },
+          "customQueryParameters": {
+            "description": "Add custom parameters to the Prometheus query URL. For example timeout, partial_response, dedup, or max_source_resolution. Multiple parameters should be concatenated together with '\u0026'.",
+            "type": "string"
+          },
+          "defaultEditor": {
+            "description": "Set default editor option for all users of this data source.",
+            "type": "string",
+            "default": "builder",
+            "enum": [
+              "builder",
+              "code"
+            ]
+          },
+          "defaultRegion": {
+            "description": "Backend-only. Part of the base @grafana/data `DataSourceJsonData` fields inherited via the shared PromOptions settings model, but unused by this plugin — `sigV4Region` is the field this plugin's editor and backend actually read.",
+            "type": "string"
+          },
+          "disableGrafanaCache": {
+            "description": "Backend-only. Part of the base @grafana/data `DataSourceJsonData` fields inherited by every datasource's jsonData; controlled from Grafana's own query caching settings, not rendered by this plugin's own config editor.",
+            "type": "boolean"
+          },
+          "disableMetricsLookup": {
+            "description": "Checking this option will disable the metrics chooser and metric/label support in the query field's autocomplete. This helps if you have performance issues with bigger Prometheus instances.",
+            "type": "boolean",
+            "default": false
+          },
+          "disableRecordingRules": {
+            "description": "This feature will disable recording rules. Turn this on to improve dashboard performance.",
+            "type": "boolean",
+            "default": false
+          },
+          "exemplarTraceIdDestinations": {
+            "description": "Maps exemplar label names to trace data sources. Hidden in this plugin's editor (hideExemplars) because Amazon Managed Service for Prometheus workspaces do not expose exemplars.",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "name"
+              ],
+              "properties": {
+                "datasourceUid": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "url": {
+                  "type": "string"
+                },
+                "urlDisplayLabel": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "forwardGrafanaUserHeader": {
+            "description": "Forward the logged-in Grafana user's X-Grafana-User header to the workspace. Requires send_user_header to be enabled in the Grafana server configuration.",
+            "type": "boolean",
+            "default": false
+          },
+          "httpMethod": {
+            "description": "You can use either POST or GET HTTP method to query your Prometheus data source. POST is the recommended method as it allows bigger queries. Change this to GET if you have a Prometheus version older than 2.1 or if POST requests are restricted in your network.",
+            "type": "string",
+            "default": "POST",
+            "enum": [
+              "POST",
+              "GET"
+            ]
+          },
+          "incrementalQueryOverlapWindow": {
+            "description": "Set a duration like 10m or 120s or 0s. Default of 10m. This duration will be added to the duration of each incremental request.",
+            "type": "string",
+            "default": "10m",
+            "x-dsconfig-depends-on": "jsonData_incrementalQuerying == true"
+          },
+          "incrementalQuerying": {
+            "description": "This feature will change the default behavior of relative queries to always request fresh data from the prometheus instance, instead query results will be cached, and only new records are requested. Turn this on to decrease database and network load.",
+            "type": "boolean",
+            "default": false
+          },
+          "keepCookies": {
+            "description": "Cookies, by name, that the Grafana proxy should forward to the datasource. The Grafana proxy strips all cookies by default.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "x-dsconfig-depends-on": "plugin_sdk_settings.access == 'proxy'"
+          },
+          "manageAlerts": {
+            "description": "Manage alert rules for this data source. To manage other alerting resources, add an Alertmanager data source. Defaults to the Grafana instance's `default_datasource_manage_alerts_ui_toggle` setting when unset.",
+            "type": "boolean"
+          },
+          "maxSamplesProcessedErrorThreshold": {
+            "description": "When set, Grafana appends this value to Prometheus query requests as the max_samples_processed_error_threshold URL parameter. Leave empty to omit.",
+            "type": "number"
+          },
+          "maxSamplesProcessedWarningThreshold": {
+            "description": "When set, Grafana appends this value to Prometheus query requests as the max_samples_processed_warning_threshold URL parameter. Leave empty to omit.",
+            "type": "number"
+          },
+          "oauthPassThru": {
+            "description": "Part of the shared PromOptions settings model but unreachable in this plugin's editor: the auth method picker only ever offers SigV4 (`visibleMethods={[sigV4Id]}` in DataSourceHttpSettingsOverhaul), so OAuth forwarding can never be selected. Kept for jsonData struct parity.",
+            "type": "boolean",
+            "default": false,
+            "x-dsconfig-depends-on": "plugin_sdk_settings.access != 'direct'"
+          },
+          "profile": {
+            "description": "Backend-only. Part of the base @grafana/data `DataSourceJsonData` fields inherited via the shared PromOptions settings model, but unused by this plugin — `sigV4Profile` is the field this plugin's editor and backend actually read.",
+            "type": "string"
+          },
+          "prometheus-type-migration": {
+            "description": "Backend-only. Set when this datasource was migrated from the core Prometheus datasource type to Amazon Managed Service for Prometheus; the editor reads it only to show a one-time migration notice and never sets it directly.",
+            "type": "boolean"
+          },
+          "prometheusType": {
+            "description": "Set this to the type of your prometheus database, e.g. Prometheus, Cortex, Mimir or Thanos. Hidden in this plugin's editor (hidePrometheusTypeVersion) because the backend connects only to Amazon Managed Service for Prometheus.",
+            "type": "string",
+            "enum": [
+              "Prometheus",
+              "Cortex",
+              "Mimir",
+              "Thanos"
+            ]
+          },
+          "prometheusVersion": {
+            "description": "Version of the configured Prometheus type. Hidden in this plugin's editor (hidePrometheusTypeVersion) for the same reason as `prometheusType`.",
+            "type": "string",
+            "x-dsconfig-depends-on": "jsonData_prometheusType != ''"
+          },
+          "queryStatsEnabled": {
+            "description": "Request query processing statistics and show the total queryable samples in Query Inspector. This can increase the response payload size.",
+            "type": "boolean",
+            "default": false
+          },
+          "queryTimeout": {
+            "description": "Set the Prometheus query timeout.",
+            "type": "string"
+          },
+          "seriesEndpoint": {
+            "description": "Checking this option will favor the series endpoint with match[] parameter over the label values endpoint with match[] parameter. While the label values endpoint is considered more performant, some users may prefer the series because it has a POST method while the label values endpoint only has a GET method.",
+            "type": "boolean",
+            "default": false
+          },
+          "seriesLimit": {
+            "description": "The limit applies to all resources (metrics, labels, and values) for both endpoints (series and labels). Leave the field empty to use the default limit (40000). Set to 0 to disable the limit and fetch everything — this may cause performance issues.",
+            "type": "number",
+            "default": 40000
+          },
+          "sigV4AssumeRoleArn": {
+            "description": "Optional. Specifying the ARN of a role will ensure that the selected authentication provider is used to assume the role rather than the credentials directly.",
+            "type": "string",
+            "pattern": "^(arn:aws[a-zA-Z-]*:iam::[0-9]{12}:role/.+)?$"
+          },
+          "sigV4Auth": {
+            "description": "Always true for this datasource. The config editor pins this to true on load and offers no other authentication method — SigV4 is the only way to connect to an Amazon Managed Service for Prometheus workspace.",
+            "type": "boolean",
+            "default": true
+          },
+          "sigV4AuthType": {
+            "description": "Specify which AWS credentials chain to use. Legacy value 'arn' is deprecated and treated as 'default'.",
+            "type": "string",
+            "enum": [
+              "default",
+              "keys",
+              "credentials",
+              "ec2_iam_role",
+              "grafana_assume_role",
+              "arn"
+            ]
+          },
+          "sigV4ExternalId": {
+            "description": "If you are assuming a role in another account, that has been created with an external ID, specify the external ID here.",
+            "type": "string",
+            "x-dsconfig-depends-on": "jsonData_sigV4AuthType != 'grafana_assume_role'"
+          },
+          "sigV4GrafanaExternalId": {
+            "description": "Per-datasource external ID used for Grafana Assume Role. Only takes effect when \"Use per-datasource external ID\" is enabled; otherwise the stack-wide external ID is used.",
+            "type": "string",
+            "x-dsconfig-depends-on": "jsonData_sigV4AuthType == 'grafana_assume_role' \u0026\u0026 jsonData_sigV4UsePerDatasourceExternalId == true"
+          },
+          "sigV4Profile": {
+            "description": "Credentials profile name, as specified in ~/.aws/credentials, leave blank for default.",
+            "type": "string",
+            "x-dsconfig-depends-on": "jsonData_sigV4AuthType == 'credentials'"
+          },
+          "sigV4Region": {
+            "description": "The AWS region of the workspace, such as `us-west-2`. Any valid AWS region is accepted (e.g. `eu-west-2`, `ca-central-1`).",
+            "type": "string"
+          },
+          "sigV4UsePerDatasourceExternalId": {
+            "description": "Grafana Assume Role only. When enabled, this datasource uses its own external ID (below) instead of the stack-wide external ID.",
+            "type": "boolean",
+            "default": false,
+            "x-dsconfig-depends-on": "jsonData_sigV4AuthType == 'grafana_assume_role'"
+          },
+          "sigv4Service": {
+            "description": "Specify the AWS service to sign requests against (e.g., 'aps' for Prometheus).",
+            "type": "string",
+            "default": "aps"
+          },
+          "timeInterval": {
+            "description": "This interval is how frequently Prometheus scrapes targets. Set this to the typical scrape and evaluation interval configured in your Prometheus config file. If you set this to a greater value than your Prometheus config file interval, Grafana will evaluate the data according to this interval and you will see less data points. Defaults to 15s.",
+            "type": "string"
+          },
+          "timeout": {
+            "description": "HTTP request timeout in seconds. Maps to `TimeoutOptions.Timeout` in the plugin SDK HTTP client.",
+            "type": "number",
+            "x-dsconfig-depends-on": "plugin_sdk_settings.access != 'direct'"
+          }
+        }
+      },
+      "url": {
+        "description": "Complete HTTP URL of the datasource (e.g. https://your-server:8080).",
+        "type": "string"
+      }
+    }
+  },
+  "secureValues": [
+    {
+      "key": "sigV4AccessKey"
+    },
+    {
+      "key": "sigV4SecretKey"
+    }
+  ]
+}

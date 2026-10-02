@@ -20,7 +20,7 @@ datasources:
       sigV4AuthType: keys
       sigV4Region: $DS_INSTANCE_SIGV4_REGION
       sigv4Service: aps
-      externalId: externalId
+      sigV4ExternalId: externalId
     secureJsonData:
       sigV4AccessKey: $DS_INSTANCE_SIGV4_ACCESS_KEY
       sigV4SecretKey: $DS_INSTANCE_SIGV4_SECRET_KEY

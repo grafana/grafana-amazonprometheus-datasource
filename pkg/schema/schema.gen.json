@@ -18,6 +18,9 @@
         },
         "jsonData": {
           "type": "object",
+          "required": [
+            "sigV4Auth"
+          ],
           "properties": {
             "alertmanagerUid": {
               "description": "Backend-only. Part of the base @grafana/data `DataSourceJsonData` fields inherited by every datasource's jsonData, set by Grafana core's Alerting UI when this datasource is linked to an Alertmanager data source. Not rendered by this plugin's own config editor.",
@@ -198,7 +201,7 @@
             "sigV4Auth": {
               "description": "Always true for this datasource. The config editor pins this to true on load and offers no other authentication method — SigV4 is the only way to connect to an Amazon Managed Service for Prometheus workspace.",
               "type": "boolean",
-              "default": false
+              "default": true
             },
             "sigV4AuthType": {
               "description": "Specify which AWS credentials chain to use. Legacy value 'arn' is deprecated and treated as 'default'.",

@@ -27,7 +27,9 @@
           "placeholder": "http://localhost:9090"
         },
         "plugin_sdk_settings.sigV4Auth": {
-          "description": "Always true for this datasource. The config editor pins this to true on load and offers no other authentication method — SigV4 is the only way to connect to an Amazon Managed Service for Prometheus workspace."
+          "description": "Always true for this datasource. The config editor pins this to true on load and offers no other authentication method — SigV4 is the only way to connect to an Amazon Managed Service for Prometheus workspace.",
+          "defaultValue": true,
+          "required": true
         },
         "plugin_sdk_settings.oauthPassThru": {
           "description": "Part of the shared PromOptions settings model but unreachable in this plugin's editor: the auth method picker only ever offers SigV4 (`visibleMethods={[sigV4Id]}` in DataSourceHttpSettingsOverhaul), so OAuth forwarding can never be selected. Kept for jsonData struct parity."

@@ -41,12 +41,21 @@ async function skipOnlyLocallyWithoutLiveCredentials(
   );
 }
 
-// Waits for the first /api/ds/query response where results.A.frames is an array.
+// Matches the legacy /api/ds/query endpoint and the unified Query Service
+// (/apis/query.grafana.app/<version>/namespaces/<ns>/query) that newer Grafana builds route
+// Explore queries through instead. Both return the same {results: {<refId>: {frames}}} shape.
+const QUERY_SERVICE_PATH = /\/apis\/query\.grafana\.app\/[^/]+\/namespaces\/[^/]+\/query(\?|$)/;
+
+function isQueryRequestUrl(url: string): boolean {
+  return url.includes('/api/ds/query') || QUERY_SERVICE_PATH.test(url);
+}
+
+// Waits for the first query response where results.A.frames is an array.
 // response.json() must be called inside the predicate while the CDP body is still live.
 async function waitForMainQueryResponse(page: Page): Promise<{ response: Response; body: any }> {
   let body: any;
   const response = await page.waitForResponse(async (r: Response) => {
-    if (!r.url().includes('/api/ds/query') || !r.ok()) {
+    if (!isQueryRequestUrl(r.url()) || !r.ok()) {
       return false;
     }
     const b = await r.json().catch(() => null);

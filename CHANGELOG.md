@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- Bump `@grafana/aws-sdk` to 0.12.2 so SigV4 Grafana Assume Role uses the server-minted external ID
+
 ## 3.2.1
 
 - Bump `@grafana/aws-sdk` to 0.12.1 for SigV4 per-datasource Grafana Assume Role external IDs

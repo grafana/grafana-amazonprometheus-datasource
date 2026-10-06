@@ -1,5 +1,12 @@
 # Changelog
 
+## 3.3.0
+
+- Add data source configuration (dsconfig) schema in [#810](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/810)
+- fix(e2e): match the unified Query Service endpoint in live-query test in [#811](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/811)
+- fix(ci): run nightly Cloud E2E commands Bench can parse in [#804](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/804)
+- Add standard PR template in [#812](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/812)
+
 ## 3.2.1
 
 - Bump `@grafana/aws-sdk` to 0.12.1 for SigV4 per-datasource Grafana Assume Role external IDs

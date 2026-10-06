@@ -3,8 +3,8 @@
   "version": "3.2.1",
   "description": "A plugin for Amazon Managed Prometheus",
   "scripts": {
-    "build": "webpack -c ./.config/webpack/webpack.config.ts --env production",
-    "dev": "webpack -w -c ./.config/webpack/webpack.config.ts --env development",
+    "build": "webpack -c ./webpack.config.ts --env production",
+    "dev": "webpack -w -c ./webpack.config.ts --env development",
     "test": "jest --watch --onlyChanged",
     "e2e": "playwright test",
     "e2e:cloud": "playwright test --grep @aws",
@@ -73,6 +73,7 @@
     "webpack": "5.110.3",
     "webpack-cli": "7.2.3",
     "webpack-livereload-plugin": "3.0.2",
+    "webpack-merge": "6.0.1",
     "webpack-subresource-integrity": "5.1.0",
     "webpack-virtual-modules": "0.6.2"
   },

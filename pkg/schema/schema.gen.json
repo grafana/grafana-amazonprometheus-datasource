@@ -219,11 +219,6 @@
               "type": "string",
               "x-dsconfig-depends-on": "jsonData_sigV4AuthType != 'grafana_assume_role'"
             },
-            "sigV4GrafanaExternalId": {
-              "description": "Per-datasource external ID used for Grafana Assume Role. Only takes effect when \"Use per-datasource external ID\" is enabled; otherwise the stack-wide external ID is used.",
-              "type": "string",
-              "x-dsconfig-depends-on": "jsonData_sigV4AuthType == 'grafana_assume_role' \u0026\u0026 jsonData_sigV4UsePerDatasourceExternalId == true"
-            },
             "sigV4Profile": {
               "description": "Credentials profile name, as specified in ~/.aws/credentials, leave blank for default.",
               "type": "string",
@@ -232,12 +227,6 @@
             "sigV4Region": {
               "description": "The AWS region of the workspace, such as `us-west-2`. Any valid AWS region is accepted (e.g. `eu-west-2`, `ca-central-1`).",
               "type": "string"
-            },
-            "sigV4UsePerDatasourceExternalId": {
-              "description": "Grafana Assume Role only. When enabled, this datasource uses its own external ID (below) instead of the stack-wide external ID.",
-              "type": "boolean",
-              "default": false,
-              "x-dsconfig-depends-on": "jsonData_sigV4AuthType == 'grafana_assume_role'"
             },
             "sigv4Service": {
               "description": "Specify the AWS service to sign requests against (e.g., 'aps' for Prometheus).",

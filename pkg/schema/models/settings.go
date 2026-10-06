@@ -12,14 +12,12 @@ type DatasourceSettings struct {
 	KeepCookies []string `json:"keepCookies"`
 	Timeout     int      `json:"timeout"`
 
-	SigV4Auth                       bool   `json:"sigV4Auth"`
-	SigV4AuthType                   string `json:"sigV4AuthType"`
-	SigV4Profile                    string `json:"sigV4Profile"`
-	SigV4AssumeRoleArn              string `json:"sigV4AssumeRoleArn"`
-	SigV4ExternalID                 string `json:"sigV4ExternalId"`
-	SigV4Region                     string `json:"sigV4Region"`
-	SigV4GrafanaExternalID          string `json:"sigV4GrafanaExternalId"`
-	SigV4UsePerDatasourceExternalID bool   `json:"sigV4UsePerDatasourceExternalId"`
+	SigV4Auth          bool   `json:"sigV4Auth"`
+	SigV4AuthType      string `json:"sigV4AuthType"`
+	SigV4Profile       string `json:"sigV4Profile"`
+	SigV4AssumeRoleArn string `json:"sigV4AssumeRoleArn"`
+	SigV4ExternalID    string `json:"sigV4ExternalId"`
+	SigV4Region        string `json:"sigV4Region"`
 
 	Sigv4Service             string `json:"sigv4Service"`
 	ForwardGrafanaUserHeader bool   `json:"forwardGrafanaUserHeader"`

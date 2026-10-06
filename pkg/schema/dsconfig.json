@@ -150,32 +150,6 @@
       }
     },
     {
-      "id": "jsonData_sigV4UsePerDatasourceExternalId",
-      "key": "sigV4UsePerDatasourceExternalId",
-      "label": "Use per-datasource external ID",
-      "description": "Grafana Assume Role only. When enabled, this datasource uses its own external ID (below) instead of the stack-wide external ID.",
-      "valueType": "boolean",
-      "target": "jsonData",
-      "defaultValue": false,
-      "dependsOn": "jsonData_sigV4AuthType == 'grafana_assume_role'",
-      "ui": {
-        "component": "switch"
-      }
-    },
-    {
-      "id": "jsonData_sigV4GrafanaExternalId",
-      "key": "sigV4GrafanaExternalId",
-      "label": "External ID",
-      "description": "Per-datasource external ID used for Grafana Assume Role. Only takes effect when \"Use per-datasource external ID\" is enabled; otherwise the stack-wide external ID is used.",
-      "valueType": "string",
-      "target": "jsonData",
-      "dependsOn": "jsonData_sigV4AuthType == 'grafana_assume_role' && jsonData_sigV4UsePerDatasourceExternalId == true",
-      "ui": {
-        "component": "input",
-        "placeholder": "External ID"
-      }
-    },
-    {
       "id": "jsonData_sigV4Region",
       "key": "sigV4Region",
       "label": "Default Region",
@@ -595,8 +569,6 @@
       "order": 3,
       "fieldRefs": [
         "jsonData_sigV4AssumeRoleArn",
-        "jsonData_sigV4UsePerDatasourceExternalId",
-        "jsonData_sigV4GrafanaExternalId",
         "jsonData_sigV4ExternalId"
       ]
     },
@@ -662,11 +634,6 @@
       "type": "group",
       "fields": ["jsonData_sigV4AssumeRoleArn", "jsonData_sigV4ExternalId"],
       "description": "STS assume-role parameters — external ID is only meaningful when assumeRoleArn is set"
-    },
-    {
-      "type": "group",
-      "fields": ["jsonData_sigV4UsePerDatasourceExternalId", "jsonData_sigV4GrafanaExternalId"],
-      "description": "Grafana Assume Role per-datasource external ID — grafanaExternalId is only meaningful when usePerDatasourceExternalId is true"
     },
     {
       "type": "group",

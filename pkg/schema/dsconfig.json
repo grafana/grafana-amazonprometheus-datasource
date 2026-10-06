@@ -42,14 +42,14 @@
       "id": "jsonData_sigV4AuthType",
       "key": "sigV4AuthType",
       "label": "Authentication Provider",
-      "description": "Specify which AWS credentials chain to use. Legacy value 'arn' is deprecated and treated as 'default'.",
+      "description": "Specify which AWS credentials chain to use.",
       "valueType": "string",
       "target": "jsonData",
       "role": "auth.discriminator",
       "validations": [
         {
           "type": "allowedValues",
-          "values": ["default", "keys", "credentials", "ec2_iam_role", "grafana_assume_role", "arn"]
+          "values": ["default", "keys", "credentials", "ec2_iam_role", "grafana_assume_role"]
         }
       ],
       "ui": {
@@ -681,7 +681,7 @@
   ],
   "instructions": [
     {
-      "msg": "This plugin forces SigV4 authentication: the config editor sets jsonData.sigV4Auth to true on load and the auth method picker offers no other option. Six authentication values are stored in jsonData.sigV4AuthType (not the base jsonData.authType field, which this plugin's PromOptions settings model inherits but never reads). The five editor-selectable ones are: 'default' (AWS SDK Default — the default credential chain), 'keys' (Access & secret key — puts sigV4AccessKey/sigV4SecretKey in secureJsonData), 'credentials' (Credentials file — optionally provide jsonData.sigV4Profile), 'ec2_iam_role' (Workspace IAM Role — no extra credentials needed), and 'grafana_assume_role' (Grafana Assume Role — Grafana Cloud only; visible only when the awsDatasourcesTempCredentials feature toggle is on and grafana-amazonprometheus-datasource is in the ConnectionConfig allow-list, which it is). The sixth is 'arn' (deprecated legacy value; treated as 'default').",
+      "msg": "This plugin forces SigV4 authentication: the config editor sets jsonData.sigV4Auth to true on load and the auth method picker offers no other option. Five authentication values are stored in jsonData.sigV4AuthType (not the base jsonData.authType field, which this plugin's PromOptions settings model inherits but never reads): 'default' (AWS SDK Default — the default credential chain), 'keys' (Access & secret key — puts sigV4AccessKey/sigV4SecretKey in secureJsonData), 'credentials' (Credentials file — optionally provide jsonData.sigV4Profile), 'ec2_iam_role' (Workspace IAM Role — no extra credentials needed), and 'grafana_assume_role' (Grafana Assume Role — Grafana Cloud only; visible only when the awsDatasourcesTempCredentials feature toggle is on and grafana-amazonprometheus-datasource is in the ConnectionConfig allow-list, which it is).",
       "tags": ["llm", "auth"]
     },
     {

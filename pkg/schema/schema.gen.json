@@ -204,15 +204,14 @@
               "default": true
             },
             "sigV4AuthType": {
-              "description": "Specify which AWS credentials chain to use. Legacy value 'arn' is deprecated and treated as 'default'.",
+              "description": "Specify which AWS credentials chain to use.",
               "type": "string",
               "enum": [
                 "default",
                 "keys",
                 "credentials",
                 "ec2_iam_role",
-                "grafana_assume_role",
-                "arn"
+                "grafana_assume_role"
               ]
             },
             "sigV4ExternalId": {

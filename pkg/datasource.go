@@ -38,8 +38,12 @@ func NewDatasource(ctx context.Context, dsInstanceSettings backend.DataSourceIns
 	}
 
 	authSettings := awsds.ReadAuthSettings(ctx)
+	service, err := promlib.NewDatasourceService(ctx, dsInstanceSettings, sdkhttpclient.NewProvider(), plog, extendClientOpts)
+	if err != nil {
+		return nil, err
+	}
 	return &Datasource{
-		Service:            promlib.NewService(sdkhttpclient.NewProvider(), plog, extendClientOpts),
+		Service:            service,
 		authSettings:       *authSettings,
 		forwardGrafanaUser: forwardGrafanaUser,
 	}, nil
@@ -53,6 +57,12 @@ type Datasource struct {
 	// forwardGrafanaUser controls whether the logged-in user's X-Grafana-User
 	// header is forwarded to the upstream workspace.
 	forwardGrafanaUser bool
+}
+
+var _ instancemgmt.InstanceDisposer = (*Datasource)(nil)
+
+func (d *Datasource) Dispose() {
+	d.Service.Dispose()
 }
 
 func (d *Datasource) QueryData(ctx context.Context, req *backend.QueryDataRequest) (*backend.QueryDataResponse, error) {

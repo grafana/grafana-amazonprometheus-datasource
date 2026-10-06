@@ -15,6 +15,7 @@ func TestNewDatasource(t *testing.T) {
 	ds, err := NewDatasource(context.Background(), backend.DataSourceInstanceSettings{Name: "test-datasource"})
 	require.NoError(t, err)
 	require.NotNil(t, ds)
+	t.Cleanup(ds.(*Datasource).Dispose)
 }
 
 func TestExtendClientOpts_SigV4Service(t *testing.T) {

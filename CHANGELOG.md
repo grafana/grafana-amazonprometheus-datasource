@@ -1,5 +1,10 @@
 # Changelog
 
+## 3.3.1
+
+- Fix CVE-2026-102278 and CVE-2026-102276 by updating `brace-expansion` to patched versions (1.1.20+, 2.1.6+, 5.0.11+)
+- Fix CVE-2026-102990 by updating `basic-ftp` to 6.2.1
+
 ## 3.3.0
 
 - Add data source configuration (dsconfig) schema in [#810](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/810)

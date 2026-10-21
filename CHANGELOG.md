@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.3.2
+
+- Update Go to 1.27.3 in [#817](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/817)
+
 ## 3.3.1
 
 - Fix CVE-2026-102278 and CVE-2026-102276 by updating `brace-expansion` to patched versions (1.1.20+, 2.1.6+, 5.0.11+)

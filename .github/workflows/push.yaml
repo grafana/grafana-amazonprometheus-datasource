@@ -28,7 +28,9 @@ jobs:
         DS_INSTANCE_SIGV4_SECRET_KEY=amazonManagedPrometheus:secure_sigV4SecretKey
 
   publish-and-deploy:
-    if: github.ref == 'refs/heads/main'
+    # Publishes each main merge to the dev catalog and deploys it to Grafana Cloud dev.
+    # Restore the `github.ref == 'refs/heads/main'` condition to enable it.
+    if: false
     uses: grafana/data-sources-ci-workflows/.github/workflows/cd-dev.yml@b400d490687700082808b90d2200239a820b3186 # main
     permissions:
       attestations: write

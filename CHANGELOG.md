@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.3.3
+
+- Dependency updates
+
 ## 3.3.2
 
 - Update Go to 1.27.3 in [#817](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/817)

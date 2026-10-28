@@ -48,6 +48,7 @@
     "checksumBehavior",
     "codeowners",
     "GATB",
+    "GHSA",
     "defaultSemverRangePrefix",
     "enableHardenedMode",
     "enableImmutableInstalls",

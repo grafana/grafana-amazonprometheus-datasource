@@ -1,5 +1,14 @@
 # Changelog
 
+## 3.3.4
+
+- Update `@grafana/*` packages to 13.3.0
+- Fix GHSA-cg2g-xh64-v4q7 and GHSA-mrv2-3pqr-j5jr by updating `dompurify` to 3.4.17
+- Fix CVE-2026-93749 by updating `source-map-js` to 1.2.2
+- Fix CVE-2023-54404 by updating `zod` to 4.6.7
+- Fix CVE-2026-85063 by updating `@grafana/levitate` to 0.18.0, which removes the `csv-parse` dependency
+- Fix CVE-2026-78669, CVE-2026-78660 and CVE-2026-78659 by updating `golang.org/x/net` to v0.60.0
+
 ## 3.3.3
 
 - Dependency updates

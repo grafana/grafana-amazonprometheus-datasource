@@ -66,6 +66,7 @@
     "testdata",
     "dsconfig",
     "promlibmodels",
-    "struct"
+    "struct",
+    "dompurify"
   ]
 }

@@ -48,6 +48,7 @@
     "checksumBehavior",
     "codeowners",
     "GATB",
+    "GHSA",
     "defaultSemverRangePrefix",
     "enableHardenedMode",
     "enableImmutableInstalls",
@@ -65,6 +66,7 @@
     "testdata",
     "dsconfig",
     "promlibmodels",
-    "struct"
+    "struct",
+    "dompurify"
   ]
 }

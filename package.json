@@ -30,9 +30,9 @@
     "@grafana/plugin-e2e": "4.0.0",
     "@grafana/sign-plugin": "4.0.0",
     "@grafana/tsconfig": "2.2.0",
-    "@playwright/test": "1.64.1",
+    "@playwright/test": "1.65.0",
     "@stylistic/eslint-plugin": "5.10.0",
-    "@swc/core": "1.16.21",
+    "@swc/core": "1.16.22",
     "@swc/jest": "0.2.39",
     "@testing-library/dom": "10.4.2",
     "@testing-library/jest-dom": "7.0.1",
@@ -55,14 +55,14 @@
     "eslint-plugin-react-hooks": "7.1.1",
     "eslint-webpack-plugin": "6.0.0",
     "fork-ts-checker-webpack-plugin": "9.1.0",
-    "glob": "14.0.3",
+    "glob": "14.0.4",
     "identity-obj-proxy": "3.0.0",
     "imports-loader": "5.0.0",
     "jest": "30.5.2",
     "jest-environment-jsdom": "30.5.2",
     "prettier": "3.9.10",
     "replace-in-file-webpack-plugin": "1.0.6",
-    "sass": "1.107.1",
+    "sass": "1.108.0",
     "sass-loader": "17.1.0",
     "semver": "7.8.6",
     "style-loader": "4.0.0",
@@ -96,11 +96,11 @@
     "brace-expansion@^1.1.0": "^1.1.20",
     "brace-expansion@^2.0.0": "^2.1.6",
     "brace-expansion@^5.0.0": "^5.0.11",
-    "basic-ftp": "6.2.5"
+    "basic-ftp": "6.2.6"
   },
   "engines": {
     "node": ">=24",
     "npm": ">=11.17.0"
   },
-  "packageManager": "npm@11.21.1"
+  "packageManager": "npm@11.21.2"
 }

@@ -1,6 +1,6 @@
 {
   "name": "grafana-amazonprometheus-datasource",
-  "version": "3.3.4",
+  "version": "3.3.5",
   "description": "A plugin for Amazon Managed Prometheus",
   "scripts": {
     "build": "webpack -c ./webpack.config.ts --env production",
@@ -83,7 +83,7 @@
     "@grafana/data": "13.3.0",
     "@grafana/i18n": "13.3.0",
     "@grafana/plugin-ui": "0.17.10",
-    "@grafana/prometheus": "13.2.2",
+    "@grafana/prometheus": "13.2.3",
     "@grafana/runtime": "13.3.0",
     "@grafana/schema": "13.3.0",
     "@grafana/ui": "13.3.0",

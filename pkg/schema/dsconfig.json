@@ -12,13 +12,9 @@
         "plugin_sdk_settings.basicAuthUser",
         "plugin_sdk_settings.basicAuthPassword",
         "plugin_sdk_settings.withCredentials",
-        "plugin_sdk_settings.tlsAuthWithCACert",
         "plugin_sdk_settings.tlsCACert",
-        "plugin_sdk_settings.tlsAuth",
-        "plugin_sdk_settings.serverName",
         "plugin_sdk_settings.tlsClientCert",
         "plugin_sdk_settings.tlsClientKey",
-        "plugin_sdk_settings.tlsSkipVerify",
         "plugin_sdk_settings.httpHeaders"
       ],
       "patch": {
@@ -218,47 +214,11 @@
       }
     },
     {
-      "id": "jsonData_alertmanagerUid",
-      "key": "alertmanagerUid",
-      "label": "Alertmanager",
-      "description": "Backend-only. Part of the base @grafana/data `DataSourceJsonData` fields inherited by every datasource's jsonData, set by Grafana core's Alerting UI when this datasource is linked to an Alertmanager data source. Not rendered by this plugin's own config editor.",
-      "valueType": "string",
-      "target": "jsonData",
-      "tags": ["backend-only"]
-    },
-    {
-      "id": "jsonData_disableGrafanaCache",
-      "key": "disableGrafanaCache",
-      "label": "Disable Grafana query caching",
-      "description": "Backend-only. Part of the base @grafana/data `DataSourceJsonData` fields inherited by every datasource's jsonData; controlled from Grafana's own query caching settings, not rendered by this plugin's own config editor.",
+      "id": "jsonData_enableSecureSocksProxy",
+      "key": "enableSecureSocksProxy",
+      "label": "Secure Socks Proxy",
+      "description": "Backend-only. Routes datasource requests through the Grafana secure SOCKS proxy. Added to the shared PromOptions settings model as a field managed by the Grafana plugin SDK; not rendered by this plugin's own config editor.",
       "valueType": "boolean",
-      "target": "jsonData",
-      "tags": ["backend-only"]
-    },
-    {
-      "id": "jsonData_authTypeLegacy",
-      "key": "authType",
-      "label": "Authentication Provider (legacy base field)",
-      "description": "Backend-only. Part of the base @grafana/data `DataSourceJsonData` fields inherited via the shared PromOptions settings model, but unused by this plugin — the SigV4-prefixed `sigV4AuthType` is the field this plugin's editor and backend actually read.",
-      "valueType": "string",
-      "target": "jsonData",
-      "tags": ["backend-only"]
-    },
-    {
-      "id": "jsonData_defaultRegionLegacy",
-      "key": "defaultRegion",
-      "label": "Default Region (legacy base field)",
-      "description": "Backend-only. Part of the base @grafana/data `DataSourceJsonData` fields inherited via the shared PromOptions settings model, but unused by this plugin — `sigV4Region` is the field this plugin's editor and backend actually read.",
-      "valueType": "string",
-      "target": "jsonData",
-      "tags": ["backend-only"]
-    },
-    {
-      "id": "jsonData_profileLegacy",
-      "key": "profile",
-      "label": "Credentials Profile (legacy base field)",
-      "description": "Backend-only. Part of the base @grafana/data `DataSourceJsonData` fields inherited via the shared PromOptions settings model, but unused by this plugin — `sigV4Profile` is the field this plugin's editor and backend actually read.",
-      "valueType": "string",
       "target": "jsonData",
       "tags": ["backend-only"]
     },
@@ -652,7 +612,7 @@
       "tags": ["llm", "auth"]
     },
     {
-      "msg": "This datasource embeds the shared grafana-prometheus-datasource PromOptions settings model, so its jsonData carries several fields the Amazon Managed Service for Prometheus editor never renders: prometheusType/prometheusVersion and exemplarTraceIdDestinations are explicitly hidden (hidePrometheusTypeVersion, hideExemplars), and the base authType/defaultRegion/profile/alertmanagerUid/disableGrafanaCache fields are either superseded by the sigV4-prefixed equivalents or set by Grafana core outside this plugin's own config editor. They are declared here only for jsonData struct parity, tagged backend-only or frontend-hidden.",
+      "msg": "This datasource embeds the shared grafana-prometheus-datasource PromOptions settings model, so its jsonData carries several fields the Amazon Managed Service for Prometheus editor never renders: prometheusType/prometheusVersion and exemplarTraceIdDestinations are explicitly hidden (hidePrometheusTypeVersion, hideExemplars), and the SDK-managed TLS fields (tlsAuth, tlsAuthWithCACert, tlsSkipVerify, serverName) and enableSecureSocksProxy are set outside this plugin's own config editor. They are declared here only for jsonData struct parity, tagged backend-only or frontend-hidden.",
       "tags": ["llm"]
     }
   ]

@@ -1,8 +1,17 @@
 # Changelog
 
-## Unreleased
+## 3.3.6
 
-- Fix a connection freeze between Grafana and the plugin under heavy query load by updating google.golang.org/grpc to v1.85.0 ([grpc/grpc-go#9330](https://github.com/grpc/grpc-go/issues/9330))
+- Bump `@grafana/aws-sdk` to 0.13.1 in [#856](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/856)
+- Update frontend dependencies in [#846](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/846) and [#848](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/848)
+- Fix a security vulnerability in golang.org/x/crypto in [#829](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/829)
+- Update grafana-plugin-sdk-go to v0.299.0 in [#849](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/849)
+- Update Node.js to 24.22.3 in [#850](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/850)
+- Match the query service path under any API group in end-to-end tests in [#851](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/851)
+
+## 3.3.5
+
+- Fix a connection freeze between Grafana and the plugin under heavy query load by updating google.golang.org/grpc to v1.85.0 ([grpc/grpc-go#9330](https://github.com/grpc/grpc-go/issues/9330)) in [#830](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/830)
 
 ## 3.3.4
 
@@ -272,7 +281,6 @@
   - Bump github.com/grafana/grafana-plugin-sdk-go from 0.280.0 to 0.281.0 [#506](https://github.com//grafana/grafana-amazonprometheus-datasource/pull/506)
   - Bump @grafana/plugin-ui from 0.10.9 to 0.11.0 [#503](https://github.com//grafana/grafana-amazonprometheus-datasource/pull/503)
 
-
 ## 2.2.1
 
 - E2E: Use grafana selectors instead of getByText in [#380](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/380)
@@ -292,6 +300,7 @@
   - Bump github.com/grafana/grafana-aws-sdk from 1.0.2 to 1.0.3 [#395](https://github.com//grafana/grafana-amazonprometheus-datasource/pull/395)
   - Bump github.com/grafana/grafana-plugin-sdk-go from 0.277.1 to 0.278.0 [#394](https://github.com//grafana/grafana-amazonprometheus-datasource/pull/394)
   
+
 ## 2.2.0
 - Update for new sigv4 middleware by @njvrzm in [#392](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/392)
 

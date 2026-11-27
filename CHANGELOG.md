@@ -2,7 +2,7 @@
 
 ## Unreleased
 
-- Add pre-made AMP dashboards (Alerts and Recording Rules, Workspace) from the [AWS Observability Accelerator](https://github.com/aws-observability/aws-observability-accelerator/tree/main/artifacts/grafana-dashboards/amp)
+- Add pre-made AMP dashboards (Alerts and Recording Rules, Workspace, Query Insights) from the [AWS Observability Accelerator](https://github.com/aws-observability/aws-observability-accelerator/tree/main/artifacts/grafana-dashboards/amp)
 - Fix a connection freeze between Grafana and the plugin under heavy query load by updating google.golang.org/grpc to v1.85.0 ([grpc/grpc-go#9330](https://github.com/grpc/grpc-go/issues/9330))
 
 ## 3.3.4

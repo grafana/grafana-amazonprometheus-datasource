@@ -1,0 +1,2249 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "description": "Understand and optimize AMP query activity from CloudWatch query logs. Ranks queries, dashboards, rules and consumers by total samples scanned. Requires opt-in query logging.",
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "links": [
+    {
+      "asDropdown": false,
+      "icon": "external link",
+      "includeVars": false,
+      "keepTime": false,
+      "tags": [],
+      "targetBlank": false,
+      "title": "RESET FILTER",
+      "tooltip": "",
+      "type": "link",
+      "url": "/d/${__dashboard.uid}?var-filter=$__all"
+    }
+  ],
+  "liveNow": false,
+  "panels": [
+    {
+      "collapsed": true,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 29,
+      "panels": [
+        {
+          "gridPos": {
+            "h": 10,
+            "w": 9,
+            "x": 0,
+            "y": 1
+          },
+          "id": 1,
+          "options": {
+            "code": {
+              "language": "plaintext",
+              "showLineNumbers": false,
+              "showMiniMap": false
+            },
+            "content": "# Amazon Managed Service for Prometheus — Query Insights\n\nUnderstand and optimize **query activity** against an **AMP** workspace using query logs shipped to **CloudWatch Logs**. Cost is driven by **`samplesProcessed`**, so every ranking uses **total samples (frequency × avg)** rather than average alone.\n\n#### ⚠️ Prerequisites\n1. Enable **query logging** on the AMP workspace with a CloudWatch Logs destination — panels are empty without it.\n2. Point the **CloudWatch datasource**, **Region** and **Log group** variables at that log group.\n3. Narrow with **Filter** (metric / label / value) and **Source** (API vs alerting vs recording).\n\nReference: [Optimizing queries with Amazon Managed Service for Prometheus](https://aws.amazon.com/blogs/mt/optimizing-queries-with-amazon-managed-prometheus/)",
+            "mode": "markdown"
+          },
+          "pluginVersion": "13.2.2",
+          "targets": [],
+          "title": "",
+          "type": "text"
+        },
+        {
+          "gridPos": {
+            "h": 10,
+            "w": 15,
+            "x": 9,
+            "y": 1
+          },
+          "id": 24,
+          "options": {
+            "code": {
+              "language": "plaintext",
+              "showLineNumbers": false,
+              "showMiniMap": false
+            },
+            "content": "### What this answers\n| # | Goal | Where |\n|---|---|---|\n| 1 | Where is my query load going? | Query load distribution — volume over time by source |\n| 2 | Which queries cost the most? | Top queries by total samples scanned |\n| 3 | Which dashboards cost the most? | Dashboards ranked by total samples |\n| 4 | What do alerting & recording rules cost? | Rules ranked by total samples |\n| 5 | Which cost cannot be attributed? | Unattributed query cost (no dashboardUid) |\n| 6 | What time ranges are queries requesting? | Longest-range queries (lookback window) |\n\n> **Note:** `qspThreshold` in the query-logging configuration gates what gets logged — `0` logs everything. Check it with `aws amp describe-query-logging-configuration`. Both API queries (`component = query-frontend`) and AMP ruler evaluations (`component = ruler`) are captured. Attribution fields (`dashboardUid`, `panelId`, `userAgent`) are taken verbatim from request headers, so treat them as caller-supplied hints.",
+            "mode": "markdown"
+          },
+          "pluginVersion": "13.2.2",
+          "targets": [],
+          "title": "",
+          "type": "text"
+        }
+      ],
+      "title": "About this dashboard",
+      "type": "row"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 1
+      },
+      "id": 30,
+      "title": "Overview",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "datasource",
+        "uid": "-- Dashboard --"
+      },
+      "description": "Sum of samples across matching query patterns. This is the primary cost dimension.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "orange",
+                "value": 100000000
+              },
+              {
+                "color": "red",
+                "value": 1000000000
+              }
+            ]
+          },
+          "unit": "short"
+        }
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 5,
+        "x": 0,
+        "y": 2
+      },
+      "id": 4,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "sum"
+          ],
+          "fields": "/^total_samples$/",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "13.2.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "datasource",
+            "uid": "-- Dashboard --"
+          },
+          "panelId": 3,
+          "refId": "A"
+        }
+      ],
+      "title": "Total query samples processed",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "datasource",
+        "uid": "-- Dashboard --"
+      },
+      "description": "Sum of frequency across matching query patterns.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              }
+            ]
+          },
+          "unit": "short"
+        }
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 4,
+        "x": 5,
+        "y": 2
+      },
+      "id": 5,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "sum"
+          ],
+          "fields": "/^frequency$/",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "13.2.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "datasource",
+            "uid": "-- Dashboard --"
+          },
+          "panelId": 3,
+          "refId": "A"
+        }
+      ],
+      "title": "Total executions",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "datasource",
+        "uid": "-- Dashboard --"
+      },
+      "description": "Max total_samples for a single (dashboard, panel, query) pattern. Top optimization target.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "orange",
+                "value": 50000000
+              },
+              {
+                "color": "red",
+                "value": 500000000
+              }
+            ]
+          },
+          "unit": "short"
+        }
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 5,
+        "x": 9,
+        "y": 2
+      },
+      "id": 6,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "max"
+          ],
+          "fields": "/^total_samples$/",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "13.2.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "datasource",
+            "uid": "-- Dashboard --"
+          },
+          "panelId": 3,
+          "refId": "A"
+        }
+      ],
+      "title": "Costliest pattern (samples)",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "cloudwatch",
+        "uid": "${cw}"
+      },
+      "description": "Distinct dashboards issuing matching queries. Counts only queries carrying a dashboardUid; rule evaluations and callers that omit X-Dashboard-Uid are excluded.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              }
+            ]
+          },
+          "unit": "short"
+        }
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 5,
+        "x": 14,
+        "y": 2
+      },
+      "id": 7,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "/^dashboards$/",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "13.2.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "cloudwatch",
+            "uid": "${cw}"
+          },
+          "expression": "fields case(component = \"ruler\" and message.ruleKind = \"alerting\", \"alerting rule\", component = \"ruler\" and message.ruleKind = \"recording\", \"recording rule\", component = \"query-frontend\", \"API\", \"other\") as source\n| filter message.dashboardUid like /./ and message.query like /${filter:raw}/ and source like /${source:pipe}/\n| stats count_distinct(message.dashboardUid) as dashboards",
+          "logGroups": [
+            {
+              "arn": "$log_group",
+              "name": "$log_group"
+            }
+          ],
+          "queryMode": "Logs",
+          "refId": "A",
+          "region": "$region",
+          "statsGroups": []
+        }
+      ],
+      "title": "Dashboards queried",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "cloudwatch",
+        "uid": "${cw}"
+      },
+      "description": "Most recent time any query matching the filter ran. A stale value means the metric/label has low recent query activity — a candidate for cleanup or tiering.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              }
+            ]
+          },
+          "unit": "dateTimeFromNow"
+        }
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 5,
+        "x": 19,
+        "y": 2
+      },
+      "id": 27,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "/^last_queried$/",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "13.2.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "cloudwatch",
+            "uid": "${cw}"
+          },
+          "expression": "fields case(component = \"ruler\" and message.ruleKind = \"alerting\", \"alerting rule\", component = \"ruler\" and message.ruleKind = \"recording\", \"recording rule\", component = \"query-frontend\", \"API\", \"other\") as source, toMillis(@timestamp) as ts\n| filter message.query like /${filter:raw}/ and source like /${source:pipe}/\n| stats max(ts) as last_queried",
+          "logGroups": [
+            {
+              "arn": "$log_group",
+              "name": "$log_group"
+            }
+          ],
+          "queryMode": "Logs",
+          "refId": "A",
+          "region": "$region",
+          "statsGroups": []
+        }
+      ],
+      "title": "Last queried (current filter)",
+      "type": "stat"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 6
+      },
+      "id": 31,
+      "title": "Query load distribution",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "cloudwatch",
+        "uid": "${cw}"
+      },
+      "description": "Executions per 30m bin by source. 'API' = anything served over the query API (Grafana dashboards, Explore, Grafana-managed alert rules, SDKs and agents). 'rule' = evaluated by the AMP ruler. Bars, not lines: Logs Insights omits empty bins.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 1,
+            "drawStyle": "bars",
+            "fillOpacity": 80,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": 3600000,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "showValues": false,
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "normal"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "short"
+        }
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 9,
+        "x": 0,
+        "y": 7
+      },
+      "id": 9,
+      "options": {
+        "annotations": {
+          "clustering": -1,
+          "multiLane": false
+        },
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "multi",
+          "sort": "desc"
+        }
+      },
+      "pluginVersion": "13.2.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "cloudwatch",
+            "uid": "${cw}"
+          },
+          "expression": "fields case(component = \"ruler\" and message.ruleKind = \"alerting\", \"alerting rule\", component = \"ruler\" and message.ruleKind = \"recording\", \"recording rule\", component = \"query-frontend\", \"API\", \"other\") as source\n| filter message.query like /${filter:raw}/ and source like /${source:pipe}/\n| stats count(*) as executions by source, bin(30m)",
+          "logGroups": [
+            {
+              "arn": "$log_group",
+              "name": "$log_group"
+            }
+          ],
+          "queryMode": "Logs",
+          "refId": "A",
+          "region": "$region",
+          "statsGroups": [
+            "source"
+          ]
+        }
+      ],
+      "title": "Query volume over time (by source)",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "cloudwatch",
+        "uid": "${cw}"
+      },
+      "description": "Which clients drive cost. API traffic only (ruler events carry no userAgent). Treat this as a hint, not an identity: currently Grafana 9.4 and earlier send an identifiable `Grafana/<version>` agent (e.g. `Grafana/9.4.7`), while the newer AMP plugin sends Go's default `Go-http-client/1.1`, which is indistinguishable from SDKs and agents. Expected to change in a later plugin release - re-verify before relying on it.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "auto",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "filterable": true,
+            "footer": {
+              "reducers": []
+            },
+            "inspect": false
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "total_samples"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "short"
+              },
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "mode": "gradient",
+                  "type": "gauge"
+                }
+              },
+              {
+                "id": "custom.width",
+                "value": 295
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "avg_samples"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "short"
+              },
+              {
+                "id": "custom.width",
+                "value": 122
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "executions"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "short"
+              },
+              {
+                "id": "custom.width",
+                "value": 111
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "userAgent",
+              "scope": "series"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 199
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 9,
+        "x": 9,
+        "y": 7
+      },
+      "id": 21,
+      "options": {
+        "cellHeight": "sm",
+        "enablePagination": true,
+        "showHeader": true,
+        "sortBy": [
+          {
+            "desc": true,
+            "displayName": "total_samples"
+          }
+        ]
+      },
+      "pluginVersion": "13.2.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "cloudwatch",
+            "uid": "${cw}"
+          },
+          "expression": "fields message.userAgent as userAgent, message.samplesProcessed as samples, case(component = \"ruler\" and message.ruleKind = \"alerting\", \"alerting rule\", component = \"ruler\" and message.ruleKind = \"recording\", \"recording rule\", component = \"query-frontend\", \"API\", \"other\") as source\n| filter component = \"query-frontend\" and message.query like /${filter:raw}/ and source like /${source:pipe}/\n| stats count(*) as executions, sum(samples) as total_samples, avg(samples) as avg_samples by userAgent\n| sort total_samples desc\n| limit 50",
+          "logGroups": [
+            {
+              "arn": "$log_group",
+              "name": "$log_group"
+            }
+          ],
+          "queryMode": "Logs",
+          "refId": "A",
+          "region": "$region",
+          "statsGroups": [
+            "userAgent"
+          ]
+        }
+      ],
+      "title": "Query cost by source (user agent)",
+      "transformations": [
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {},
+            "indexByName": {
+              "avg_samples": 2,
+              "executions": 1,
+              "total_samples": 3,
+              "userAgent": 0
+            },
+            "renameByName": {}
+          }
+        }
+      ],
+      "type": "table"
+    },
+    {
+      "datasource": {
+        "type": "cloudwatch",
+        "uid": "${cw}"
+      },
+      "description": "Share of total samples by source. 'API' covers all query-API traffic (dashboards, Explore, Grafana-managed alert rules, SDKs, agents); 'rule' is AMP-ruler evaluation only. Use the user-agent panel to separate interactive from programmatic within API.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "#73BF69",
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            }
+          },
+          "unit": "short"
+        }
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 6,
+        "x": 18,
+        "y": 7
+      },
+      "id": 10,
+      "options": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true,
+          "values": [
+            "percent"
+          ]
+        },
+        "pieType": "donut",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "/^total_samples$/",
+          "values": true
+        },
+        "sort": "desc",
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "13.2.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "cloudwatch",
+            "uid": "${cw}"
+          },
+          "expression": "fields case(component = \"ruler\" and message.ruleKind = \"alerting\", \"alerting rule\", component = \"ruler\" and message.ruleKind = \"recording\", \"recording rule\", component = \"query-frontend\", \"API\", \"other\") as source, message.samplesProcessed as samples\n| filter message.query like /${filter:raw}/ and source like /${source:pipe}/\n| stats sum(samples) as total_samples by source",
+          "logGroups": [
+            {
+              "arn": "$log_group",
+              "name": "$log_group"
+            }
+          ],
+          "queryMode": "Logs",
+          "refId": "A",
+          "region": "$region",
+          "statsGroups": [
+            "source"
+          ]
+        }
+      ],
+      "title": "Query samples processed by source",
+      "type": "piechart"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 16
+      },
+      "id": 32,
+      "title": "Most expensive queries and assets",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "cloudwatch",
+        "uid": "${cw}"
+      },
+      "description": "Grouped by dashboard, panel, query and queryType. Ranked by total_samples (frequency x avg). High frequency + large scans = recording-rule candidates. Click DashboardUid to open it.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "auto",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "filterable": true,
+            "footer": {
+              "reducers": []
+            },
+            "inspect": false
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "total_samples"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "short"
+              },
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "mode": "gradient",
+                  "type": "gauge"
+                }
+              },
+              {
+                "id": "custom.width",
+                "value": 216
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "avg_samples"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "short"
+              },
+              {
+                "id": "custom.width",
+                "value": 137
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "max_samples"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "short"
+              },
+              {
+                "id": "custom.width",
+                "value": 133
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "frequency"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "short"
+              },
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "type": "color-text"
+                }
+              },
+              {
+                "id": "custom.width",
+                "value": 123
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "avg_step"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "s"
+              },
+              {
+                "id": "custom.width",
+                "value": 112
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Query"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 922
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "DashboardUid"
+            },
+            "properties": [
+              {
+                "id": "links",
+                "value": [
+                  {
+                    "targetBlank": true,
+                    "title": "Open dashboard ${__value.text}",
+                    "url": "/d/${__value.text}?var-filter=${filter}"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Value"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 293
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 11,
+        "w": 15,
+        "x": 0,
+        "y": 17
+      },
+      "id": 3,
+      "options": {
+        "cellHeight": "sm",
+        "enablePagination": true,
+        "showHeader": true,
+        "sortBy": [
+          {
+            "desc": true,
+            "displayName": "total_samples"
+          }
+        ]
+      },
+      "pluginVersion": "13.2.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "cloudwatch",
+            "uid": "${cw}"
+          },
+          "expression": "fields message.dashboardUid as DashboardUid, message.panelId as PanelId, message.query as Query, message.queryType as queryType, message.samplesProcessed as samples, case(component = \"ruler\" and message.ruleKind = \"alerting\", \"alerting rule\", component = \"ruler\" and message.ruleKind = \"recording\", \"recording rule\", component = \"query-frontend\", \"API\", \"other\") as source\n| filter message.query like /${filter:raw}/ and source like /${source:pipe}/\n| stats count(*) as frequency, avg(samples) as avg_samples, max(samples) as max_samples, sum(samples) as total_samples, avg(message.step) as avg_step by DashboardUid, PanelId, Query, queryType\n| sort total_samples desc\n| limit 100",
+          "logGroups": [
+            {
+              "arn": "$log_group",
+              "name": "$log_group"
+            }
+          ],
+          "queryMode": "Logs",
+          "refId": "A",
+          "region": "$region",
+          "statsGroups": [
+            "DashboardUid",
+            "PanelId",
+            "Query",
+            "queryType"
+          ]
+        }
+      ],
+      "title": "Top queries by total samples scanned",
+      "transformations": [
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {},
+            "indexByName": {
+              "DashboardUid": 0,
+              "PanelId": 1,
+              "Query": 2,
+              "avg_samples": 5,
+              "avg_step": 8,
+              "frequency": 4,
+              "max_samples": 6,
+              "queryType": 3,
+              "total_samples": 7
+            },
+            "renameByName": {}
+          }
+        }
+      ],
+      "type": "table"
+    },
+    {
+      "datasource": {
+        "type": "cloudwatch",
+        "uid": "${cw}"
+      },
+      "description": "Total query cost aggregated per dashboard. Only queries that carry a dashboardUid are counted - rule evaluations and API callers that omit the X-Dashboard-Uid header are excluded rather than collapsed into one blank row.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "auto",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "filterable": true,
+            "footer": {
+              "reducers": []
+            },
+            "inspect": false
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "total_samples"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "short"
+              },
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "mode": "gradient",
+                  "type": "gauge"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "avg_samples"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "short"
+              },
+              {
+                "id": "custom.width",
+                "value": 116
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "frequency"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "short"
+              },
+              {
+                "id": "custom.width",
+                "value": 109
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "DashboardUid"
+            },
+            "properties": [
+              {
+                "id": "links",
+                "value": [
+                  {
+                    "targetBlank": true,
+                    "title": "Open dashboard ${__value.text}",
+                    "url": "/d/${__value.text}?var-filter=${filter}"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 11,
+        "w": 9,
+        "x": 15,
+        "y": 17
+      },
+      "id": 15,
+      "options": {
+        "cellHeight": "sm",
+        "enablePagination": true,
+        "showHeader": true,
+        "sortBy": [
+          {
+            "desc": true,
+            "displayName": "total_samples"
+          }
+        ]
+      },
+      "pluginVersion": "13.2.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "cloudwatch",
+            "uid": "${cw}"
+          },
+          "expression": "fields message.dashboardUid as DashboardUid, message.samplesProcessed as samples, case(component = \"ruler\" and message.ruleKind = \"alerting\", \"alerting rule\", component = \"ruler\" and message.ruleKind = \"recording\", \"recording rule\", component = \"query-frontend\", \"API\", \"other\") as source\n| filter message.dashboardUid like /./ and message.query like /${filter:raw}/ and source like /${source:pipe}/\n| stats sum(samples) as total_samples, count(*) as frequency, avg(samples) as avg_samples by DashboardUid\n| sort total_samples desc\n| limit 50",
+          "logGroups": [
+            {
+              "arn": "$log_group",
+              "name": "$log_group"
+            }
+          ],
+          "queryMode": "Logs",
+          "refId": "A",
+          "region": "$region",
+          "statsGroups": [
+            "DashboardUid"
+          ]
+        }
+      ],
+      "title": "Dashboards ranked by total samples",
+      "transformations": [
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {},
+            "indexByName": {
+              "DashboardUid": 0,
+              "avg_samples": 2,
+              "frequency": 1,
+              "total_samples": 3
+            },
+            "renameByName": {}
+          }
+        }
+      ],
+      "type": "table"
+    },
+    {
+      "datasource": {
+        "type": "cloudwatch",
+        "uid": "${cw}"
+      },
+      "description": "Alerting + recording rules by cost. evaluations x avg samples = continuous cost. Unexpectedly large scans often mean a missing label filter. Ruler events only (component = ruler).",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "auto",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "filterable": true,
+            "footer": {
+              "reducers": []
+            },
+            "inspect": false
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "total_samples"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "short"
+              },
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "mode": "gradient",
+                  "type": "gauge"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "avg_samples"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "short"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "evaluations"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "short"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Rule Type",
+              "scope": "series"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 118
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Query",
+              "scope": "series"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 360
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 10,
+        "w": 24,
+        "x": 0,
+        "y": 28
+      },
+      "id": 17,
+      "options": {
+        "cellHeight": "sm",
+        "enablePagination": true,
+        "showHeader": true,
+        "sortBy": [
+          {
+            "desc": true,
+            "displayName": "total_samples"
+          }
+        ]
+      },
+      "pluginVersion": "13.2.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "cloudwatch",
+            "uid": "${cw}"
+          },
+          "expression": "fields message.ruleKind as RuleKind, message.ruleNamespace as RuleNamespace, message.ruleGroup as RuleGroup, message.ruleName as RuleName, message.query as Query, message.samplesProcessed as samples, case(component = \"ruler\" and message.ruleKind = \"alerting\", \"alerting rule\", component = \"ruler\" and message.ruleKind = \"recording\", \"recording rule\", component = \"query-frontend\", \"API\", \"other\") as source\n| filter component = \"ruler\" and message.query like /${filter:raw}/ and source like /${source:pipe}/\n| stats count(*) as evaluations, avg(samples) as avg_samples, sum(samples) as total_samples by RuleKind, RuleNamespace, RuleGroup, RuleName, Query\n| sort total_samples desc\n| limit 100",
+          "logGroups": [
+            {
+              "arn": "$log_group",
+              "name": "$log_group"
+            }
+          ],
+          "queryMode": "Logs",
+          "refId": "A",
+          "region": "$region",
+          "statsGroups": [
+            "RuleKind",
+            "RuleNamespace",
+            "RuleGroup",
+            "RuleName",
+            "Query"
+          ]
+        }
+      ],
+      "title": "Rules ranked by total samples",
+      "transformations": [
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {},
+            "indexByName": {
+              "Query": 4,
+              "RuleGroup": 2,
+              "RuleKind": 0,
+              "RuleName": 3,
+              "RuleNamespace": 1,
+              "avg_samples": 6,
+              "evaluations": 5,
+              "total_samples": 7
+            },
+            "renameByName": {
+              "RuleKind": "Rule Type"
+            }
+          }
+        }
+      ],
+      "type": "table"
+    },
+    {
+      "datasource": {
+        "type": "datasource",
+        "uid": "-- Dashboard --"
+      },
+      "description": "Heaviest queries by total samples scanned.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "continuous-GrYlRd"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "fillOpacity": 80,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineWidth": 1,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "short"
+        }
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 0,
+        "y": 38
+      },
+      "id": 12,
+      "options": {
+        "barRadius": 0,
+        "barWidth": 0.97,
+        "fullHighlight": false,
+        "groupWidth": 0.7,
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
+        },
+        "orientation": "horizontal",
+        "showValue": "auto",
+        "stacking": "none",
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        },
+        "xField": "Query",
+        "xTickLabelRotation": 0,
+        "xTickLabelSpacing": 0
+      },
+      "pluginVersion": "13.2.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "datasource",
+            "uid": "-- Dashboard --"
+          },
+          "panelId": 3,
+          "refId": "A"
+        }
+      ],
+      "title": "Top 15 queries by total samples",
+      "transformations": [
+        {
+          "id": "filterFieldsByName",
+          "options": {
+            "include": {
+              "names": [
+                "Query",
+                "total_samples"
+              ]
+            }
+          }
+        },
+        {
+          "id": "sortBy",
+          "options": {
+            "sort": [
+              {
+                "desc": true,
+                "field": "total_samples"
+              }
+            ]
+          }
+        },
+        {
+          "id": "limit",
+          "options": {
+            "limitField": 15
+          }
+        }
+      ],
+      "type": "barchart"
+    },
+    {
+      "datasource": {
+        "type": "datasource",
+        "uid": "-- Dashboard --"
+      },
+      "description": "Most frequently executed queries.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "continuous-BlPu"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "fillOpacity": 80,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineWidth": 1,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "short"
+        }
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 12,
+        "y": 38
+      },
+      "id": 13,
+      "options": {
+        "barRadius": 0,
+        "barWidth": 0.97,
+        "fullHighlight": false,
+        "groupWidth": 0.7,
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
+        },
+        "orientation": "horizontal",
+        "showValue": "auto",
+        "stacking": "none",
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        },
+        "xField": "Query",
+        "xTickLabelRotation": 0,
+        "xTickLabelSpacing": 0
+      },
+      "pluginVersion": "13.2.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "datasource",
+            "uid": "-- Dashboard --"
+          },
+          "panelId": 3,
+          "refId": "A"
+        }
+      ],
+      "title": "Top 15 queries by frequency",
+      "transformations": [
+        {
+          "id": "filterFieldsByName",
+          "options": {
+            "include": {
+              "names": [
+                "Query",
+                "frequency"
+              ]
+            }
+          }
+        },
+        {
+          "id": "sortBy",
+          "options": {
+            "sort": [
+              {
+                "desc": true,
+                "field": "frequency"
+              }
+            ]
+          }
+        },
+        {
+          "id": "limit",
+          "options": {
+            "limitField": 15
+          }
+        }
+      ],
+      "type": "barchart"
+    },
+    {
+      "datasource": {
+        "type": "cloudwatch",
+        "uid": "${cw}"
+      },
+      "description": "API queries that carry no dashboardUid, so no dashboard or panel can be attributed. This is where most sample cost sits today. Ranked by total samples; max_samples shows the worst single execution. Populated by callers that omit X-Dashboard-Uid, including the newer AMP plugin.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "auto",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "filterable": true,
+            "footer": {
+              "reducers": []
+            },
+            "inspect": false
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "total_samples"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "short"
+              },
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "mode": "gradient",
+                  "type": "gauge"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "avg_samples"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "short"
+              },
+              {
+                "id": "custom.width",
+                "value": 280
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "max_samples"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "short"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "executions"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "short"
+              },
+              {
+                "id": "custom.width",
+                "value": 119
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "userAgent",
+              "scope": "series"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 176
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Query",
+              "scope": "series"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 723
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 10,
+        "w": 24,
+        "x": 0,
+        "y": 47
+      },
+      "id": 28,
+      "options": {
+        "cellHeight": "sm",
+        "enablePagination": true,
+        "showHeader": true,
+        "sortBy": [
+          {
+            "desc": true,
+            "displayName": "total_samples"
+          }
+        ]
+      },
+      "pluginVersion": "13.2.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "cloudwatch",
+            "uid": "${cw}"
+          },
+          "expression": "fields message.query as Query, message.userAgent as userAgent, message.samplesProcessed as samples, case(component = \"ruler\" and message.ruleKind = \"alerting\", \"alerting rule\", component = \"ruler\" and message.ruleKind = \"recording\", \"recording rule\", component = \"query-frontend\", \"API\", \"other\") as source\n| filter component = \"query-frontend\" and not (message.dashboardUid like /./) and message.query like /${filter:raw}/ and source like /${source:pipe}/\n| stats count(*) as executions, avg(samples) as avg_samples, max(samples) as max_samples, sum(samples) as total_samples by userAgent, Query\n| sort total_samples desc\n| limit 100",
+          "logGroups": [
+            {
+              "arn": "$log_group",
+              "name": "$log_group"
+            }
+          ],
+          "queryMode": "Logs",
+          "refId": "A",
+          "region": "$region",
+          "statsGroups": [
+            "userAgent",
+            "Query"
+          ]
+        }
+      ],
+      "title": "Unattributed query cost (no dashboardUid)",
+      "transformations": [
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {},
+            "indexByName": {
+              "Query": 1,
+              "avg_samples": 3,
+              "executions": 2,
+              "max_samples": 4,
+              "total_samples": 5,
+              "userAgent": 0
+            },
+            "renameByName": {}
+          }
+        }
+      ],
+      "type": "table"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 57
+      },
+      "id": 33,
+      "title": "Query patterns",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "cloudwatch",
+        "uid": "${cw}"
+      },
+      "description": "Range queries sorted by lookback (end - start). Long range + high samples = biggest cost drivers; a panel may be scanning weeks of data on every refresh.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "auto",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "filterable": true,
+            "footer": {
+              "reducers": []
+            },
+            "inspect": false
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "samples"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "short"
+              },
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "mode": "gradient",
+                  "type": "gauge"
+                }
+              },
+              {
+                "id": "custom.width",
+                "value": 262
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "range_lookback"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "s"
+              },
+              {
+                "id": "custom.width",
+                "value": 164
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "step"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "s"
+              },
+              {
+                "id": "custom.width",
+                "value": 92
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Query"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 756
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Time"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 199
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 10,
+        "w": 24,
+        "x": 0,
+        "y": 58
+      },
+      "id": 19,
+      "options": {
+        "cellHeight": "sm",
+        "enablePagination": true,
+        "showHeader": true,
+        "sortBy": [
+          {
+            "desc": true,
+            "displayName": "range_lookback"
+          }
+        ]
+      },
+      "pluginVersion": "13.2.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "cloudwatch",
+            "uid": "${cw}"
+          },
+          "expression": "fields message.query as Query, (message.end - message.start) as range_lookback, message.step as step, message.samplesProcessed as samples, case(component = \"ruler\" and message.ruleKind = \"alerting\", \"alerting rule\", component = \"ruler\" and message.ruleKind = \"recording\", \"recording rule\", component = \"query-frontend\", \"API\", \"other\") as source\n| filter message.query like /${filter:raw}/ and message.queryType = \"range\" and source like /${source:pipe}/\n| sort range_lookback desc\n| limit 100",
+          "logGroups": [
+            {
+              "arn": "$log_group",
+              "name": "$log_group"
+            }
+          ],
+          "queryMode": "Logs",
+          "refId": "A",
+          "region": "$region",
+          "statsGroups": []
+        }
+      ],
+      "title": "Longest-range queries (lookback window)",
+      "transformations": [
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {},
+            "includeByName": {},
+            "indexByName": {
+              "Query": 0,
+              "Time": 4,
+              "Value": 7,
+              "__log__grafana_internal__": 5,
+              "__logstream__grafana_internal__": 6,
+              "range_lookback": 1,
+              "samples": 3,
+              "step": 2
+            },
+            "renameByName": {}
+          }
+        }
+      ],
+      "type": "table"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 68
+      },
+      "id": 34,
+      "title": "Drill-down — all log fields",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "cloudwatch",
+        "uid": "${cw}"
+      },
+      "description": "Unaggregated CloudWatch Logs for the current filter, newest first. Expand any line to inspect every field. API events: queryType, start/end/step, userAgent, dashboardUid, panelId. Ruler events: ruleName, ruleKind, ruleGroup, ruleNamespace. Both: query, samplesProcessed, queryTimeInSeconds, component, workspaceId.",
+      "gridPos": {
+        "h": 14,
+        "w": 24,
+        "x": 0,
+        "y": 69
+      },
+      "id": 23,
+      "options": {
+        "dedupStrategy": "none",
+        "detailsMode": "inline",
+        "enableInfiniteScrolling": true,
+        "enableLogDetails": true,
+        "prettifyLogMessage": true,
+        "showCommonLabels": false,
+        "showControls": true,
+        "showFieldSelector": false,
+        "showLabels": false,
+        "showLevel": true,
+        "showTime": true,
+        "sortOrder": "Descending",
+        "syntaxHighlighting": true,
+        "timestampResolution": "ms",
+        "unwrappedColumns": false,
+        "wrapLogMessage": false
+      },
+      "pluginVersion": "13.2.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "cloudwatch",
+            "uid": "${cw}"
+          },
+          "expression": "fields @timestamp, @message, case(component = \"ruler\" and message.ruleKind = \"alerting\", \"alerting rule\", component = \"ruler\" and message.ruleKind = \"recording\", \"recording rule\", component = \"query-frontend\", \"API\", \"other\") as source\n| filter message.query like /${filter:raw}/ and source like /${source:pipe}/\n| sort @timestamp desc\n| limit 1000",
+          "logGroups": [
+            {
+              "arn": "$log_group",
+              "name": "$log_group"
+            }
+          ],
+          "queryMode": "Logs",
+          "refId": "A",
+          "region": "$region",
+          "statsGroups": []
+        }
+      ],
+      "title": "Raw query logs (expand a row for all fields)",
+      "type": "logs"
+    }
+  ],
+  "preload": false,
+  "refresh": "",
+  "schemaVersion": 42,
+  "templating": {
+    "list": [
+      {
+        "allowCustomValue": true,
+        "current": {
+          "text": "",
+          "value": ""
+        },
+        "hide": 0,
+        "includeAll": false,
+        "label": "CloudWatch datasource",
+        "multi": false,
+        "name": "cw",
+        "options": [],
+        "query": "cloudwatch",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "type": "datasource"
+      },
+      {
+        "allowCustomValue": true,
+        "current": {
+          "text": "",
+          "value": ""
+        },
+        "description": "Source for filter variable values.",
+        "hide": 0,
+        "includeAll": false,
+        "label": "Amazon Managed Service for Prometheus datasource",
+        "multi": false,
+        "name": "prom",
+        "options": [],
+        "query": "grafana-amazonprometheus-datasource",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "type": "datasource"
+      },
+      {
+        "allowCustomValue": true,
+        "current": {
+          "text": "",
+          "value": ""
+        },
+        "datasource": {
+          "type": "cloudwatch",
+          "uid": "${cw}"
+        },
+        "definition": "",
+        "hide": 0,
+        "includeAll": false,
+        "label": "Log group",
+        "multi": false,
+        "name": "log_group",
+        "options": [],
+        "query": {
+          "logGroupPrefix": "/aws/amp",
+          "queryType": "logGroups",
+          "refId": "CloudWatchVariableQueryEditor-VariableQuery",
+          "region": "default"
+        },
+        "refresh": 1,
+        "regex": "",
+        "regexApplyTo": "value",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "allValue": ".*",
+        "allowCustomValue": true,
+        "current": {
+          "text": "All",
+          "value": "$__all"
+        },
+        "datasource": {
+          "type": "grafana-amazonprometheus-datasource",
+          "uid": "${prom}"
+        },
+        "definition": "label_values(__name__)",
+        "description": "Regex applied to message.query. Metric names from Prometheus by default; type a custom value for a label name or label-value pair. All = every query (.*).",
+        "hide": 0,
+        "includeAll": true,
+        "label": "Filter (metric / label / value)",
+        "multi": false,
+        "name": "filter",
+        "options": [],
+        "query": {
+          "qryType": 1,
+          "query": "label_values(__name__)",
+          "refId": "PrometheusVariableQueryEditor-VariableQuery"
+        },
+        "refresh": 2,
+        "regex": "",
+        "regexApplyTo": "value",
+        "skipUrlSync": false,
+        "sort": 1,
+        "type": "query"
+      },
+      {
+        "allValue": ".*",
+        "allowCustomValue": false,
+        "current": {
+          "text": "All",
+          "value": "$__all"
+        },
+        "description": "Filter by query origin. AMP ruler alerting / recording rule evaluations, vs API = served over the read API (Grafana dashboards, Explore, Grafana-managed alert rules, SDKs and agents).",
+        "hide": 0,
+        "includeAll": true,
+        "label": "Source",
+        "multi": true,
+        "name": "source",
+        "options": [],
+        "query": "alerting rule, recording rule, API, other",
+        "skipUrlSync": false,
+        "type": "custom",
+        "valuesFormat": "csv"
+      },
+      {
+        "allowCustomValue": true,
+        "current": {
+          "text": "",
+          "value": ""
+        },
+        "datasource": {
+          "type": "cloudwatch",
+          "uid": "${cw}"
+        },
+        "definition": "",
+        "description": "CloudWatch Logs region",
+        "hide": 0,
+        "includeAll": false,
+        "label": "Region",
+        "multi": false,
+        "name": "region",
+        "options": [],
+        "query": {
+          "queryType": "regions",
+          "refId": "A",
+          "region": "default"
+        },
+        "refresh": 1,
+        "regex": "",
+        "regexApplyTo": "value",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-30d",
+    "to": "now"
+  },
+  "timepicker": {
+    "refresh_intervals": [
+      "5s",
+      "10s",
+      "30s",
+      "1m",
+      "5m",
+      "15m",
+      "30m",
+      "1h",
+      "2h",
+      "1d"
+    ]
+  },
+  "timezone": "browser",
+  "title": "Amazon Managed Service for Prometheus - Query Insights",
+  "id": null,
+  "uid": "amp-query-insights"
+}

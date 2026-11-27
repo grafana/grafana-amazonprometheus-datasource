@@ -82,6 +82,21 @@
       "type": "dashboard",
       "name": "Grafana Stats",
       "path": "dashboards/grafana_stats.json"
+    },
+    {
+      "type": "dashboard",
+      "name": "AMP Alerts and Recording Rules",
+      "path": "dashboards/amp_alerts_and_recording_rules.json"
+    },
+    {
+      "type": "dashboard",
+      "name": "AMP Workspace Dashboard",
+      "path": "dashboards/amp_workspace.json"
+    },
+    {
+      "type": "dashboard",
+      "name": "Amazon Managed Service for Prometheus - Query Insights",
+      "path": "dashboards/amp_query_insights.json"
     }
   ],
   "metrics": true,

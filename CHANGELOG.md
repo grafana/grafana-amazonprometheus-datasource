@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- Add pre-made AMP dashboards (Alerts and Recording Rules, Workspace, Query Insights) from the [AWS Observability Accelerator](https://github.com/aws-observability/aws-observability-accelerator/tree/main/artifacts/grafana-dashboards/amp)
+
 ## 3.3.6
 
 - Bump `@grafana/aws-sdk` to 0.13.1 in [#856](https://github.com/grafana/grafana-amazonprometheus-datasource/pull/856)

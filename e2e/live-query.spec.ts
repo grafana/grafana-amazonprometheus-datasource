@@ -41,10 +41,9 @@ async function skipOnlyLocallyWithoutLiveCredentials(
   );
 }
 
-// Matches the legacy /api/ds/query endpoint and the unified Query Service
-// (/apis/query.grafana.app/<version>/namespaces/<ns>/query) that newer Grafana builds route
-// Explore queries through instead. Both return the same {results: {<refId>: {frames}}} shape.
-const QUERY_SERVICE_PATH = /\/apis\/query\.grafana\.app\/[^/]+\/namespaces\/[^/]+\/query(\?|$)/;
+// Matches /api/ds/query and /apis/<group>/<version>/namespaces/<ns>/query, where the group is
+// query.grafana.app or datasource.grafana.app depending on the Grafana build.
+const QUERY_SERVICE_PATH = /\/apis\/[^/]+\/[^/]+\/namespaces\/[^/]+\/query(\?|$)/;
 
 function isQueryRequestUrl(url: string): boolean {
   return url.includes('/api/ds/query') || QUERY_SERVICE_PATH.test(url);

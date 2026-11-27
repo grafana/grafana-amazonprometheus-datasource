@@ -1,4 +1,36 @@
 {
+  "__inputs": [
+    {
+      "name": "DS_AMP",
+      "label": "Amazon Managed Service for Prometheus",
+      "description": "",
+      "type": "datasource",
+      "pluginId": "grafana-amazonprometheus-datasource",
+      "pluginName": "Amazon Managed Service for Prometheus"
+    },
+    {
+      "name": "DS_AMAZON_CLOUDWATCH",
+      "label": "Amazon CloudWatch",
+      "description": "",
+      "type": "datasource",
+      "pluginId": "cloudwatch",
+      "pluginName": "CloudWatch"
+    }
+  ],
+  "__requires": [
+    {
+      "type": "datasource",
+      "id": "grafana-amazonprometheus-datasource",
+      "name": "Amazon Managed Service for Prometheus",
+      "version": "1.0.0"
+    },
+    {
+      "type": "datasource",
+      "id": "cloudwatch",
+      "name": "CloudWatch",
+      "version": "1.0.0"
+    }
+  ],
   "annotations": {
     "list": [
       {
@@ -307,7 +339,7 @@
     {
       "datasource": {
         "type": "cloudwatch",
-        "uid": "${cw}"
+        "uid": "${DS_AMAZON_CLOUDWATCH}"
       },
       "description": "Distinct dashboards issuing matching queries. Counts only queries carrying a dashboardUid; rule evaluations and callers that omit X-Dashboard-Uid are excluded.",
       "fieldConfig": {
@@ -356,7 +388,7 @@
         {
           "datasource": {
             "type": "cloudwatch",
-            "uid": "${cw}"
+            "uid": "${DS_AMAZON_CLOUDWATCH}"
           },
           "expression": "fields case(component = \"ruler\" and message.ruleKind = \"alerting\", \"alerting rule\", component = \"ruler\" and message.ruleKind = \"recording\", \"recording rule\", component = \"query-frontend\", \"API\", \"other\") as source\n| filter message.dashboardUid like /./ and message.query like /${filter:raw}/ and source like /${source:pipe}/\n| stats count_distinct(message.dashboardUid) as dashboards",
           "logGroups": [
@@ -377,7 +409,7 @@
     {
       "datasource": {
         "type": "cloudwatch",
-        "uid": "${cw}"
+        "uid": "${DS_AMAZON_CLOUDWATCH}"
       },
       "description": "Most recent time any query matching the filter ran. A stale value means the metric/label has low recent query activity — a candidate for cleanup or tiering.",
       "fieldConfig": {
@@ -426,7 +458,7 @@
         {
           "datasource": {
             "type": "cloudwatch",
-            "uid": "${cw}"
+            "uid": "${DS_AMAZON_CLOUDWATCH}"
           },
           "expression": "fields case(component = \"ruler\" and message.ruleKind = \"alerting\", \"alerting rule\", component = \"ruler\" and message.ruleKind = \"recording\", \"recording rule\", component = \"query-frontend\", \"API\", \"other\") as source, toMillis(@timestamp) as ts\n| filter message.query like /${filter:raw}/ and source like /${source:pipe}/\n| stats max(ts) as last_queried",
           "logGroups": [
@@ -459,7 +491,7 @@
     {
       "datasource": {
         "type": "cloudwatch",
-        "uid": "${cw}"
+        "uid": "${DS_AMAZON_CLOUDWATCH}"
       },
       "description": "Executions per 30m bin by source. 'API' = anything served over the query API (Grafana dashboards, Explore, Grafana-managed alert rules, SDKs and agents). 'rule' = evaluated by the AMP ruler. Bars, not lines: Logs Insights omits empty bins.",
       "fieldConfig": {
@@ -546,7 +578,7 @@
         {
           "datasource": {
             "type": "cloudwatch",
-            "uid": "${cw}"
+            "uid": "${DS_AMAZON_CLOUDWATCH}"
           },
           "expression": "fields case(component = \"ruler\" and message.ruleKind = \"alerting\", \"alerting rule\", component = \"ruler\" and message.ruleKind = \"recording\", \"recording rule\", component = \"query-frontend\", \"API\", \"other\") as source\n| filter message.query like /${filter:raw}/ and source like /${source:pipe}/\n| stats count(*) as executions by source, bin(30m)",
           "logGroups": [
@@ -569,7 +601,7 @@
     {
       "datasource": {
         "type": "cloudwatch",
-        "uid": "${cw}"
+        "uid": "${DS_AMAZON_CLOUDWATCH}"
       },
       "description": "Which clients drive cost. API traffic only (ruler events carry no userAgent). Treat this as a hint, not an identity: currently Grafana 9.4 and earlier send an identifiable `Grafana/<version>` agent (e.g. `Grafana/9.4.7`), while the newer AMP plugin sends Go's default `Go-http-client/1.1`, which is indistinguishable from SDKs and agents. Expected to change in a later plugin release - re-verify before relying on it.",
       "fieldConfig": {
@@ -692,7 +724,7 @@
         {
           "datasource": {
             "type": "cloudwatch",
-            "uid": "${cw}"
+            "uid": "${DS_AMAZON_CLOUDWATCH}"
           },
           "expression": "fields message.userAgent as userAgent, message.samplesProcessed as samples, case(component = \"ruler\" and message.ruleKind = \"alerting\", \"alerting rule\", component = \"ruler\" and message.ruleKind = \"recording\", \"recording rule\", component = \"query-frontend\", \"API\", \"other\") as source\n| filter component = \"query-frontend\" and message.query like /${filter:raw}/ and source like /${source:pipe}/\n| stats count(*) as executions, sum(samples) as total_samples, avg(samples) as avg_samples by userAgent\n| sort total_samples desc\n| limit 50",
           "logGroups": [
@@ -730,7 +762,7 @@
     {
       "datasource": {
         "type": "cloudwatch",
-        "uid": "${cw}"
+        "uid": "${DS_AMAZON_CLOUDWATCH}"
       },
       "description": "Share of total samples by source. 'API' covers all query-API traffic (dashboards, Explore, Grafana-managed alert rules, SDKs, agents); 'rule' is AMP-ruler evaluation only. Use the user-agent panel to separate interactive from programmatic within API.",
       "fieldConfig": {
@@ -785,7 +817,7 @@
         {
           "datasource": {
             "type": "cloudwatch",
-            "uid": "${cw}"
+            "uid": "${DS_AMAZON_CLOUDWATCH}"
           },
           "expression": "fields case(component = \"ruler\" and message.ruleKind = \"alerting\", \"alerting rule\", component = \"ruler\" and message.ruleKind = \"recording\", \"recording rule\", component = \"query-frontend\", \"API\", \"other\") as source, message.samplesProcessed as samples\n| filter message.query like /${filter:raw}/ and source like /${source:pipe}/\n| stats sum(samples) as total_samples by source",
           "logGroups": [
@@ -820,7 +852,7 @@
     {
       "datasource": {
         "type": "cloudwatch",
-        "uid": "${cw}"
+        "uid": "${DS_AMAZON_CLOUDWATCH}"
       },
       "description": "Grouped by dashboard, panel, query and queryType. Ranked by total_samples (frequency x avg). High frequency + large scans = recording-rule candidates. Click DashboardUid to open it.",
       "fieldConfig": {
@@ -1010,7 +1042,7 @@
         {
           "datasource": {
             "type": "cloudwatch",
-            "uid": "${cw}"
+            "uid": "${DS_AMAZON_CLOUDWATCH}"
           },
           "expression": "fields message.dashboardUid as DashboardUid, message.panelId as PanelId, message.query as Query, message.queryType as queryType, message.samplesProcessed as samples, case(component = \"ruler\" and message.ruleKind = \"alerting\", \"alerting rule\", component = \"ruler\" and message.ruleKind = \"recording\", \"recording rule\", component = \"query-frontend\", \"API\", \"other\") as source\n| filter message.query like /${filter:raw}/ and source like /${source:pipe}/\n| stats count(*) as frequency, avg(samples) as avg_samples, max(samples) as max_samples, sum(samples) as total_samples, avg(message.step) as avg_step by DashboardUid, PanelId, Query, queryType\n| sort total_samples desc\n| limit 100",
           "logGroups": [
@@ -1056,7 +1088,7 @@
     {
       "datasource": {
         "type": "cloudwatch",
-        "uid": "${cw}"
+        "uid": "${DS_AMAZON_CLOUDWATCH}"
       },
       "description": "Total query cost aggregated per dashboard. Only queries that carry a dashboardUid are counted - rule evaluations and API callers that omit the X-Dashboard-Uid header are excluded rather than collapsed into one blank row.",
       "fieldConfig": {
@@ -1180,7 +1212,7 @@
         {
           "datasource": {
             "type": "cloudwatch",
-            "uid": "${cw}"
+            "uid": "${DS_AMAZON_CLOUDWATCH}"
           },
           "expression": "fields message.dashboardUid as DashboardUid, message.samplesProcessed as samples, case(component = \"ruler\" and message.ruleKind = \"alerting\", \"alerting rule\", component = \"ruler\" and message.ruleKind = \"recording\", \"recording rule\", component = \"query-frontend\", \"API\", \"other\") as source\n| filter message.dashboardUid like /./ and message.query like /${filter:raw}/ and source like /${source:pipe}/\n| stats sum(samples) as total_samples, count(*) as frequency, avg(samples) as avg_samples by DashboardUid\n| sort total_samples desc\n| limit 50",
           "logGroups": [
@@ -1218,7 +1250,7 @@
     {
       "datasource": {
         "type": "cloudwatch",
-        "uid": "${cw}"
+        "uid": "${DS_AMAZON_CLOUDWATCH}"
       },
       "description": "Alerting + recording rules by cost. evaluations x avg samples = continuous cost. Unexpectedly large scans often mean a missing label filter. Ruler events only (component = ruler).",
       "fieldConfig": {
@@ -1342,7 +1374,7 @@
         {
           "datasource": {
             "type": "cloudwatch",
-            "uid": "${cw}"
+            "uid": "${DS_AMAZON_CLOUDWATCH}"
           },
           "expression": "fields message.ruleKind as RuleKind, message.ruleNamespace as RuleNamespace, message.ruleGroup as RuleGroup, message.ruleName as RuleName, message.query as Query, message.samplesProcessed as samples, case(component = \"ruler\" and message.ruleKind = \"alerting\", \"alerting rule\", component = \"ruler\" and message.ruleKind = \"recording\", \"recording rule\", component = \"query-frontend\", \"API\", \"other\") as source\n| filter component = \"ruler\" and message.query like /${filter:raw}/ and source like /${source:pipe}/\n| stats count(*) as evaluations, avg(samples) as avg_samples, sum(samples) as total_samples by RuleKind, RuleNamespace, RuleGroup, RuleName, Query\n| sort total_samples desc\n| limit 100",
           "logGroups": [
@@ -1634,7 +1666,7 @@
     {
       "datasource": {
         "type": "cloudwatch",
-        "uid": "${cw}"
+        "uid": "${DS_AMAZON_CLOUDWATCH}"
       },
       "description": "API queries that carry no dashboardUid, so no dashboard or panel can be attributed. This is where most sample cost sits today. Ranked by total samples; max_samples shows the worst single execution. Populated by callers that omit X-Dashboard-Uid, including the newer AMP plugin.",
       "fieldConfig": {
@@ -1778,7 +1810,7 @@
         {
           "datasource": {
             "type": "cloudwatch",
-            "uid": "${cw}"
+            "uid": "${DS_AMAZON_CLOUDWATCH}"
           },
           "expression": "fields message.query as Query, message.userAgent as userAgent, message.samplesProcessed as samples, case(component = \"ruler\" and message.ruleKind = \"alerting\", \"alerting rule\", component = \"ruler\" and message.ruleKind = \"recording\", \"recording rule\", component = \"query-frontend\", \"API\", \"other\") as source\n| filter component = \"query-frontend\" and not (message.dashboardUid like /./) and message.query like /${filter:raw}/ and source like /${source:pipe}/\n| stats count(*) as executions, avg(samples) as avg_samples, max(samples) as max_samples, sum(samples) as total_samples by userAgent, Query\n| sort total_samples desc\n| limit 100",
           "logGroups": [
@@ -1831,7 +1863,7 @@
     {
       "datasource": {
         "type": "cloudwatch",
-        "uid": "${cw}"
+        "uid": "${DS_AMAZON_CLOUDWATCH}"
       },
       "description": "Range queries sorted by lookback (end - start). Long range + high samples = biggest cost drivers; a panel may be scanning weeks of data on every refresh.",
       "fieldConfig": {
@@ -1965,7 +1997,7 @@
         {
           "datasource": {
             "type": "cloudwatch",
-            "uid": "${cw}"
+            "uid": "${DS_AMAZON_CLOUDWATCH}"
           },
           "expression": "fields message.query as Query, (message.end - message.start) as range_lookback, message.step as step, message.samplesProcessed as samples, case(component = \"ruler\" and message.ruleKind = \"alerting\", \"alerting rule\", component = \"ruler\" and message.ruleKind = \"recording\", \"recording rule\", component = \"query-frontend\", \"API\", \"other\") as source\n| filter message.query like /${filter:raw}/ and message.queryType = \"range\" and source like /${source:pipe}/\n| sort range_lookback desc\n| limit 100",
           "logGroups": [
@@ -2018,7 +2050,7 @@
     {
       "datasource": {
         "type": "cloudwatch",
-        "uid": "${cw}"
+        "uid": "${DS_AMAZON_CLOUDWATCH}"
       },
       "description": "Unaggregated CloudWatch Logs for the current filter, newest first. Expand any line to inspect every field. API events: queryType, start/end/step, userAgent, dashboardUid, panelId. Ruler events: ruleName, ruleKind, ruleGroup, ruleNamespace. Both: query, samplesProcessed, queryTimeInSeconds, component, workspaceId.",
       "gridPos": {
@@ -2051,7 +2083,7 @@
         {
           "datasource": {
             "type": "cloudwatch",
-            "uid": "${cw}"
+            "uid": "${DS_AMAZON_CLOUDWATCH}"
           },
           "expression": "fields @timestamp, @message, case(component = \"ruler\" and message.ruleKind = \"alerting\", \"alerting rule\", component = \"ruler\" and message.ruleKind = \"recording\", \"recording rule\", component = \"query-frontend\", \"API\", \"other\") as source\n| filter message.query like /${filter:raw}/ and source like /${source:pipe}/\n| sort @timestamp desc\n| limit 1000",
           "logGroups": [
@@ -2081,46 +2113,9 @@
           "text": "",
           "value": ""
         },
-        "hide": 0,
-        "includeAll": false,
-        "label": "CloudWatch datasource",
-        "multi": false,
-        "name": "cw",
-        "options": [],
-        "query": "cloudwatch",
-        "refresh": 1,
-        "regex": "",
-        "skipUrlSync": false,
-        "type": "datasource"
-      },
-      {
-        "allowCustomValue": true,
-        "current": {
-          "text": "",
-          "value": ""
-        },
-        "description": "Source for filter variable values.",
-        "hide": 0,
-        "includeAll": false,
-        "label": "Amazon Managed Service for Prometheus datasource",
-        "multi": false,
-        "name": "prom",
-        "options": [],
-        "query": "grafana-amazonprometheus-datasource",
-        "refresh": 1,
-        "regex": "",
-        "skipUrlSync": false,
-        "type": "datasource"
-      },
-      {
-        "allowCustomValue": true,
-        "current": {
-          "text": "",
-          "value": ""
-        },
         "datasource": {
           "type": "cloudwatch",
-          "uid": "${cw}"
+          "uid": "${DS_AMAZON_CLOUDWATCH}"
         },
         "definition": "",
         "hide": 0,
@@ -2151,7 +2146,7 @@
         },
         "datasource": {
           "type": "grafana-amazonprometheus-datasource",
-          "uid": "${prom}"
+          "uid": "${DS_AMP}"
         },
         "definition": "label_values(__name__)",
         "description": "Regex applied to message.query. Metric names from Prometheus by default; type a custom value for a label name or label-value pair. All = every query (.*).",
@@ -2200,7 +2195,7 @@
         },
         "datasource": {
           "type": "cloudwatch",
-          "uid": "${cw}"
+          "uid": "${DS_AMAZON_CLOUDWATCH}"
         },
         "definition": "",
         "description": "CloudWatch Logs region",

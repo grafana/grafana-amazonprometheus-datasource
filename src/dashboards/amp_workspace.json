@@ -1,5 +1,14 @@
 {
-  "__elements": {},
+  "__inputs": [
+    {
+      "name": "DS_AMAZON_CLOUDWATCH",
+      "label": "Amazon CloudWatch",
+      "description": "",
+      "type": "datasource",
+      "pluginId": "cloudwatch",
+      "pluginName": "CloudWatch"
+    }
+  ],
   "__requires": [
     {
       "type": "panel",
@@ -38,6 +47,7 @@
       "version": ""
     }
   ],
+  "__elements": {},
   "annotations": {
     "list": [
       {
@@ -78,7 +88,7 @@
     {
       "datasource": {
         "type": "cloudwatch",
-        "uid": "${cloudwatch_datasource}"
+        "uid": "${DS_AMAZON_CLOUDWATCH}"
       },
       "fieldConfig": {
         "defaults": {
@@ -137,7 +147,7 @@
         {
           "datasource": {
             "type": "cloudwatch",
-            "uid": "${cloudwatch_datasource}"
+            "uid": "${DS_AMAZON_CLOUDWATCH}"
           },
           "dimensions": {},
           "expression": "SEARCH('{AWS/Prometheus,LabelSet,Workspace} MetricName=\"ActiveSeriesLimitPerLabelSet\"', 'Average', 300)",
@@ -176,7 +186,7 @@
     {
       "datasource": {
         "type": "cloudwatch",
-        "uid": "${cloudwatch_datasource}"
+        "uid": "${DS_AMAZON_CLOUDWATCH}"
       },
       "fieldConfig": {
         "defaults": {
@@ -231,7 +241,7 @@
         {
           "datasource": {
             "type": "cloudwatch",
-            "uid": "${cloudwatch_datasource}"
+            "uid": "${DS_AMAZON_CLOUDWATCH}"
           },
           "dimensions": {},
           "expression": "",
@@ -263,7 +273,7 @@
     {
       "datasource": {
         "type": "cloudwatch",
-        "uid": "${cloudwatch_datasource}"
+        "uid": "${DS_AMAZON_CLOUDWATCH}"
       },
       "fieldConfig": {
         "defaults": {
@@ -318,7 +328,7 @@
         {
           "datasource": {
             "type": "cloudwatch",
-            "uid": "${cloudwatch_datasource}"
+            "uid": "${DS_AMAZON_CLOUDWATCH}"
           },
           "dimensions": {},
           "expression": "",
@@ -406,7 +416,7 @@
     {
       "datasource": {
         "type": "cloudwatch",
-        "uid": "${cloudwatch_datasource}"
+        "uid": "${DS_AMAZON_CLOUDWATCH}"
       },
       "fieldConfig": {
         "defaults": {
@@ -455,7 +465,7 @@
         {
           "datasource": {
             "type": "cloudwatch",
-            "uid": "${cloudwatch_datasource}"
+            "uid": "${DS_AMAZON_CLOUDWATCH}"
           },
           "dimensions": {},
           "expression": "",
@@ -487,7 +497,7 @@
     {
       "datasource": {
         "type": "cloudwatch",
-        "uid": "${cloudwatch_datasource}"
+        "uid": "${DS_AMAZON_CLOUDWATCH}"
       },
       "fieldConfig": {
         "defaults": {
@@ -541,7 +551,7 @@
         {
           "datasource": {
             "type": "cloudwatch",
-            "uid": "${cloudwatch_datasource}"
+            "uid": "${DS_AMAZON_CLOUDWATCH}"
           },
           "dimensions": {},
           "expression": "",
@@ -583,7 +593,7 @@
     {
       "datasource": {
         "type": "cloudwatch",
-        "uid": "${cloudwatch_datasource}"
+        "uid": "${DS_AMAZON_CLOUDWATCH}"
       },
       "fieldConfig": {
         "defaults": {
@@ -639,7 +649,7 @@
         {
           "datasource": {
             "type": "cloudwatch",
-            "uid": "${cloudwatch_datasource}"
+            "uid": "${DS_AMAZON_CLOUDWATCH}"
           },
           "dimensions": {},
           "expression": "",
@@ -671,7 +681,7 @@
     {
       "datasource": {
         "type": "cloudwatch",
-        "uid": "${cloudwatch_datasource}"
+        "uid": "${DS_AMAZON_CLOUDWATCH}"
       },
       "fieldConfig": {
         "defaults": {
@@ -754,7 +764,7 @@
         {
           "datasource": {
             "type": "cloudwatch",
-            "uid": "${cloudwatch_datasource}"
+            "uid": "${DS_AMAZON_CLOUDWATCH}"
           },
           "dimensions": {},
           "expression": "",
@@ -801,7 +811,7 @@
     {
       "datasource": {
         "type": "cloudwatch",
-        "uid": "${cloudwatch_datasource}"
+        "uid": "${DS_AMAZON_CLOUDWATCH}"
       },
       "fieldConfig": {
         "defaults": {
@@ -853,7 +863,7 @@
         {
           "datasource": {
             "type": "cloudwatch",
-            "uid": "${cloudwatch_datasource}"
+            "uid": "${DS_AMAZON_CLOUDWATCH}"
           },
           "dimensions": {
             "Service": "Prometheus"
@@ -939,7 +949,7 @@
     {
       "datasource": {
         "type": "cloudwatch",
-        "uid": "${cloudwatch_datasource}"
+        "uid": "${DS_AMAZON_CLOUDWATCH}"
       },
       "fieldConfig": {
         "defaults": {
@@ -993,7 +1003,7 @@
         {
           "datasource": {
             "type": "cloudwatch",
-            "uid": "${cloudwatch_datasource}"
+            "uid": "${DS_AMAZON_CLOUDWATCH}"
           },
           "dimensions": {},
           "expression": "",
@@ -1020,7 +1030,7 @@
     {
       "datasource": {
         "type": "cloudwatch",
-        "uid": "${cloudwatch_datasource}"
+        "uid": "${DS_AMAZON_CLOUDWATCH}"
       },
       "fieldConfig": {
         "defaults": {
@@ -1072,7 +1082,7 @@
         {
           "datasource": {
             "type": "cloudwatch",
-            "uid": "${cloudwatch_datasource}"
+            "uid": "${DS_AMAZON_CLOUDWATCH}"
           },
           "dimensions": {},
           "expression": "",
@@ -1108,23 +1118,9 @@
     "list": [
       {
         "current": {},
-        "hide": 0,
-        "includeAll": false,
-        "label": "CloudWatch",
-        "multi": false,
-        "name": "cloudwatch_datasource",
-        "options": [],
-        "query": "cloudwatch",
-        "refresh": 1,
-        "regex": "",
-        "skipUrlSync": false,
-        "type": "datasource"
-      },
-      {
-        "current": {},
         "datasource": {
           "type": "cloudwatch",
-          "uid": "${cloudwatch_datasource}"
+          "uid": "${DS_AMAZON_CLOUDWATCH}"
         },
         "definition": "",
         "description": "LabelSet",
@@ -1157,7 +1153,7 @@
         "current": {},
         "datasource": {
           "type": "cloudwatch",
-          "uid": "${cloudwatch_datasource}"
+          "uid": "${DS_AMAZON_CLOUDWATCH}"
         },
         "definition": "",
         "description": "AMP Workspace ID",
@@ -1186,7 +1182,7 @@
         "current": {},
         "datasource": {
           "type": "cloudwatch",
-          "uid": "${cloudwatch_datasource}"
+          "uid": "${DS_AMAZON_CLOUDWATCH}"
         },
         "definition": "",
         "description": "Account",
